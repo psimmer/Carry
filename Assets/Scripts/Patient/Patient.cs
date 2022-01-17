@@ -8,7 +8,7 @@ public enum TaskType
     ChangeBandage,
     BringPills,
     ChangeCatheter,
-    TakeBloodSample,
+    TakeBloodSample,                //Maybe we do a own script "Tasks" and there are only the Tasks inside?
     AdministerTransfusion,
     WashThePatient,
     RelocateAPatient,
@@ -22,17 +22,20 @@ public class Patient : MonoBehaviour
     private string patientID;
     public int healthAmount;
     public TaskType currentIllness;
+    public Patient currentPatient;
 
     void Start()
     {
         
     }
 
-    void Update()
+    private void OnTriggerStay(Collider other)
     {
-        
+        if (other.GetComponent<Player>())
+        {
+           currentPatient = returnsHimself();
+        }
     }
-
     public Patient returnsHimself()
     {
         return this;

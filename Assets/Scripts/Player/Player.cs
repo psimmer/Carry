@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Item currentItem { get; set; }
+    public Item currentItem;
 
     private void Awake()
     {
