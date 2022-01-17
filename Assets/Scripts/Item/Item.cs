@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType
-{
-    None,           // None because we have tasks without item needed
-    Bandage,
-    Pill,
-    Catheter,
-    Transfusion,
-    BloodSample,
-    Sponge,
-}
 
-
-public class Item : MonoBehaviour
+[CreateAssetMenu(menuName = "Item Data")]
+public class Item : ScriptableObject
 {
+    public string itemName;
     public int restoreHealth;
-    public ItemType itemType;
+    public GameObject prefab;
+    
+    public void Heal(Patient patient)
+    {
+        patient.healthAmount += restoreHealth;
+    }
+
+    public void Damage(Patient patient)
+    {
+        patient.healthAmount -= restoreHealth;
+    }
+
+
 }
