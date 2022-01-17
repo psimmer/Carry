@@ -15,10 +15,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Item") && Input.GetKey(KeyCode.Space))
+        if (other.GetComponent<Item>() && Input.GetKey(KeyCode.Space))
         {
             currentItem = other.gameObject.GetComponent<Item>();
-            Debug.Log("Hallo " + currentItem.name);
+            Debug.Log("Du Hast eingesammelt: " + currentItem.name);
         }
 
     }
