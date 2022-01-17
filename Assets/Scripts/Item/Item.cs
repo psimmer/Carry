@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ItemType
+{
+    None,           // None because we have tasks without item needed
+    Bandage,
+    Pill,
+    Catheter,
+    Transfusion,
+    BloodSample,
+    Sponge,
+}
+
+
 public class Item : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int restoreHealth;
+    public ItemType itemType;
 }
