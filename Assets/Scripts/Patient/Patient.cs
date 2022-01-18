@@ -19,10 +19,27 @@ public enum TaskType
 
 public class Patient : MonoBehaviour
 {
-    private string patientID;
-    public int healthAmount;
-    public TaskType currentIllness;
-    public Patient currentPatient;
+    [SerializeField] private int healthAmount;
+    [SerializeField] private TaskType currentIllness;
+    private int patientID;
+    private Patient currentPatient;
+
+    // getters and setters
+    public TaskType CurrentIllness
+    {
+        get;
+        set;
+    }
+    public int HealthAmount
+    {
+        get;
+        set;
+    }
+    public Patient CurrentPatient
+    {
+        get;
+        set;
+    }
 
     void Start()
     {

@@ -7,11 +7,11 @@ public class Item : MonoBehaviour
     public ItemSO item;
     public void Heal(Patient patient)
     {
-        patient.healthAmount += item.restoreHealth;
+        patient.HealthAmount += item.restoreHealth;
     }
 
     public void Damage(Patient patient)
     {
-        patient.healthAmount -= item.restoreHealth;
+        patient.HealthAmount -= item.restoreHealth;
     }
 }
