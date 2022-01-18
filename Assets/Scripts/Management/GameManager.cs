@@ -62,9 +62,9 @@ public class GameManager : MonoBehaviour
     private void SpawnPatient(GameObject patient, Transform spawnPoint)
     {
         GameObject newPatient = Instantiate(patient, spawnPoint);
-        newPatient.transform.parent = GameObject.Find("Patients").transform;
+        newPatient.transform.parent = GameObject.Find("Patients").transform;  // unperformant?
         newPatient.transform.SetAsLastSibling();
-        int patientNumber = patientList.Count+1;
+        int patientNumber = patientList.Count+1;  //Lukas Question: Why does it takes + 1?
         newPatient.name = patientNumber.ToString();
         newPatient.transform.position = spawnPoint.transform.position;
         spawnPoint.GetComponent<SpawnPoint>().IsFree = false;
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         }
         if(freeSpawnPoints.Count > 0)
         {
-            int randomIndex = new System.Random().Next(0, freeSpawnPoints.Count - 1);
+            int randomIndex = new System.Random().Next(0, freeSpawnPoints.Count - 1); // aks if we should take Random.Range or Random.Next
             Transform spawnPoint = freeSpawnPoints[randomIndex].transform;
             SpawnPatient(testPatientPrefab, spawnPoint);
 
@@ -85,15 +85,17 @@ public class GameManager : MonoBehaviour
     }
     private void UpdateRespawnPointsList()
     {
-        Transform list = GameObject.Find("SpawnPoints").transform;
+        Transform list = GameObject.Find("SpawnPoints").transform;   // is this method unperformant? Lukas will find out! :D
         for (int i=0; i<list.childCount; i++)
         {
             // if the spawn point is free, and is not already in the list
-            if (list.transform.GetChild(i).GetComponent<SpawnPoint>().IsFree && !freeSpawnPoints.Contains(list.transform.GetChild(i).GetComponent<SpawnPoint>()))
+            if (list.transform.GetChild(i).GetComponent<SpawnPoint>().IsFree && 
+                !freeSpawnPoints.Contains(list.transform.GetChild(i).GetComponent<SpawnPoint>()))
             {
                 freeSpawnPoints.Add(list.transform.GetChild(i).GetComponent<SpawnPoint>());
             }
-            if(list.transform.GetChild(i).GetComponent<SpawnPoint>().IsFree == false && freeSpawnPoints.Contains(list.transform.GetChild(i).GetComponent<SpawnPoint>()))
+            if(list.transform.GetChild(i).GetComponent<SpawnPoint>().IsFree == false && 
+                freeSpawnPoints.Contains(list.transform.GetChild(i).GetComponent<SpawnPoint>()))
             {
                 freeSpawnPoints.Remove(list.transform.GetChild(i).GetComponent<SpawnPoint>());
             }
@@ -102,7 +104,7 @@ public class GameManager : MonoBehaviour
     
     private void UpdatePatientList()
     {
-        Transform list = GameObject.Find("Patients").transform;
+        Transform list = GameObject.Find("Patients").transform;  // is this method unperformant? Lukas will find out! :D
         for (int i = 0; i < list.childCount; i++)
         {
             // if the patient is not already in the list
