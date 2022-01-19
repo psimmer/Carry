@@ -66,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRigidbody.AddForce(movement);
         }
+
         //animator.setfloat("movement", playerRigidbody.velocity.magnitude)
     }
 }

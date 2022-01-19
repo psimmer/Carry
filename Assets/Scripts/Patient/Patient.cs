@@ -22,20 +22,13 @@ public class Patient : MonoBehaviour
     [SerializeField] private int healthAmount;
     [SerializeField] private TaskType currentIllness;
     private int patientID;
-    private Patient currentPatient;
 
     // getters and setters
     public TaskType CurrentIllness
     {
-        get;
-        set;
+        get { return currentIllness; }
     }
     public int HealthAmount
-    {
-        get;
-        set;
-    }
-    public Patient CurrentPatient
     {
         get;
         set;
@@ -46,13 +39,13 @@ public class Patient : MonoBehaviour
         
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.GetComponent<Player>())
-        {
-           currentPatient = returnsHimself();
-        }
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.GetComponent<Player>())
+    //    {
+    //       currentPatient = returnsHimself();
+    //    }
+    //}
     public Patient returnsHimself()
     {
         return this;

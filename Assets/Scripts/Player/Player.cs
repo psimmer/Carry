@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Item currentItem;
-    public Patient current;
+    public Patient currentPatient;
     private void Awake()
     {
 
@@ -14,10 +14,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             //Interact
-            Collider[] obj = Physics.OverlapBox(transform.position + new Vector3(0f, 1f, 0.5f), Vector3.one * 0.5f);
+            Collider[] obj = Physics.OverlapBox(transform.position + new Vector3(0f, 1f, -0.5f), Vector3.one * 0.5f);
             foreach (var item in obj)
             {
                 if (item.CompareTag("Item"))
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
                 }
                 if (item.CompareTag("Patients"))
                 {
-
+                    currentPatient = item.GetComponent<Patient>();
                 }
                 Debug.Log(item.name);
             }
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(transform.position + new Vector3(0f, 1f, 0.5f), Vector3.one);
+        Gizmos.DrawWireCube(transform.position + new Vector3(0f, 1f, -0.5f), Vector3.one);
     }
 
 }
