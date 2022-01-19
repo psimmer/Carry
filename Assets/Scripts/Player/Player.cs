@@ -6,32 +6,81 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Item currentItem;
-
+    public Patient current;
     private void Awake()
     {
 
     }
 
-
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if (other.GetComponent<Item>() && Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            currentItem = other.gameObject.GetComponent<Item>();
-            Debug.Log("Du Hast eingesammelt: " + currentItem.name);
+            //Interact
+            Collider[] obj = Physics.OverlapBox(transform.position + new Vector3(0f, 1f, 0.5f), Vector3.one * 0.5f);
+            foreach (var item in obj)
+            {
+                if (item.CompareTag("Item"))
+                {
+                    //Pickup
+                    if (currentItem == null)
+                    {
+                        currentItem = item.GetComponent<Item>();
+                    }
+                }
+                if (item.CompareTag("Patients"))
+                {
+
+                }
+                Debug.Log(item.name);
+            }
         }
-
+        if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
+        {
+            //Drop Item
+        }
     }
 
-    public void HealPatientWithItem(Patient patient, Item item)
+
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.GetComponent<Item>() && Input.GetKey(KeyCode.Space))
+    //    {
+    //        currentItem = other.gameObject.GetComponent<Item>();
+    //        Debug.Log("Du Hast eingesammelt: " + currentItem.name);
+    //    }
+
+    //}
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.GetComponent<Patient>() != null)
+    //    {
+    //        current = other.GetComponent<Patient>();
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.GetComponent<Patient>() != null)
+    //    {
+    //        current = null;
+    //    }
+    //}
+
+    //public void HealPatientWithItem(Patient patient, Item item)
+    //{
+    //    item.Heal(patient);
+    //}
+    //public void DamagePatientWithItem(Patient patient, Item item)
+    //{
+    //    item.Damage(patient);
+    //}
+
+    private void OnDrawGizmos()
     {
-        item.Heal(patient);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position + new Vector3(0f, 1f, 0.5f), Vector3.one);
     }
-    public void DamagePatientWithItem(Patient patient, Item item)
-    {
-        item.Damage(patient);
-    }
-
-
 
 }

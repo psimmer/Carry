@@ -17,9 +17,9 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
-        playerTransform = gameObject.transform;
+        playerTransform = transform;
     }
-    void FixedUpdate()
+    void Update()
     {
         playerMovement();
     }
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         {
             verticalMovement = 1f;
         }
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
             verticalMovement = -1f;
         }
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalMovement = -1f;
         }
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             horizontalMovement = 1f;
         }
@@ -66,6 +66,6 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRigidbody.AddForce(movement);
         }
-
+        //animator.setfloat("movement", playerRigidbody.velocity.magnitude)
     }
 }

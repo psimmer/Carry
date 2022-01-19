@@ -9,5 +9,5 @@ public class ItemSO : ScriptableObject
     public string itemName;
     public int restoreHealth;
     public GameObject prefab;
-
+    public TaskType task;
 }

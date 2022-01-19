@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private List<Patient> patients;
-    public event Action<Patient, Item> e_OnHeal;
-    public event Action<Patient, Item> e_OnDamage;
+    //public event Action<Patient, Item> e_OnHeal;
+    //public event Action<Patient, Item> e_OnDamage;
     public Func<Patient> getPatient;
 
     #region Patient Manager Variables
@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
     {
         getPatient = patients[0].returnsHimself;     //we need to fix this index atomatically to the correct patient
 
-        e_OnHeal += player.HealPatientWithItem;
-        e_OnDamage += player.DamagePatientWithItem;
+        //e_OnHeal += player.HealPatientWithItem;
+        //e_OnDamage += player.DamagePatientWithItem;
     }
     void Update()
     {
@@ -43,17 +43,28 @@ public class GameManager : MonoBehaviour
     {
         if(player.currentItem != null && touchPatient)
         {
-            if(patient.CurrentIllness == TaskType.ChangeBandage && player.currentItem.name == "Bandage")
+            //if(patient.CurrentIllness == TaskType.ChangeBandage && player.currentItem.name == "Bandage")
+            //{
+            //    e_OnHeal?.Invoke(patient, player.currentItem);
+            //}
+            //else if (patient.CurrentIllness == TaskType.BringPills && player.currentItem.name == "Pill")
+            //{
+            //    e_OnHeal?.Invoke(patient, player.currentItem);
+            //}
+            //else
+            //{
+            //    e_OnDamage(patient, player.currentItem);
+            //}
+
+            if(patient.CurrentIllness == player.currentItem.item.task)
             {
-                e_OnHeal?.Invoke(patient, player.currentItem);
-            }
-            else if (patient.CurrentIllness == TaskType.BringPills && player.currentItem.name == "Pill")
-            {
-                e_OnHeal?.Invoke(patient, player.currentItem);
+                //Success
+                patient.HealthAmount += player.currentItem.item.restoreHealth;
             }
             else
             {
-                e_OnDamage(patient, player.currentItem);
+                //Damage
+                patient.HealthAmount -= player.currentItem.item.restoreHealth;
             }
 
         }
