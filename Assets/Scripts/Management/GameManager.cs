@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Player player;
     [SerializeField] private List<Patient> patients;
+    [SerializeField] private Inventory itemSlot;
+    [SerializeField] private Transform itemslotPos;
     //public event Action<Patient, Item> e_OnHeal;
     //public event Action<Patient, Item> e_OnDamage;
     public Func<Patient> getPatient;
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        itemSlot.UpdateInventory(player.currentItem.item.prefab, itemslotPos);
         UpdatePatientList();
         UpdateRespawnPointsList();
         PatientSpawner();
@@ -52,18 +55,6 @@ public class GameManager : MonoBehaviour
     {
         if(player.currentItem != null && touchPatient)
         {
-            //if(patient.CurrentIllness == TaskType.ChangeBandage && player.currentItem.name == "Bandage")
-            //{
-            //    e_OnHeal?.Invoke(patient, player.currentItem);
-            //}
-            //else if (patient.CurrentIllness == TaskType.BringPills && player.currentItem.name == "Pill")
-            //{
-            //    e_OnHeal?.Invoke(patient, player.currentItem);
-            //}
-            //else
-            //{
-            //    e_OnDamage(patient, player.currentItem);
-            //}
 
             if(patient.CurrentIllness == player.currentItem.item.task)
             {
