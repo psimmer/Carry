@@ -41450,6 +41450,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 47c3b244a2d3341409600a2939b1a46f, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 47c3b244a2d3341409600a2939b1a46f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7fd81c0bf63563e459a31485f0331d64, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 47c3b244a2d3341409600a2939b1a46f, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 47c3b244a2d3341409600a2939b1a46f, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 47c3b244a2d3341409600a2939b1a46f, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5931484560415660247, guid: 47c3b244a2d3341409600a2939b1a46f, type: 3}
       propertyPath: m_IsActive
       value: 1
