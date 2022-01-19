@@ -12,13 +12,11 @@ public class Timer : MonoBehaviour
     private string PM = "pm";
     private string AM = "am";
     private string dayOrNight;
-    private int minutes;
     private float realTime;
 
     private void Awake()
     {
         timeText = GetComponentInChildren<Text>();
-        minutes = 0;
         dayOrNight = AM;
     }
     private void Update()

@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //camThings
+    [SerializeField] private MovePoints zoomCam;
+
+
     [SerializeField] private Player player;
     [SerializeField] private List<Patient> patients;
     //public event Action<Patient, Item> e_OnHeal;
@@ -40,6 +44,7 @@ public class GameManager : MonoBehaviour
         UpdateRespawnPointsList();
         PatientSpawner();
         Treatment(getPatient());
+        //zoomCam.MoveCamera();
     }
 
     //I think this will work fine ^^

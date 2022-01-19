@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - Patient
+  - CamPoints
   layers:
   - Default
   - TransparentFX

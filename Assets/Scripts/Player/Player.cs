@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Item currentItem;
+    [SerializeField] private Camera camera;
+    public Item currentItem { get; private set; }
     public Patient currentPatient;
     private void Awake()
     {
@@ -50,6 +51,29 @@ public class Player : MonoBehaviour
             currentItem = null;
             Debug.Log("Item thrown away");
     }
-    
 
+    #region Stuff for Cam
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<CamColliders>() != null)
+        {
+            Transform lastPos = other.GetComponent<CamColliders>().FirstPosition;
+            Transform newPos = other.GetComponent<CamColliders>().NewPosition;
+            if (camera.GetComponent<CamPosition>().currentPoint != newPos)
+            {
+                camera.GetComponent<CamPosition>().currentPoint = newPos;
+            }
+            else if(camera.GetComponent<CamPosition>().currentPoint == newPos)
+            {
+                camera.GetComponent<CamPosition>().currentPoint = lastPos;
+            }
+        }
+        
+    }
+
+
+
+
+    #endregion
 }
