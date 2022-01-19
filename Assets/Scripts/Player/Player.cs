@@ -16,71 +16,40 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Interact
-            Collider[] obj = Physics.OverlapBox(transform.position + new Vector3(0f, 1f, -0.5f), Vector3.one * 0.5f);
-            foreach (var item in obj)
-            {
-                if (item.CompareTag("Item"))
-                {
-                    //Pickup
-                    if (currentItem == null)
-                    {
-                        currentItem = item.GetComponent<Item>();
-                    }
-                }
-                if (item.CompareTag("Patients"))
-                {
-                    currentPatient = item.GetComponent<Patient>();
-                }
-                Debug.Log(item.name);
-            }
+            Interact();
         }
         if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
         {
-            //Drop Item
+            DropItem();
         }
     }
 
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.GetComponent<Item>() && Input.GetKey(KeyCode.Space))
-    //    {
-    //        currentItem = other.gameObject.GetComponent<Item>();
-    //        Debug.Log("Du Hast eingesammelt: " + currentItem.name);
-    //    }
-
-    //}
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.GetComponent<Patient>() != null)
-    //    {
-    //        current = other.GetComponent<Patient>();
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.GetComponent<Patient>() != null)
-    //    {
-    //        current = null;
-    //    }
-    //}
-
-    //public void HealPatientWithItem(Patient patient, Item item)
-    //{
-    //    item.Heal(patient);
-    //}
-    //public void DamagePatientWithItem(Patient patient, Item item)
-    //{
-    //    item.Damage(patient);
-    //}
-
-    private void OnDrawGizmos()
+    public void Interact()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(transform.position + new Vector3(0f, 1f, -0.5f), Vector3.one);
+        Collider[] obj = Physics.OverlapBox(transform.position + new Vector3(0f, 1f, 0f), Vector3.one);
+        foreach (var item in obj)
+        {
+            if (item.CompareTag("Item"))
+            {
+                //Pickup
+                currentItem = item.GetComponent<Item>();
+                Debug.Log(currentItem);
+            }
+            if (item.CompareTag("Patient"))
+            {
+                currentPatient = item.GetComponent<Patient>();
+                Debug.Log(currentPatient.name);
+               }
+            //Debug.Log(item.name);
+        }
     }
+    public void DropItem()
+    {
+            //Drop Item
+            currentItem = null;
+            Debug.Log("Item thrown away");
+    }
+    
 
 }
