@@ -12,21 +12,16 @@ public class CamPosition : MonoBehaviour
     private void Start()
     {
         currentPoint = camPoints.Find("Start");
+        interpolation = Time.deltaTime * 0.1f;
+
     }
 
     private void Update()  
     {
-        // Issue!!! We need to reset the interpolation to zero after a Lerp
         transform.position = Vector3.Lerp(transform.position, currentPoint.position, interpolation);
-        interpolation += Time.deltaTime * 0.0005f;
-        if (transform.position == currentPoint.position)
-        {
-            interpolation = 0; 
-        }
-
     }
 
-
+   
 
 
 

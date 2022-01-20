@@ -5,11 +5,11 @@ using UnityEngine;
 // I know it is the wrong script for this but i dont know in which script it should be
 public enum TaskType
 {
-    ChangeBandage,
-    BringPills,
-    ChangeCatheter,
-    TakeBloodSample,                //Maybe we do a own script "Tasks" and there are only the Tasks inside?
-    AdministerTransfusion,
+    Bandage,
+    Pills,
+    Catheter,
+    BloodSample,                //Maybe we do a own script "Tasks" and there are only the Tasks inside?
+    Transfusion,
     WashThePatient,
     RelocateAPatient,
     AnswerTheTelephone,
