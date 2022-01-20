@@ -10,11 +10,12 @@ public class GameManager : MonoBehaviour
     public Func<Patient> getPatient;
 
     #region Patient Manager Variables
-    [SerializeField] private List<SpawnPoint> freeSpawnPoints; // private List<Bed> allBeds;
+    [SerializeField] private List<BedScript> bedList; // private List<Bed> allBeds;
     [SerializeField] private List<Patient> patientList;
     public int maxAmountOfPatients;
     [SerializeField] private GameObject testPatientPrefab;
-    Transform list; // find better name
+    Transform patientContainer;
+    Transform bedContainer;
     #endregion
 
     //UI 
@@ -34,13 +35,13 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        list = GameObject.Find("Patients").transform;
+        GetAllBeds();
+        patientContainer = GameObject.Find("Patients").transform;
     }
     void Update()
     {
 
         UpdatePatientList();
-        UpdateRespawnPointsList();
         PatientSpawner();
         Treatment(getPatient());
         //zoomCam.MoveCamera();
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
         int patientNumber = patientList.Count+1;  
         newPatient.name = patientNumber.ToString();
         newPatient.transform.position = spawnPoint.transform.position;
-        spawnPoint.GetComponent<SpawnPoint>().IsFree = false;
+        spawnPoint.GetComponent<BedScript>().IsFree = false;
     }
     private void PatientSpawner()
     {
@@ -82,42 +83,33 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        if(freeSpawnPoints.Count > 0)
+        if(bedList.Count > 0)
         {
             //(0, freeSpawnPoints.Count - 1); // aks if we should take Random.Range or Random.Next
-            int randomIndex = UnityEngine.Random.Range(0, freeSpawnPoints.Count - 1);
-            Transform spawnPoint = freeSpawnPoints[randomIndex].transform;
+            int randomIndex = UnityEngine.Random.Range(0, bedList.Count - 1);
+            Transform spawnPoint = bedList[randomIndex].transform;
             SpawnPatient(testPatientPrefab, spawnPoint);
 
         }
     }
-    private void UpdateRespawnPointsList()
+    private void GetAllBeds()
     {
-        //Transform list = GameObject.Find("SpawnPoints").transform;   // is this method unperformant? Lukas will find out! :D
-        for (int i=0; i<list.childCount; i++)
+        GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed");
+        for(int i=0; i<bedArray.Length; i++)
         {
-            // if the spawn point is free, and is not already in the list
-            if (list.transform.GetChild(i).GetComponent<SpawnPoint>().IsFree && 
-                !freeSpawnPoints.Contains(list.transform.GetChild(i).GetComponent<SpawnPoint>()))
-            {
-                freeSpawnPoints.Add(list.transform.GetChild(i).GetComponent<SpawnPoint>());
-            }
-            if(list.transform.GetChild(i).GetComponent<SpawnPoint>().IsFree == false && 
-                freeSpawnPoints.Contains(list.transform.GetChild(i).GetComponent<SpawnPoint>()))
-            {
-                freeSpawnPoints.Remove(list.transform.GetChild(i).GetComponent<SpawnPoint>());
-            }
+            bedList.Add(bedArray[i].GetComponent<BedScript>());
         }
     }
-    
+
     private void UpdatePatientList()
     {
         //Transform list = GameObject.Find("Patients").transform;  // is this method unperformant? Lukas will find out! :D
-        for (int i = 0; i < list.childCount; i++)
+        for (int i = 0; i < patientContainer.childCount; i++)
         {
+            Patient patient = patientContainer.transform.GetChild(i).GetComponent<Patient>();
             // if the patient is not already in the list
-            if (!patientList.Contains(list.transform.GetChild(i).GetComponent<Patient>()))
-                patientList.Add(list.transform.GetChild(i).GetComponent<Patient>());
+            if (!patientList.Contains(patient))
+                patientList.Add(patient);
         }
     }
     #endregion

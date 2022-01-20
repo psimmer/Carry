@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private Transform itemSlotPos;
+    private GameObject currentItem;
     private GameObject Ui_element;
     private void Update()
     {
@@ -23,10 +24,10 @@ public class Inventory : MonoBehaviour
             if (Ui_element != player.currentItem.item.UI_prefab)
             {
                 if (Ui_element != null)
-                    //Destroy(Ui_element);
+                    Destroy(currentItem);
 
                 player.IsHoldingItem = false;
-                Instantiate(player.currentItem.item.UI_prefab, itemSlotPos);
+                currentItem = Instantiate(player.currentItem.item.UI_prefab, itemSlotPos);
                 Ui_element = player.currentItem.item.UI_prefab;
             }
             else
