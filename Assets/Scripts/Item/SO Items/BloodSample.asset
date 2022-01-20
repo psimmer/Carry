@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Blood Sample
   restoreHealth: 1
   prefab: {fileID: 919132149155446097, guid: 10fd3e27929601e418b1307cb2272ed2, type: 3}
+  UI_prefab: {fileID: 6851068978507163019, guid: 14feef37060501b4890ed0aee35b25f5, type: 3}
+  task: 0

@@ -10,26 +10,31 @@ public class Inventory : MonoBehaviour
     private GameObject Ui_element;
     private void Update()
     {
-        if(player.currentItem != null && player.IsHoldingItem )
+
+
+        InstantiateItem();
+
+    }
+
+    public void InstantiateItem()
+    {
+        if (player.currentItem != null && player.IsHoldingItem)
         {
-            if(Ui_element != player.currentItem.item.UI_prefab)
+            if (Ui_element != player.currentItem.item.UI_prefab)
             {
+                if (Ui_element != null)
+                    //Destroy(Ui_element);
+
                 player.IsHoldingItem = false;
                 Instantiate(player.currentItem.item.UI_prefab, itemSlotPos);
                 Ui_element = player.currentItem.item.UI_prefab;
             }
-            else 
-            { 
+            else
+            {
                 // if he already have the item he will do this! Correct Nothing :D
             }
         }
-
-
-
     }
-
-
-
 
 
 }
