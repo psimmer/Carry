@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Bandage
   restoreHealth: 2
   prefab: {fileID: 5994960371811907341, guid: 5c312b99beab0fe44a6b82cea0c1faba, type: 3}
+  UI_prefab: {fileID: 8855837082999093438, guid: 49c095dc7486f0f41aeb50d77ffa81cd, type: 3}
+  task: 0

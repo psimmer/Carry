@@ -5,16 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //camThings
-    [SerializeField] private MovePoints zoomCam;
-
-
     [SerializeField] private Player player;
     [SerializeField] private List<Patient> patients;
-    [SerializeField] private Inventory itemSlot;
-    [SerializeField] private Transform itemslotPos;
-    //public event Action<Patient, Item> e_OnHeal;
-    //public event Action<Patient, Item> e_OnDamage;
     public Func<Patient> getPatient;
 
     #region Patient Manager Variables
@@ -24,6 +16,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject testPatientPrefab;
     Transform list; // find better name
     #endregion
+
+    //UI 
+    [SerializeField] private Inventory itemSlot;
+    [SerializeField] private Transform itemslotPos;
 
 
     //Just for now can be deleted later
@@ -42,7 +38,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        itemSlot.UpdateInventory(player.currentItem.item.prefab, itemslotPos);
+
         UpdatePatientList();
         UpdateRespawnPointsList();
         PatientSpawner();

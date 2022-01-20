@@ -6,11 +6,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Camera camera;
-    public Item currentItem { get; private set; }
+    public Item currentItem { get; set; }
     public Patient currentPatient;
+
+    public bool IsHoldingItem { get; set; }
+
     private void Awake()
     {
-
+        IsHoldingItem = false;
     }
 
     private void Update()
@@ -34,6 +37,7 @@ public class Player : MonoBehaviour
             if (item.CompareTag("Item"))
             {
                 //Pickup
+                IsHoldingItem = true;
                 currentItem = item.GetComponent<Item>();
                 Debug.Log(currentItem);
             }

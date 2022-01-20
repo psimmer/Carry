@@ -2463,6 +2463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60781b4e2710e8041933834e1f42d99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1404871689}
+  itemSlotPos: {fileID: 1127159734}
 --- !u!1 &123896604
 GameObject:
   m_ObjectHideFlags: 0
@@ -11287,18 +11289,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff04cd68ee5aba41b6a4d54f0dfafb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomCam: {fileID: 1752384743}
   player: {fileID: 1404871689}
   patients:
   - {fileID: 1393475252}
   - {fileID: 0}
   - {fileID: 352956904}
-  itemSlot: {fileID: 121423932}
-  itemslotPos: {fileID: 1127159734}
   freeSpawnPoints: []
   patientList: []
   maxAmountOfPatients: 5
   testPatientPrefab: {fileID: 1572476281147765791, guid: 8d79c7b2869e21641a6634eefef69776, type: 3}
+  itemSlot: {fileID: 121423932}
+  itemslotPos: {fileID: 1127159734}
 --- !u!4 &636068959
 Transform:
   m_ObjectHideFlags: 0
