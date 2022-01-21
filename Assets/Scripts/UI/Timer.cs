@@ -21,6 +21,20 @@ public class Timer : MonoBehaviour
     }
     private void Update()
     {
+        
+        //This would be the condition to end the scene with a success
+        if (startTimeHours == endTimeHours && (int)realTime == 59)
+        {
+            Debug.Log("SceneManager....");
+        }
+
+    }
+
+    /// <summary>
+    /// Throws out the realtime * 2
+    /// </summary>
+    public void DoubledRealTime()
+    {
         realTime += Time.deltaTime * 2;
 
         AmAndPm.text = dayOrNight;
@@ -29,7 +43,7 @@ public class Timer : MonoBehaviour
         {
             dayOrNight = PM;
         }
-        if(startTimeHours == 13)
+        if (startTimeHours == 13)
         {
             startTimeHours = 1;
         }
@@ -52,6 +66,6 @@ public class Timer : MonoBehaviour
             realTime = 0;
             timeText.text = "0" + startTimeHours.ToString() + ":" + (int)realTime;
         }
-
     }
+
 }

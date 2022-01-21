@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneMan sceneManager;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private List<Patient> patients;
-    public Func<Patient> getPatient;
 
     #region Patient Manager Variables
     [SerializeField] private List<BedScript> bedList; // private List<Bed> allBeds;
@@ -20,20 +19,19 @@ public class GameManager : MonoBehaviour
     Transform bedContainer;
     #endregion
 
-    //UI 
+    #region Inventory Variables
     [SerializeField] private Inventory itemSlot;
     [SerializeField] private Transform itemslotPos;
+    #endregion
 
+    #region DayCycle and DayTime references
+    [SerializeField] private DayCycle dayCycle;
+    [SerializeField] private Timer dayTime;
+    #endregion
 
-    //Just for now can be deleted later
-    private bool touchPatient = false; // this bool stays false forever in moment
 
     private void Awake()
     {
-        getPatient = patients[0].returnsHimself;     //we need to fix this index atomatically to the correct patient
-
-        //e_OnHeal += player.HealPatientWithItem;
-        //e_OnDamage += player.DamagePatientWithItem;
     }
     private void Start()
     {
@@ -42,28 +40,36 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        //Game will be paused
+		dayCycle.dayCycle();
+        dayTime.DoubledRealTime();
+		//Game will be paused
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             uiManager.GamePaused();
-        }
-
+        }        
         UpdatePatientList();
         PatientSpawner();
-        Treatment(getPatient());
-        //zoomCam.MoveCamera();
+        Treatment(player.currentPatient);
     }
 
-    //I think this will work fine ^^
+    /// <summary>
+    /// Heals or damages the patient if it is the wrong item
+    /// </summary>
+    /// <param name="patient"></param>
     public void Treatment(Patient patient)
     {
-        if(player.currentItem != null && touchPatient)
+        if (player.IsHealing)
         {
-
-            if(patient.CurrentIllness == player.currentItem.item.task)
+            if (player.currentItem == null)
+            {
+                Debug.Log("Damage");
+                patient.HealthAmount -= 5;
+            }
+            else if(patient.CurrentIllness == player.currentItem.item.task)
             {
                 //Success
                 patient.HealthAmount += player.currentItem.item.restoreHealth;
+                
             }
             else
             {
@@ -71,8 +77,16 @@ public class GameManager : MonoBehaviour
                 patient.HealthAmount -= player.currentItem.item.restoreHealth;
             }
 
+            if(itemSlot.CurrentItem != null)
+            {
+                Destroy(itemSlot.CurrentItem);
+                player.currentItem = null;
+                itemSlot.UI_Element = null;
+            }
+            player.IsHealing = false;
         }
     }
+
     #region Patient Spawn Manager
     private void SpawnPatient(GameObject patient, Transform spawnPoint)
     {

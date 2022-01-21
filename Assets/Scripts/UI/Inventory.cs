@@ -9,6 +9,18 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform itemSlotPos;
     private GameObject currentItem;
     private GameObject Ui_element;
+
+    public GameObject CurrentItem
+    {
+        get { return currentItem; }
+        set { currentItem = value; }
+    }
+    public GameObject UI_Element
+    {
+        get { return Ui_element; }
+        set { Ui_element = value; }
+    }
+
     private void Update()
     {
 
@@ -35,6 +47,8 @@ public class Inventory : MonoBehaviour
                 // if he already have the item he will do this! Correct Nothing :D
             }
         }
+        if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
+            Destroy(currentItem);
     }
 
 

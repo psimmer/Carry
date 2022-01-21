@@ -30,26 +30,13 @@ public class Patient : MonoBehaviour
     }
     public int HealthAmount
     {
-        get;
-        set;
+        get { return healthAmount; }
+        set { healthAmount = value; }
     }
 
     void Start()
     {
         
     }
-
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.GetComponent<Player>())
-    //    {
-    //       currentPatient = returnsHimself();
-    //    }
-    //}
-    public Patient returnsHimself()
-    {
-        return this;
-    }
-
 
 }
