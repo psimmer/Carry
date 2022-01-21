@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float playerMovementSpeed;
     [SerializeField] private float maxSpeed;
+    [SerializeField] private Animator playerAnimator;
 
     private float horizontalMovement;
     private float verticalMovement;
@@ -35,20 +36,27 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             verticalMovement = 1f;
+            playerAnimator.SetBool("isWalking", true);
         }
         else if (Input.GetKey(KeyCode.S))
         {
             verticalMovement = -1f;
+            playerAnimator.SetBool("isWalking", true);
         }
         if (Input.GetKey(KeyCode.A))
         {
             horizontalMovement = -1f;
+            playerAnimator.SetBool("isWalking", true);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             horizontalMovement = 1f;
+            playerAnimator.SetBool("isWalking", true);
         }
-
+        if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
+        {
+            playerAnimator.SetBool("isWalking", false);
+        }
 
         Vector3 movement = new Vector3(horizontalMovement, 0f, verticalMovement);
         Vector3 rotation = new Vector3(horizontalRotation, 0f, verticalRotation);

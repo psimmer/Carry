@@ -26042,6 +26042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovementSpeed: 23000
   maxSpeed: 4
+  playerAnimator: {fileID: 5866666020360420813}
 --- !u!54 &1404871686
 Rigidbody:
   m_ObjectHideFlags: 0
