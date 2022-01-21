@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Camera camera;
     public Item currentItem { get; set; }
-    public Patient currentPatient;
-
+    public Patient currentPatient { get; set; }
+    public bool IsHealing { get; set; }
     public bool IsHoldingItem { get; set; }
 
     private void Awake()
@@ -28,7 +28,9 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Interacting with Objects/ with Items and Patients
+    /// </summary>
     public void Interact()
     {
         Collider[] obj = Physics.OverlapBox(transform.position + new Vector3(0f, 1f, 0f), Vector3.one);
@@ -44,11 +46,13 @@ public class Player : MonoBehaviour
             if (item.CompareTag("Patient"))
             {
                 currentPatient = item.GetComponent<Patient>();
+                IsHealing = true;
                 Debug.Log(currentPatient.name);
                }
             //Debug.Log(item.name);
         }
     }
+
     public void DropItem()
     {
             //Drop Item
