@@ -8,6 +8,9 @@ public class Timer : MonoBehaviour
     [SerializeField] private Text timeText;
     [SerializeField] private Text AmAndPm;
     [SerializeField] private int startTimeHours;
+
+
+    [Tooltip("This is the hour when the Game ends + 59 minutes")]
     [SerializeField] private int endTimeHours;
     private string PM = "pm";
     private string AM = "am";

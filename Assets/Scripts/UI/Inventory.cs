@@ -48,7 +48,12 @@ public class Inventory : MonoBehaviour
             }
         }
         if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
+        {
             Destroy(currentItem);
+            Ui_element = null;
+            player.IsHoldingItem = false;
+        }
+
     }
 
 

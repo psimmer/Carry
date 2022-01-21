@@ -1471,6 +1471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3769360300778649146}
   - component: {fileID: 1003468066801226954}
+  - component: {fileID: 4815715235222263265}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -1526,6 +1527,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &4815715235222263265
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540936381063408768}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.69, y: 1.81, z: 0.52}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4851985195599141529
 GameObject:
   m_ObjectHideFlags: 0
