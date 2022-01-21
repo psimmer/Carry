@@ -6,6 +6,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Player player;
+    [SerializeField] private SceneMan sceneManager;
+    [SerializeField] private UIManager uiManager;
     [SerializeField] private List<Patient> patients;
     public Func<Patient> getPatient;
 
@@ -40,6 +42,11 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        //Game will be paused
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            uiManager.GamePaused();
+        }
 
         UpdatePatientList();
         PatientSpawner();
