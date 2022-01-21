@@ -6,9 +6,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Player player;
+    [SerializeField] private Camera mainCam;
     [SerializeField] private SceneMan sceneManager;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private List<Patient> patients;
+    [SerializeField] private List<GameObject> popUps;
 
     #region Patient Manager Variables
     [SerializeField] private List<BedScript> bedList; // private List<Bed> allBeds;
@@ -50,6 +52,12 @@ public class GameManager : MonoBehaviour
         UpdatePatientList();
         PatientSpawner();
         Treatment(player.currentPatient);
+        
+        if(patientList != null)
+        {
+
+            PopUpSpawn(patientList[UnityEngine.Random.Range(0, patientList.Count)]);
+        }
     }
 
     /// <summary>
@@ -134,6 +142,39 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
+
+    #region PopUp Spwan Manager
+
+    private void PopUpSpawn(Patient patient)
+    {
+        if (!patient.IsPopping)
+        {
+            patient.IsPopping = true;
+            StartCoroutine("PopUpManaging", patient);
+        }
+    }
+
+    IEnumerator PopUpManaging(Patient patient)
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(5, 10));
+        foreach(GameObject task in popUps)
+        {
+            if(task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
+            {
+                GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
+                currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
+                currentPopUp.transform.SetAsFirstSibling();
+                currentPopUp.transform.position = mainCam.WorldToScreenPoint(new Vector3(patient.transform.position.x, 
+                    patient.transform.position.y + 2, patient.transform.position.z));
+                break;
+            }
+        }
+        //GameObject currentPopUp = Instantiate();
+        StopCoroutine("PopUpManaging");
+    }
+
+    #endregion
+
 
 
 }

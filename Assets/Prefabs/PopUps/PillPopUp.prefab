@@ -31,6 +31,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.2499695
       objectReference: {fileID: 0}
+    - target: {fileID: 6382526379656950401, guid: 66084169ca04d3b4eaec4f10a3e77d79, type: 3}
+      propertyPath: popUpTaskType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8641603371945470390, guid: 66084169ca04d3b4eaec4f10a3e77d79, type: 3}
       propertyPath: m_Name
       value: PillImage

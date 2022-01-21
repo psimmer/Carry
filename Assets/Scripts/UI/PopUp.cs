@@ -4,7 +4,23 @@ using UnityEngine;
 
 public class PopUp : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private GameObject popUpPrefab;
+    public TaskType popUpTaskType;
+
+    public GameObject Prefab => popUpPrefab;
+
+    public TaskType TaskType
+    {
+        get { return popUpTaskType; }
+        set { popUpTaskType = value; }
+    }
+
+
+    private void Awake()
+    {
+        //popUpTaskType = GetComponentInParent<Patient>().CurrentIllness;
+    }
+
     void Start()
     {
         

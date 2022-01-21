@@ -22,8 +22,15 @@ public class Patient : MonoBehaviour
     [SerializeField] private int healthAmount;
     [SerializeField] private TaskType currentIllness;
     private int patientID;
+    private bool isPopping;
 
     // getters and setters
+    public bool IsPopping
+    {
+        get { return isPopping; }
+        set { isPopping = value; }
+    }
+
     public TaskType CurrentIllness
     {
         get { return currentIllness; }
@@ -36,7 +43,7 @@ public class Patient : MonoBehaviour
 
     void Start()
     {
-        
+        IsPopping = false;
     }
 
 }

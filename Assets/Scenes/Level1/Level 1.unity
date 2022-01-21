@@ -11143,12 +11143,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1404871689}
+  mainCam: {fileID: 963194227}
   sceneManager: {fileID: 711209936}
   uiManager: {fileID: 121423933}
   patients:
   - {fileID: 1393475252}
   - {fileID: 0}
   - {fileID: 352956904}
+  popUps:
+  - {fileID: 1360661134648728818, guid: 66084169ca04d3b4eaec4f10a3e77d79, type: 3}
+  - {fileID: 1608855348714204151, guid: e1ce2c2b5bed2554c892b218a5ba6d7e, type: 3}
   bedList: []
   patientList: []
   maxAmountOfPatients: 5
