@@ -11,11 +11,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private List<Patient> patients;
     [SerializeField] private List<GameObject> popUps;
+    private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
 
     #region Patient Manager Variables
     [SerializeField] private List<BedScript> bedList; // private List<Bed> allBeds;
     [SerializeField] private List<Patient> patientList;
     public int maxAmountOfPatients;
+    private int newPatientID;
     [SerializeField] private GameObject testPatientPrefab;
     Transform patientContainer;
     Transform bedContainer;
@@ -37,8 +39,10 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        newPatientID = 1;
         GetAllBeds();
         patientContainer = GameObject.Find("Patients").transform;
+        AssignPatientIDs();
     }
     void Update()
     {
@@ -49,14 +53,13 @@ public class GameManager : MonoBehaviour
         {
             uiManager.GamePaused();
         }        
-        UpdatePatientList();
         PatientSpawner();
+        UpdatePatientList();
         Treatment(player.currentPatient);
         
         if(patientList != null)
         {
-
-            PopUpSpawn(patientList[UnityEngine.Random.Range(0, patientList.Count)]);
+            ManagePopUps();
         }
     }
 
@@ -101,8 +104,8 @@ public class GameManager : MonoBehaviour
         GameObject newPatient = Instantiate(patient, spawnPoint);
         newPatient.transform.parent = GameObject.Find("Patients").transform;  // unperformant?
         newPatient.transform.SetAsLastSibling();
-        int patientNumber = patientList.Count+1;  
-        newPatient.name = patientNumber.ToString();
+        newPatient.name = newPatientID.ToString();
+        newPatientID++;
         newPatient.transform.position = spawnPoint.transform.position;
         spawnPoint.GetComponent<BedScript>().IsFree = false;
     }
@@ -123,7 +126,7 @@ public class GameManager : MonoBehaviour
     }
     private void GetAllBeds()
     {
-        GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed");
+        UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed");
         for(int i=0; i<bedArray.Length; i++)
         {
             bedList.Add(bedArray[i].GetComponent<BedScript>());
@@ -132,29 +135,47 @@ public class GameManager : MonoBehaviour
 
     private void UpdatePatientList()
     {
-        //Transform list = GameObject.Find("Patients").transform;  // is this method unperformant? Lukas will find out! :D
+        if (patientContainer.childCount == patientList.Count)
+            return;
         for (int i = 0; i < patientContainer.childCount; i++)
         {
             Patient patient = patientContainer.transform.GetChild(i).GetComponent<Patient>();
             // if the patient is not already in the list
             if (!patientList.Contains(patient))
                 patientList.Add(patient);
+
+        }
+            
+    }
+    private void DestroyPatient(GameObject patient) // please use this for destroying patients!
+    {
+        int patientID = patient.GetComponent<Patient>().PatientID;
+        foreach (Patient element in patientList)
+        {
+            if(element.GetComponent<Patient>().PatientID == patientID)
+            {
+                patientList.Remove(element);
+            }
+        }
+        RemovePopUpFromList(patientID);
+        Destroy(patient);
+    }
+
+
+    private void AssignPatientIDs()
+    {
+        for(int i = 0; i<patientContainer.childCount;i++)
+        {
+            patientContainer.transform.GetChild(i).GetComponent<Patient>().PatientID = newPatientID;
+            newPatientID++;
         }
     }
+
     #endregion
 
     #region PopUp Spwan Manager
 
-    private void PopUpSpawn(Patient patient)
-    {
-        if (!patient.IsPopping)
-        {
-            patient.IsPopping = true;
-            StartCoroutine("PopUpManaging", patient);
-        }
-    }
-
-    IEnumerator PopUpManaging(Patient patient)
+    IEnumerator GeneratePopUp(Patient patient)
     {
         yield return new WaitForSeconds(UnityEngine.Random.Range(5, 10));
         foreach(GameObject task in popUps)
@@ -164,15 +185,34 @@ public class GameManager : MonoBehaviour
                 GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
                 currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
                 currentPopUp.transform.SetAsFirstSibling();
-                currentPopUp.transform.position = mainCam.WorldToScreenPoint(new Vector3(patient.transform.position.x, 
-                    patient.transform.position.y + 2, patient.transform.position.z));
+                popUpList.Add(patient.PatientID, currentPopUp);
                 break;
             }
         }
         //GameObject currentPopUp = Instantiate();
         StopCoroutine("PopUpManaging");
     }
-
+    private void ManagePopUps()
+    {
+        foreach (Patient patient in patientList)
+        {
+            int patientID = patient.PatientID;
+            if (!patient.IsPopping)
+            {
+                patient.IsPopping = true;
+                StartCoroutine("GeneratePopUp", patient);
+            }
+                popUpList[patientID].transform.position = mainCam.WorldToScreenPoint(new Vector3(patient.transform.position.x,
+                    patient.transform.position.y + 2, patient.transform.position.z));
+        }
+    }
+    private void RemovePopUpFromList(int patientID)
+    {
+        GameObject removeIfExists;
+        popUpList.TryGetValue(patientID, out removeIfExists);
+        if(removeIfExists != null)
+            popUpList.Remove(patientID);
+    }
     #endregion
 
 

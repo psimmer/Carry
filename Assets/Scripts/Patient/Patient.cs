@@ -31,6 +31,12 @@ public class Patient : MonoBehaviour
         set { isPopping = value; }
     }
 
+    public int PatientID
+    {
+        get { return patientID; }
+        set { patientID = value; }
+    }
+
     public TaskType CurrentIllness
     {
         get { return currentIllness; }
