@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private List<Patient> patients;
     [SerializeField] private List<GameObject> popUps;
-    //private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
-    private GameObject[] popUpList = new GameObject[6];
+    private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
+    //private GameObject[] popUpList = new GameObject[6];
 
     #region Patient Manager Variables
     [SerializeField] private List<BedScript> bedList; // private List<Bed> allBeds;
@@ -37,30 +37,30 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        patientContainer = GameObject.Find("Patients").transform;
+        GetAllBeds();
     }
     private void Start()
     {
-        newPatientID = 1;
-        GetAllBeds();
-        patientContainer = GameObject.Find("Patients").transform;
         AssignPatientIDs();
+        newPatientID = patientContainer.childCount+1;
     }
     void Update()
     {
-		dayCycle.dayCycle();
+        dayCycle.dayCycle();
         dayTime.DoubledRealTime();
-		//Game will be paused
+        //Game will be paused
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             uiManager.GamePaused();
-        }        
+        }
         PatientSpawner();
         UpdatePatientList();
         Treatment(player.currentPatient);
-        
+
         //if(patientList != null)
         //{
-            ManagePopUps();
+        ManagePopUps();
         //}
     }
 
@@ -77,11 +77,11 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Damage");
                 patient.HealthAmount -= 5;
             }
-            else if(patient.CurrentIllness == player.currentItem.item.task)
+            else if (patient.CurrentIllness == player.currentItem.item.task)
             {
                 //Success
                 patient.HealthAmount += player.currentItem.item.restoreHealth;
-                
+
             }
             else
             {
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
                 patient.HealthAmount -= player.currentItem.item.restoreHealth;
             }
 
-            if(itemSlot.CurrentItem != null)
+            if (itemSlot.CurrentItem != null)
             {
                 Destroy(itemSlot.CurrentItem);
                 player.currentItem = null;
@@ -103,20 +103,21 @@ public class GameManager : MonoBehaviour
     private void SpawnPatient(GameObject patient, Transform spawnPoint)
     {
         GameObject newPatient = Instantiate(patient, spawnPoint);
-        newPatient.transform.parent = GameObject.Find("Patients").transform;  // unperformant?
-        newPatient.transform.SetAsLastSibling();
+        newPatient.transform.parent = patientContainer; 
+        newPatient.GetComponent<Patient>().PatientID = newPatientID;
         newPatient.name = newPatientID.ToString();
+        newPatient.transform.SetAsLastSibling();
         newPatientID++;
         newPatient.transform.position = spawnPoint.transform.position;
         spawnPoint.GetComponent<BedScript>().IsFree = false;
     }
     private void PatientSpawner()
     {
-        if(patientList.Count > maxAmountOfPatients)
+        if (patientList.Count > maxAmountOfPatients)
         {
             return;
         }
-        if(bedList.Count > 0)
+        if (bedList.Count > 0)
         {
             //(0, freeSpawnPoints.Count - 1); // aks if we should take Random.Range or Random.Next
             int randomIndex = UnityEngine.Random.Range(0, bedList.Count - 1);
@@ -128,7 +129,7 @@ public class GameManager : MonoBehaviour
     private void GetAllBeds()
     {
         UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed");
-        for(int i=0; i<bedArray.Length; i++)
+        for (int i = 0; i < bedArray.Length; i++)
         {
             bedList.Add(bedArray[i].GetComponent<BedScript>());
         }
@@ -146,14 +147,14 @@ public class GameManager : MonoBehaviour
                 patientList.Add(patient);
 
         }
-            
+
     }
     private void DestroyPatient(GameObject patient) // please use this for destroying patients!
     {
         int patientID = patient.GetComponent<Patient>().PatientID;
         foreach (Patient element in patientList)
         {
-            if(element.GetComponent<Patient>().PatientID == patientID)
+            if (element.GetComponent<Patient>().PatientID == patientID)
             {
                 patientList.Remove(element);
             }
@@ -165,10 +166,9 @@ public class GameManager : MonoBehaviour
 
     private void AssignPatientIDs()
     {
-        for(int i = 0; i<patientContainer.childCount;i++)
+        for (int i = 0; i < patientContainer.childCount; i++)
         {
-            patientContainer.transform.GetChild(i).GetComponent<Patient>().PatientID = newPatientID;
-            newPatientID++;
+            patientContainer.transform.GetChild(i).GetComponent<Patient>().PatientID = int.Parse(patientContainer.GetChild(i).name);
         }
     }
 
@@ -176,41 +176,54 @@ public class GameManager : MonoBehaviour
 
     #region PopUp Spwan Manager
 
-    IEnumerator GeneratePopUp(Patient patient)
-    {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(5, 10));
-        foreach(GameObject task in popUps)
-        {
-            if(task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
-            {
-                GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
-                currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
-                currentPopUp.transform.SetAsFirstSibling();
-                popUpList[patient.PatientID] = currentPopUp;
-                Debug.Log(patient.PatientID);
-                //Debug.Log(currentPopUp);
-                //patient.IsPopping = false;
-                //break;
-            }
-        }
-        //GameObject currentPopUp = Instantiate();
-        StopCoroutine("GeneratePopUp");
-    }
+    
     private void ManagePopUps()
     {
+        foreach (GameObject value in popUpList.Values)
+        {
+            Debug.Log($"{value}");
+        }
+
         foreach (Patient patient in patientList)
         {
-            if(patient != null && popUpList[patient.PatientID] == null)
+            if (patient != null)
             {
                 int patientID = patient.PatientID;
-                if (!patient.IsPopping && patientID < popUpList.Length)
+
+                if (!patient.HasTask && !patient.IsPopping)
                 {
-                    patient.IsPopping = true;
-                    StartCoroutine("GeneratePopUp", patient);
+                    Debug.Log($"patient {patient.PatientID}has no task");
+                    StartCoroutine(patient.PopUpTimer());
                 }
-                if(popUpList[patientID] != null) // <---- Somehow we dont get in here 
+
+                else if (patient.IsPopping && !popUpList.ContainsKey(patientID))
                 {
-                    popUpList[patientID].transform.position = mainCam.WorldToScreenPoint(new Vector3(patient.transform.position.x,
+                    Debug.Log($"patient {patient.PatientID} is popping");
+                    foreach (GameObject task in popUps)
+                    {
+                        if (task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
+                        {
+                            if (popUpList.ContainsKey(patientID))
+                                break;
+
+                            GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
+                            currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
+                            currentPopUp.transform.SetAsFirstSibling();
+                            popUpList.Add(patient.PatientID, currentPopUp);
+                            patient.HasTask = true;
+                            patient.IsPopping = false;
+                        }
+                    }
+                }
+
+                if (popUpList.ContainsKey(patientID)) // <---- Somehow we dont get in here 
+                {
+                    GameObject popUp;
+                    bool success = false;
+                    success = popUpList.TryGetValue(patientID, out popUp);
+                    if (!success)
+                        return;
+                    popUp.transform.position = mainCam.WorldToScreenPoint(new Vector3(patient.transform.position.x,
                     patient.transform.position.y + 2, patient.transform.position.z));
                 }
             }
