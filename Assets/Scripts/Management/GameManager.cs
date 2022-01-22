@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private List<Patient> patients;
     [SerializeField] private List<GameObject> popUps;
-    private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
+    //private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
+    private GameObject[] popUpList = new GameObject[6];
 
     #region Patient Manager Variables
     [SerializeField] private List<BedScript> bedList; // private List<Bed> allBeds;
@@ -57,10 +58,10 @@ public class GameManager : MonoBehaviour
         UpdatePatientList();
         Treatment(player.currentPatient);
         
-        if(patientList != null)
-        {
+        //if(patientList != null)
+        //{
             ManagePopUps();
-        }
+        //}
     }
 
     /// <summary>
@@ -157,7 +158,7 @@ public class GameManager : MonoBehaviour
                 patientList.Remove(element);
             }
         }
-        RemovePopUpFromList(patientID);
+        popUpList[patientID] = null;
         Destroy(patient);
     }
 
@@ -185,34 +186,43 @@ public class GameManager : MonoBehaviour
                 GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
                 currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
                 currentPopUp.transform.SetAsFirstSibling();
-                popUpList.Add(patient.PatientID, currentPopUp);
-                break;
+                popUpList[patient.PatientID] = currentPopUp;
+                Debug.Log(patient.PatientID);
+                //Debug.Log(currentPopUp);
+                //patient.IsPopping = false;
+                //break;
             }
         }
         //GameObject currentPopUp = Instantiate();
-        StopCoroutine("PopUpManaging");
+        StopCoroutine("GeneratePopUp");
     }
     private void ManagePopUps()
     {
         foreach (Patient patient in patientList)
         {
-            int patientID = patient.PatientID;
-            if (!patient.IsPopping)
+            if(patient != null && popUpList[patient.PatientID] == null)
             {
-                patient.IsPopping = true;
-                StartCoroutine("GeneratePopUp", patient);
-            }
-                popUpList[patientID].transform.position = mainCam.WorldToScreenPoint(new Vector3(patient.transform.position.x,
+                int patientID = patient.PatientID;
+                if (!patient.IsPopping && patientID < popUpList.Length)
+                {
+                    patient.IsPopping = true;
+                    StartCoroutine("GeneratePopUp", patient);
+                }
+                if(popUpList[patientID] != null) // <---- Somehow we dont get in here 
+                {
+                    popUpList[patientID].transform.position = mainCam.WorldToScreenPoint(new Vector3(patient.transform.position.x,
                     patient.transform.position.y + 2, patient.transform.position.z));
+                }
+            }
         }
     }
-    private void RemovePopUpFromList(int patientID)
-    {
-        GameObject removeIfExists;
-        popUpList.TryGetValue(patientID, out removeIfExists);
-        if(removeIfExists != null)
-            popUpList.Remove(patientID);
-    }
+    //private void RemovePopUpFromList(int patientID)
+    //{
+    //    GameObject removeIfExists;
+    //    popUpList.TryGetValue(patientID, out removeIfExists);
+    //    if(removeIfExists != null)
+    //        popUpList.Remove(patientID);
+    //}
     #endregion
 
 

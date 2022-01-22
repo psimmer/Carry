@@ -11152,7 +11152,6 @@ MonoBehaviour:
   uiManager: {fileID: 121423933}
   patients:
   - {fileID: 1393475252}
-  - {fileID: 0}
   - {fileID: 352956904}
   popUps:
   - {fileID: 1360661134648728818, guid: 66084169ca04d3b4eaec4f10a3e77d79, type: 3}
