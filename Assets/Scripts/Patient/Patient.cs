@@ -59,17 +59,17 @@ public class Patient : MonoBehaviour
     void Start()
     {
         HasTask = false;
-        minTimer = Random.Range(3, 6);
-        maxTimer = Random.Range(7, 12);
+        minTimer = Random.Range(10, 15);
+        maxTimer = Random.Range(20, 30);
         IsPopping = false;
     }
 
-    public IEnumerator PopUpTimer()
-    {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(minTimer, maxTimer));
-        IsPopping = true;
-        Debug.Log($"patient {patientID} finished waiting and is popping");
-        StopCoroutine("PopUpTimer");
+    //public IEnumerator PopUpTimer()
+    //{
+    //    yield return new WaitForSeconds(10);  // Lukas likes this random timer method: I tooked it out to test smth Random.Range(minTimer, maxTimer)
+    //    IsPopping = true;
+    //    Debug.Log($"patient {patientID} finished waiting and is popping");
+    //    StopCoroutine("PopUpTimer");
         //foreach(GameObject task in popUps)
         //{
         //    if(task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
@@ -84,7 +84,7 @@ public class Patient : MonoBehaviour
         //    }
         //}
         //GameObject currentPopUp = Instantiate();
-    }
+    
 
 
 }

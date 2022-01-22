@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         AssignPatientIDs();
-        newPatientID = patientContainer.childCount+1;
+        newPatientID = patientContainer.childCount + 1;
     }
     void Update()
     {
@@ -58,10 +58,11 @@ public class GameManager : MonoBehaviour
         UpdatePatientList();
         Treatment(player.currentPatient);
 
-        //if(patientList != null)
-        //{
-        ManagePopUps();
-        //}
+        if (patientList != null)
+        {
+            ManagePopUps();
+
+        }
     }
 
     /// <summary>
@@ -103,7 +104,9 @@ public class GameManager : MonoBehaviour
     private void SpawnPatient(GameObject patient, Transform spawnPoint)
     {
         GameObject newPatient = Instantiate(patient, spawnPoint);
-        newPatient.transform.parent = patientContainer; 
+        newPatient.GetComponent<Patient>().IsPopping = false;
+        newPatient.GetComponent<Patient>().HasTask = false;
+        newPatient.transform.parent = patientContainer;
         newPatient.GetComponent<Patient>().PatientID = newPatientID;
         newPatient.name = newPatientID.ToString();
         newPatient.transform.SetAsLastSibling();
@@ -176,7 +179,7 @@ public class GameManager : MonoBehaviour
 
     #region PopUp Spwan Manager
 
-    
+
     private void ManagePopUps()
     {
         foreach (GameObject value in popUpList.Values)
@@ -192,19 +195,19 @@ public class GameManager : MonoBehaviour
 
                 if (!patient.HasTask && !patient.IsPopping)
                 {
-                    Debug.Log($"patient {patient.PatientID}has no task");
-                    StartCoroutine(patient.PopUpTimer());
+                    //Debug.Log($"patient {patient.PatientID}has no task");
+                    StartCoroutine("PopUpTimer", patient);
                 }
 
-                else if (patient.IsPopping && !popUpList.ContainsKey(patientID))
+                if (patient.IsPopping && !popUpList.ContainsKey(patientID))
                 {
-                    Debug.Log($"patient {patient.PatientID} is popping");
+                    //Debug.Log($"patient {patient.PatientID} is popping");
                     foreach (GameObject task in popUps)
                     {
                         if (task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
                         {
                             if (popUpList.ContainsKey(patientID))
-                                break;
+                                continue;
 
                             GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
                             currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
@@ -216,8 +219,9 @@ public class GameManager : MonoBehaviour
                     }
                 }
 
-                if (popUpList.ContainsKey(patientID)) // <---- Somehow we dont get in here 
+                if (popUpList.ContainsKey(patientID)) // <---- Somehow we dont get in here // now we are getting in there
                 {
+                    Debug.Log("Got it");
                     GameObject popUp;
                     bool success = false;
                     success = popUpList.TryGetValue(patientID, out popUp);
@@ -229,15 +233,22 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    //private void RemovePopUpFromList(int patientID)
-    //{
-    //    GameObject removeIfExists;
-    //    popUpList.TryGetValue(patientID, out removeIfExists);
-    //    if(removeIfExists != null)
-    //        popUpList.Remove(patientID);
-    //}
-    #endregion
+    public IEnumerator PopUpTimer(Patient patient)
+    {
+        yield return new WaitForSeconds(10);  // Lukas likes this random timer method: I tooked it out to test smth Random.Range(minTimer, maxTimer)
+        patient.IsPopping = true;
+        //Debug.Log($"patient {patient.patientID} finished waiting and is popping");
+        StopCoroutine("PopUpTimer");
+        //private void RemovePopUpFromList(int patientID)
+        //{
+        //    GameObject removeIfExists;
+        //    popUpList.TryGetValue(patientID, out removeIfExists);
+        //    if(removeIfExists != null)
+        //        popUpList.Remove(patientID);
+        //}
+        #endregion
 
 
 
+    }
 }
