@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera mainCam;
     [SerializeField] private SceneMan sceneManager;
     [SerializeField] private UIManager uiManager;
-    [SerializeField] private List<Patient> patients;
+    //[SerializeField] private List<Patient> patients;
     [SerializeField] private List<GameObject> popUps;
     private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
     //private GameObject[] popUpList = new GameObject[6];
@@ -42,27 +42,40 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        //SetHealthBarPos();
         AssignPatientIDs();
         newPatientID = patientContainer.childCount + 1;
     }
     void Update()
     {
+        //Game will be paused
+        uiManager.GamePaused();
+
+        //DayCycle and Timer
         dayCycle.dayCycle();
         dayTime.DoubledRealTime();
-        //Game will be paused
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            uiManager.GamePaused();
-        }
+        
+        //Patient Spawning Stuff
         PatientSpawner();
         UpdatePatientList();
-        Treatment(player.currentPatient);
 
+        Treatment(player.currentPatient);
+        //SetHealthBarPos();
+
+        //PopUp Stuff
         if (patientList != null)
         {
             ManagePopUps();
-
         }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SpawnPatient(testPatientPrefab, bedList[1].transform);
+        }
+    }
+    private void LateUpdate()
+    {
+        UpdateHealthBar();
+
     }
 
     /// <summary>
@@ -113,6 +126,8 @@ public class GameManager : MonoBehaviour
         newPatientID++;
         newPatient.transform.position = spawnPoint.transform.position;
         spawnPoint.GetComponent<BedScript>().IsFree = false;
+        //SetHealthBarPos(newPatient.GetComponent<Patient>());
+
     }
     private void PatientSpawner()
     {
@@ -142,9 +157,12 @@ public class GameManager : MonoBehaviour
     {
         if (patientContainer.childCount == patientList.Count)
             return;
+
         for (int i = 0; i < patientContainer.childCount; i++)
         {
+
             Patient patient = patientContainer.transform.GetChild(i).GetComponent<Patient>();
+
             // if the patient is not already in the list
             if (!patientList.Contains(patient))
                 patientList.Add(patient);
@@ -177,7 +195,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    #region PopUp Spwan Manager
+    #region PopUp Spawn Manager
 
 
     private void ManagePopUps()
@@ -246,9 +264,46 @@ public class GameManager : MonoBehaviour
         //    if(removeIfExists != null)
         //        popUpList.Remove(patientID);
         //}
-        #endregion
+
 
 
 
     }
+    #endregion
+
+    #region Health Bar Manager
+
+    public void UpdateHealthBar()
+    {
+        for(int i = 0; i < patientContainer.childCount; i++)
+        {
+            Patient patient = patientContainer.GetChild(i).GetComponent<Patient>();
+            GameObject instantiatedHealthbar = patient.InstantiatedHealthbar;
+            if (patient != null)
+            {
+                 Vector3 patientPos = patient.transform.position;
+
+                 if (patient.InstantiatedHealthbar != null)
+                 {
+                     instantiatedHealthbar.transform.position = mainCam.WorldToScreenPoint(new Vector3(patientPos.x,
+                         patientPos.y + 0.5f, patientPos.z));
+                 }
+                else
+                {
+                    Debug.Log(patient.PatientID);
+                    patient.InstantiatedHealthbar = Instantiate(patient.Prefab, uiManager.transform);
+                }
+            }
+        }
+    }
+
+    public void LerpHealthBar()
+    {
+
+
+
+    }
+
+
+    #endregion
 }

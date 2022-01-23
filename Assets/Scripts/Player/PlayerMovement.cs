@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
             horizontalMovement = 1f;
             playerAnimator.SetBool("isWalking", true);
         }
-        if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
+        if(!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
         {
             playerAnimator.SetBool("isWalking", false);
         }

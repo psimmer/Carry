@@ -5669,6 +5669,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
+      propertyPath: healthbar
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
 --- !u!1 &311755153
@@ -6487,30 +6491,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: af2cfd2bae9b6ed4fb095fee9e046bb2, type: 3}
   m_PrefabInstance: {fileID: 468203636}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &352956902 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4540936381063408768, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
-  m_PrefabInstance: {fileID: 308272483}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &352956903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3769360300778649146, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
   m_PrefabInstance: {fileID: 308272483}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &352956904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352956902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35c363c7e1c42ef4ebe70ade52a88adc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthAmount: 0
-  currentIllness: 0
 --- !u!1001 &361610714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11150,9 +11135,6 @@ MonoBehaviour:
   mainCam: {fileID: 963194227}
   sceneManager: {fileID: 711209936}
   uiManager: {fileID: 121423933}
-  patients:
-  - {fileID: 1393475252}
-  - {fileID: 352956904}
   popUps:
   - {fileID: 1360661134648728818, guid: 66084169ca04d3b4eaec4f10a3e77d79, type: 3}
   - {fileID: 1608855348714204151, guid: e1ce2c2b5bed2554c892b218a5ba6d7e, type: 3}
@@ -26020,17 +26002,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2204897345709698725, guid: 8d79c7b2869e21641a6634eefef69776, type: 3}
   m_PrefabInstance: {fileID: 3086702202621831031}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1393475252 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1393475252, guid: 8d79c7b2869e21641a6634eefef69776, type: 3}
-  m_PrefabInstance: {fileID: 3086702202621831031}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 677797885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35c363c7e1c42ef4ebe70ade52a88adc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1404871689 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
@@ -36158,10 +36129,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1866187252}
     m_Modifications:
-    - target: {fileID: 1393475252, guid: 8d79c7b2869e21641a6634eefef69776, type: 3}
-      propertyPath: healthAmount
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 1572476281147765791, guid: 8d79c7b2869e21641a6634eefef69776, type: 3}
       propertyPath: m_Name
       value: 1
@@ -36342,6 +36309,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1404871689}
+    - target: {fileID: 7360556260702446166, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7360556260702446167, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -36376,6 +36347,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7360556260702446167, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360556260702446167, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360556260702446167, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360556260702446167, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7360556260702446167, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}

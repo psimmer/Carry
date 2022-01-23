@@ -26,8 +26,19 @@ public class Patient : MonoBehaviour
     [SerializeField] private bool hasTask;
     [SerializeField] private int minTimer;
     [SerializeField] private int maxTimer;
+    [SerializeField] private GameObject healthbarPrefab;
+    private Healthbar healthbar;
+    public GameObject InstantiatedHealthbar { get; set; }
 
     // getters and setters
+    public GameObject Prefab => healthbarPrefab;
+
+    public Healthbar Healthbar
+    {
+        get { return healthbar; }
+        set { healthbar = value; }
+    }
+
     public bool IsPopping
     {
         get { return isPopping; }
@@ -58,6 +69,8 @@ public class Patient : MonoBehaviour
 
     void Start()
     {
+        InstantiatedHealthbar = null;
+        healthbar = healthbarPrefab.GetComponent<Healthbar>();
         HasTask = false;
         minTimer = Random.Range(10, 15);
         maxTimer = Random.Range(20, 30);

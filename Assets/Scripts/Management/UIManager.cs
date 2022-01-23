@@ -44,23 +44,26 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void GamePaused()
     {
-        if (Time.timeScale > 0)
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Time.timeScale = 0f;
-            pauseElements.SetActive(true);
-            //TODO: dimm light
-            //TODO: Pause AUdio
-            //TODO: Pause Camera
-        }
-        else
-        {
-            pauseElements.SetActive(false);
-            Time.timeScale = 1f;
+            if (Time.timeScale > 0)
+            {
+                Time.timeScale = 0f;
+                pauseElements.SetActive(true);
+                //TODO: dimm light
+                //TODO: Pause AUdio
+                //TODO: Pause Camera
+            }
+            else
+            {
+                pauseElements.SetActive(false);
+                Time.timeScale = 1f;
 
-            //TODO: dimm light
-            //TODO: play audio
-            //TODO: Play Camera
+                //TODO: dimm light
+                //TODO: play audio
+                //TODO: Play Camera
 
+            }
         }
     }
 
