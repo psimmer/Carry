@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class Timer : MonoBehaviour
         //This would be the condition to end the scene with a success
         if (startTimeHours == endTimeHours && (int)realTime == 59)
         {
+            SceneManager.LoadScene("LevelComplete");    //should be in the GameManager
             Debug.Log("SceneManager....");
         }
 

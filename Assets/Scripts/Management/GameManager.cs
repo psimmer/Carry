@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
             {
                 //Success
                 patient.HealthAmount += player.currentItem.item.restoreHealth;
+                GlobalData.instance.TotalTreatments++;
 
             }
             else
