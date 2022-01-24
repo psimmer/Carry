@@ -5730,6 +5730,10 @@ PrefabInstance:
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
+      propertyPath: healthAmount
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
 --- !u!1 &311755153
@@ -11198,7 +11202,7 @@ MonoBehaviour:
   bedList: []
   patientList: []
   maxAmountOfPatients: 5
-  testPatientPrefab: {fileID: 1572476281147765791, guid: 8d79c7b2869e21641a6634eefef69776, type: 3}
+  patientPrefab: {fileID: 1572476281147765791, guid: 8d79c7b2869e21641a6634eefef69776, type: 3}
   itemSlot: {fileID: 121423932}
   itemslotPos: {fileID: 1127159734}
   dayCycle: {fileID: 705507996}

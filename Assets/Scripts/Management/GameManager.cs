@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Patient> patientList;
     public int maxAmountOfPatients;
     private int newPatientID;
-    [SerializeField] private GameObject testPatientPrefab;
+    [SerializeField] private GameObject patientPrefab;
     Transform patientContainer;
     Transform bedContainer;
     #endregion
@@ -93,19 +93,24 @@ public class GameManager : MonoBehaviour
             if (player.currentItem == null)
             {
                 Debug.Log("Damage");
-                patient.HealthAmount -= 5;
+                patient.HealthAmount -= 5;  //make a serializabel variable for balancing 
+                //IsPatientDead(patient); 
             }
             else if (patient.CurrentIllness == player.currentItem.item.task)
             {
                 //Success
                 patient.HealthAmount += player.currentItem.item.restoreHealth;
+                //TODO: update Healthbar, StressLvl, ParticleEffects, Soundeffect
                 GlobalData.instance.TotalTreatments++;
+                GlobalData.instance.ShiftTreatments++;
 
             }
             else
             {
                 //Damage
                 patient.HealthAmount -= player.currentItem.item.restoreHealth;
+                //TODO: update Healthbar, Stresslvl, ParticleEffects, Soundeffects
+                //TODO: patient is dead condition
             }
 
             if (itemSlot.CurrentItem != null)
@@ -145,7 +150,7 @@ public class GameManager : MonoBehaviour
             //(0, freeSpawnPoints.Count - 1); // aks if we should take Random.Range or Random.Next
             int randomIndex = UnityEngine.Random.Range(0, bedList.Count - 1);
             Transform spawnPoint = bedList[randomIndex].transform;
-            SpawnPatient(testPatientPrefab, spawnPoint);
+            SpawnPatient(patientPrefab, spawnPoint);
 
         }
     }
@@ -197,119 +202,24 @@ public class GameManager : MonoBehaviour
             patientContainer.transform.GetChild(i).GetComponent<Patient>().PatientID = int.Parse(patientContainer.GetChild(i).name);
         }
     }
-
     #endregion
 
-    #region PopUp Spawn Manager
-
-
-    //private void ManagePopUps()
+    /// <summary>
+    /// Sets all statistics and destroys the patient
+    /// </summary>
+    /// <param name="patient"></param>
+    /// <returns></returns>
+    //private bool IsPatientDead(Patient patient)
     //{
-    //    //foreach (GameObject value in popUpList.Values)
-    //    //{
-    //    //    Debug.Log($"{value}");
-    //    //}
-
-    //    foreach (Patient patient in patientList)
+    //    if(patient.HealthAmount <= 0)
     //    {
-    //        if (patient != null)
-    //        {
-    //            int patientID = patient.PatientID;
-
-    //            if (!patient.HasTask && !patient.IsPopping)
-    //            {
-    //                //Debug.Log($"patient {patient.PatientID}has no task");
-    //                StartCoroutine("PopUpTimer", patient);
-    //            }
-
-    //            if (patient.IsPopping && !popUpList.ContainsKey(patientID))
-    //            {
-    //                //Debug.Log($"patient {patient.PatientID} is popping");
-    //                foreach (GameObject task in popUps)
-    //                {
-    //                    if (task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
-    //                    {
-    //                        if (popUpList.ContainsKey(patientID))
-    //                            continue;
-
-    //                        GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
-    //                        currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
-    //                        currentPopUp.transform.SetAsFirstSibling();
-    //                        popUpList.Add(patient.PatientID, currentPopUp);
-    //                        patient.HasTask = true;
-    //                        patient.IsPopping = false;
-    //                    }
-    //                }
-    //            }
-
-    //            if (popUpList.ContainsKey(patientID))
-    //            {
-    //                GameObject popUp;
-    //                bool success = false;
-    //                success = popUpList.TryGetValue(patientID, out popUp);
-    //                if (!success)
-    //                    return;
-    //                popUp.transform.position = mainCam.WorldToScreenPoint(new Vector3(patient.transform.position.x,
-    //                patient.transform.position.y + 2, patient.transform.position.z));
-    //            }
-    //        }
+    //        GlobalData.instance.TotalPatientsLost++;
+    //        GlobalData.instance.ShiftPatientsLost++;
+    //        //TODO: set StressLvl, SoundEffects, Particles
+    //        //DestroyPatient(patient.gameObject); --> DestroyPatient Method doesnt work
     //    }
-    //}
-    //public IEnumerator PopUpTimer(Patient patient)
-    //{
-    //    int randomTime = UnityEngine.Random.Range(10, 15);
-    //    int maxRandomTime = UnityEngine.Random.Range(20, 25);
-    //    yield return new WaitForSeconds(UnityEngine.Random.Range(randomTime, maxRandomTime));  // Lukas likes this random timer method: I tooked it out to test smth Random.Range(minTimer, maxTimer)
-    //    patient.IsPopping = true;
-    //    //Debug.Log($"patient {patient.patientID} finished waiting and is popping");
-    //    StopCoroutine("PopUpTimer");
-    //    //private void RemovePopUpFromList(int patientID)
-    //    //{
-    //    //    GameObject removeIfExists;
-    //    //    popUpList.TryGetValue(patientID, out removeIfExists);
-    //    //    if(removeIfExists != null)
-    //    //        popUpList.Remove(patientID);
-    //    //}
-
-
-
-
-    //}
-    #endregion
-
-    #region Health Bar Manager
-
-    //public void UpdateHealthBar()
-    //{
-    //    for(int i = 0; i < patientContainer.childCount; i++)
-    //    {
-    //        Patient patient = patientContainer.GetChild(i).GetComponent<Patient>();
-    //        GameObject instantiatedHealthbar = patient.InstantiatedHealthbar;
-    //        if (patient != null)
-    //        {
-    //             Vector3 patientPos = patient.transform.position;
-
-    //             if (patient.InstantiatedHealthbar != null)
-    //             {
-    //                 instantiatedHealthbar.transform.position = mainCam.WorldToScreenPoint(new Vector3(patientPos.x,
-    //                     patientPos.y + 0.5f, patientPos.z));
-    //             }
-    //            else
-    //            {
-    //                Debug.Log(patient.PatientID);
-    //                patient.InstantiatedHealthbar = Instantiate(patient.Prefab, uiManager.transform);
-    //            }
-    //        }
-    //    }
-    //}
-
-    //public void LerpHealthBar()
-    //{
-
-
-
+    //    return false;
     //}
 
 
-    #endregion
 }

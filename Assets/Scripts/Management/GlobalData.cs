@@ -84,4 +84,6 @@ public class GlobalData : MonoBehaviour
         GlobalData.instance.TotalPatientsLost = 0;
         GlobalData.instance.TotalPatientsHealed = 0;
     }
+
+    
 }

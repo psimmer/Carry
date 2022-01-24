@@ -132,7 +132,7 @@ public class UIManager : MonoBehaviour
 
         foreach (Patient patient in patientList)
         {
-            if (patient != null)
+            if (patient != null)    //do you need this if in a foreach? is it even possible, that a patient is null?
             {
                 int patientID = patient.PatientID;
 
