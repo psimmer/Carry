@@ -47,8 +47,7 @@ public class Player : MonoBehaviour
             {
                 currentPatient = item.GetComponent<Patient>();
                 IsHealing = true;
-                Debug.Log(currentPatient.name);
-               }
+            }
             //Debug.Log(item.name);
         }
     }
@@ -79,9 +78,6 @@ public class Player : MonoBehaviour
         }
         
     }
-
-
-
 
     #endregion
 }

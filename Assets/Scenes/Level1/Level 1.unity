@@ -36188,7 +36188,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1352591567381251235, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
       propertyPath: m_Name
-      value: UIManagerLvl
+      value: UIManager
       objectReference: {fileID: 0}
     - target: {fileID: 1414732855571159100, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
       propertyPath: player
@@ -36358,7 +36358,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4959383937220050687, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: m_Name
-      value: Nurse
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: camera

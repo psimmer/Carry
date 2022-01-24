@@ -35,6 +35,14 @@ public class GameManager : MonoBehaviour
     #endregion
 
 
+    #region Properties
+
+    //public List<Patient> PatientList => patientList;
+    //public Dictionary<int, GameObject> PopUpList => popUpList;
+    //public List<GameObject> PopUps => popUps;
+
+    #endregion
+
     private void Awake()
     {
         patientContainer = GameObject.Find("Patients").transform;
@@ -65,17 +73,13 @@ public class GameManager : MonoBehaviour
         //PopUp Stuff
         if (patientList != null)
         {
-            ManagePopUps();
+            uiManager.ManagePopUps(patientList, popUpList, popUps);
         }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            SpawnPatient(testPatientPrefab, bedList[1].transform);
-        }
+        
     }
     private void LateUpdate()
     {
-        UpdateHealthBar();
-
+        uiManager.UpdateHealthBar(patientContainer);
     }
 
     /// <summary>
@@ -199,111 +203,112 @@ public class GameManager : MonoBehaviour
     #region PopUp Spawn Manager
 
 
-    private void ManagePopUps()
-    {
-        foreach (GameObject value in popUpList.Values)
-        {
-            Debug.Log($"{value}");
-        }
+    //private void ManagePopUps()
+    //{
+    //    //foreach (GameObject value in popUpList.Values)
+    //    //{
+    //    //    Debug.Log($"{value}");
+    //    //}
 
-        foreach (Patient patient in patientList)
-        {
-            if (patient != null)
-            {
-                int patientID = patient.PatientID;
+    //    foreach (Patient patient in patientList)
+    //    {
+    //        if (patient != null)
+    //        {
+    //            int patientID = patient.PatientID;
 
-                if (!patient.HasTask && !patient.IsPopping)
-                {
-                    //Debug.Log($"patient {patient.PatientID}has no task");
-                    StartCoroutine("PopUpTimer", patient);
-                }
+    //            if (!patient.HasTask && !patient.IsPopping)
+    //            {
+    //                //Debug.Log($"patient {patient.PatientID}has no task");
+    //                StartCoroutine("PopUpTimer", patient);
+    //            }
 
-                if (patient.IsPopping && !popUpList.ContainsKey(patientID))
-                {
-                    //Debug.Log($"patient {patient.PatientID} is popping");
-                    foreach (GameObject task in popUps)
-                    {
-                        if (task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
-                        {
-                            if (popUpList.ContainsKey(patientID))
-                                continue;
+    //            if (patient.IsPopping && !popUpList.ContainsKey(patientID))
+    //            {
+    //                //Debug.Log($"patient {patient.PatientID} is popping");
+    //                foreach (GameObject task in popUps)
+    //                {
+    //                    if (task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
+    //                    {
+    //                        if (popUpList.ContainsKey(patientID))
+    //                            continue;
 
-                            GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
-                            currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
-                            currentPopUp.transform.SetAsFirstSibling();
-                            popUpList.Add(patient.PatientID, currentPopUp);
-                            patient.HasTask = true;
-                            patient.IsPopping = false;
-                        }
-                    }
-                }
+    //                        GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
+    //                        currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
+    //                        currentPopUp.transform.SetAsFirstSibling();
+    //                        popUpList.Add(patient.PatientID, currentPopUp);
+    //                        patient.HasTask = true;
+    //                        patient.IsPopping = false;
+    //                    }
+    //                }
+    //            }
 
-                if (popUpList.ContainsKey(patientID)) // <---- Somehow we dont get in here // now we are getting in there
-                {
-                    Debug.Log("Got it");
-                    GameObject popUp;
-                    bool success = false;
-                    success = popUpList.TryGetValue(patientID, out popUp);
-                    if (!success)
-                        return;
-                    popUp.transform.position = mainCam.WorldToScreenPoint(new Vector3(patient.transform.position.x,
-                    patient.transform.position.y + 2, patient.transform.position.z));
-                }
-            }
-        }
-    }
-    public IEnumerator PopUpTimer(Patient patient)
-    {
-        yield return new WaitForSeconds(10);  // Lukas likes this random timer method: I tooked it out to test smth Random.Range(minTimer, maxTimer)
-        patient.IsPopping = true;
-        //Debug.Log($"patient {patient.patientID} finished waiting and is popping");
-        StopCoroutine("PopUpTimer");
-        //private void RemovePopUpFromList(int patientID)
-        //{
-        //    GameObject removeIfExists;
-        //    popUpList.TryGetValue(patientID, out removeIfExists);
-        //    if(removeIfExists != null)
-        //        popUpList.Remove(patientID);
-        //}
+    //            if (popUpList.ContainsKey(patientID))
+    //            {
+    //                GameObject popUp;
+    //                bool success = false;
+    //                success = popUpList.TryGetValue(patientID, out popUp);
+    //                if (!success)
+    //                    return;
+    //                popUp.transform.position = mainCam.WorldToScreenPoint(new Vector3(patient.transform.position.x,
+    //                patient.transform.position.y + 2, patient.transform.position.z));
+    //            }
+    //        }
+    //    }
+    //}
+    //public IEnumerator PopUpTimer(Patient patient)
+    //{
+    //    int randomTime = UnityEngine.Random.Range(10, 15);
+    //    int maxRandomTime = UnityEngine.Random.Range(20, 25);
+    //    yield return new WaitForSeconds(UnityEngine.Random.Range(randomTime, maxRandomTime));  // Lukas likes this random timer method: I tooked it out to test smth Random.Range(minTimer, maxTimer)
+    //    patient.IsPopping = true;
+    //    //Debug.Log($"patient {patient.patientID} finished waiting and is popping");
+    //    StopCoroutine("PopUpTimer");
+    //    //private void RemovePopUpFromList(int patientID)
+    //    //{
+    //    //    GameObject removeIfExists;
+    //    //    popUpList.TryGetValue(patientID, out removeIfExists);
+    //    //    if(removeIfExists != null)
+    //    //        popUpList.Remove(patientID);
+    //    //}
 
 
 
 
-    }
+    //}
     #endregion
 
     #region Health Bar Manager
 
-    public void UpdateHealthBar()
-    {
-        for(int i = 0; i < patientContainer.childCount; i++)
-        {
-            Patient patient = patientContainer.GetChild(i).GetComponent<Patient>();
-            GameObject instantiatedHealthbar = patient.InstantiatedHealthbar;
-            if (patient != null)
-            {
-                 Vector3 patientPos = patient.transform.position;
+    //public void UpdateHealthBar()
+    //{
+    //    for(int i = 0; i < patientContainer.childCount; i++)
+    //    {
+    //        Patient patient = patientContainer.GetChild(i).GetComponent<Patient>();
+    //        GameObject instantiatedHealthbar = patient.InstantiatedHealthbar;
+    //        if (patient != null)
+    //        {
+    //             Vector3 patientPos = patient.transform.position;
 
-                 if (patient.InstantiatedHealthbar != null)
-                 {
-                     instantiatedHealthbar.transform.position = mainCam.WorldToScreenPoint(new Vector3(patientPos.x,
-                         patientPos.y + 0.5f, patientPos.z));
-                 }
-                else
-                {
-                    Debug.Log(patient.PatientID);
-                    patient.InstantiatedHealthbar = Instantiate(patient.Prefab, uiManager.transform);
-                }
-            }
-        }
-    }
+    //             if (patient.InstantiatedHealthbar != null)
+    //             {
+    //                 instantiatedHealthbar.transform.position = mainCam.WorldToScreenPoint(new Vector3(patientPos.x,
+    //                     patientPos.y + 0.5f, patientPos.z));
+    //             }
+    //            else
+    //            {
+    //                Debug.Log(patient.PatientID);
+    //                patient.InstantiatedHealthbar = Instantiate(patient.Prefab, uiManager.transform);
+    //            }
+    //        }
+    //    }
+    //}
 
-    public void LerpHealthBar()
-    {
+    //public void LerpHealthBar()
+    //{
 
 
 
-    }
+    //}
 
 
     #endregion
