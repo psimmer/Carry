@@ -117,12 +117,11 @@ public class GameManager : MonoBehaviour
                 GlobalData.instance.ShiftTreatments++;
 
             }
-            else
+            else if(patient.CurrentIllness != player.currentItem.item.task)
             {
                 //Damage
                 patient.HealthAmount -= player.currentItem.item.restoreHealth;
                 player.CurrentStressLvl += player.currentItem.item.restoreHealth * player.StressMultiplier;
-
                 
                 Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
                 if (IsPatientDead(patient)) ;
