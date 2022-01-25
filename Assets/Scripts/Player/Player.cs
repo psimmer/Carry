@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float stressMultiplier;
     [Tooltip("This value reduce the stress")] [Range(0, 1)]
     [SerializeField] private float stressReductionMultiplier;
+    private bool isAtPC;
+    public bool IsAtPc { get { return isAtPC; } set { isAtPC = value; } }
+
 
     #region Properties
     public float CurrentStressLvl
@@ -47,6 +50,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         IsHoldingItem = false;
+        IsAtPc = false;
     }
 
     private void Update()
@@ -82,6 +86,17 @@ public class Player : MonoBehaviour
                 currentPatient = item.GetComponent<Patient>();
                 IsHealing = true;
             }
+            if (item.CompareTag("CPU"))
+            {
+                Debug.Log("Documentation Starts.");
+                IsAtPc = true;
+                //Start Documentation.
+
+
+            }
+
+
+
             //Debug.Log(item.name);
         }
     }

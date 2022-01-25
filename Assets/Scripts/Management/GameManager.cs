@@ -147,6 +147,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     #region Patient Spawn Manager
     private void SpawnPatient(GameObject patient, Transform spawnPoint)
     {

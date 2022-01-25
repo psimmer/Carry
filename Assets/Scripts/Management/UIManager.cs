@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] Button firstButton;
-
+    CPU documentationCpu;
     GameObject pauseElements;
     GameObject optionsElements;
     GameObject mainMenuElements;
@@ -190,6 +190,26 @@ public class UIManager : MonoBehaviour
         //    if(removeIfExists != null)
         //        popUpList.Remove(patientID);
         //}
-
     }
+
+    public void DocumentationTask(bool playerInteractionBool)
+    {
+        if (playerInteractionBool)
+        {
+            documentationCpu.KeyTabs();
+            //SetActive PC UI
+            //System for All Buttons You can press
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            playerInteractionBool = false;
+        }
+    }
+
+
+
+
+
+
+
 }
