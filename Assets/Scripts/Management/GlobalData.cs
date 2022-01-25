@@ -72,7 +72,7 @@ public class GlobalData : MonoBehaviour
         }
         else if (instance != this)
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
 
         DontDestroyOnLoad(gameObject);  //take GlobalData to the next scene
@@ -80,27 +80,27 @@ public class GlobalData : MonoBehaviour
 
     public void ResetTotalStatistics()
     {
-        GlobalData.instance.TotalTreatments = 0;
-        GlobalData.instance.TotalPatientsLost = 0;
-        GlobalData.instance.TotalPatientsHealed = 0;
+        totalTreatments = 0;
+        totalPatientsLost = 0;
+        totalPatientsHealed = 0;
     }
 
     public void ResetShiftStatistics()
     {
-        GlobalData.instance.ShiftPatientsHealed = 0;
-        GlobalData.instance.ShiftPatientsLost = 0;
-        GlobalData.instance.ShiftTreatments = 0;
+        shiftPatientsHealed = 0;
+        shiftPatientsLost = 0;
+        shiftTreatments = 0;
     }
 
     public void SetPatientDeadStatistics()
     {
-        GlobalData.instance.TotalPatientsLost++;
-        GlobalData.instance.ShiftPatientsLost++;
+        totalPatientsLost++;
+        shiftPatientsLost++;
     }
 
     public void SetPatientHealedStatistics()
     {
-        GlobalData.instance.TotalTreatments++;
-        GlobalData.instance.ShiftTreatments++;
+        totalTreatments++;
+        shiftTreatments++;
     }
 }
