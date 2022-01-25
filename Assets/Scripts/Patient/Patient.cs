@@ -19,7 +19,14 @@ public enum TaskType
 
 public class Patient : MonoBehaviour
 {
-    [SerializeField] private int healthAmount;
+    [SerializeField] private int currentHP; //changed it from healthAmount to currentHP
+    [SerializeField] private int patientMaxHP;
+
+    //range for the random HP that the patient spawns with
+    [SerializeField] private int minCurrentHp;
+    [SerializeField] private int maxCurrentHp;
+    
+
     [SerializeField] private TaskType currentIllness;
     [SerializeField] private int patientID;
     [SerializeField] private bool isPopping;
@@ -30,8 +37,19 @@ public class Patient : MonoBehaviour
     private Healthbar healthbar;
     public GameObject InstantiatedHealthbar { get; set; }
 
-    // getters and setters
+    #region Properties
     public GameObject Prefab => healthbarPrefab;
+
+    public int CurrentHP
+    {
+        get { return currentHP; }
+        set { currentHP = value; }
+    }
+
+    public int PatientMaxHP
+    {
+        get { return patientMaxHP; }
+    }
 
     public Healthbar Healthbar
     {
@@ -63,9 +81,10 @@ public class Patient : MonoBehaviour
     }
     public int HealthAmount
     {
-        get { return healthAmount; }
-        set { healthAmount = value; }
+        get { return currentHP; }
+        set { currentHP = value; }
     }
+    #endregion
 
     void Start()
     {

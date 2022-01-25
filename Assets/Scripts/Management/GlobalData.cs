@@ -26,7 +26,7 @@ public class GlobalData : MonoBehaviour
     [SerializeField] private List<AudioClip> allMusic;
     [SerializeField] private List<AudioClip> allSoundEffects;
 
-    #region Getter/Setter
+    #region Properties
     public int TotalTreatments
     {
         get { return totalTreatments; }
@@ -78,12 +78,29 @@ public class GlobalData : MonoBehaviour
         DontDestroyOnLoad(gameObject);  //take GlobalData to the next scene
     }
 
-    public void ResetStatistics()
+    public void ResetTotalStatistics()
     {
         GlobalData.instance.TotalTreatments = 0;
         GlobalData.instance.TotalPatientsLost = 0;
         GlobalData.instance.TotalPatientsHealed = 0;
     }
 
-    
+    public void ResetShiftStatistics()
+    {
+        GlobalData.instance.ShiftPatientsHealed = 0;
+        GlobalData.instance.ShiftPatientsLost = 0;
+        GlobalData.instance.ShiftTreatments = 0;
+    }
+
+    public void SetPatientDeadStatistics()
+    {
+        GlobalData.instance.TotalPatientsLost++;
+        GlobalData.instance.ShiftPatientsLost++;
+    }
+
+    public void SetPatientHealedStatistics()
+    {
+        GlobalData.instance.TotalTreatments++;
+        GlobalData.instance.ShiftTreatments++;
+    }
 }

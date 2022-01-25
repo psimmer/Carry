@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: cf11b1bd8bc70a641850be0ea1c265a2, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -5388,6 +5388,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GlobalData
       objectReference: {fileID: 0}
+    - target: {fileID: 7124587807185531283, guid: 21bbebeb6bd906f41a22af3f36db6ef2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21bbebeb6bd906f41a22af3f36db6ef2, type: 3}
 --- !u!1001 &289439573
@@ -5727,12 +5731,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
+      propertyPath: currentHP
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: healthAmount
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
+      propertyPath: patientMaxHP
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
@@ -36368,6 +36380,22 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
+      propertyPath: maxStressLvl
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
+      propertyPath: currentStressLvl
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
+      propertyPath: stressMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
+      propertyPath: stressReductionMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5735498805784552517, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: m_RootOrder
       value: 3

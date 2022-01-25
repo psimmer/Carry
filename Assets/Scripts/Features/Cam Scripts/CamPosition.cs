@@ -12,12 +12,12 @@ public class CamPosition : MonoBehaviour
     private void Start()
     {
         currentPoint = camPoints.Find("Start");
-        interpolation = Time.deltaTime * 0.1f;
 
     }
 
     private void Update()  
     {
+        interpolation = Time.deltaTime * 0.5f;
         transform.position = Vector3.Lerp(transform.position, currentPoint.position, interpolation);
     }
 

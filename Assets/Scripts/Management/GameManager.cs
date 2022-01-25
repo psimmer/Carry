@@ -90,18 +90,30 @@ public class GameManager : MonoBehaviour
     {
         if (player.IsHealing)
         {
+            //if player wants to treat the patient without an item. maybe we have to overthink for itemless tasks
             if (player.currentItem == null)
             {
                 Debug.Log("Damage");
-                patient.HealthAmount -= 5;  //make a serializabel variable for balancing 
-                //IsPatientDead(patient); 
+                patient.HealthAmount -= 5;  //make a serializable variable for balancing 
+                
+                if(IsPatientDead(patient));
+                {
+                    //TODO: ParticleEffects Methods, Sound Effects
+                }
+                //TODO: ParticleEffects Methods, Sound Effects
+
             }
-            else if (patient.CurrentIllness == player.currentItem.item.task)
+            else if (patient.CurrentIllness == player.currentItem.item.task)    //doesnt work right
             {
                 //Success
                 patient.HealthAmount += player.currentItem.item.restoreHealth;
-                //TODO: update Healthbar, StressLvl, ParticleEffects, Soundeffect
-                GlobalData.instance.TotalTreatments++;
+                player.CurrentStressLvl -= player.currentItem.item.restoreHealth * player.StressReductionMultiplier;
+                if (IsPatientHealed(patient))
+                {
+                    //TODO: update Healthbar, ParticleEffects, Soundeffect
+                }
+                //TODO: update Healthbar, ParticleEffects, Soundeffect
+                Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
                 GlobalData.instance.ShiftTreatments++;
 
             }
@@ -109,8 +121,21 @@ public class GameManager : MonoBehaviour
             {
                 //Damage
                 patient.HealthAmount -= player.currentItem.item.restoreHealth;
-                //TODO: update Healthbar, Stresslvl, ParticleEffects, Soundeffects
-                //TODO: patient is dead condition
+                player.CurrentStressLvl += player.currentItem.item.restoreHealth * player.StressMultiplier;
+
+                
+                Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
+                if (IsPatientDead(patient)) ;
+                {
+                    //TODO: ParticleEffects Methods, Sound Effects
+                }
+                //TODO: Healthbar update, Sound Effects
+
+                //Gameover, maxStresslvl is reached
+                if (player.CurrentStressLvl >= player.MaxStressLvl)
+                {
+                    sceneManager.GameOver();
+                }
             }
 
             if (itemSlot.CurrentItem != null)
@@ -209,17 +234,28 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="patient"></param>
     /// <returns></returns>
-    //private bool IsPatientDead(Patient patient)
-    //{
-    //    if(patient.HealthAmount <= 0)
-    //    {
-    //        GlobalData.instance.TotalPatientsLost++;
-    //        GlobalData.instance.ShiftPatientsLost++;
-    //        //TODO: set StressLvl, SoundEffects, Particles
-    //        //DestroyPatient(patient.gameObject); --> DestroyPatient Method doesnt work
-    //    }
-    //    return false;
-    //}
+    private bool IsPatientDead(Patient patient)
+    {
+        if (patient.HealthAmount <= 0)
+        {
+            GlobalData.instance.SetPatientDeadStatistics();
+            Debug.Log("Patient is dead");
+            //DestroyPatient(patient.gameObject); --> DestroyPatient Method doesnt work
+            return true;
+        }
+        return false;
+    }
+
+    private bool IsPatientHealed(Patient patient)
+    {
+        if(patient.HealthAmount >= patient.PatientMaxHP)
+        {
+            GlobalData.instance.SetPatientHealedStatistics();
+            Debug.Log("Patient is healed");
+            return true;
+        }
+        return false;
+    }
 
 
 }

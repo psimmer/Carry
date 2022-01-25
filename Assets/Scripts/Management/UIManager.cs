@@ -191,10 +191,5 @@ public class UIManager : MonoBehaviour
         //        popUpList.Remove(patientID);
         //}
 
-
-
-
-
-
     }
 }

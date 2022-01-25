@@ -6,6 +6,39 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Camera camera;
+
+    //Player values
+    [SerializeField] private float currentStressLvl;
+    [SerializeField] private float maxStressLvl;
+    [Tooltip("This value multiplies the stress")] [Range(1, 4)]
+    [SerializeField] private float stressMultiplier;
+    [Tooltip("This value reduce the stress")] [Range(0, 1)]
+    [SerializeField] private float stressReductionMultiplier;
+
+    #region Properties
+    public float CurrentStressLvl
+    {
+        get { return currentStressLvl; }
+        set { currentStressLvl = value; }
+    }
+
+    public float MaxStressLvl
+    {
+        get { return maxStressLvl; }
+    }
+
+    public float StressMultiplier
+    {
+        get { return stressMultiplier; }
+    }
+
+    public float StressReductionMultiplier
+    {
+        get { return stressReductionMultiplier; }
+    }
+
+    #endregion
+
     public Item currentItem { get; set; }
     public Patient currentPatient { get; set; }
     public bool IsHealing { get; set; }
@@ -26,6 +59,7 @@ public class Player : MonoBehaviour
         {
             DropItem();
         }
+        
     }
 
     /// <summary>

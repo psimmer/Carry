@@ -10,14 +10,19 @@ public class SceneMan : MonoBehaviour
     public void StartGame()
     {
         Time.timeScale = 1f;
-        GlobalData.instance.ResetStatistics();
+        GlobalData.instance.ResetTotalStatistics();
         SceneManager.LoadScene("Level 1");
+    }
+
+    public void NextLvl()
+    {
+        GlobalData.instance.ResetShiftStatistics();
     }
 
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f;
-        GlobalData.instance.ResetStatistics();
+        GlobalData.instance.ResetTotalStatistics();
         //GlobalData.instance.isSaveFileLoaded = false;
         SceneManager.LoadScene("MainMenu");
     }
@@ -26,6 +31,11 @@ public class SceneMan : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Tutorial");
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 
     public void ExitGame()
