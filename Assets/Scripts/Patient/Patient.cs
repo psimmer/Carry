@@ -133,9 +133,10 @@ public class Patient : MonoBehaviour
         // patient dead
         else if (currentHP <= 0)
         {
-            currentHP = 0;
+            //currentHP = 0;
             GlobalData.instance.SetPatientDeadStatistics();
             //SpawnParticles(deathParticles, particlesDuration);
+            Destroy(this.gameObject);
         }
         
         healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);

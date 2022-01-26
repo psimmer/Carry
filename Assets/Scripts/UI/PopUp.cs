@@ -15,20 +15,10 @@ public class PopUp : MonoBehaviour
         set { popUpTaskType = value; }
     }
 
-
-    private void Awake()
-    {
-        //popUpTaskType = GetComponentInParent<Patient>().CurrentIllness;
-    }
-
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

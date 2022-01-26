@@ -13,10 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int noItemDamage;
     
 
-    [Tooltip("This value multiplies the stress")] [Range(1, 4)]
-    [SerializeField] private float stressMultiplier;
-    [Tooltip("This value reduce the stress")] [Range(0, 1)]
-    [SerializeField] private float stressReductionMultiplier;
+    
 
     private bool isAtPC;
 
@@ -44,15 +41,9 @@ public class Player : MonoBehaviour
     //    set { healCoffee = value; }
     //}
 
-    public float StressMultiplier
-    {
-        get { return stressMultiplier; }
-    }
+    
 
-    public float StressReductionMultiplier
-    {
-        get { return stressReductionMultiplier; }
-    }
+    
     #endregion
     public Item currentItem { get; set; }
     public Patient currentPatient { get; set; }
@@ -66,18 +57,9 @@ public class Player : MonoBehaviour
         IsAtPc = false;
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        Interact();
-    //    }
-    //    if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
-    //    {
-    //        DropItem();
-    //    }
+    
         
-    //}
+    }
 
     /// <summary>
     /// Interacting with Objects/ with Items and Patients

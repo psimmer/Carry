@@ -706,6 +706,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstButton: {fileID: 556665320}
+  coffeeCounter: {fileID: 0}
+  stressLvlBar: {fileID: 0}
 --- !u!1 &527003924
 GameObject:
   m_ObjectHideFlags: 0
