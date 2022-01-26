@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+[RequireComponent(typeof(Slider))]
 public class Healthbar : MonoBehaviour
 {
-    [SerializeField] private Slider healthbar;
-    private float maxAmount;
-    private float minAmount;
-    private float currentAmount;
+    private Slider healthbar;
+    
 
 
     private void Start()
     {
-        maxAmount = 100;
-        minAmount = 0;
+        healthbar = GetComponent<Slider>();
+        Vector3 lookDir = -Camera.main.transform.forward;
+        transform.parent.LookAt(transform.parent.position + lookDir);
     }
 
-
+    public void UpdateHealthbar(float percent)
+    {
+        healthbar.value = percent;
+    }
 
 
 

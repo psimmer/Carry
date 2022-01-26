@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalRotation;
     Rigidbody playerRigidbody;
     Transform playerTransform;
-
+    public bool IsLocked = false;
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -22,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        playerMovement();
+        if(!IsLocked)
+            playerMovement();
     }
 
 
