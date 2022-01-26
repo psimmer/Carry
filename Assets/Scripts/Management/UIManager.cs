@@ -104,28 +104,28 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-    public void UpdateHealthBar(Transform patientContainer)
-    {
-        for (int i = 0; i < patientContainer.childCount; i++)
-        {
-            Patient patient = patientContainer.GetChild(i).GetComponent<Patient>();
-            GameObject instantiatedHealthbar = patient.InstantiatedHealthbar;
-            if (patient != null)
-            {
-                Vector3 patientPos = patient.transform.position;
+    //public void UpdateHealthBar(Transform patientContainer)
+    //{
+    //    for (int i = 0; i < patientContainer.childCount; i++)
+    //    {
+    //        Patient patient = patientContainer.GetChild(i).GetComponent<Patient>();
+    //        GameObject instantiatedHealthbar = patient.InstantiatedHealthbar;
+    //        if (patient != null)
+    //        {
+    //            Vector3 patientPos = patient.transform.position;
 
-                if (patient.InstantiatedHealthbar != null)
-                {
-                    instantiatedHealthbar.transform.position = Camera.main.WorldToScreenPoint(new Vector3(patientPos.x,
-                        patientPos.y + 0.5f, patientPos.z));
-                }
-                else
-                {
-                    patient.InstantiatedHealthbar = Instantiate(patient.Prefab, transform);
-                }
-            }
-        }
-    }
+    //            if (patient.InstantiatedHealthbar != null)
+    //            {
+    //                instantiatedHealthbar.transform.position = Camera.main.WorldToScreenPoint(new Vector3(patientPos.x,
+    //                    patientPos.y + 0.5f, patientPos.z));
+    //            }
+    //            else
+    //            {
+    //                patient.InstantiatedHealthbar = Instantiate(patient.Prefab, transform);
+    //            }
+    //        }
+    //    }
+    //}
 
     #region PopUp Stuff
     public void ManagePopUps(List<Patient> patientList, Dictionary<int, GameObject> popUpList, List<GameObject> popUps)
@@ -198,19 +198,19 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-    public void DocumentationTask(bool playerInteractionBool)
-    {
-        if (playerInteractionBool)
-        {
-            documentationCpu.KeyTabs();
-            //SetActive PC UI
-            //System for All Buttons You can press
-        }
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            playerInteractionBool = false;
-        }
-    }
+    //public void DocumentationTask(bool playerInteractionBool)
+    //{
+    //    if (playerInteractionBool)
+    //    {
+    //        documentationCpu.KeyTabs();
+    //        //SetActive PC UI
+    //        //System for All Buttons You can press
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Tab))
+    //    {
+    //        playerInteractionBool = false;
+    //    }
+    //}
 
 
 

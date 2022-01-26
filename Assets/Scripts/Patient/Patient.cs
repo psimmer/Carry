@@ -33,12 +33,12 @@ public class Patient : MonoBehaviour
     [SerializeField] private bool hasTask;
     [SerializeField] private int minTimer;
     [SerializeField] private int maxTimer;
-    [SerializeField] private GameObject healthbarPrefab;
+    //[SerializeField] private GameObject healthbarPrefab;
     private Healthbar healthbar;
     public GameObject InstantiatedHealthbar { get; set; }
 
     #region Properties
-    public GameObject Prefab => healthbarPrefab;
+    //public GameObject Prefab => healthbarPrefab;
 
     public int CurrentHP
     {
@@ -85,34 +85,35 @@ public class Patient : MonoBehaviour
     void Start()
     {
         InstantiatedHealthbar = null;
-        healthbar = healthbarPrefab.GetComponent<Healthbar>();
+        //healthbar = healthbarPrefab.GetComponent<Healthbar>();
+        healthbar = GetComponentInChildren<Healthbar>();
         HasTask = false;
         minTimer = Random.Range(10, 15);
         maxTimer = Random.Range(20, 30);
         IsPopping = false;
     }
 
-    //public IEnumerator PopUpTimer()
-    //{
-    //    yield return new WaitForSeconds(10);  // Lukas likes this random timer method: I tooked it out to test smth Random.Range(minTimer, maxTimer)
-    //    IsPopping = true;
-    //    Debug.Log($"patient {patientID} finished waiting and is popping");
-    //    StopCoroutine("PopUpTimer");
-        //foreach(GameObject task in popUps)
-        //{
-        //    if(task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
-        //    {
-        //        GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
-        //        currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
-        //        currentPopUp.transform.SetAsFirstSibling();
-        //        popUpList.Add(patient.PatientID, currentPopUp);
-        //        //Debug.Log(currentPopUp);
-        //        //patient.IsPopping = false;
-        //        //break;
-        //    }
-        //}
-        //GameObject currentPopUp = Instantiate();
-    
+
+
+    public void Treatment(int health)
+    {
+        currentHP += health;
+        // patient full recovered
+        if(currentHP >= patientMaxHP)
+        {
+            currentHP = patientMaxHP;
+            GlobalData.instance.SetPatientHealedStatistics();
+        }
+        // patient dead
+        else if (currentHP <= 0)
+        {
+            currentHP = 0;
+            GlobalData.instance.SetPatientDeadStatistics();
+        }
+        healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
+        
+
+    }
 
 
 }
