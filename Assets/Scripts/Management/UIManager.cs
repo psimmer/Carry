@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     GameObject pauseElements;
     GameObject optionsElements;
     GameObject mainMenuElements;
-    
+
     public void Awake()
     {
         pauseElements = GameObject.Find("PauseMenu");
@@ -66,6 +66,11 @@ public class UIManager : MonoBehaviour
 
             }
         }
+    }
+
+    public void updateCoffeCounter(int coffeeCount)
+    {
+        coffeeCounter.text = "Coffee: " + coffeeCount;
     }
 
     #region Activate/Deactive Options
