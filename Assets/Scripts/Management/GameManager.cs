@@ -172,6 +172,7 @@ public class GameManager : MonoBehaviour
                 //patient.CurrentHP -= player.currentItem.item.restoreHealth;
                 patient.Treatment(-player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
+                SpawnParticles(damageParticles, patient, particlesDuration);
 
                 //Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
 
