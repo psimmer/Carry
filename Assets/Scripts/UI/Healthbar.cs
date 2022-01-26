@@ -20,6 +20,8 @@ public class Healthbar : MonoBehaviour
 
     public void UpdateHealthbar(float percent)
     {
+        if (healthbar == null)
+            return;
         healthbar.value = percent;
     }
 

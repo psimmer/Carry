@@ -141,6 +141,7 @@ public class UIManager : MonoBehaviour
                     //Debug.Log($"patient {patient.PatientID} is popping");
                     foreach (GameObject task in popUps)
                     {
+                        //Debug.Log(task.name);
                         if (task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
                         {
                             if (popUpList.ContainsKey(patientID))
@@ -171,12 +172,14 @@ public class UIManager : MonoBehaviour
     }
     public IEnumerator PopUpTimer(Patient patient)
     {
-        int randomTime = UnityEngine.Random.Range(10, 15);
-        int maxRandomTime = UnityEngine.Random.Range(20, 25);
-        yield return new WaitForSeconds(UnityEngine.Random.Range(randomTime, maxRandomTime));  // Lukas likes this random timer method: I tooked it out to test smth Random.Range(minTimer, maxTimer)
-        patient.IsPopping = true;
-        //Debug.Log($"patient {patient.patientID} finished waiting and is popping");
-        StopCoroutine("PopUpTimer");
+        if (patient.CurrentIllness != TaskType.RelocateAPatient)
+        {
+            int randomTime = UnityEngine.Random.Range(10, 15);
+            int maxRandomTime = UnityEngine.Random.Range(20, 25);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(randomTime, maxRandomTime));  // Lukas likes this random timer method: I tooked it out to test smth Random.Range(minTimer, maxTimer)
+            patient.IsPopping = true;
+            StopCoroutine("PopUpTimer");
+        }
         //private void RemovePopUpFromList(int patientID)
         //{
         //    GameObject removeIfExists;

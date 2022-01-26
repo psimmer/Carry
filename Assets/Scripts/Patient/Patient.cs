@@ -5,13 +5,13 @@ using UnityEngine;
 // I know it is the wrong script for this but i dont know in which script it should be
 public enum TaskType
 {
+    RelocateAPatient,
     Bandage,
     Pills,
     Catheter,
     BloodSample,                //Maybe we do a own script "Tasks" and there are only the Tasks inside?
     Transfusion,
     WashThePatient,
-    RelocateAPatient,
     AnswerTheTelephone,
     Documentation,
     TalkToThePatient
@@ -34,7 +34,10 @@ public class Patient : MonoBehaviour
     [SerializeField] private int minTimer;
     [SerializeField] private int maxTimer;
     //[SerializeField] private GameObject healthbarPrefab;
-    private Healthbar healthbar;
+    [SerializeField] private Healthbar healthbar;
+    TaskType RandomTask;
+    [SerializeField] bool isInBed = false;
+
     //public GameObject InstantiatedHealthbar { get; set; }
 
     #region Particles
@@ -60,7 +63,7 @@ public class Patient : MonoBehaviour
     {
         get { return patientMaxHP; }
     }
-
+    
     public Healthbar Healthbar
     {
         get { return healthbar; }
@@ -88,6 +91,12 @@ public class Patient : MonoBehaviour
     public TaskType CurrentIllness
     {
         get { return currentIllness; }
+        set { 
+            if(isInBed == false)
+                currentIllness = TaskType.RelocateAPatient;
+            else
+            currentIllness = (TaskType) Random.Range(1, 3); 
+        }
     }
 
     #endregion
@@ -101,12 +110,14 @@ public class Patient : MonoBehaviour
         minTimer = Random.Range(10, 15);
         maxTimer = Random.Range(20, 30);
         IsPopping = false;
+        CurrentIllness = RandomTask;
         //Treatment(currentHP);
     }
 
     private void LateUpdate()
     {
-        healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
+        if(healthbar)
+            healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
 
     }
 

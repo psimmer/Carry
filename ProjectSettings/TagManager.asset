@@ -10,6 +10,7 @@ TagManager:
   - Bed
   - CPU
   - CoffeeMachine
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
