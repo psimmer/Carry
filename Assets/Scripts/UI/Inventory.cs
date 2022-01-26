@@ -23,10 +23,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-
-
         InstantiateItem();
-
     }
 
     public void InstantiateItem()
