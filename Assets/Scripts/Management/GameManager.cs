@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera mainCam;
     [SerializeField] private SceneMan sceneManager;
     [SerializeField] private UIManager uiManager;
+    [SerializeField] private CPU computer;
     //[SerializeField] private List<Patient> patients;
     [SerializeField] private List<GameObject> popUps;
     private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
@@ -73,6 +74,24 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        //player Stuff
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            player.Interact();
+        }
+        if (Input.GetKeyDown(KeyCode.F) && player.currentItem != null)
+        {
+            player.DropItem();
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            bool IsInputCorrect = computer.EndDocumentation();
+            if (IsInputCorrect)
+                player.CurrentStressLvl -= 20;
+            else
+                player.CurrentStressLvl += 20;
+        }
+
         //Game will be paused
         uiManager.GamePaused();
 

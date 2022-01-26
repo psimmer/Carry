@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PillPopUp
       objectReference: {fileID: 0}
+    - target: {fileID: 2985294049399845868, guid: 66084169ca04d3b4eaec4f10a3e77d79, type: 3}
+      propertyPath: popUpPrefab
+      value: 
+      objectReference: {fileID: 1608855348714204151}
     - target: {fileID: 4518425176231157488, guid: 66084169ca04d3b4eaec4f10a3e77d79, type: 3}
       propertyPath: m_Texture
       value: 
@@ -125,3 +129,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66084169ca04d3b4eaec4f10a3e77d79, type: 3}
+--- !u!1 &1608855348714204151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1360661134648728818, guid: 66084169ca04d3b4eaec4f10a3e77d79, type: 3}
+  m_PrefabInstance: {fileID: 338270789490063109}
+  m_PrefabAsset: {fileID: 0}

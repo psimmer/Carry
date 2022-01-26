@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float stressMultiplier;
     [Tooltip("This value reduce the stress")] [Range(0, 1)]
     [SerializeField] private float stressReductionMultiplier;
-    
 
     private bool isAtPC;
 
@@ -55,7 +54,6 @@ public class Player : MonoBehaviour
         get { return stressReductionMultiplier; }
     }
     #endregion
-
     public Item currentItem { get; set; }
     public Patient currentPatient { get; set; }
     public bool IsHealing { get; set; }
@@ -68,18 +66,18 @@ public class Player : MonoBehaviour
         IsAtPc = false;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Interact();
-        }
-        if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
-        {
-            DropItem();
-        }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        Interact();
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
+    //    {
+    //        DropItem();
+    //    }
         
-    }
+    //}
 
     /// <summary>
     /// Interacting with Objects/ with Items and Patients
@@ -105,6 +103,7 @@ public class Player : MonoBehaviour
             {
                 Debug.Log("Documentation Starts.");
                 IsAtPc = true;
+                item.GetComponent<CPU>().BeginDocumentation();
                 //Start Documentation.
             }
             if (item.CompareTag("CoffeeMachine")) {
