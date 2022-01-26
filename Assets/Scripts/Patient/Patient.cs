@@ -79,11 +79,7 @@ public class Patient : MonoBehaviour
     {
         get { return currentIllness; }
     }
-    public int HealthAmount
-    {
-        get { return currentHP; }
-        set { currentHP = value; }
-    }
+
     #endregion
 
     void Start()

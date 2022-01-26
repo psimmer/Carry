@@ -10,15 +10,21 @@ public class Player : MonoBehaviour
     //Player values
     [SerializeField] private float currentStressLvl;
     [SerializeField] private float maxStressLvl;
+    [SerializeField] private int noItemDamage;
+    [SerializeField] private float healCoffee;
     [Tooltip("This value multiplies the stress")] [Range(1, 4)]
     [SerializeField] private float stressMultiplier;
     [Tooltip("This value reduce the stress")] [Range(0, 1)]
     [SerializeField] private float stressReductionMultiplier;
     private bool isAtPC;
-    public bool IsAtPc { get { return isAtPC; } set { isAtPC = value; } }
 
 
     #region Properties
+    public int NoItemDamage
+    {
+        get { return noItemDamage; }
+    }
+    public bool IsAtPc { get { return isAtPC; } set { isAtPC = value; } }
     public float CurrentStressLvl
     {
         get { return currentStressLvl; }
@@ -91,11 +97,10 @@ public class Player : MonoBehaviour
                 Debug.Log("Documentation Starts.");
                 IsAtPc = true;
                 //Start Documentation.
-
-
             }
-
-
+            if (item.CompareTag("CoffeeMachine")) {
+                CurrentStressLvl -= healCoffee;     //should it be multiplied by stressReductionMultiplier?
+            }
 
             //Debug.Log(item.name);
         }

@@ -9,6 +9,7 @@ TagManager:
   - CamPoints
   - Bed
   - CPU
+  - CoffeeMachine
   layers:
   - Default
   - TransparentFX

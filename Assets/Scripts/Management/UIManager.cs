@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,12 +8,12 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] Button firstButton;
+    [SerializeField] TMP_Text coffeeCounter;
     CPU documentationCpu;
     GameObject pauseElements;
     GameObject optionsElements;
     GameObject mainMenuElements;
-
-
+    
     public void Awake()
     {
         pauseElements = GameObject.Find("PauseMenu");
@@ -67,10 +68,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    #region Activate/Deactive Options
     //i think following two methods can be optimized. iam tired, i will look over it another time
     public void EnterOptions()
     {
-        if (SceneManager.GetActiveScene().name == "Level 1")
+        if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" ||
+            SceneManager.GetActiveScene().name == "Level 3" || SceneManager.GetActiveScene().name == "Level 4")
         {
             pauseElements.SetActive(false);
             optionsElements.SetActive(true);
@@ -86,7 +89,8 @@ public class UIManager : MonoBehaviour
 
     public void LeaveOptions()
     {
-        if (SceneManager.GetActiveScene().name == "Level 1")
+        if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" ||
+            SceneManager.GetActiveScene().name == "Level 3" || SceneManager.GetActiveScene().name == "Level 4")
         {
             pauseElements.SetActive(true);
             optionsElements.SetActive(false);
@@ -98,6 +102,7 @@ public class UIManager : MonoBehaviour
             optionsElements.SetActive(false);
         }
     }
+    #endregion
 
     public void UpdateHealthBar(Transform patientContainer)
     {
@@ -122,7 +127,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
+    #region PopUp Stuff
     public void ManagePopUps(List<Patient> patientList, Dictionary<int, GameObject> popUpList, List<GameObject> popUps)
     {
         //foreach (GameObject value in popUpList.Values)
@@ -191,6 +196,7 @@ public class UIManager : MonoBehaviour
         //        popUpList.Remove(patientID);
         //}
     }
+    #endregion
 
     public void DocumentationTask(bool playerInteractionBool)
     {

@@ -12,7 +12,12 @@ public class GameManager : MonoBehaviour
     //[SerializeField] private List<Patient> patients;
     [SerializeField] private List<GameObject> popUps;
     private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
+    
     //private GameObject[] popUpList = new GameObject[6];
+    //public List<Patient> PatientList => patientList;
+    //public Dictionary<int, GameObject> PopUpList => popUpList;
+    //public List<GameObject> PopUps => popUps;
+
 
     #region Patient Manager Variables
     [SerializeField] private List<BedScript> bedList; // private List<Bed> allBeds;
@@ -35,13 +40,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
 
-    #region Properties
-
-    //public List<Patient> PatientList => patientList;
-    //public Dictionary<int, GameObject> PopUpList => popUpList;
-    //public List<GameObject> PopUps => popUps;
-
-    #endregion
 
     private void Awake()
     {
@@ -93,48 +91,45 @@ public class GameManager : MonoBehaviour
             //if player wants to treat the patient without an item. maybe we have to overthink for itemless tasks
             if (player.currentItem == null)
             {
-                Debug.Log("Damage");
-                patient.HealthAmount -= 5;  //make a serializable variable for balancing 
-                
+                //Debug.Log("Damage");
+                patient.CurrentHP -= player.NoItemDamage;  //make a serializable variable for balancing 
+                player.CurrentStressLvl += player.NoItemDamage * player.StressMultiplier; 
+
                 if(IsPatientDead(patient));
                 {
                     //TODO: ParticleEffects Methods, Sound Effects
                 }
+                isGameOver();
                 //TODO: ParticleEffects Methods, Sound Effects
 
             }
             else if (patient.CurrentIllness == player.currentItem.item.task)    //doesnt work right
             {
                 //Success
-                patient.HealthAmount += player.currentItem.item.restoreHealth;
+                patient.CurrentHP += player.currentItem.item.restoreHealth;
                 player.CurrentStressLvl -= player.currentItem.item.restoreHealth * player.StressReductionMultiplier;
                 if (IsPatientHealed(patient))
                 {
                     //TODO: update Healthbar, ParticleEffects, Soundeffect
                 }
                 //TODO: update Healthbar, ParticleEffects, Soundeffect
-                Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
+                //Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
                 GlobalData.instance.ShiftTreatments++;
 
             }
             else if(patient.CurrentIllness != player.currentItem.item.task)
             {
                 //Damage
-                patient.HealthAmount -= player.currentItem.item.restoreHealth;
+                patient.CurrentHP -= player.currentItem.item.restoreHealth;
                 player.CurrentStressLvl += player.currentItem.item.restoreHealth * player.StressMultiplier;
                 
-                Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
+                //Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
                 if (IsPatientDead(patient)) ;
                 {
                     //TODO: ParticleEffects Methods, Sound Effects
                 }
                 //TODO: Healthbar update, Sound Effects
-
-                //Gameover, maxStresslvl is reached
-                if (player.CurrentStressLvl >= player.MaxStressLvl)
-                {
-                    sceneManager.GameOver();
-                }
+                isGameOver();
             }
 
             if (itemSlot.CurrentItem != null)
@@ -208,14 +203,16 @@ public class GameManager : MonoBehaviour
     private void DestroyPatient(GameObject patient) // please use this for destroying patients!
     {
         int patientID = patient.GetComponent<Patient>().PatientID;
-        foreach (Patient element in patientList)
+        //foreach (Patient element in patientList)
+        for (int i = 0; i < patientList.Count; i++) //@alejandro: i changed the foreach to a for loop. you are not allowed to edit things in a foreach loop! there was an exception!
         {
-            if (element.GetComponent<Patient>().PatientID == patientID)
+            if (patientList[i].GetComponent<Patient>().PatientID == patientID)
             {
-                patientList.Remove(element);
+                patientList.RemoveAt(i);
             }
         }
         popUpList[patientID] = null;
+        //TODO: destroy healthbar and PopUp UI
         Destroy(patient);
     }
 
@@ -236,11 +233,11 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     private bool IsPatientDead(Patient patient)
     {
-        if (patient.HealthAmount <= 0)
+        if (patient.CurrentHP <= 0)
         {
             GlobalData.instance.SetPatientDeadStatistics();
             Debug.Log("Patient is dead");
-            //DestroyPatient(patient.gameObject); --> DestroyPatient Method doesnt work
+            DestroyPatient(patient.gameObject); //--> DestroyPatient Method doesnt work
             return true;
         }
         return false;
@@ -248,14 +245,21 @@ public class GameManager : MonoBehaviour
 
     private bool IsPatientHealed(Patient patient)
     {
-        if(patient.HealthAmount >= patient.PatientMaxHP)
+        if(patient.CurrentHP >= patient.PatientMaxHP)
         {
             GlobalData.instance.SetPatientHealedStatistics();
-            Debug.Log("Patient is healed");
+            //Debug.Log("Patient is healed");
+            //TODO: start release task
             return true;
         }
         return false;
     }
 
-
+    private void isGameOver()
+    {
+        if(player.CurrentStressLvl >= player.MaxStressLvl)
+        {
+            sceneManager.GameOver();
+        }
+    }
 }
