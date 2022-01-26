@@ -741,7 +741,6 @@ MonoBehaviour:
   hasTask: 0
   minTimer: 0
   maxTimer: 0
-  healthbarPrefab: {fileID: 5934406255941502209, guid: f6bac63d9ce2da24b814ac187f5ccf76, type: 3}
 --- !u!1 &4851985195599141529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,6 +1447,14 @@ PrefabInstance:
     - target: {fileID: 769319584638283303, guid: f6bac63d9ce2da24b814ac187f5ccf76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231716536062829319, guid: f6bac63d9ce2da24b814ac187f5ccf76, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231716536062829319, guid: f6bac63d9ce2da24b814ac187f5ccf76, type: 3}
+      propertyPath: m_MaxValue
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5934406255941502209, guid: f6bac63d9ce2da24b814ac187f5ccf76, type: 3}
       propertyPath: m_Name

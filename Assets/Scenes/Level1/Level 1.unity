@@ -5732,7 +5732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: currentHP
-      value: 3
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: healthbar
@@ -5744,7 +5744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: patientMaxHP
-      value: 6
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5305877997049696223, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: m_AnchorMax.x
@@ -36568,6 +36568,14 @@ PrefabInstance:
     - target: {fileID: 1572476281147765791, guid: 8d79c7b2869e21641a6634eefef69776, type: 3}
       propertyPath: m_TagString
       value: Patient
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727281506702510788, guid: 8d79c7b2869e21641a6634eefef69776, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727281506702510788, guid: 8d79c7b2869e21641a6634eefef69776, type: 3}
+      propertyPath: m_MaxValue
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2204897345709698725, guid: 8d79c7b2869e21641a6634eefef69776, type: 3}
       propertyPath: m_RootOrder
