@@ -12,12 +12,21 @@ public class GameManager : MonoBehaviour
     //[SerializeField] private List<Patient> patients;
     [SerializeField] private List<GameObject> popUps;
     private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
-    [SerializeField] private CoffeMachine coffeeMachine;
+
     //private GameObject[] popUpList = new GameObject[6];
     //public List<Patient> PatientList => patientList;
     //public Dictionary<int, GameObject> PopUpList => popUpList;
     //public List<GameObject> PopUps => popUps;
-
+    #region Multipliers
+    [SerializeField] private float healCoffee;
+    [Tooltip("This value multiplies the stress")]
+    [Range(1, 4)]
+    [SerializeField] private float stressMultiplier;
+    [Tooltip("This value reduce the stress")]
+    [Range(0, 1)]
+    [SerializeField] private float stressReductionMultiplier;
+    [SerializeField] private CoffeMachine coffeeMachine;
+    #endregion
 
     #region Patient Manager Variables
     [SerializeField] private List<BedScript> bedList; // private List<Bed> allBeds;
@@ -70,7 +79,7 @@ public class GameManager : MonoBehaviour
         //DayCycle and Timer
         dayCycle.dayCycle();
         dayTime.DoubledRealTime();
-        
+
         //Patient Spawning Stuff
         PatientSpawner();
         UpdatePatientList();
@@ -79,17 +88,16 @@ public class GameManager : MonoBehaviour
         //SetHealthBarPos();
 
         DrinkingCoffee();
-
         //PopUp Stuff
         if (patientList != null)
         {
             uiManager.ManagePopUps(patientList, popUpList, popUps);
         }
-        
+
     }
     private void LateUpdate()
     {
-        
+
         //uiManager.UpdateHealthBar(patientContainer);
     }
 
@@ -109,13 +117,11 @@ public class GameManager : MonoBehaviour
             }
         }
         player.IsDrinkingCoffee = false;
-        
-    }
 
-    /// <summary>
-    /// Heals or damages the patient if it is the wrong item
-    /// </summary>
-    /// <param name="patient"></param>
+    }    /// <summary>
+         /// Heals or damages the patient if it is the wrong item
+         /// </summary>
+         /// <param name="patient"></param>
     public void Treatment(Patient patient)
     {
         if (player.IsHealing)
@@ -124,19 +130,14 @@ public class GameManager : MonoBehaviour
             if (player.currentItem == null)
             {
                 //Debug.Log("Damage");
-<<<<<<< HEAD
-                patient.CurrentHP -= player.NoItemDamage;  //make a serializable variable for balancing 
-                player.CurrentStressLvl += player.NoItemDamage * player.StressMultiplier; 
-=======
-                
+
                 //patient.CurrentHP -= player.NoItemDamage;  //make a serializable variable for balancing 
                 patient.Treatment(-player.NoItemDamage);
-                
+
                 player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
                 SpawnParticles(damageParticles, patient, particlesDuration);
->>>>>>> 85dc9790b63b14f38f09e37766aef5965b3667de
 
-                
+
                 //if(IsPatientDead(patient))
                 //{
                 //    //TODO: ParticleEffects Methods, Sound Effects
@@ -148,44 +149,32 @@ public class GameManager : MonoBehaviour
             else if (patient.CurrentIllness == player.currentItem.item.task)    //doesnt work right
             {
                 //Success
-<<<<<<< HEAD
-                patient.CurrentHP += player.currentItem.item.restoreHealth;
-                player.CurrentStressLvl -= player.currentItem.item.restoreHealth * player.StressReductionMultiplier;
-                if (IsPatientHealed(patient))
-                {
-=======
-                
+
                 //patient.CurrentHP += player.currentItem.item.restoreHealth;
                 patient.Treatment(player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
-                
-				SpawnParticles(healingParticles, patient, particlesDuration);
+
+                SpawnParticles(healingParticles, patient, particlesDuration);
 
                 //if (IsPatientHealed(patient))
                 //{
->>>>>>> 85dc9790b63b14f38f09e37766aef5965b3667de
-                    //TODO: update Healthbar, ParticleEffects, Soundeffect
+                //TODO: update Healthbar, ParticleEffects, Soundeffect
                 //}
                 //TODO: update Healthbar, ParticleEffects, Soundeffect
                 //Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
                 GlobalData.instance.ShiftTreatments++;
 
             }
-            else if(patient.CurrentIllness != player.currentItem.item.task)
+            else if (patient.CurrentIllness != player.currentItem.item.task)
             {
                 //Damage
-<<<<<<< HEAD
-                patient.CurrentHP -= player.currentItem.item.restoreHealth;
-                player.CurrentStressLvl += player.currentItem.item.restoreHealth * player.StressMultiplier;
-=======
-                
+
                 //patient.CurrentHP -= player.currentItem.item.restoreHealth;
                 patient.Treatment(-player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
->>>>>>> 85dc9790b63b14f38f09e37766aef5965b3667de
-                
+
                 //Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
-               
+
                 //if (IsPatientDead(patient)) ;
                 //{
                 //    //TODO: ParticleEffects Methods, Sound Effects
@@ -208,8 +197,8 @@ public class GameManager : MonoBehaviour
     #region Patient Spawn Manager
     private void SpawnPatient(GameObject patient, Transform spawnPoint)
     {
-        
-        GameObject newPatient = Instantiate(patient, spawnPoint);   
+
+        GameObject newPatient = Instantiate(patient, spawnPoint);
         newPatient.GetComponent<Patient>().IsPopping = false;
         newPatient.GetComponent<Patient>().HasTask = false;
         newPatient.transform.parent = patientContainer;
@@ -245,7 +234,7 @@ public class GameManager : MonoBehaviour
             bedList.Add(bedArray[i].GetComponent<BedScript>());
         }
 
-        //bedList.AddRange(FindObjectsOfType<BedScript>());  
+        //bedList.AddRange(FindObjectsOfType<BedScript>());
 
 
     }
@@ -298,7 +287,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="patient"></param>
     /// <returns></returns>
-    
+
     //private bool IsPatientDead(Patient patient)
     //{
     //    if (patient.CurrentHP <= 0)
@@ -311,7 +300,7 @@ public class GameManager : MonoBehaviour
     //    return false;
     //}
 
-    
+
     //private bool IsPatientHealed(Patient patient)
     //{
     //    if(patient.CurrentHP >= patient.PatientMaxHP)
@@ -332,7 +321,7 @@ public class GameManager : MonoBehaviour
 
     private void isGameOver()
     {
-        if(player.CurrentStressLvl >= player.MaxStressLvl)
+        if (player.CurrentStressLvl >= player.MaxStressLvl)
         {
             sceneManager.GameOver();
         }
