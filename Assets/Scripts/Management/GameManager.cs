@@ -37,6 +37,16 @@ public class GameManager : MonoBehaviour
     Transform bedContainer;
     #endregion
 
+    #region Particles
+
+    [SerializeField] private GameObject healingParticles;
+    //[SerializeField] private GameObject fullHealingParticles;
+    [SerializeField] private GameObject damageParticles;
+    //[SerializeField] private GameObject deathParticles;
+    [SerializeField] private float particlesDuration;
+
+    #endregion
+
     #region Inventory Variables
     [SerializeField] private Inventory itemSlot;
     [SerializeField] private Transform itemslotPos;
@@ -101,7 +111,8 @@ public class GameManager : MonoBehaviour
             {
                 //Debug.Log("Damage");
                 patient.CurrentHP -= player.NoItemDamage;  //make a serializable variable for balancing 
-                player.CurrentStressLvl += player.NoItemDamage * stressMultiplier; 
+                player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
+                SpawnParticles(damageParticles, patient, particlesDuration);
 
                 if(IsPatientDead(patient));
                 {
@@ -116,6 +127,8 @@ public class GameManager : MonoBehaviour
                 //Success
                 patient.CurrentHP += player.currentItem.item.restoreHealth;
                 player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
+                SpawnParticles(healingParticles, patient, particlesDuration);
+
                 if (IsPatientHealed(patient))
                 {
                     //TODO: update Healthbar, ParticleEffects, Soundeffect
@@ -261,6 +274,12 @@ public class GameManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void SpawnParticles(GameObject particles, Patient patient, float duration)
+    {
+        GameObject newParticles = Instantiate(particles, patient.transform);
+        Destroy(newParticles, duration);
     }
 
     private void isGameOver()
