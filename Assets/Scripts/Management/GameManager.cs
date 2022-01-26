@@ -12,12 +12,20 @@ public class GameManager : MonoBehaviour
     //[SerializeField] private List<Patient> patients;
     [SerializeField] private List<GameObject> popUps;
     private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
-    
+
     //private GameObject[] popUpList = new GameObject[6];
     //public List<Patient> PatientList => patientList;
     //public Dictionary<int, GameObject> PopUpList => popUpList;
     //public List<GameObject> PopUps => popUps;
-
+    #region Multipliers
+    [SerializeField] private float healCoffee;
+    [Tooltip("This value multiplies the stress")]
+    [Range(1, 4)]
+    [SerializeField] private float stressMultiplier;
+    [Tooltip("This value reduce the stress")]
+    [Range(0, 1)]
+    [SerializeField] private float stressReductionMultiplier;
+    #endregion
 
     #region Patient Manager Variables
     [SerializeField] private List<BedScript> bedList; // private List<Bed> allBeds;
@@ -93,7 +101,7 @@ public class GameManager : MonoBehaviour
             {
                 //Debug.Log("Damage");
                 patient.CurrentHP -= player.NoItemDamage;  //make a serializable variable for balancing 
-                player.CurrentStressLvl += player.NoItemDamage * player.StressMultiplier; 
+                player.CurrentStressLvl += player.NoItemDamage * stressMultiplier; 
 
                 if(IsPatientDead(patient));
                 {
@@ -107,7 +115,7 @@ public class GameManager : MonoBehaviour
             {
                 //Success
                 patient.CurrentHP += player.currentItem.item.restoreHealth;
-                player.CurrentStressLvl -= player.currentItem.item.restoreHealth * player.StressReductionMultiplier;
+                player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
                 if (IsPatientHealed(patient))
                 {
                     //TODO: update Healthbar, ParticleEffects, Soundeffect
@@ -121,7 +129,7 @@ public class GameManager : MonoBehaviour
             {
                 //Damage
                 patient.CurrentHP -= player.currentItem.item.restoreHealth;
-                player.CurrentStressLvl += player.currentItem.item.restoreHealth * player.StressMultiplier;
+                player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
                 
                 //Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
                 if (IsPatientDead(patient)) ;
