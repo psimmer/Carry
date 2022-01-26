@@ -13,10 +13,10 @@ public class Player : MonoBehaviour
     [SerializeField] private int noItemDamage;
     
 
-    [Tooltip("This value multiplies the stress")] [Range(1, 4)]
-    [SerializeField] private float stressMultiplier;
-    [Tooltip("This value reduce the stress")] [Range(0, 1)]
-    [SerializeField] private float stressReductionMultiplier;
+    //[Tooltip("This value multiplies the stress")] [Range(1, 4)]
+    //[SerializeField] private float stressMultiplier;
+    //[Tooltip("This value reduce the stress")] [Range(0, 1)]
+    //[SerializeField] private float stressReductionMultiplier;
     
 
     private bool isAtPC;
@@ -45,15 +45,15 @@ public class Player : MonoBehaviour
     //    set { healCoffee = value; }
     //}
 
-    public float StressMultiplier
-    {
-        get { return stressMultiplier; }
-    }
+    //public float StressMultiplier
+    //{
+    //    get { return stressMultiplier; }
+    //}
 
-    public float StressReductionMultiplier
-    {
-        get { return stressReductionMultiplier; }
-    }
+    //public float StressReductionMultiplier
+    //{
+    //    get { return stressReductionMultiplier; }
+    //}
     #endregion
 
     public Item currentItem { get; set; }

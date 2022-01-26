@@ -19,11 +19,9 @@ public class GameManager : MonoBehaviour
     //public List<GameObject> PopUps => popUps;
     #region Multipliers
     [SerializeField] private float healCoffee;
-    [Tooltip("This value multiplies the stress")]
-    [Range(1, 4)]
+    [Tooltip("This value multiplies the stress")] [Range(1, 4)]
     [SerializeField] private float stressMultiplier;
-    [Tooltip("This value reduce the stress")]
-    [Range(0, 1)]
+    [Tooltip("This value reduce the stress")] [Range(0, 1)]
     [SerializeField] private float stressReductionMultiplier;
     [SerializeField] private CoffeMachine coffeeMachine;
     #endregion
@@ -37,8 +35,6 @@ public class GameManager : MonoBehaviour
     Transform patientContainer;
     Transform bedContainer;
     #endregion
-
-
 
     #region Inventory Variables
     [SerializeField] private Inventory itemSlot;
@@ -89,7 +85,7 @@ public class GameManager : MonoBehaviour
     }
     private void LateUpdate()
     {
-
+        uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
         //uiManager.UpdateHealthBar(patientContainer);
     }
 
@@ -110,10 +106,11 @@ public class GameManager : MonoBehaviour
         }
         player.IsDrinkingCoffee = false;
 
-    }    /// <summary>
-         /// Heals or damages the patient if it is the wrong item
-         /// </summary>
-         /// <param name="patient"></param>
+    }    
+    /// <summary>
+    /// Heals or damages the patient if it is the wrong item
+    /// </summary>
+    /// <param name="patient"></param>
     public void Treatment(Patient patient)
     {
         if (player.IsHealing)
@@ -121,58 +118,29 @@ public class GameManager : MonoBehaviour
             //if player wants to treat the patient without an item. maybe we have to overthink for itemless tasks
             if (player.currentItem == null)
             {
-                //Debug.Log("Damage");
 
-                //patient.CurrentHP -= player.NoItemDamage;  //make a serializable variable for balancing 
                 patient.Treatment(-player.NoItemDamage);
-
-                player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
-                
-
-
-                //if(IsPatientDead(patient))
-                //{
-                //    //TODO: ParticleEffects Methods, Sound Effects
-                //}
+                player.CurrentStressLvl += player.NoItemDamage * stressMultiplier; 
+                uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
                 isGameOver();
-                //TODO: ParticleEffects Methods, Sound Effects
 
             }
-            else if (patient.CurrentIllness == player.currentItem.item.task)    //doesnt work right
+            else if (patient.CurrentIllness == player.currentItem.item.task)    
             {
                 //Success
 
-                //patient.CurrentHP += player.currentItem.item.restoreHealth;
                 patient.Treatment(player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
-
-                //SpawnParticles(healingParticles, patient, particlesDuration);
-
-                //if (IsPatientHealed(patient))
-                //{
-                //TODO: update Healthbar, ParticleEffects, Soundeffect
-                //}
-                //TODO: update Healthbar, ParticleEffects, Soundeffect
-                //Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
+                uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
                 GlobalData.instance.ShiftTreatments++;
 
             }
             else if (patient.CurrentIllness != player.currentItem.item.task)
             {
                 //Damage
-
-                //patient.CurrentHP -= player.currentItem.item.restoreHealth;
                 patient.Treatment(-player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
-                //SpawnParticles(damageParticles, patient, particlesDuration);
-
-                //Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
-
-                //if (IsPatientDead(patient)) ;
-                //{
-                //    //TODO: ParticleEffects Methods, Sound Effects
-                //}
-                ////TODO: Healthbar update, Sound Effects
+                uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
                 isGameOver();
             }
 
@@ -219,16 +187,16 @@ public class GameManager : MonoBehaviour
 
         }
     }
-    //@alejandro you can youse the commented line in the Start() instead of this function
+    //@alejandro i changed the code: commented area is yours, the other code (line) is the more efficent one (tip from Andi). cut it out and paste it in the Awake() Method
     private void GetAllBeds()
     {
-        UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed");
-        for (int i = 0; i < bedArray.Length; i++)
-        {
-            bedList.Add(bedArray[i].GetComponent<BedScript>());
-        }
+        //UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed");
+        //for (int i = 0; i < bedArray.Length; i++)
+        //{
+        //    bedList.Add(bedArray[i].GetComponent<BedScript>());
+        //}
 
-        //bedList.AddRange(FindObjectsOfType<BedScript>());
+        bedList.AddRange(FindObjectsOfType<BedScript>());
 
 
     }
@@ -275,38 +243,6 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
-
-    /// <summary>
-    /// Sets all statistics and destroys the patient
-    /// </summary>
-    /// <param name="patient"></param>
-    /// <returns></returns>
-
-    //private bool IsPatientDead(Patient patient)
-    //{
-    //    if (patient.CurrentHP <= 0)
-    //    {
-    //        GlobalData.instance.SetPatientDeadStatistics();
-    //        Debug.Log("Patient is dead");
-    //        DestroyPatient(patient.gameObject); //--> DestroyPatient Method doesnt work
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
-
-    //private bool IsPatientHealed(Patient patient)
-    //{
-    //    if(patient.CurrentHP >= patient.PatientMaxHP)
-    //    {
-    //        GlobalData.instance.SetPatientHealedStatistics();
-    //        //Debug.Log("Patient is healed");
-    //        //TODO: start release task
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
 
 
     private void isGameOver()

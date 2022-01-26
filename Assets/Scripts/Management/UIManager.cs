@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] Button firstButton;
     [SerializeField] TMP_Text coffeeCounter;
+    [SerializeField] Slider stressLvlBar;
     CPU documentationCpu;
     GameObject pauseElements;
     GameObject optionsElements;
@@ -38,6 +39,11 @@ public class UIManager : MonoBehaviour
         {
             firstButton.Select();
         }
+    }
+
+    public void UpdateStressLvlBar(float percent)
+    {
+        stressLvlBar.value = percent;
     }
 
     /// <summary>
@@ -109,28 +115,6 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-    //public void UpdateHealthBar(Transform patientContainer)
-    //{
-    //    for (int i = 0; i < patientContainer.childCount; i++)
-    //    {
-    //        Patient patient = patientContainer.GetChild(i).GetComponent<Patient>();
-    //        GameObject instantiatedHealthbar = patient.InstantiatedHealthbar;
-    //        if (patient != null)
-    //        {
-    //            Vector3 patientPos = patient.transform.position;
-
-    //            if (patient.InstantiatedHealthbar != null)
-    //            {
-    //                instantiatedHealthbar.transform.position = Camera.main.WorldToScreenPoint(new Vector3(patientPos.x,
-    //                    patientPos.y + 0.5f, patientPos.z));
-    //            }
-    //            else
-    //            {
-    //                patient.InstantiatedHealthbar = Instantiate(patient.Prefab, transform);
-    //            }
-    //        }
-    //    }
-    //}
 
     #region PopUp Stuff
     public void ManagePopUps(List<Patient> patientList, Dictionary<int, GameObject> popUpList, List<GameObject> popUps)
