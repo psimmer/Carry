@@ -14,7 +14,7 @@ public class Healthbar : MonoBehaviour
     private void Start()
     {
         healthbar = GetComponent<Slider>();
-        Vector3 lookDir = -Camera.main.transform.forward;
+        Vector3 lookDir = Camera.main.transform.forward;
         transform.parent.LookAt(transform.parent.position + lookDir);
     }
 

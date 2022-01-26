@@ -39,15 +39,7 @@ public class GameManager : MonoBehaviour
     Transform bedContainer;
     #endregion
 
-    #region Particles
 
-    [SerializeField] private GameObject healingParticles;
-    //[SerializeField] private GameObject fullHealingParticles;
-    [SerializeField] private GameObject damageParticles;
-    //[SerializeField] private GameObject deathParticles;
-    [SerializeField] private float particlesDuration;
-
-    #endregion
 
     #region Inventory Variables
     [SerializeField] private Inventory itemSlot;
@@ -154,7 +146,7 @@ public class GameManager : MonoBehaviour
                 patient.Treatment(-player.NoItemDamage);
 
                 player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
-                SpawnParticles(damageParticles, patient, particlesDuration);
+                
 
 
                 //if(IsPatientDead(patient))
@@ -173,7 +165,7 @@ public class GameManager : MonoBehaviour
                 patient.Treatment(player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
 
-                SpawnParticles(healingParticles, patient, particlesDuration);
+                //SpawnParticles(healingParticles, patient, particlesDuration);
 
                 //if (IsPatientHealed(patient))
                 //{
@@ -191,7 +183,7 @@ public class GameManager : MonoBehaviour
                 //patient.CurrentHP -= player.currentItem.item.restoreHealth;
                 patient.Treatment(-player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
-                SpawnParticles(damageParticles, patient, particlesDuration);
+                //SpawnParticles(damageParticles, patient, particlesDuration);
 
                 //Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
 
@@ -246,6 +238,7 @@ public class GameManager : MonoBehaviour
 
         }
     }
+    //@alejandro you can youse the commented line in the Start() instead of this function
     private void GetAllBeds()
     {
         UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed");
@@ -333,11 +326,7 @@ public class GameManager : MonoBehaviour
     //    return false;
     //}
 
-    private void SpawnParticles(GameObject particles, Patient patient, float duration)
-    {
-        GameObject newParticles = Instantiate(particles, patient.transform);
-        Destroy(newParticles, duration);
-    }
+
 
     private void isGameOver()
     {

@@ -37,6 +37,16 @@ public class Patient : MonoBehaviour
     private Healthbar healthbar;
     //public GameObject InstantiatedHealthbar { get; set; }
 
+    #region Particles
+
+    [SerializeField] private GameObject healingParticles;
+    //[SerializeField] private GameObject fullHealingParticles;
+    [SerializeField] private GameObject damageParticles;
+    //[SerializeField] private GameObject deathParticles;
+    [SerializeField] private float particlesDuration;
+
+    #endregion
+
     #region Properties
     //public GameObject Prefab => healthbarPrefab;
 
@@ -91,31 +101,51 @@ public class Patient : MonoBehaviour
         minTimer = Random.Range(10, 15);
         maxTimer = Random.Range(20, 30);
         IsPopping = false;
-        healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
         //Treatment(currentHP);
     }
 
+    private void LateUpdate()
+    {
+        healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
 
+    }
 
     public void Treatment(int health)
     {
         currentHP += health;
         // patient full recovered
+
+        if(health < 0)
+        {
+            SpawnParticles(damageParticles, particlesDuration);
+        }
+        else if (health > 0)
+        {
+            SpawnParticles(healingParticles, particlesDuration);
+        }
+
         if(currentHP >= patientMaxHP)
         {
             currentHP = patientMaxHP;
             GlobalData.instance.SetPatientHealedStatistics();
+            //SpawnParticles(fullHealingParticles, particlesDuration);
         }
         // patient dead
         else if (currentHP <= 0)
         {
             currentHP = 0;
             GlobalData.instance.SetPatientDeadStatistics();
+            //SpawnParticles(deathParticles, particlesDuration);
         }
+        
         healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
         
 
     }
 
-
+    private void SpawnParticles(GameObject particles, float duration)
+    {
+        GameObject newParticles = Instantiate(particles, this.transform);
+        Destroy(newParticles, duration);
+    }
 }
