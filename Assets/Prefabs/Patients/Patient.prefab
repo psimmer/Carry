@@ -731,8 +731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c363c7e1c42ef4ebe70ade52a88adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 0
-  patientMaxHP: 0
+  currentHP: 50
+  patientMaxHP: 100
   minCurrentHp: 0
   maxCurrentHp: 0
   currentIllness: 0
@@ -741,6 +741,9 @@ MonoBehaviour:
   hasTask: 0
   minTimer: 0
   maxTimer: 0
+  healingParticles: {fileID: 5048721385892816507, guid: 172cc0eeeb0c10e4289ade386f0b8dcd, type: 3}
+  damageParticles: {fileID: 1547498293661416764, guid: c15b5077315498b4ca930299472479f7, type: 3}
+  particlesDuration: 3
 --- !u!1 &4851985195599141529
 GameObject:
   m_ObjectHideFlags: 0
