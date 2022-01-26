@@ -37,6 +37,16 @@ public class GameManager : MonoBehaviour
     Transform bedContainer;
     #endregion
 
+    #region Particles
+
+    [SerializeField] private GameObject healingParticles;
+    //[SerializeField] private GameObject fullHealingParticles;
+    [SerializeField] private GameObject damageParticles;
+    //[SerializeField] private GameObject deathParticles;
+    [SerializeField] private float particlesDuration;
+
+    #endregion
+
     #region Inventory Variables
     [SerializeField] private Inventory itemSlot;
     [SerializeField] private Transform itemslotPos;
@@ -85,6 +95,7 @@ public class GameManager : MonoBehaviour
     }
     private void LateUpdate()
     {
+        
         //uiManager.UpdateHealthBar(patientContainer);
     }
 
@@ -100,10 +111,14 @@ public class GameManager : MonoBehaviour
             if (player.currentItem == null)
             {
                 //Debug.Log("Damage");
+                
                 //patient.CurrentHP -= player.NoItemDamage;  //make a serializable variable for balancing 
                 patient.Treatment(-player.NoItemDamage);
-                player.CurrentStressLvl += player.NoItemDamage * stressMultiplier; 
+                
+                player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
+                SpawnParticles(damageParticles, patient, particlesDuration);
 
+                
                 //if(IsPatientDead(patient))
                 //{
                 //    //TODO: ParticleEffects Methods, Sound Effects
@@ -115,12 +130,16 @@ public class GameManager : MonoBehaviour
             else if (patient.CurrentIllness == player.currentItem.item.task)    //doesnt work right
             {
                 //Success
+                
                 //patient.CurrentHP += player.currentItem.item.restoreHealth;
                 patient.Treatment(player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
+                
+				SpawnParticles(healingParticles, patient, particlesDuration);
+
                 //if (IsPatientHealed(patient))
                 //{
-                //    //TODO: update Healthbar, ParticleEffects, Soundeffect
+                    //TODO: update Healthbar, ParticleEffects, Soundeffect
                 //}
                 //TODO: update Healthbar, ParticleEffects, Soundeffect
                 //Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
@@ -130,11 +149,13 @@ public class GameManager : MonoBehaviour
             else if(patient.CurrentIllness != player.currentItem.item.task)
             {
                 //Damage
+                
                 //patient.CurrentHP -= player.currentItem.item.restoreHealth;
                 patient.Treatment(-player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
                 
                 //Debug.Log("currentStressLvl: " + player.CurrentStressLvl);
+               
                 //if (IsPatientDead(patient)) ;
                 //{
                 //    //TODO: ParticleEffects Methods, Sound Effects
@@ -157,6 +178,7 @@ public class GameManager : MonoBehaviour
     #region Patient Spawn Manager
     private void SpawnPatient(GameObject patient, Transform spawnPoint)
     {
+        
         GameObject newPatient = Instantiate(patient, spawnPoint);   
         newPatient.GetComponent<Patient>().IsPopping = false;
         newPatient.GetComponent<Patient>().HasTask = false;
@@ -246,6 +268,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="patient"></param>
     /// <returns></returns>
+    
     //private bool IsPatientDead(Patient patient)
     //{
     //    if (patient.CurrentHP <= 0)
@@ -258,6 +281,7 @@ public class GameManager : MonoBehaviour
     //    return false;
     //}
 
+    
     //private bool IsPatientHealed(Patient patient)
     //{
     //    if(patient.CurrentHP >= patient.PatientMaxHP)
@@ -269,6 +293,12 @@ public class GameManager : MonoBehaviour
     //    }
     //    return false;
     //}
+
+    private void SpawnParticles(GameObject particles, Patient patient, float duration)
+    {
+        GameObject newParticles = Instantiate(particles, patient.transform);
+        Destroy(newParticles, duration);
+    }
 
     private void isGameOver()
     {
