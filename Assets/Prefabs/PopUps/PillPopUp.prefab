@@ -50,8 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd8aab96f4322e439209a5ac3a210a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUpPrefab: {fileID: 1360661134648728818}
-  popUpTaskType: 1
+  popUpTaskType: 2
 --- !u!1 &7151000756691187861
 GameObject:
   m_ObjectHideFlags: 0

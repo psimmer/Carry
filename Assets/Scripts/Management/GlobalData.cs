@@ -7,11 +7,11 @@ public class GlobalData : MonoBehaviour
     public static GlobalData instance;
 
     //not sure if needed for the Save/Load System
-    //private float currentStresslvl;
-    //private int currentItem;
-    //private Vector3 currentPlayerPosition;
-    //private bool isSaveFileLoaded = false;
-    //private float timeLeft;
+    //private float currentStresslvl;           Lukas would say lets make the currentstresslevel in the playerscript static so we dont need to save and in start lvl 1 reset 
+    //private int currentItem;                  totally!!
+    //private Vector3 currentPlayerPosition;    totally!!
+    //private bool isSaveFileLoaded = false;    what should this be?
+    //private float timeLeft;                   totally!!
 
     //Overall statistics
     private int totalTreatments;

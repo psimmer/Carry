@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private CPU computer;
     //[SerializeField] private List<Patient> patients;
-    [SerializeField] private List<GameObject> popUps;
+    //[SerializeField] private List<GameObject> popUps;
     private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
 
     //private GameObject[] popUpList = new GameObject[6];
@@ -102,10 +102,10 @@ public class GameManager : MonoBehaviour
 
         DrinkingCoffee();
         //PopUp Stuff
-        if (patientList != null)
-        {
-            uiManager.ManagePopUps(patientList, popUpList, popUps);
-        }
+        //if (patientList != null)
+        //{
+        //    uiManager.ManagePopUps(patientList, popUpList, popUps);
+        //}
 
     }
     private void LateUpdate()
@@ -150,9 +150,10 @@ public class GameManager : MonoBehaviour
                     Debug.Log("Working");
                     return;
                 }
-
+                patient.HasPopUp = false;
+                Destroy(patient.CurrentPopUp);
                 patient.Treatment(-player.NoItemDamage);
-                player.CurrentStressLvl += player.NoItemDamage * stressMultiplier; 
+                player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
                 uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
                 isGameOver();
 
@@ -161,8 +162,9 @@ public class GameManager : MonoBehaviour
             else if (patient.CurrentIllness == player.currentItem.item.task)    
             {
                 //Success
-
-                patient.Treatment(player.currentItem.item.restoreHealth);
+                patient.HasPopUp = false;
+                Destroy(patient.CurrentPopUp);
+                patient.Treatment(+player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
                 uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
                 GlobalData.instance.ShiftTreatments++;
@@ -171,6 +173,8 @@ public class GameManager : MonoBehaviour
             else if (patient.CurrentIllness != player.currentItem.item.task)
             {
                 //Damage
+                patient.HasPopUp = false;
+                Destroy(patient.CurrentPopUp);
                 patient.Treatment(-player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
                 uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);

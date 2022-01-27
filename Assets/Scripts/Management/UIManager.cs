@@ -116,78 +116,79 @@ public class UIManager : MonoBehaviour
     #endregion
 
 
+
     #region PopUp Stuff
-    public void ManagePopUps(List<Patient> patientList, Dictionary<int, GameObject> popUpList, List<GameObject> popUps)
-    {
-        //foreach (GameObject value in popUpList.Values)
-        //{
-        //    Debug.Log($"{value}");
-        //}
+    //public void ManagePopUps(List<Patient> patientList, Dictionary<int, GameObject> popUpList, List<GameObject> popUps)
+    //{
+    //    //foreach (GameObject value in popUpList.Values)
+    //    //{
+    //    //    Debug.Log($"{value}");
+    //    //}
 
-        foreach (Patient patient in patientList)
-        {
-            if (patient != null)    //do you need this if in a foreach? is it even possible, that a patient is null?
-            {
-                int patientID = patient.PatientID;
+    //    foreach (Patient patient in patientList)
+    //    {
+    //        if (patient != null)    //do you need this if in a foreach? is it even possible, that a patient is null?
+    //        {
+    //            int patientID = patient.PatientID;
 
-                if (!patient.HasTask && !patient.IsPopping)
-                {
-                    //Debug.Log($"patient {patient.PatientID}has no task");
-                    StartCoroutine("PopUpTimer", patient);
-                }
+    //            if (!patient.HasTask && !patient.IsPopping)
+    //            {
+    //                //Debug.Log($"patient {patient.PatientID}has no task");
+    //                StartCoroutine("PopUpTimer", patient);
+    //            }
 
-                if (patient.IsPopping && !popUpList.ContainsKey(patientID))
-                {
-                    //Debug.Log($"patient {patient.PatientID} is popping");
-                    foreach (GameObject task in popUps)
-                    {
-                        //Debug.Log(task.name);
-                        if (task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
-                        {
-                            if (popUpList.ContainsKey(patientID))
-                                continue;
+    //            if (patient.IsPopping && !popUpList.ContainsKey(patientID))
+    //            {
+    //                //Debug.Log($"patient {patient.PatientID} is popping");
+    //                foreach (GameObject task in popUps)
+    //                {
+    //                    //Debug.Log(task.name);
+    //                    if (task.GetComponent<PopUp>().TaskType == patient.CurrentIllness)
+    //                    {
+    //                        if (popUpList.ContainsKey(patientID))
+    //                            continue;
 
-                            GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
-                            currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
-                            currentPopUp.transform.SetAsFirstSibling();
-                            popUpList.Add(patient.PatientID, currentPopUp);
-                            patient.HasTask = true;
-                            patient.IsPopping = false;
-                        }
-                    }
-                }
+    //                        GameObject currentPopUp = Instantiate(task.GetComponent<PopUp>().Prefab, patient.transform);
+    //                        currentPopUp.transform.SetParent(GameObject.Find("UIManager").transform, false);
+    //                        currentPopUp.transform.SetAsFirstSibling();
+    //                        popUpList.Add(patient.PatientID, currentPopUp);
+    //                        patient.HasTask = true;
+    //                        patient.IsPopping = false;
+    //                    }
+    //                }
+    //            }
 
-                if (popUpList.ContainsKey(patientID))
-                {
-                    GameObject popUp;
-                    bool success = false;
-                    success = popUpList.TryGetValue(patientID, out popUp);
-                    if (!success)
-                        return;
-                    popUp.transform.position = Camera.main.WorldToScreenPoint(new Vector3(patient.transform.position.x,
-                        patient.transform.position.y + 2, patient.transform.position.z));
-                }
-            }
-        }
-    }
-    public IEnumerator PopUpTimer(Patient patient)
-    {
-        if (patient.CurrentIllness != TaskType.RelocateAPatient)
-        {
-            int randomTime = UnityEngine.Random.Range(10, 15);
-            int maxRandomTime = UnityEngine.Random.Range(20, 25);
-            yield return new WaitForSeconds(UnityEngine.Random.Range(randomTime, maxRandomTime));  // Lukas likes this random timer method: I tooked it out to test smth Random.Range(minTimer, maxTimer)
-            patient.IsPopping = true;
-            StopCoroutine("PopUpTimer");
-        }
-        //private void RemovePopUpFromList(int patientID)
-        //{
-        //    GameObject removeIfExists;
-        //    popUpList.TryGetValue(patientID, out removeIfExists);
-        //    if(removeIfExists != null)
-        //        popUpList.Remove(patientID);
-        //}
-    }
+    //            if (popUpList.ContainsKey(patientID))
+    //            {
+    //                GameObject popUp;
+    //                bool success = false;
+    //                success = popUpList.TryGetValue(patientID, out popUp);
+    //                if (!success)
+    //                    return;
+    //                popUp.transform.position = Camera.main.WorldToScreenPoint(new Vector3(patient.transform.position.x,
+    //                    patient.transform.position.y + 2, patient.transform.position.z));
+    //            }
+    //        }
+    //    }
+    //}
+    //public IEnumerator PopUpTimer(Patient patient)
+    //{
+    //    if (patient.CurrentIllness != TaskType.RelocateAPatient)
+    //    {
+    //        int randomTime = UnityEngine.Random.Range(10, 15);
+    //        int maxRandomTime = UnityEngine.Random.Range(20, 25);
+    //        yield return new WaitForSeconds(UnityEngine.Random.Range(randomTime, maxRandomTime));  // Lukas likes this random timer method: I tooked it out to test smth Random.Range(minTimer, maxTimer)
+    //        patient.IsPopping = true;
+    //        StopCoroutine("PopUpTimer");
+    //    }
+    //    //private void RemovePopUpFromList(int patientID)
+    //    //{
+    //    //    GameObject removeIfExists;
+    //    //    popUpList.TryGetValue(patientID, out removeIfExists);
+    //    //    if(removeIfExists != null)
+    //    //        popUpList.Remove(patientID);
+    //    //}
+    //}
     #endregion
 
     //public void DocumentationTask(bool playerInteractionBool)

@@ -733,6 +733,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHP: 50
   patientMaxHP: 100
+  popUpList:
+  - {fileID: 1360661134648728818, guid: be7335628a72584469b1020da3d5028a, type: 3}
+  - {fileID: 1360661134648728818, guid: 05455ea590b10624d87a7721fea9a516, type: 3}
+  canvas: {fileID: 3520177203202608619}
   minCurrentHp: 0
   maxCurrentHp: 0
   currentIllness: 0
@@ -741,6 +745,8 @@ MonoBehaviour:
   hasTask: 0
   minTimer: 0
   maxTimer: 0
+  healthbar: {fileID: 0}
+  isInBed: 0
   healingParticles: {fileID: 5048721385892816507, guid: 172cc0eeeb0c10e4289ade386f0b8dcd, type: 3}
   damageParticles: {fileID: 1547498293661416764, guid: c15b5077315498b4ca930299472479f7, type: 3}
   particlesDuration: 3
