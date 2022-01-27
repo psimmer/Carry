@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //patientSpawner is now here, it works through a coroutine
-        PatientSpawner();
+        PatientSpawner();               // Just call here StartCoroutine(WaitAndSpawn());
         //SetHealthBarPos();
         AssignPatientIDs();
         newPatientID = patientContainer.childCount + 1;
@@ -218,24 +218,24 @@ public class GameManager : MonoBehaviour
     private void SpawnPatientInSpawnPoint(GameObject patient, Transform spawnPoint)
     {
 
-        GameObject newPatient = Instantiate(patient, spawnPoint);
-        newPatient.GetComponent<Patient>().IsPopping = false;
+        GameObject newPatient = Instantiate(patient, spawnPoint); // you could take here the patientContainer and in the next line you say newPatient.transform.position = spawnpoint.position;
+        newPatient.GetComponent<Patient>().IsPopping = false;       //booleans we need to check which we really need and which not
         newPatient.GetComponent<Patient>().HasTask = false;
-        newPatient.transform.parent = patientContainer;
+        newPatient.transform.parent = patientContainer;     // <---- i think this is the same like you do in line 227
         newPatient.GetComponent<Patient>().PatientID = newPatientID;
-        newPatient.name = newPatientID.ToString();
-        newPatient.transform.SetAsLastSibling();
+        newPatient.name = newPatientID.ToString();          // <----for what do we need the id?
+        newPatient.transform.SetAsLastSibling();            // <----i dont think we need this?
         newPatientID++;
-        newPatient.transform.position = spawnPoint.transform.position;
-        spawnPoint.GetComponent<SpawnPoint>().IsFree = false;
+        newPatient.transform.position = spawnPoint.transform.position; //this line should be after instantiate i think so
+        spawnPoint.GetComponent<SpawnPoint>().IsFree = false;           
         newPatient.transform.Rotate(new Vector3 (0, 180));
         //SetHealthBarPos(newPatient.GetComponent<Patient>());
 
     }
-    private void PatientSpawner()
+    private void PatientSpawner()       //If you just call the the coroutine in the start you dont need this Function
     {
             IEnumerator coroutine = WaitAndSpawn();
-            StartCoroutine(coroutine);
+            StartCoroutine(coroutine);              // StartCoroutine(WaitAndSpawn()); ??
     }
 
 
@@ -251,7 +251,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WaitAndSpawn()
     {
-        while(true)
+        while(true)         // OHHHH shit can we dont use while loops?? Pleeasse? thats fucking dangerous bro... and what is the reason for the while because it never gets false
         {
             SpawnDelay = (float)UnityEngine.Random.Range(4, 10);
             yield return new WaitForSeconds(SpawnDelay);
@@ -262,7 +262,7 @@ public class GameManager : MonoBehaviour
                 if(spawnPoint.GetComponent<SpawnPoint>().IsFree)
                 {
                     SpawnPatientInSpawnPoint(patientPrefabList[UnityEngine.Random.Range(0, patientPrefabList.Length)], spawnPoint);
-                    spawnPoint.GetComponent<SpawnPoint>().IsFree = false;
+                    spawnPoint.GetComponent<SpawnPoint>().IsFree = false;       // you are setting this false two times before it gets true i think so...
                 }
             }
         }
@@ -273,7 +273,7 @@ public class GameManager : MonoBehaviour
 
     private void GetFreeBeds()
     {
-        UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed");
+        UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed"); // can we just call this in awake or start do we need the for loop?
         for (int i = 0; i < bedArray.Length; i++)
         {
             if(bedArray[i].GetComponent<BedScript>().IsFree)
@@ -284,7 +284,8 @@ public class GameManager : MonoBehaviour
 
 
     }
-    private void GetAllSpawnPoints()
+
+    private void GetAllSpawnPoints() // this method is called in awake we could just say in awake: SpawnPointList.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
     {
         SpawnPointList.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
     }
@@ -316,13 +317,13 @@ public class GameManager : MonoBehaviour
                 patientList.RemoveAt(i);
             }
         }
-        popUpList[patientID] = null;
+        popUpList[patientID] = null;        // i dont know do we need this? i mean the popUpList
         //TODO: destroy healthbar and PopUp UI
         Destroy(patient);
     }
 
 
-    private void AssignPatientIDs()
+    private void AssignPatientIDs()             // I dont understand what we are doing with the ID? for what do we need it?
     {
         for (int i = 0; i < patientContainer.childCount; i++)
         {
