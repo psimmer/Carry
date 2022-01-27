@@ -65,7 +65,11 @@ public class Patient : MonoBehaviour
         get { return currentHP; }
         set { currentHP = value; }
     }
-
+    public bool IsInBed
+    {
+        get { return isInBed; }
+        set { isInBed = value; }
+    }
     public int PatientMaxHP
     {
         get { return patientMaxHP; }
@@ -109,8 +113,10 @@ public class Patient : MonoBehaviour
 
     #endregion
 
+
     void Start()
     {
+        tag = "Patient";
         hasPopUp = false;
         timetillPopUp = Random.Range(5, 20);
         healthbar = GetComponentInChildren<Healthbar>();
@@ -120,6 +126,8 @@ public class Patient : MonoBehaviour
         IsPopping = false;
         CurrentIllness = RandomTask;
     }
+
+
     private void Update()
     {
         popUpTimer += Time.deltaTime;

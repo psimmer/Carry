@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Patient Manager Variables
-    [SerializeField] private List<BedScript> bedList; // private List<Bed> allBeds;
+    [SerializeField] private List<BedScript> freeBedList; // private List<Bed> allBeds;
     [SerializeField] private List<Patient> patientList;
     public int maxAmountOfPatients;
     float SpawnDelay;
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     {
         patientContainer = GameObject.Find("Patients").transform;
         GetAllSpawnPoints();
-        GetAllBeds();
+        GetFreeBeds();
     }
     private void Start()
     {
@@ -145,12 +145,6 @@ public class GameManager : MonoBehaviour
             //if player wants to treat the patient without an item. maybe we have to overthink for itemless tasks
             if (player.currentItem == null)
             {
-                // This part should be for relocating patients, but apparently it's not detecting them. I'm a bit tired and will continue tomorrow!
-                if (patient.CurrentIllness == TaskType.RelocateAPatient)
-                {
-                    Debug.Log("Working");
-                    return;
-                }
                 patient.HasPopUp = false;
                 patient.Treatment(-player.NoItemDamage);
                 player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
@@ -186,27 +180,40 @@ public class GameManager : MonoBehaviour
                 player.currentItem = null;
                 itemSlot.UI_Element = null;
             }
+
+            if (patient.CurrentIllness == TaskType.RelocateAPatient)
+            {
+                MovePatientToBed(patient.gameObject);
+                return;
+            }
+
             player.IsHealing = false;
         }
     }
 
 
     #region Patient Spawn Manager
-    private void SpawnPatientInBed(GameObject patient, Transform spawnPoint)
+    private void MovePatientToBed(GameObject patient)
     {
-
-        GameObject newPatient = Instantiate(patient, spawnPoint);
-        newPatient.GetComponent<Patient>().IsPopping = false;
-        newPatient.GetComponent<Patient>().HasTask = false;
-        newPatient.transform.parent = patientContainer;
-        newPatient.GetComponent<Patient>().PatientID = newPatientID;
-        newPatient.name = newPatientID.ToString();
-        newPatient.transform.SetAsLastSibling();
-        newPatientID++;
-        newPatient.transform.position = spawnPoint.transform.position;
-        spawnPoint.GetComponent<BedScript>().IsFree = false;
-        //SetHealthBarPos(newPatient.GetComponent<Patient>());
-
+        Patient patientScript = patient.GetComponent<Patient>();
+        if (freeBedList.Count > 0)
+        {
+            if(patientScript.CurrentIllness == TaskType.RelocateAPatient)
+            {
+                
+                int randomBed = UnityEngine.Random.Range(0, freeBedList.Count);
+                Transform patientBed = freeBedList[randomBed].transform;
+                //patient.transform.Rotate(new Vector3(-90, -90, 0));
+                //rotation and position must still be fixed, but it's working more or less
+                patient.transform.position = patientBed.position;
+                patientScript.IsInBed = true;
+                patientScript.CurrentIllness = RandomTask;
+                freeBedList.RemoveAt(randomBed);
+                
+            }
+        }
+        else
+            Debug.LogWarning("No free beds!");
     }
     private void SpawnPatientInSpawnPoint(GameObject patient, Transform spawnPoint)
     {
@@ -232,11 +239,11 @@ public class GameManager : MonoBehaviour
     }
 
 
-        //if (bedList.Count > 0)
+        //if (freeBedList.Count > 0)
         //{
         //    //(0, freeSpawnPoints.Count - 1); // aks if we should take Random.Range or Random.Next
-        //    int randomIndex = UnityEngine.Random.Range(0, bedList.Count - 1);
-        //    Transform spawnPoint = bedList[randomIndex].transform;
+        //    int randomIndex = UnityEngine.Random.Range(0, freeBedList.Count - 1);
+        //    Transform spawnPoint = freeBedList[randomIndex].transform;
         //    SpawnPatientInBed(patientPrefabList[UnityEngine.Random.Range(0, patientPrefabList.Length)], spawnPoint);
 
         //}
@@ -246,7 +253,7 @@ public class GameManager : MonoBehaviour
     {
         while(true)
         {
-            SpawnDelay = (float)UnityEngine.Random.Range(0, 5);
+            SpawnDelay = (float)UnityEngine.Random.Range(4, 10);
             yield return new WaitForSeconds(SpawnDelay);
             if(patientContainer.childCount < maxAmountOfPatients)
             {
@@ -264,15 +271,16 @@ public class GameManager : MonoBehaviour
     //@alejandro i changed the code: commented area is yours, the other code (line) is the more efficent one (tip from Andi). cut it out and paste it in the Awake() Method
     // perfect! I deleted the bed container, thanks!
 
-    private void GetAllBeds()
+    private void GetFreeBeds()
     {
-        //UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed");
-        //for (int i = 0; i < bedArray.Length; i++)
-        //{
-        //    bedList.Add(bedArray[i].GetComponent<BedScript>());
-        //}
-
-        bedList.AddRange(FindObjectsOfType<BedScript>());
+        UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed");
+        for (int i = 0; i < bedArray.Length; i++)
+        {
+            if(bedArray[i].GetComponent<BedScript>().IsFree)
+            {
+                freeBedList.Add(bedArray[i].GetComponent<BedScript>());
+            }
+        }
 
 
     }

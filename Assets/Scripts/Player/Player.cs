@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float currentStressLvl;
     [SerializeField] private float maxStressLvl;
     [SerializeField] private int noItemDamage;
+    Coroutine reduceStressIfOutside;
 
     private bool isAtPC;
 
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
         IsHoldingItem = false;
         IsAtPc = false;
     }
+
 
 
     /// <summary>
@@ -90,8 +92,23 @@ public class Player : MonoBehaviour
 
     #region Stuff for Cam
 
+    private void OnTriggerExit(Collider collision)
+    {
+
+        if (collision.tag == "Inside")
+        {
+            reduceStressIfOutside = StartCoroutine(ReduceStressLevel());
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
+        if(other.tag == "Inside")
+        {
+            if(reduceStressIfOutside != null)
+                StopCoroutine(reduceStressIfOutside);
+        }
+
         if(other.GetComponent<CamColliders>() != null)
         {
             Transform lastPos = other.GetComponent<CamColliders>().FirstPosition;
@@ -109,4 +126,17 @@ public class Player : MonoBehaviour
     }
 
     #endregion
+
+    IEnumerator ReduceStressLevel()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(3);
+            currentStressLvl--;
+        }
+    }
+
+
 }
+
+
