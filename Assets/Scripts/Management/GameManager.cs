@@ -152,7 +152,6 @@ public class GameManager : MonoBehaviour
                     return;
                 }
                 patient.HasPopUp = false;
-                Destroy(patient.CurrentPopUp);
                 patient.Treatment(-player.NoItemDamage);
                 player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
                 uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
@@ -165,7 +164,6 @@ public class GameManager : MonoBehaviour
             {
                 //Success
                 patient.HasPopUp = false;
-                Destroy(patient.CurrentPopUp);
                 patient.Treatment(+player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
                 uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
@@ -176,7 +174,6 @@ public class GameManager : MonoBehaviour
             {
                 //Damage
                 patient.HasPopUp = false;
-                Destroy(patient.CurrentPopUp);
                 patient.Treatment(-player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
                 uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);

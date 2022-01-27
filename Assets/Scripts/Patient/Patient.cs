@@ -139,7 +139,8 @@ public class Patient : MonoBehaviour
     {
         currentHP += health;
         // patient full recovered
-
+        Destroy(currentPopUp);
+        Debug.Log(currentPopUp);
         if (health < 0)
         {
             SpawnParticles(damageParticles, particlesDuration);
@@ -168,7 +169,6 @@ public class Patient : MonoBehaviour
             Debug.Log($"patient tot {health}");
             Destroy(this.gameObject);
         }
-
         healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
     }
 
@@ -197,7 +197,7 @@ public class Patient : MonoBehaviour
                 if (!hasPopUp)
                 {
                     hasPopUp = true;
-                    GameObject currentPopUp = Instantiate(popUp.gameObject, canvas);
+                    currentPopUp = Instantiate(popUp.gameObject, canvas);
                     currentPopUp.transform.position = new Vector3(canvas.position.x, canvas.position.y + 1f, canvas.position.z);
                 }
             }
