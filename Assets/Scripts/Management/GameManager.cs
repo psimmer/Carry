@@ -84,7 +84,10 @@ public class GameManager : MonoBehaviour
             if (IsInputCorrect)
                 player.CurrentStressLvl -= 20;
             else
+            {
                 player.CurrentStressLvl += 20;
+                isGameOver();
+            }
         }
 
         //Game will be paused
@@ -98,7 +101,6 @@ public class GameManager : MonoBehaviour
         UpdatePatientList();
 
         Treatment(player.currentPatient);
-        //SetHealthBarPos();
 
         DrinkingCoffee();
         //PopUp Stuff
@@ -111,7 +113,6 @@ public class GameManager : MonoBehaviour
     private void LateUpdate()
     {
         uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
-        //uiManager.UpdateHealthBar(patientContainer);
     }
 
     private void DrinkingCoffee()
@@ -155,11 +156,12 @@ public class GameManager : MonoBehaviour
                 patient.Treatment(-player.NoItemDamage);
                 player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
                 uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
+                
                 isGameOver();
 
 
             }
-            else if (patient.CurrentIllness == player.currentItem.item.task)    
+            else if (patient.CurrentIllness == player.currentItem.item.task)   
             {
                 //Success
                 patient.HasPopUp = false;
@@ -190,8 +192,6 @@ public class GameManager : MonoBehaviour
             player.IsHealing = false;
         }
     }
-
-
 
 
     #region Patient Spawn Manager

@@ -11,9 +11,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float currentStressLvl;
     [SerializeField] private float maxStressLvl;
     [SerializeField] private int noItemDamage;
-    
-
-    
 
     private bool isAtPC;
 
@@ -34,22 +31,13 @@ public class Player : MonoBehaviour
     {
         get { return maxStressLvl; }
     }
-
-    //public float HealCoffe
-    //{
-    //    get { return healCoffee; }
-    //    set { healCoffee = value; }
-    //}
-
-    
-
-    
-    #endregion
     public Item currentItem { get; set; }
     public Patient currentPatient { get; set; }
     public bool IsHealing { get; set; }
     public bool IsDrinkingCoffee { get; set; }
     public bool IsHoldingItem { get; set; }
+    #endregion
+
 
     private void Awake()
     { 
@@ -57,9 +45,6 @@ public class Player : MonoBehaviour
         IsAtPc = false;
     }
 
-    
-        
-    
 
     /// <summary>
     /// Interacting with Objects/ with Items and Patients
@@ -90,7 +75,6 @@ public class Player : MonoBehaviour
             }
             if (item.CompareTag("CoffeeMachine")) {
                 IsDrinkingCoffee = true;
-                //item.GetComponent<CoffeMachine>().DrinkCoffee(this);
             }
 
             //Debug.Log(item.name);

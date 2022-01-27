@@ -41,10 +41,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateStressLvlBar(float percent)
-    {
-        stressLvlBar.value = percent;
-    }
 
     /// <summary>
     /// pauses the game and sets the Pause UI active
@@ -74,13 +70,26 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    #region StressLvlBar and CoffeeCounter
+    /// <summary>
+    /// Updates the amount of Coffees left in the UI
+    /// </summary>
+    /// <param name="coffeeCount"></param>
     public void updateCoffeCounter(int coffeeCount)
     {
         coffeeCounter.text = "Coffee: " + coffeeCount;
     }
-
+    public void UpdateStressLvlBar(float percent)
+    {
+        stressLvlBar.value = percent;
+    }
+    #endregion
+    
     #region Activate/Deactive Options
     //i think following two methods can be optimized. iam tired, i will look over it another time
+    /// <summary>
+    /// Sets the right UI elements active/inactive
+    /// </summary>
     public void EnterOptions()
     {
         if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" ||
@@ -98,6 +107,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the right UI elements active/inactive
+    /// </summary>
     public void LeaveOptions()
     {
         if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" ||
@@ -114,8 +126,6 @@ public class UIManager : MonoBehaviour
         }
     }
     #endregion
-
-
 
     #region PopUp Stuff
     //public void ManagePopUps(List<Patient> patientList, Dictionary<int, GameObject> popUpList, List<GameObject> popUps)

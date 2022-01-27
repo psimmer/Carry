@@ -11467,10 +11467,7 @@ MonoBehaviour:
   sceneManager: {fileID: 711209936}
   uiManager: {fileID: 121423933}
   computer: {fileID: 1341434335}
-  popUps:
-  - {fileID: 1360661134648728818, guid: be7335628a72584469b1020da3d5028a, type: 3}
-  - {fileID: 1360661134648728818, guid: 05455ea590b10624d87a7721fea9a516, type: 3}
-  healCoffee: 0
+  healCoffee: 15
   stressMultiplier: 1
   stressReductionMultiplier: 1
   coffeeMachine: {fileID: 2117576457}
