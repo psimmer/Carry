@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioSlider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private AudioMixer audioMixer;
+
+    public void SetMasterVolume(float sliderValue)
     {
-        
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetMusicVolume(float sliderValue)
     {
-        
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
+    }
+
+    public void SetSFXVolume(float sliderValue)
+    {
+        audioMixer.SetFloat("SFXVolume", Mathf.Log10(sliderValue) * 20);
     }
 }

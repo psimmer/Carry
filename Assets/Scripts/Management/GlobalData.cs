@@ -23,8 +23,8 @@ public class GlobalData : MonoBehaviour
     private int shiftPatientsHealed;
     private int shiftPatientsLost;
 
-    [SerializeField] private List<AudioClip> allMusic;
-    [SerializeField] private List<AudioClip> allSoundEffects;
+    //[SerializeField] private List<AudioClip> allMusic;
+    //[SerializeField] private List<AudioClip> allSoundEffects;
 
     #region Properties
     public int TotalTreatments
