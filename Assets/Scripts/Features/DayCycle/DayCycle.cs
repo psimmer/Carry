@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DayCycle : MonoBehaviour
@@ -21,7 +19,7 @@ public class DayCycle : MonoBehaviour
 
     public void LerpTheSun()
     {
-        interpolation += Time.deltaTime * (((interpolationValue / 10) / 10) / 10);
+        interpolation += Time.deltaTime * (interpolationValue / 1000); 
         transform.rotation = Quaternion.Lerp(startPos, endPos, interpolation);
     }
 

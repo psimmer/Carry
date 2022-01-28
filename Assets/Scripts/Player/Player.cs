@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -78,24 +76,21 @@ public class Player : MonoBehaviour
             if (item.CompareTag("CoffeeMachine")) {
                 IsDrinkingCoffee = true;
             }
-
-            //Debug.Log(item.name);
         }
     }
 
     public void DropItem()
     {
-            //Drop Item
             currentItem = null;
             Debug.Log("Item thrown away");
     }
 
     #region Stuff for Cam
 
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit(Collider other)
     {
 
-        if (collision.tag == "Inside")
+        if (other.CompareTag("Inside"))
         {
             reduceStressIfOutside = StartCoroutine(ReduceStressLevel());
         }
@@ -103,7 +98,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Inside")
+        if(other.CompareTag("Inside"))
         {
             if(reduceStressIfOutside != null)
                 StopCoroutine(reduceStressIfOutside);

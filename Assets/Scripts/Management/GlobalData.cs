@@ -10,7 +10,7 @@ public class GlobalData : MonoBehaviour
     //private float currentStresslvl;           Lukas would say lets make the currentstresslevel in the playerscript static so we dont need to save and in start lvl 1 reset 
     //private int currentItem;                  totally!!
     //private Vector3 currentPlayerPosition;    totally!!
-    //private bool isSaveFileLoaded = false;    what should this be?
+    //private bool isSaveFileLoaded = false;    
     //private float timeLeft;                   totally!!
 
     //Overall statistics
@@ -22,9 +22,6 @@ public class GlobalData : MonoBehaviour
     private int shiftTreatments;
     private int shiftPatientsHealed;
     private int shiftPatientsLost;
-
-    //[SerializeField] private List<AudioClip> allMusic;
-    //[SerializeField] private List<AudioClip> allSoundEffects;
 
     #region Properties
     public int TotalTreatments

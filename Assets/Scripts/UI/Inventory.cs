@@ -39,11 +39,8 @@ public class Inventory : MonoBehaviour
                 currentItem = Instantiate(player.currentItem.item.UI_prefab, itemSlotPos);
                 Ui_element = player.currentItem.item.UI_prefab;
             }
-            else
-            {
-                // if he already have the item he will do this! Correct Nothing :D
-            }
         }
+
         if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
         {
             Destroy(currentItem);

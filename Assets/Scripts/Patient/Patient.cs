@@ -5,6 +5,7 @@ using UnityEngine;
 // I know it is the wrong script for this but i dont know in which script it should be
 public enum TaskType
 {
+    None,
     RelocateAPatient,
     Bandage,
     Pills,
@@ -19,10 +20,11 @@ public enum TaskType
 
 public class Patient : MonoBehaviour
 {
-    [SerializeField] private int currentHP; //changed it from healthAmount to currentHP
+    [SerializeField] private int currentHP; 
     [SerializeField] private int patientMaxHP;
     [SerializeField] private List<GameObject> popUpList;
     [SerializeField] private Transform canvas;
+
     //range for the random HP that the patient spawns with
     [SerializeField] private int minCurrentHp;
     [SerializeField] private int maxCurrentHp;
@@ -32,8 +34,7 @@ public class Patient : MonoBehaviour
     [SerializeField] private int patientID;
     [SerializeField] private bool isPopping;
     [SerializeField] private bool hasTask;
-    [SerializeField] private int minTimer;
-    [SerializeField] private int maxTimer;
+    
     //[SerializeField] private GameObject healthbarPrefab;
     [SerializeField] private Healthbar healthbar;
     TaskType RandomTask;
@@ -118,22 +119,18 @@ public class Patient : MonoBehaviour
     {
         tag = "Patient";
         hasPopUp = false;
-        timetillPopUp = Random.Range(5, 20);
+        timetillPopUp = Random.Range(10, 20);       //this gets serialized;
         healthbar = GetComponentInChildren<Healthbar>();
         HasTask = false;
-        minTimer = Random.Range(10, 15);
-        maxTimer = Random.Range(20, 30);
         IsPopping = false;
         CurrentIllness = RandomTask;
-    }
 
+    }
 
     private void Update()
     {
         popUpTimer += Time.deltaTime;
         PopUpTimer(CurrentIllness, canvas);
-
-
     }
 
     private void LateUpdate()
@@ -146,36 +143,36 @@ public class Patient : MonoBehaviour
     public void Treatment(int health)
     {
         currentHP += health;
-        // patient full recovered
         Destroy(currentPopUp);
-        Debug.Log(currentPopUp);
+        //Damage
         if (health < 0)
         {
             SpawnParticles(damageParticles, particlesDuration);
             Debug.Log($"health kleiner als 0 {health}");
         }
+        //Heal
         else if (health > 0)
         {
             SpawnParticles(healingParticles, particlesDuration);
             Debug.Log($"health größer als 0 {health}");
         }
 
+        // patient full recovered
         if (currentHP >= patientMaxHP)
         {
             currentHP = patientMaxHP;
             GlobalData.instance.SetPatientHealedStatistics();
             Debug.Log($"patient vollgeheilt {health}");
-
+            Destroy(this.gameObject);
             //SpawnParticles(fullHealingParticles, particlesDuration);
         }
         // patient dead
         else if (currentHP <= 0)
         {
-            //currentHP = 0;
             GlobalData.instance.SetPatientDeadStatistics();
-            //SpawnParticles(deathParticles, particlesDuration);
             Debug.Log($"patient tot {health}");
             Destroy(this.gameObject);
+            //SpawnParticles(deathParticles, particlesDuration);
         }
         healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
     }
@@ -190,7 +187,6 @@ public class Patient : MonoBehaviour
     {
         if (popUpTimer >= timetillPopUp)
         {
-            Debug.Log("Timer");
             popUpTimer = 0;
             StartCoroutine(PopUpSpawn(illness, canvas));
         }

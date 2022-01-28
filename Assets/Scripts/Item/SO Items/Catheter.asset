@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Catheter
   restoreHealth: 2
   prefab: {fileID: 0}
+  UI_prefab: {fileID: 0}
+  task: 4

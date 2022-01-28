@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Transfusion
   restoreHealth: 5
   prefab: {fileID: 0}
+  UI_prefab: {fileID: 0}
+  task: 6

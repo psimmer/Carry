@@ -201,24 +201,5 @@ public class UIManager : MonoBehaviour
     //}
     #endregion
 
-    //public void DocumentationTask(bool playerInteractionBool)
-    //{
-    //    if (playerInteractionBool)
-    //    {
-    //        documentationCpu.KeyTabs();
-    //        //SetActive PC UI
-    //        //System for All Buttons You can press
-    //    }
-    //    if (Input.GetKeyDown(KeyCode.Tab))
-    //    {
-    //        playerInteractionBool = false;
-    //    }
-    //}
-
-
-
-
-
-
 
 }

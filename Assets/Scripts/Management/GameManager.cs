@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,14 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneMan sceneManager;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private CPU computer;
-    //[SerializeField] private List<Patient> patients;
-    //[SerializeField] private List<GameObject> popUps;
     private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
 
-    //private GameObject[] popUpList = new GameObject[6];
-    //public List<Patient> PatientList => patientList;
-    //public Dictionary<int, GameObject> PopUpList => popUpList;
-    //public List<GameObject> PopUps => popUps;
     #region Multipliers
     [SerializeField] private float healCoffee;
     [Tooltip("This value multiplies the stress")] [Range(1, 4)]
@@ -30,14 +23,13 @@ public class GameManager : MonoBehaviour
     #region Patient Manager Variables
     [SerializeField] private List<BedScript> freeBedList; // private List<Bed> allBeds;
     [SerializeField] private List<Patient> patientList;
-    public int maxAmountOfPatients;
-    float SpawnDelay;
-    TaskType RandomTask;
-    bool delayIsOver;
-    private int newPatientID;
     [SerializeField] private GameObject[] patientPrefabList;
-    Transform patientContainer;
     [SerializeField] private List<GameObject> SpawnPointList;
+    Transform patientContainer;
+    TaskType RandomTask;
+    public int maxAmountOfPatients;
+    private int newPatientID;
+    float SpawnDelay;
 
     #endregion
 
@@ -50,8 +42,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DayCycle dayCycle;
     [SerializeField] private Timer dayTime;
     #endregion
-
-
 
     private void Awake()
     {
@@ -251,7 +241,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WaitAndSpawn()
     {
-        while(true)         // OHHHH shit can we dont use while loops?? Pleeasse? thats fucking dangerous bro... and what is the reason for the while because it never gets false
+        while(true)
         {
             SpawnDelay = (float)UnityEngine.Random.Range(4, 10);
             yield return new WaitForSeconds(SpawnDelay);
@@ -268,9 +258,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //@alejandro i changed the code: commented area is yours, the other code (line) is the more efficent one (tip from Andi). cut it out and paste it in the Awake() Method
-    // perfect! I deleted the bed container, thanks!
-
     private void GetFreeBeds()
     {
         UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed"); // can we just call this in awake or start do we need the for loop?
@@ -281,14 +268,13 @@ public class GameManager : MonoBehaviour
                 freeBedList.Add(bedArray[i].GetComponent<BedScript>());
             }
         }
-
-
     }
 
     private void GetAllSpawnPoints() // this method is called in awake we could just say in awake: SpawnPointList.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
     {
         SpawnPointList.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
     }
+
     private void UpdatePatientList()
     {
         if (patientContainer.childCount == patientList.Count)
@@ -306,21 +292,21 @@ public class GameManager : MonoBehaviour
         }
 
     }
-    private void DestroyPatient(GameObject patient) // please use this for destroying patients!
-    {
-        int patientID = patient.GetComponent<Patient>().PatientID;
-        //foreach (Patient element in patientList)
-        for (int i = 0; i < patientList.Count; i++) //@alejandro: i changed the foreach to a for loop. you are not allowed to edit things in a foreach loop! there was an exception!
-        {
-            if (patientList[i].GetComponent<Patient>().PatientID == patientID)
-            {
-                patientList.RemoveAt(i);
-            }
-        }
-        popUpList[patientID] = null;        // i dont know do we need this? i mean the popUpList
-        //TODO: destroy healthbar and PopUp UI
-        Destroy(patient);
-    }
+    //private void DestroyPatient(GameObject patient) // please use this for destroying patients!
+    //{
+    //    int patientID = patient.GetComponent<Patient>().PatientID;
+
+    //    for (int i = 0; i < patientList.Count; i++) 
+    //    {
+    //        if (patientList[i].GetComponent<Patient>().PatientID == patientID)
+    //        {
+    //            patientList.RemoveAt(i);
+    //        }
+    //    }
+    //    //popUpList[patientID] = null;        // i dont know do we need this? i mean the popUpList
+    //    //TODO: destroy healthbar and PopUp UI
+    //    Destroy(patient);
+    //}
 
 
     private void AssignPatientIDs()             // I dont understand what we are doing with the ID? for what do we need it?

@@ -12,7 +12,6 @@ public class SceneMan : MonoBehaviour
         Time.timeScale = 1f;
         GlobalData.instance.ResetTotalStatistics();
         SceneManager.LoadScene("Level 1");
-        //TODO: start music level 1
     }
 
     public void NextLvl()

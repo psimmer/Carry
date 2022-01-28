@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class CoffeMachine : MonoBehaviour
@@ -20,25 +17,5 @@ public class CoffeMachine : MonoBehaviour
     {
         get { return healCoffee; }
     }
-    
 
-    private void Awake()
-    {
-        
-    }
-
-    //public void DrinkCoffee(Player player)
-    //{
-    //    if (coffeeCount <= 0)
-    //    {
-    //        Debug.Log("No Coffee left");
-    //        //show in UI that nothing is left
-    //    }
-    //    else
-    //    {
-    //        player.CurrentStressLvl -= healCoffee;  //multiply it by the stressReductionMultiplier?
-    //        coffeeCount--;
-    //        coffeeCounter.text = "Coffee: " + coffeeCount;
-    //    }
-    //}
 }
