@@ -5939,6 +5939,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
+      propertyPath: currentIllness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: particlesDuration
       value: 2
       objectReference: {fileID: 0}
@@ -6168,7 +6172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315504373}
   m_LocalRotation: {x: -0.31266013, y: -0.042172197, z: 0.013808833, w: -0.948828}
-  m_LocalPosition: {x: -4.9243126, y: 7.2077837, z: -19.056507}
+  m_LocalPosition: {x: -4.9243126, y: 11, z: -15.056507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1752384742}
@@ -10664,6 +10668,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
+      propertyPath: currentIllness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303922921525176870, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: particlesDuration
       value: 2
       objectReference: {fileID: 0}
@@ -11678,7 +11686,6 @@ MonoBehaviour:
   coffeeMachine: {fileID: 2117576457}
   freeBedList: []
   patientList: []
-  maxAmountOfPatients: 4
   patientPrefabList:
   - {fileID: 1304896773851607012, guid: cd7de24de828e8a46b79f224463c82da, type: 3}
   - {fileID: 4540936381063408768, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
@@ -11687,6 +11694,7 @@ MonoBehaviour:
   - {fileID: 927602944}
   - {fileID: 667112292}
   - {fileID: 1709245729}
+  maxAmountOfPatients: 4
   itemSlot: {fileID: 121423932}
   itemslotPos: {fileID: 1127159734}
   dayCycle: {fileID: 705507996}
@@ -22606,7 +22614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c27efde061739c043bafafb5c1824416, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c27efde061739c043bafafb5c1824416, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26239,7 +26247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c27efde061739c043bafafb5c1824416, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c27efde061739c043bafafb5c1824416, type: 3}
       propertyPath: m_LocalPosition.x

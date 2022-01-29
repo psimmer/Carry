@@ -48,10 +48,10 @@ public class Timer : MonoBehaviour
         {
             dayOrNight = PM;
         }
-        if (startTimeHours == 13)
-        {
-            startTimeHours = 1;
-        }
+        //if (startTimeHours == 13)
+        //{
+        //    startTimeHours = 1;
+        //}
 
         if ((int)realTime <= 9 && startTimeHours <= 9)
             timeText.text = "0" + startTimeHours.ToString() + ":" + "0" + (int)realTime;

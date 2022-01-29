@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bcd6d3ca6355c64c8a8564c17a0d7d9, type: 3}
-  m_Name: BloodSample
+  m_Name: Defibrillator
   m_EditorClassIdentifier: 
-  itemName: Blood Sample
-  restoreHealth: 1
-  prefab: {fileID: 919132149155446097, guid: 10fd3e27929601e418b1307cb2272ed2, type: 3}
-  UI_prefab: {fileID: 6851068978507163019, guid: 14feef37060501b4890ed0aee35b25f5, type: 3}
-  task: 5
+  itemName: Defibrillator
+  restoreHealth: 10
+  prefab: {fileID: 6556839584298884841, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+  UI_prefab: {fileID: 0}
+  task: 0

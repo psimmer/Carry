@@ -148,12 +148,14 @@ public class Patient : MonoBehaviour
         //Damage
         if (health < 0)
         {
+            CurrentIllness = (TaskType)Random.Range(1, 3);
             SpawnParticles(damageParticles, particlesDuration);
             Debug.Log($"health kleiner als 0 {health}");
         }
         //Heal
         else if (health > 0)
         {
+            CurrentIllness = (TaskType)Random.Range(1, 3);
             SpawnParticles(healingParticles, particlesDuration);
             Debug.Log($"health größer als 0 {health}");
         }
@@ -164,6 +166,7 @@ public class Patient : MonoBehaviour
             currentHP = patientMaxHP;
             GlobalData.instance.SetPatientHealedStatistics();
             Debug.Log($"patient vollgeheilt {health}");
+            Destroy(this.gameObject);
             //SpawnParticles(fullHealingParticles, particlesDuration);
         }
         // patient dead
@@ -171,6 +174,7 @@ public class Patient : MonoBehaviour
         {
             GlobalData.instance.SetPatientDeadStatistics();
             Debug.Log($"patient tot {health}");
+            Destroy(this.gameObject);
             //SpawnParticles(deathParticles, particlesDuration);
         }
         healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);

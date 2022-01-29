@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     }
     public Item currentItem { get; set; }
     public Patient currentPatient { get; set; }
-    public bool IsHealing { get; set; }
+    public bool IsInContact { get; set; }
     public bool IsDrinkingCoffee { get; set; }
     public bool IsHoldingItem { get; set; }
     #endregion
@@ -51,29 +51,29 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Interact()
     {
-        Collider[] obj = Physics.OverlapBox(transform.position + new Vector3(0f, 1f, 0f), Vector3.one);
-        foreach (var item in obj)
+        Collider[] objects = Physics.OverlapBox(transform.position + new Vector3(0f, 1f, 0f), Vector3.one);
+        foreach (var obj in objects)
         {
-            if (item.CompareTag("Item"))
+            if (obj.CompareTag("Item"))
             {
                 //Pickup
                 IsHoldingItem = true;
-                currentItem = item.GetComponent<Item>();
+                currentItem = obj.GetComponent<Item>();
                 Debug.Log(currentItem);
             }
-            if (item.CompareTag("Patient"))
+            if (obj.CompareTag("Patient"))
             {
-                currentPatient = item.GetComponent<Patient>();
-                IsHealing = true;
+                currentPatient = obj.GetComponent<Patient>();
+                IsInContact = true;
             }
-            if (item.CompareTag("CPU"))
+            if (obj.CompareTag("CPU"))
             {
                 Debug.Log("Documentation Starts.");
                 IsAtPc = true;
-                item.GetComponent<CPU>().BeginDocumentation();
+                obj.GetComponent<CPU>().BeginDocumentation();
                 //Start Documentation.
             }
-            if (item.CompareTag("CoffeeMachine")) {
+            if (obj.CompareTag("CoffeeMachine")) {
                 IsDrinkingCoffee = true;
             }
         }

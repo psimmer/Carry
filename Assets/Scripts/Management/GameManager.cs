@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneMan sceneManager;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private CPU computer;
-    private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
+    //private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
 
     #region Multipliers
     [SerializeField] private float healCoffee;
@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
     public void Treatment(Patient patient)
     {
 
-        if (player.IsHealing)
+        if (player.IsInContact)
         {
             //if player wants to treat the patient without an item. maybe we have to overthink for itemless tasks
             if (player.currentItem == null)
@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour
                 return;
             }
 
-            player.IsHealing = false;
+            player.IsInContact = false;
         }
     }
 
@@ -188,9 +188,9 @@ public class GameManager : MonoBehaviour
     //    Patient patientScript = patient.GetComponent<Patient>();
     //    if (freeBedList.Count > 0)
     //    {
-    //        if(patientScript.CurrentIllness == TaskType.RelocateAPatient)
+    //        if (patientScript.CurrentIllness == TaskType.RelocateAPatient)
     //        {
-                
+
     //            int randomBed = UnityEngine.Random.Range(0, freeBedList.Count);
     //            Transform patientBed = freeBedList[randomBed].transform;
     //            //patient.transform.Rotate(new Vector3(-90, -90, 0));
@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
     //            patientScript.IsInBed = true;
     //            patientScript.CurrentIllness = RandomTask;
     //            freeBedList.RemoveAt(randomBed);
-                
+
     //        }
     //    }
     //    else
@@ -217,39 +217,39 @@ public class GameManager : MonoBehaviour
     //    newPatient.transform.SetAsLastSibling();            // <----i dont think we need this?
     //    newPatientID++;
     //    newPatient.transform.position = spawnPoint.transform.position; //this line should be after instantiate i think so
-    //    spawnPoint.GetComponent<SpawnPoint>().IsFree = false;           
-    //    newPatient.transform.Rotate(new Vector3 (0, 180));
+    //    spawnPoint.GetComponent<SpawnPoint>().IsFree = false;
+    //    newPatient.transform.Rotate(new Vector3(0, 180));
     //    //SetHealthBarPos(newPatient.GetComponent<Patient>());
 
     //}
     //private void PatientSpawner()       //If you just call the the coroutine in the start you dont need this Function
     //{
-    //        IEnumerator coroutine = WaitAndSpawn();
-    //        StartCoroutine(coroutine);              // StartCoroutine(WaitAndSpawn()); ??
+    //    IEnumerator coroutine = WaitAndSpawn();
+    //    StartCoroutine(coroutine);              // StartCoroutine(WaitAndSpawn()); ??
     //}
 
 
-    //    //if (freeBedList.Count > 0)
-    //    //{
-    //    //    //(0, freeSpawnPoints.Count - 1); // aks if we should take Random.Range or Random.Next
-    //    //    int randomIndex = UnityEngine.Random.Range(0, freeBedList.Count - 1);
-    //    //    Transform spawnPoint = freeBedList[randomIndex].transform;
-    //    //    SpawnPatientInBed(patientPrefabList[UnityEngine.Random.Range(0, patientPrefabList.Length)], spawnPoint);
+    ////if (freeBedList.Count > 0)
+    ////{
+    ////    //(0, freeSpawnPoints.Count - 1); // aks if we should take Random.Range or Random.Next
+    ////    int randomIndex = UnityEngine.Random.Range(0, freeBedList.Count - 1);
+    ////    Transform spawnPoint = freeBedList[randomIndex].transform;
+    ////    SpawnPatientInBed(patientPrefabList[UnityEngine.Random.Range(0, patientPrefabList.Length)], spawnPoint);
 
-    //    //}
-    
+    ////}
+
 
     //IEnumerator WaitAndSpawn()
     //{
-    //    while(true)
+    //    while (true)
     //    {
     //        SpawnDelay = (float)UnityEngine.Random.Range(4, 10);
     //        yield return new WaitForSeconds(SpawnDelay);
-    //        if(patientContainer.childCount < maxAmountOfPatients)
+    //        if (patientContainer.childCount < maxAmountOfPatients)
     //        {
     //            int randomIndex = UnityEngine.Random.Range(0, SpawnPointList.Count);
     //            Transform spawnPoint = SpawnPointList[randomIndex].transform;
-    //            if(spawnPoint.GetComponent<SpawnPoint>().IsFree)
+    //            if (spawnPoint.GetComponent<SpawnPoint>().IsFree)
     //            {
     //                SpawnPatientInSpawnPoint(patientPrefabList[UnityEngine.Random.Range(0, patientPrefabList.Length)], spawnPoint);
     //                spawnPoint.GetComponent<SpawnPoint>().IsFree = false;       // you are setting this false two times before it gets true i think so...
@@ -263,7 +263,7 @@ public class GameManager : MonoBehaviour
     //    UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed"); // can we just call this in awake or start do we need the for loop?
     //    for (int i = 0; i < bedArray.Length; i++)
     //    {
-    //        if(bedArray[i].GetComponent<BedScript>().IsFree)
+    //        if (bedArray[i].GetComponent<BedScript>().IsFree)
     //        {
     //            freeBedList.Add(bedArray[i].GetComponent<BedScript>());
     //        }
