@@ -46,15 +46,15 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         patientContainer = GameObject.Find("Patients").transform;
-        GetAllSpawnPoints();
-        GetFreeBeds();
+        //GetAllSpawnPoints();
+        //GetFreeBeds();
     }
     private void Start()
     {
         //patientSpawner is now here, it works through a coroutine
-        PatientSpawner();               // Just call here StartCoroutine(WaitAndSpawn());
+        //PatientSpawner();               // Just call here StartCoroutine(WaitAndSpawn());
         //SetHealthBarPos();
-        AssignPatientIDs();
+        //AssignPatientIDs();
         newPatientID = patientContainer.childCount + 1;
     }
     void Update()
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         dayTime.DoubledRealTime();
 
         //Patient Spawning Stuff
-        UpdatePatientList();
+        //UpdatePatientList();
 
         Treatment(player.currentPatient);
 
@@ -173,7 +173,7 @@ public class GameManager : MonoBehaviour
 
             if (patient.CurrentIllness == TaskType.RelocateAPatient)
             {
-                MovePatientToBed(patient.gameObject);
+                //MovePatientToBed(patient.gameObject);
                 return;
             }
 
@@ -183,140 +183,140 @@ public class GameManager : MonoBehaviour
 
 
     #region Patient Spawn Manager
-    private void MovePatientToBed(GameObject patient)
-    {
-        Patient patientScript = patient.GetComponent<Patient>();
-        if (freeBedList.Count > 0)
-        {
-            if(patientScript.CurrentIllness == TaskType.RelocateAPatient)
-            {
-                
-                int randomBed = UnityEngine.Random.Range(0, freeBedList.Count);
-                Transform patientBed = freeBedList[randomBed].transform;
-                //patient.transform.Rotate(new Vector3(-90, -90, 0));
-                //rotation and position must still be fixed, but it's working more or less
-                patient.transform.position = patientBed.position;
-                patientScript.IsInBed = true;
-                patientScript.CurrentIllness = RandomTask;
-                freeBedList.RemoveAt(randomBed);
-                
-            }
-        }
-        else
-            Debug.LogWarning("No free beds!");
-    }
-    private void SpawnPatientInSpawnPoint(GameObject patient, Transform spawnPoint)
-    {
-
-        GameObject newPatient = Instantiate(patient, spawnPoint); // you could take here the patientContainer and in the next line you say newPatient.transform.position = spawnpoint.position;
-        newPatient.GetComponent<Patient>().IsPopping = false;       //booleans we need to check which we really need and which not
-        newPatient.GetComponent<Patient>().HasTask = false;
-        newPatient.transform.parent = patientContainer;     // <---- i think this is the same like you do in line 227
-        newPatient.GetComponent<Patient>().PatientID = newPatientID;
-        newPatient.name = newPatientID.ToString();          // <----for what do we need the id?
-        newPatient.transform.SetAsLastSibling();            // <----i dont think we need this?
-        newPatientID++;
-        newPatient.transform.position = spawnPoint.transform.position; //this line should be after instantiate i think so
-        spawnPoint.GetComponent<SpawnPoint>().IsFree = false;           
-        newPatient.transform.Rotate(new Vector3 (0, 180));
-        //SetHealthBarPos(newPatient.GetComponent<Patient>());
-
-    }
-    private void PatientSpawner()       //If you just call the the coroutine in the start you dont need this Function
-    {
-            IEnumerator coroutine = WaitAndSpawn();
-            StartCoroutine(coroutine);              // StartCoroutine(WaitAndSpawn()); ??
-    }
-
-
-        //if (freeBedList.Count > 0)
-        //{
-        //    //(0, freeSpawnPoints.Count - 1); // aks if we should take Random.Range or Random.Next
-        //    int randomIndex = UnityEngine.Random.Range(0, freeBedList.Count - 1);
-        //    Transform spawnPoint = freeBedList[randomIndex].transform;
-        //    SpawnPatientInBed(patientPrefabList[UnityEngine.Random.Range(0, patientPrefabList.Length)], spawnPoint);
-
-        //}
-    
-
-    IEnumerator WaitAndSpawn()
-    {
-        while(true)
-        {
-            SpawnDelay = (float)UnityEngine.Random.Range(4, 10);
-            yield return new WaitForSeconds(SpawnDelay);
-            if(patientContainer.childCount < maxAmountOfPatients)
-            {
-                int randomIndex = UnityEngine.Random.Range(0, SpawnPointList.Count);
-                Transform spawnPoint = SpawnPointList[randomIndex].transform;
-                if(spawnPoint.GetComponent<SpawnPoint>().IsFree)
-                {
-                    SpawnPatientInSpawnPoint(patientPrefabList[UnityEngine.Random.Range(0, patientPrefabList.Length)], spawnPoint);
-                    spawnPoint.GetComponent<SpawnPoint>().IsFree = false;       // you are setting this false two times before it gets true i think so...
-                }
-            }
-        }
-    }
-
-    private void GetFreeBeds()
-    {
-        UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed"); // can we just call this in awake or start do we need the for loop?
-        for (int i = 0; i < bedArray.Length; i++)
-        {
-            if(bedArray[i].GetComponent<BedScript>().IsFree)
-            {
-                freeBedList.Add(bedArray[i].GetComponent<BedScript>());
-            }
-        }
-    }
-
-    private void GetAllSpawnPoints() // this method is called in awake we could just say in awake: SpawnPointList.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
-    {
-        SpawnPointList.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
-    }
-
-    private void UpdatePatientList()
-    {
-        if (patientContainer.childCount == patientList.Count)
-            return;
-
-        for (int i = 0; i < patientContainer.childCount; i++)
-        {
-
-            Patient patient = patientContainer.transform.GetChild(i).GetComponent<Patient>();
-
-            // if the patient is not already in the list
-            if (!patientList.Contains(patient))
-                patientList.Add(patient);
-
-        }
-
-    }
-    //private void DestroyPatient(GameObject patient) // please use this for destroying patients!
+    //private void MovePatientToBed(GameObject patient)
     //{
-    //    int patientID = patient.GetComponent<Patient>().PatientID;
-
-    //    for (int i = 0; i < patientList.Count; i++) 
+    //    Patient patientScript = patient.GetComponent<Patient>();
+    //    if (freeBedList.Count > 0)
     //    {
-    //        if (patientList[i].GetComponent<Patient>().PatientID == patientID)
+    //        if(patientScript.CurrentIllness == TaskType.RelocateAPatient)
     //        {
-    //            patientList.RemoveAt(i);
+                
+    //            int randomBed = UnityEngine.Random.Range(0, freeBedList.Count);
+    //            Transform patientBed = freeBedList[randomBed].transform;
+    //            //patient.transform.Rotate(new Vector3(-90, -90, 0));
+    //            //rotation and position must still be fixed, but it's working more or less
+    //            patient.transform.position = patientBed.position;
+    //            patientScript.IsInBed = true;
+    //            patientScript.CurrentIllness = RandomTask;
+    //            freeBedList.RemoveAt(randomBed);
+                
     //        }
     //    }
-    //    //popUpList[patientID] = null;        // i dont know do we need this? i mean the popUpList
-    //    //TODO: destroy healthbar and PopUp UI
-    //    Destroy(patient);
+    //    else
+    //        Debug.LogWarning("No free beds!");
+    //}
+    //private void SpawnPatientInSpawnPoint(GameObject patient, Transform spawnPoint)
+    //{
+
+    //    GameObject newPatient = Instantiate(patient, spawnPoint); // you could take here the patientContainer and in the next line you say newPatient.transform.position = spawnpoint.position;
+    //    newPatient.GetComponent<Patient>().IsPopping = false;       //booleans we need to check which we really need and which not
+    //    newPatient.GetComponent<Patient>().HasTask = false;
+    //    newPatient.transform.parent = patientContainer;     // <---- i think this is the same like you do in line 227
+    //    newPatient.GetComponent<Patient>().PatientID = newPatientID;
+    //    newPatient.name = newPatientID.ToString();          // <----for what do we need the id?
+    //    newPatient.transform.SetAsLastSibling();            // <----i dont think we need this?
+    //    newPatientID++;
+    //    newPatient.transform.position = spawnPoint.transform.position; //this line should be after instantiate i think so
+    //    spawnPoint.GetComponent<SpawnPoint>().IsFree = false;           
+    //    newPatient.transform.Rotate(new Vector3 (0, 180));
+    //    //SetHealthBarPos(newPatient.GetComponent<Patient>());
+
+    //}
+    //private void PatientSpawner()       //If you just call the the coroutine in the start you dont need this Function
+    //{
+    //        IEnumerator coroutine = WaitAndSpawn();
+    //        StartCoroutine(coroutine);              // StartCoroutine(WaitAndSpawn()); ??
     //}
 
 
-    private void AssignPatientIDs()             // I dont understand what we are doing with the ID? for what do we need it?
-    {
-        for (int i = 0; i < patientContainer.childCount; i++)
-        {
-            patientContainer.transform.GetChild(i).GetComponent<Patient>().CurrentIllness = RandomTask;
-            patientContainer.transform.GetChild(i).GetComponent<Patient>().PatientID = int.Parse(patientContainer.GetChild(i).name);
-        }
-    }
+    //    //if (freeBedList.Count > 0)
+    //    //{
+    //    //    //(0, freeSpawnPoints.Count - 1); // aks if we should take Random.Range or Random.Next
+    //    //    int randomIndex = UnityEngine.Random.Range(0, freeBedList.Count - 1);
+    //    //    Transform spawnPoint = freeBedList[randomIndex].transform;
+    //    //    SpawnPatientInBed(patientPrefabList[UnityEngine.Random.Range(0, patientPrefabList.Length)], spawnPoint);
+
+    //    //}
+    
+
+    //IEnumerator WaitAndSpawn()
+    //{
+    //    while(true)
+    //    {
+    //        SpawnDelay = (float)UnityEngine.Random.Range(4, 10);
+    //        yield return new WaitForSeconds(SpawnDelay);
+    //        if(patientContainer.childCount < maxAmountOfPatients)
+    //        {
+    //            int randomIndex = UnityEngine.Random.Range(0, SpawnPointList.Count);
+    //            Transform spawnPoint = SpawnPointList[randomIndex].transform;
+    //            if(spawnPoint.GetComponent<SpawnPoint>().IsFree)
+    //            {
+    //                SpawnPatientInSpawnPoint(patientPrefabList[UnityEngine.Random.Range(0, patientPrefabList.Length)], spawnPoint);
+    //                spawnPoint.GetComponent<SpawnPoint>().IsFree = false;       // you are setting this false two times before it gets true i think so...
+    //            }
+    //        }
+    //    }
+    //}
+
+    //private void GetFreeBeds()
+    //{
+    //    UnityEngine.GameObject[] bedArray = GameObject.FindGameObjectsWithTag("Bed"); // can we just call this in awake or start do we need the for loop?
+    //    for (int i = 0; i < bedArray.Length; i++)
+    //    {
+    //        if(bedArray[i].GetComponent<BedScript>().IsFree)
+    //        {
+    //            freeBedList.Add(bedArray[i].GetComponent<BedScript>());
+    //        }
+    //    }
+    //}
+
+    //private void GetAllSpawnPoints() // this method is called in awake we could just say in awake: SpawnPointList.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
+    //{
+    //    SpawnPointList.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
+    //}
+
+    //private void UpdatePatientList()
+    //{
+    //    if (patientContainer.childCount == patientList.Count)
+    //        return;
+
+    //    for (int i = 0; i < patientContainer.childCount; i++)
+    //    {
+
+    //        Patient patient = patientContainer.transform.GetChild(i).GetComponent<Patient>();
+
+    //        // if the patient is not already in the list
+    //        if (!patientList.Contains(patient))
+    //            patientList.Add(patient);
+
+    //    }
+
+    //}
+    ////private void DestroyPatient(GameObject patient) // please use this for destroying patients!
+    ////{
+    ////    int patientID = patient.GetComponent<Patient>().PatientID;
+
+    ////    for (int i = 0; i < patientList.Count; i++) 
+    ////    {
+    ////        if (patientList[i].GetComponent<Patient>().PatientID == patientID)
+    ////        {
+    ////            patientList.RemoveAt(i);
+    ////        }
+    ////    }
+    ////    //popUpList[patientID] = null;        // i dont know do we need this? i mean the popUpList
+    ////    //TODO: destroy healthbar and PopUp UI
+    ////    Destroy(patient);
+    ////}
+
+
+    //private void AssignPatientIDs()             // I dont understand what we are doing with the ID? for what do we need it?
+    //{
+    //    for (int i = 0; i < patientContainer.childCount; i++)
+    //    {
+    //        patientContainer.transform.GetChild(i).GetComponent<Patient>().CurrentIllness = RandomTask;
+    //        patientContainer.transform.GetChild(i).GetComponent<Patient>().PatientID = int.Parse(patientContainer.GetChild(i).name);
+    //    }
+    //}
     #endregion
 
 

@@ -5,17 +5,17 @@ using UnityEngine;
 // I know it is the wrong script for this but i dont know in which script it should be
 public enum TaskType
 {
-    None,
+    //None,
     RelocateAPatient,
     Bandage,
-    Pills,
-    Catheter,
-    BloodSample,                //Maybe we do a own script "Tasks" and there are only the Tasks inside?
-    Transfusion,
-    WashThePatient,
-    AnswerTheTelephone,
-    Documentation,
-    TalkToThePatient
+    Pills
+    //Catheter,
+    //BloodSample,                //Maybe we do a own script "Tasks" and there are only the Tasks inside?
+    //Transfusion,
+    //WashThePatient,
+    //AnswerTheTelephone,
+    //Documentation,
+    //TalkToThePatient
 }
 
 public class Patient : MonoBehaviour
@@ -37,7 +37,7 @@ public class Patient : MonoBehaviour
     
     //[SerializeField] private GameObject healthbarPrefab;
     [SerializeField] private Healthbar healthbar;
-    TaskType RandomTask;
+    TaskType RandomTask; 
     [SerializeField] bool isInBed = false;
 
     //PopUpStuff
@@ -105,10 +105,11 @@ public class Patient : MonoBehaviour
         get { return currentIllness; }
         set
         {
-            if (isInBed == false)
-                currentIllness = TaskType.RelocateAPatient;
-            else
-                currentIllness = (TaskType)Random.Range(1, 3);
+            currentIllness = value;
+            //if (isInBed == false)
+            //    currentIllness = TaskType.RelocateAPatient;
+            //else
+            //    currentIllness = (TaskType)Random.Range(1, 3);
         }
     }
 
@@ -123,7 +124,7 @@ public class Patient : MonoBehaviour
         healthbar = GetComponentInChildren<Healthbar>();
         HasTask = false;
         IsPopping = false;
-        CurrentIllness = RandomTask;
+        CurrentIllness = (TaskType)Random.Range(1, 3);
 
     }
 
@@ -163,7 +164,6 @@ public class Patient : MonoBehaviour
             currentHP = patientMaxHP;
             GlobalData.instance.SetPatientHealedStatistics();
             Debug.Log($"patient vollgeheilt {health}");
-            Destroy(this.gameObject);
             //SpawnParticles(fullHealingParticles, particlesDuration);
         }
         // patient dead
@@ -171,7 +171,6 @@ public class Patient : MonoBehaviour
         {
             GlobalData.instance.SetPatientDeadStatistics();
             Debug.Log($"patient tot {health}");
-            Destroy(this.gameObject);
             //SpawnParticles(deathParticles, particlesDuration);
         }
         healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
