@@ -26,6 +26,6 @@ public class MovePoints : MonoBehaviour
             transform.position -= new Vector3(0, cameraSpeed, -cameraSpeed);
 
         transform.position = Vector3.ClampMagnitude(transform.position, MaxZoomOut);
-        transform.position = Vector3.ClampMagnitude(transform.position, MaxZoomIn);
+        //transform.position = Vector3.ClampMagnitude(transform.position, MaxZoomIn);
     }
 }
