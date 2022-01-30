@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23784948401768848}
   - component: {fileID: 95836340518811286}
   - component: {fileID: 65650725446851764}
-  - component: {fileID: 3441148753582818966}
+  - component: {fileID: 4883672179317743335}
   m_Layer: 0
   m_Name: "SM_Bed_\u04214"
   m_TagString: Untagged
@@ -31,7 +31,8 @@ Transform:
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -34.40965, y: 0.007982035, z: -5.886442}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5024520174531221999}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116,7 +117,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5685846, y: 1.0076922, z: 2.634619}
   m_Center: {x: 0.00000029802322, y: 0.49628493, z: 0}
---- !u!114 &3441148753582818966
+--- !u!114 &4883672179317743335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,7 +126,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1693428794228340}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7da6c061ad73c3a4f9e0b953524bdc1a, type: 3}
+  m_Script: {fileID: 11500000, guid: c8116966c82c7f244bc62cdd8ac6d0b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFree: 0
+  isPatientInBed: 0
+  currentPatient: {fileID: 0}
+--- !u!1 &2360737621247731367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5024520174531221999}
+  m_Layer: 0
+  m_Name: BedSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5024520174531221999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2360737621247731367}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.00000011920929, y: 1, z: 1.0000001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4187650052692172}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}

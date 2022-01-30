@@ -5,22 +5,22 @@ using UnityEngine;
 // I know it is the wrong script for this but i dont know in which script it should be
 public enum TaskType
 {
-    //None,
+    Bandages,
+    Pills,
+    Syringe,
+    Transfusion,
+    Defibrillator,
+    Sponge,
     RelocateAPatient,
-    Bandage,
-    Pills
-    //Catheter,
-    //BloodSample,                //Maybe we do a own script "Tasks" and there are only the Tasks inside?
-    //Transfusion,
-    //WashThePatient,
-    //AnswerTheTelephone,
-    //Documentation,
-    //TalkToThePatient
+    ReleasePatient,
+    AnswerTheTelephone,
+    Documentation,
+    AssignBed
 }
 
 public class Patient : MonoBehaviour
 {
-    [SerializeField] private int currentHP; 
+    [SerializeField] private int currentHP;
     [SerializeField] private int patientMaxHP;
     [SerializeField] private List<GameObject> popUpList;
     [SerializeField] private Transform canvas;
@@ -34,10 +34,10 @@ public class Patient : MonoBehaviour
     [SerializeField] private int patientID;
     [SerializeField] private bool isPopping;
     [SerializeField] private bool hasTask;
-    
+
     //[SerializeField] private GameObject healthbarPrefab;
     [SerializeField] private Healthbar healthbar;
-    TaskType RandomTask; 
+    TaskType RandomTask;
     [SerializeField] bool isInBed = false;
 
     //PopUpStuff
@@ -124,7 +124,7 @@ public class Patient : MonoBehaviour
         healthbar = GetComponentInChildren<Healthbar>();
         HasTask = false;
         IsPopping = false;
-        CurrentIllness = (TaskType)Random.Range(1, 3);
+        //CurrentIllness = (TaskType)Random.Range(1, 3);
 
     }
 
@@ -143,41 +143,44 @@ public class Patient : MonoBehaviour
 
     public void Treatment(int health)
     {
-        currentHP += health;
-        Destroy(currentPopUp);
-        //Damage
-        if (health < 0)
+        if (CurrentIllness != TaskType.AssignBed)
         {
-            CurrentIllness = (TaskType)Random.Range(1, 3);
-            SpawnParticles(damageParticles, particlesDuration);
-            Debug.Log($"health kleiner als 0 {health}");
-        }
-        //Heal
-        else if (health > 0)
-        {
-            CurrentIllness = (TaskType)Random.Range(1, 3);
-            SpawnParticles(healingParticles, particlesDuration);
-            Debug.Log($"health größer als 0 {health}");
-        }
+            currentHP += health;
+            Destroy(currentPopUp);
+            //Damage
+            if (health < 0)
+            {
+                CurrentIllness = (TaskType)Random.Range(0, 2);
+                SpawnParticles(damageParticles, particlesDuration);
+                Debug.Log($"health kleiner als 0 {health}");
+            }
+            //Heal
+            else if (health > 0)
+            {
+                CurrentIllness = (TaskType)Random.Range(0, 2);
+                SpawnParticles(healingParticles, particlesDuration);
+                Debug.Log($"health größer als 0 {health}");
+            }
 
-        // patient full recovered
-        if (currentHP >= patientMaxHP)
-        {
-            currentHP = patientMaxHP;
-            GlobalData.instance.SetPatientHealedStatistics();
-            Debug.Log($"patient vollgeheilt {health}");
-            Destroy(this.gameObject);
-            //SpawnParticles(fullHealingParticles, particlesDuration);
+            // patient full recovered
+            if (currentHP >= patientMaxHP)
+            {
+                currentHP = patientMaxHP;
+                GlobalData.instance.SetPatientHealedStatistics();
+                Debug.Log($"patient vollgeheilt {health}");
+                Destroy(this.gameObject);
+                //SpawnParticles(fullHealingParticles, particlesDuration);
+            }
+            // patient dead
+            else if (currentHP <= 0)
+            {
+                GlobalData.instance.SetPatientDeadStatistics();
+                Debug.Log($"patient tot {health}");
+                Destroy(this.gameObject);
+                //SpawnParticles(deathParticles, particlesDuration);
+            }
+            healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
         }
-        // patient dead
-        else if (currentHP <= 0)
-        {
-            GlobalData.instance.SetPatientDeadStatistics();
-            Debug.Log($"patient tot {health}");
-            Destroy(this.gameObject);
-            //SpawnParticles(deathParticles, particlesDuration);
-        }
-        healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
     }
 
     private void SpawnParticles(GameObject particles, float duration)
@@ -197,15 +200,19 @@ public class Patient : MonoBehaviour
 
     IEnumerator PopUpSpawn(TaskType illness, Transform canvas)
     {
-        foreach (GameObject popUp in popUpList)
+        if (CurrentIllness != TaskType.RelocateAPatient)
         {
-            if (illness == popUp.GetComponent<PopUp>().TaskType)
+
+            foreach (GameObject popUp in popUpList)
             {
-                if (!hasPopUp)
+                if (illness == popUp.GetComponent<PopUp>().TaskType)
                 {
-                    hasPopUp = true;
-                    currentPopUp = Instantiate(popUp.gameObject, canvas);
-                    currentPopUp.transform.position = new Vector3(canvas.position.x, canvas.position.y + 1f, canvas.position.z);
+                    if (!hasPopUp)
+                    {
+                        hasPopUp = true;
+                        currentPopUp = Instantiate(popUp.gameObject, canvas);
+                        currentPopUp.transform.position = new Vector3(canvas.position.x, canvas.position.y + 1f, canvas.position.z);
+                    }
                 }
             }
         }

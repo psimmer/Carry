@@ -21,16 +21,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Patient Manager Variables
-    [SerializeField] private List<BedScript> freeBedList; // private List<Bed> allBeds;
-    [SerializeField] private List<Patient> patientList;
-    [SerializeField] private GameObject[] patientPrefabList;
-    [SerializeField] private List<GameObject> SpawnPointList;
-    Transform patientContainer;
-    TaskType RandomTask;
-    public int maxAmountOfPatients;
-    private int newPatientID;
-    float SpawnDelay;
-
+    [SerializeField] PatientSpawner patientSpawner;
     #endregion
 
     #region Inventory Variables
@@ -45,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        patientContainer = GameObject.Find("Patients").transform;
+        //patientContainer = GameObject.Find("Patients").transform;
         //GetAllSpawnPoints();
         //GetFreeBeds();
     }
@@ -55,7 +46,7 @@ public class GameManager : MonoBehaviour
         //PatientSpawner();               // Just call here StartCoroutine(WaitAndSpawn());
         //SetHealthBarPos();
         //AssignPatientIDs();
-        newPatientID = patientContainer.childCount + 1;
+        //newPatientID = patientContainer.childCount + 1;
     }
     void Update()
     {
@@ -133,16 +124,14 @@ public class GameManager : MonoBehaviour
         if (player.IsInContact)
         {
             //if player wants to treat the patient without an item. maybe we have to overthink for itemless tasks
-            if (player.currentItem == null)
+            if (player.currentItem == null && patient.CurrentIllness == TaskType.AssignBed)
             {
-                patient.HasPopUp = false;
-                patient.Treatment(-player.NoItemDamage);
-                player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
-                uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
-                
-                isGameOver();
-
-
+                patientSpawner.MoveToBed(patient);
+                //patient.HasPopUp = false;
+                //patient.Treatment(-player.NoItemDamage);
+                //player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
+                //uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
+                //isGameOver();
             }
             else if (patient.CurrentIllness == player.currentItem.item.task)   
             {
@@ -170,13 +159,7 @@ public class GameManager : MonoBehaviour
                 player.currentItem = null;
                 itemSlot.UI_Element = null;
             }
-
-            if (patient.CurrentIllness == TaskType.RelocateAPatient)
-            {
-                //MovePatientToBed(patient.gameObject);
-                return;
-            }
-
+           
             player.IsInContact = false;
         }
     }
