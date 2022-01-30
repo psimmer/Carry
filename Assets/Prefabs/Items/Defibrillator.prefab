@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &443058497332335181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5460676953926712340}
+  m_Layer: 0
+  m_Name: Defibrillator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5460676953926712340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443058497332335181}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4717651710938645190}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1210682476463752853
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5460676953926712340}
+    m_Modifications:
+    - target: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556839584298884841, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_Name
+      value: Defibrillator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556839584298884841, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+--- !u!1 &5346801423800817788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6556839584298884841, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+  m_PrefabInstance: {fileID: 1210682476463752853}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4717651710938645190 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
+  m_PrefabInstance: {fileID: 1210682476463752853}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2817401193880368396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5346801423800817788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871f25d0a86b22a4f9bd62f9a297eb48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 89f52ddb20a36e84ca5546f1ec62bda1, type: 2}
