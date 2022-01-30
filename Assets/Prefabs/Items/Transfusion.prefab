@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6230631672904513763}
   m_Layer: 0
   m_Name: Transfusion
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +45,10 @@ PrefabInstance:
     - target: {fileID: 8309343370019302410, guid: 1096a1627881d8d43924de59a15e5cb7, type: 3}
       propertyPath: m_Name
       value: Enema
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309343370019302410, guid: 1096a1627881d8d43924de59a15e5cb7, type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     - target: {fileID: 8654624812612662960, guid: 1096a1627881d8d43924de59a15e5cb7, type: 3}
       propertyPath: m_RootOrder
@@ -92,26 +96,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1096a1627881d8d43924de59a15e5cb7, type: 3}
---- !u!1 &3801967531294430747 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8309343370019302410, guid: 1096a1627881d8d43924de59a15e5cb7, type: 3}
-  m_PrefabInstance: {fileID: 5157741521912527377}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4578082743739468961 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8654624812612662960, guid: 1096a1627881d8d43924de59a15e5cb7, type: 3}
   m_PrefabInstance: {fileID: 5157741521912527377}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6766641733233173400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3801967531294430747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871f25d0a86b22a4f9bd62f9a297eb48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 538d1d74e8fcdfa42b171258bd197b83, type: 2}

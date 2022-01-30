@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5460676953926712340}
   m_Layer: 0
   m_Name: Defibrillator
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5887685137296688211, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
   m_PrefabInstance: {fileID: 1210682476463752853}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &3324038573719151226
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5346801423800817788}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.55, z: 0.73}
+  m_Center: {x: 0, y: 0.27, z: 0.24}
 --- !u!114 &2817401193880368396
 MonoBehaviour:
   m_ObjectHideFlags: 0

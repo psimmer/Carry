@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sponge
   m_EditorClassIdentifier: 
   itemName: Sponge
-  restoreHealth: 2
-  prefab: {fileID: 0}
-  UI_prefab: {fileID: 0}
-  task: 7
+  restoreHealth: 5
+  prefab: {fileID: 3933883604701664506, guid: 3147ec5b3ec82c544a57d3a790e5eb1d, type: 3}
+  UI_prefab: {fileID: 3933883604701664506, guid: 3147ec5b3ec82c544a57d3a790e5eb1d, type: 3}
+  task: 5

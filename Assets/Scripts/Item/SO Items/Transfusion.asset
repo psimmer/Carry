@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Transfusion
   restoreHealth: 5
-  prefab: {fileID: 0}
-  UI_prefab: {fileID: 0}
-  task: 6
+  prefab: {fileID: 3794632971450099112, guid: d5b854dd6c7bd3d43b50b25e13ba00d6, type: 3}
+  UI_prefab: {fileID: 3794632971450099112, guid: d5b854dd6c7bd3d43b50b25e13ba00d6, type: 3}
+  task: 3

@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 5303922921525176870}
   m_Layer: 0
   m_Name: Patient
-  m_TagString: Untagged
+  m_TagString: Patient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -717,7 +717,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.69, y: 1.81, z: 0.52}
+  m_Size: {x: 1.19, y: 1.81, z: 0.64}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5303922921525176870
 MonoBehaviour:
@@ -743,8 +743,6 @@ MonoBehaviour:
   patientID: 0
   isPopping: 0
   hasTask: 0
-  minTimer: 0
-  maxTimer: 0
   healthbar: {fileID: 0}
   isInBed: 0
   healingParticles: {fileID: 5048721385892816507, guid: 172cc0eeeb0c10e4289ade386f0b8dcd, type: 3}

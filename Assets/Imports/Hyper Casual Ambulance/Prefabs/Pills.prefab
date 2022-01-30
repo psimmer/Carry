@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1906707595794731777}
   - component: {fileID: 3328575924507483865}
   - component: {fileID: 708627973229472275}
-  - component: {fileID: 747843889553964534}
+  - component: {fileID: 3572830641481105582}
+  - component: {fileID: 6051029293899865299}
   m_Layer: 0
   m_Name: Pills
   m_TagString: Untagged
@@ -82,8 +83,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &747843889553964534
-MeshCollider:
+--- !u!65 &3572830641481105582
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,7 +93,19 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7767006011482702677, guid: 4d4c230ef20062442a856041fa23125f, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.5017706, y: 0.60571516, z: 0.49634585}
+  m_Center: {x: 0.091518596, y: 0.3036105, z: 0.0888062}
+--- !u!114 &6051029293899865299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242479854823279035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871f25d0a86b22a4f9bd62f9a297eb48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 8cca0973c9eb25747972251700504a48, type: 2}

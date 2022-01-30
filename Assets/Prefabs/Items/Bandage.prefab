@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6002405952975156669}
   m_Layer: 0
   m_Name: Bandage
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,6 +41,10 @@ PrefabInstance:
     - target: {fileID: 5994960371811907341, guid: 5c312b99beab0fe44a6b82cea0c1faba, type: 3}
       propertyPath: m_Name
       value: Bandage
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994960371811907341, guid: 5c312b99beab0fe44a6b82cea0c1faba, type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     - target: {fileID: 6375320392945642935, guid: 5c312b99beab0fe44a6b82cea0c1faba, type: 3}
       propertyPath: m_RootOrder
@@ -88,39 +92,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c312b99beab0fe44a6b82cea0c1faba, type: 3}
---- !u!1 &7374024445234503494 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5994960371811907341, guid: 5c312b99beab0fe44a6b82cea0c1faba, type: 3}
-  m_PrefabInstance: {fileID: 3848234192279939147}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7862753359098250748 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6375320392945642935, guid: 5c312b99beab0fe44a6b82cea0c1faba, type: 3}
   m_PrefabInstance: {fileID: 3848234192279939147}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5699196054540797033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7374024445234503494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871f25d0a86b22a4f9bd62f9a297eb48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: c2e61b20ebb69234bac6dcc4c5c54dfa, type: 2}
---- !u!65 &2848565599554389971
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7374024445234503494}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.54330516, y: 0.37310955, z: 0.9079746}
-  m_Center: {x: -0.08509781, y: 0.18715747, z: 0.000000014901161}

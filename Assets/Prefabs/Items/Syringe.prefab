@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6396635953797374790}
   m_Layer: 0
   m_Name: Syringe
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,6 +41,10 @@ PrefabInstance:
     - target: {fileID: 8074393629606460362, guid: 1870ec0114b1b044984f2bea08ce3c15, type: 3}
       propertyPath: m_Name
       value: Syringe
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074393629606460362, guid: 1870ec0114b1b044984f2bea08ce3c15, type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     - target: {fileID: 8882737379596493168, guid: 1870ec0114b1b044984f2bea08ce3c15, type: 3}
       propertyPath: m_RootOrder
@@ -98,6 +102,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8882737379596493168, guid: 1870ec0114b1b044984f2bea08ce3c15, type: 3}
   m_PrefabInstance: {fileID: 5514666334346003944}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &8998230582097988692
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4361179790865169954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.56415814, y: 0.27075258, z: 1.2511647}
+  m_Center: {x: 0, y: 0.13650127, z: 0.030109018}
 --- !u!114 &6371928206021988145
 MonoBehaviour:
   m_ObjectHideFlags: 0

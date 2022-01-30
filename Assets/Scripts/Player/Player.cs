@@ -4,7 +4,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Camera camera;
-
+    [SerializeField] private Vector3 boxSize = Vector3.one;
+    public Vector3 boxPos;
     //Player values
     [SerializeField] private float currentStressLvl;
     [SerializeField] private float maxStressLvl;
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Interact()
     {
-        Collider[] objects = Physics.OverlapBox(transform.position + new Vector3(0f, 1f, 0f), Vector3.one);
+        Collider[] objects = Physics.OverlapBox(transform.position + boxPos, boxSize);
         foreach (var obj in objects)
         {
             if (obj.CompareTag("Item"))
@@ -131,6 +132,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireCube(transform.position + boxPos, boxSize);
+    }
 
 }
 
