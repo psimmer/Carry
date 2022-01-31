@@ -41,13 +41,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
 
+        //Game will be paused
+        GamePaused();
+    }
+
+    #region Pausing the Game
     /// <summary>
     /// pauses the game and sets the Pause UI active
     /// </summary>
     public void GamePaused()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        
+        if (Input.GetKeyUp(KeyCode.Escape) && !optionsElements.activeSelf && pauseElements!= null)
         {
             if (Time.timeScale > 0)
             {
@@ -67,8 +75,28 @@ public class UIManager : MonoBehaviour
                 //TODO: Play Camera
 
             }
+        } else if(Input.GetKeyUp(KeyCode.Escape) && optionsElements.activeSelf)
+        {
+            if(pauseElements != null)
+                pauseElements.SetActive(true);
+
+            if (mainMenuElements != null)
+                mainMenuElements.SetActive(true);
+
+            optionsElements.SetActive(false);
+
         }
     }
+
+    public void Continue()
+    {
+        pauseElements.SetActive(false);
+        Time.timeScale = 1f;
+        //TODO: dimm light
+        //TODO: play audio
+        //TODO: Play Camera
+    }
+    #endregion
 
     #region StressLvlBar and CoffeeCounter
     /// <summary>

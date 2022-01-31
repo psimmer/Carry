@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 5193262505905465329}
   - component: {fileID: 5193262505905465339}
   m_Layer: 0
-  m_Name: Nurse
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

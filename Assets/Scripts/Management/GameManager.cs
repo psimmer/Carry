@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneMan sceneManager;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private CPU computer;
+    [SerializeField] private CoffeMachine coffeMachine;
     //private Dictionary<int, GameObject> popUpList = new Dictionary<int, GameObject>();
 
     #region Multipliers
@@ -70,9 +71,6 @@ public class GameManager : MonoBehaviour
                 isGameOver();
             }
         }
-
-        //Game will be paused
-        uiManager.GamePaused();
 
         //DayCycle and Timer
         dayCycle.dayCycle();
