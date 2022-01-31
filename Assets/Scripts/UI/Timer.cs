@@ -7,21 +7,17 @@ using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviour
 {
     [SerializeField] private Text timeText;
-    [SerializeField] private Text AmAndPm;
     [SerializeField] private int startTimeHours;
 
 
     [Tooltip("This is the hour when the Game ends + 59 minutes")]
     [SerializeField] private int endTimeHours;
-    private string PM = "pm";
-    private string AM = "am";
     private string dayOrNight;
     private float realTime;
 
     private void Awake()
     {
         timeText = GetComponentInChildren<Text>();
-        dayOrNight = AM;
     }
     private void Update()
     {
@@ -41,17 +37,6 @@ public class Timer : MonoBehaviour
     public void DoubledRealTime()
     {
         realTime += Time.deltaTime * 2;
-
-        AmAndPm.text = dayOrNight;
-
-        if (startTimeHours == 12)
-        {
-            dayOrNight = PM;
-        }
-        //if (startTimeHours == 13)
-        //{
-        //    startTimeHours = 1;
-        //}
 
         if ((int)realTime <= 9 && startTimeHours <= 9)
             timeText.text = "0" + startTimeHours.ToString() + ":" + "0" + (int)realTime;
