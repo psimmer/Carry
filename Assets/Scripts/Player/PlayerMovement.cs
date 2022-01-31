@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalMovement;
     private float verticalRotation;
     private float horizontalRotation;
+    float groundSpace;
     Rigidbody playerRigidbody;
     Transform playerTransform;
     public bool IsLocked = false;
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRigidbody = GetComponent<Rigidbody>();
         playerTransform = transform;
+        groundSpace = transform.position.y;
     }
     void Update()
     {
@@ -77,4 +79,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            groundSpace = 0.1f;
+        }
+    }
+
+
 }

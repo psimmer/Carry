@@ -12,6 +12,7 @@ TagManager:
   - CoffeeMachine
   - SpawnPoint
   - Inside
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MovePoints : MonoBehaviour
 {
-    [SerializeField] private float cameraSpeed;
-    public float CamSpeed => cameraSpeed;
+    [SerializeField] private float cameraHeight;
+    public float CamHeight => cameraHeight;
 
     [SerializeField] private float cameraDirection;
     public float CameraDirection => cameraDirection;
@@ -21,9 +21,9 @@ public class MovePoints : MonoBehaviour
     {
 
         if (Input.GetKey(KeyCode.Q))
-            transform.position += new Vector3(0, cameraSpeed, -cameraDirection);
+            transform.position += new Vector3(0, cameraHeight, -cameraDirection) * Time.deltaTime;
         else if(Input.GetKey(KeyCode.E))
-            transform.position -= new Vector3(0, cameraSpeed, -cameraDirection);
+            transform.position -= new Vector3(0, cameraHeight, -cameraDirection) * Time.deltaTime;
 
         transform.position = Vector3.ClampMagnitude(transform.position, MaxZoomOut);
         //transform.position = Vector3.ClampMagnitude(transform.position, MaxZoomIn);

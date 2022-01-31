@@ -567,6 +567,7 @@ GameObject:
   - component: {fileID: 5193262505905465338}
   - component: {fileID: 5193262505905465329}
   - component: {fileID: 5193262505905465339}
+  - component: {fileID: 1965056011918014494}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -668,6 +669,7 @@ MonoBehaviour:
   playerMovementSpeed: 23000
   maxSpeed: 4
   playerAnimator: {fileID: 1835420335735504447}
+  IsLocked: 0
 --- !u!114 &5193262505905465339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,6 +683,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
+  boxSize: {x: 1, y: 1, z: 1}
+  boxPos: {x: 0, y: 0, z: 0}
+  currentStressLvl: 0
+  maxStressLvl: 0
+  noItemDamage: 0
+--- !u!114 &1965056011918014494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959383937220050687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 2
+  outlineColor: {r: 0.26254895, g: 0.9433962, b: 0.34323373, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &5026201969650757101
 GameObject:
   m_ObjectHideFlags: 0

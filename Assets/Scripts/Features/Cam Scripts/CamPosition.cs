@@ -19,16 +19,15 @@ public class CamPosition : MonoBehaviour
         interpolation = Time.deltaTime * 0.5f;
         transform.position = Vector3.Lerp(transform.position, currentPoint.position, interpolation);
 
-        if (Input.GetKey(KeyCode.Q) && transform.position.y < 22.677f)
+        if (Input.GetKey(KeyCode.Q) && transform.position.y < 20.325f)
         {
-            transform.position += new Vector3(0, movePoints.CamSpeed, -movePoints.CameraDirection);
+            transform.position += new Vector3(0, movePoints.CamHeight, -movePoints.CameraDirection) * Time.deltaTime;
         }
-        else if (Input.GetKey(KeyCode.E) && transform.position.y > 7.82f)
+        else if (Input.GetKey(KeyCode.E) && transform.position.y > 10.174f)
         {
-            transform.position -= new Vector3(0, movePoints.CamSpeed, -movePoints.CameraDirection);
+            transform.position -= new Vector3(0, movePoints.CamHeight, -movePoints.CameraDirection) * Time.deltaTime;
         }
 
-        //Vector3.ClampMagnitude(transform.position, movePoints.MaxZoomOut);
     }
 
 

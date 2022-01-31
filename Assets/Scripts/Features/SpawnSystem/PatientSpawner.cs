@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PatientSpawner : MonoBehaviour
 {
+    [SerializeField] int minRandomTime;
+    [SerializeField] int maxRandomTime;
     [SerializeField] List<GameObject> differentPatients;
     [SerializeField] List<GameObject> patientList;
     [SerializeField] List<Transform> spawnPoints;
@@ -16,7 +18,7 @@ public class PatientSpawner : MonoBehaviour
     private void Start()
     {
         patientList.AddRange(GameObject.FindGameObjectsWithTag("Patient"));
-        randomTime = Random.Range(5, 10);
+        randomTime = Random.Range(minRandomTime, maxRandomTime);
     }
 
 
@@ -30,15 +32,15 @@ public class PatientSpawner : MonoBehaviour
     {
         if (patientList.Count < bedList.Count && spawnTimer >= randomTime)
         {
+            spawnTimer = 0;
             Transform randomSpawn = spawnPoints[Random.Range(0, spawnPoints.Count)];
             if (randomSpawn.GetComponent<SpawnPoint>().IsFree)
             {
                 GameObject newPatient = Instantiate(differentPatients[Random.Range(0, differentPatients.Count)], randomSpawn);
                 patientList.Add(newPatient);
                 newPatient.GetComponent<Patient>().CurrentIllness = TaskType.AssignBed;
-                spawnTimer = 0;
-                randomTime = Random.Range(5, 10);
                 randomSpawn.GetComponent<SpawnPoint>().IsFree = false;
+                randomTime = Random.Range(minRandomTime, maxRandomTime);
             }
         }
     }

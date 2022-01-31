@@ -10,20 +10,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] Button firstButton;
     [SerializeField] TMP_Text coffeeCounter;
     [SerializeField] Slider stressLvlBar;
-    CPU documentationCpu;
-    GameObject pauseElements;
-    GameObject optionsElements;
+    [SerializeField] GameObject pauseElements;
+    [SerializeField] GameObject optionsElements;
     GameObject mainMenuElements;
+
 
     public void Awake()
     {
-        pauseElements = GameObject.Find("PauseMenu");
         if (pauseElements != null)
         {
             pauseElements.SetActive(false);
         }
 
-        optionsElements = GameObject.Find("OptionsMenu");
         if (optionsElements != null)
         {
             optionsElements.SetActive(false);
@@ -55,7 +53,7 @@ public class UIManager : MonoBehaviour
     public void GamePaused()
     {
         
-        if (Input.GetKeyUp(KeyCode.Escape) && !optionsElements.activeSelf && pauseElements!= null)
+        if (Input.GetKeyUp(KeyCode.Escape)) //&& !optionsElements.activeSelf && pauseElements!= null)
         {
             if (Time.timeScale > 0)
             {
