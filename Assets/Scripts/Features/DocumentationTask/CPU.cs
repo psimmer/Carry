@@ -21,15 +21,15 @@ public class CPU : MonoBehaviour
         outputField = outputField.GetComponentInChildren<TextMeshProUGUI>();
         Debug.Log(outputField.text);
 
-        if(inputfield.text != outputField.text)
+        if(outputField.text == "Twelve hours of work completed.")
         {
             canvas.gameObject.SetActive(false);
-            return false;
+            return true;
         }
         else
         {
             canvas.gameObject.SetActive(false);
-            return true;
+            return false;
         }
     }
 

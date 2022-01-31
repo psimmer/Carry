@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 
 
     private void Awake()
-    { 
+    {
         IsHoldingItem = false;
         IsAtPc = false;
     }
@@ -52,38 +52,46 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Interact()
     {
-        Collider[] objects = Physics.OverlapBox(transform.position + boxPos, boxSize);
-        foreach (var obj in objects)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (obj.CompareTag("Item"))
+
+            Collider[] objects = Physics.OverlapBox(transform.position + boxPos, boxSize);
+            foreach (var obj in objects)
             {
-                //Pickup
-                IsHoldingItem = true;
-                currentItem = obj.GetComponent<Item>();
-                Debug.Log(currentItem);
-            }
-            if (obj.CompareTag("Patient"))
-            {
-                currentPatient = obj.GetComponent<Patient>();
-                IsInContact = true;
-            }
-            if (obj.CompareTag("CPU"))
-            {
-                Debug.Log("Documentation Starts.");
-                IsAtPc = true;
-                obj.GetComponent<CPU>().BeginDocumentation();
-                //Start Documentation.
-            }
-            if (obj.CompareTag("CoffeeMachine")) {
-                IsDrinkingCoffee = true;
+                if (obj.CompareTag("Item"))
+                {
+                    //Pickup
+                    IsHoldingItem = true;
+                    currentItem = obj.GetComponent<Item>();
+                    Debug.Log(currentItem);
+                }
+                if (obj.CompareTag("Patient"))
+                {
+                    currentPatient = obj.GetComponent<Patient>();
+                    IsInContact = true;
+                }
+                if (obj.CompareTag("CPU"))
+                {
+                    Debug.Log("Documentation Starts.");
+                    IsAtPc = true;
+                    obj.GetComponent<CPU>().BeginDocumentation();
+                    //Start Documentation.
+                }
+                if (obj.CompareTag("CoffeeMachine"))
+                {
+                    IsDrinkingCoffee = true;
+                }
             }
         }
     }
 
     public void DropItem()
     {
+        if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
+        {
             currentItem = null;
             Debug.Log("Item thrown away");
+        }
     }
 
     #region Stuff for Cam
@@ -99,13 +107,13 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Inside"))
+        if (other.CompareTag("Inside"))
         {
-            if(reduceStressIfOutside != null)
+            if (reduceStressIfOutside != null)
                 StopCoroutine(reduceStressIfOutside);
         }
 
-        if(other.GetComponent<CamColliders>() != null)
+        if (other.GetComponent<CamColliders>() != null)
         {
             Transform newPos = other.GetComponent<CamColliders>().NewPosition;
             if (camera.GetComponent<CamPosition>().currentPoint != newPos)
@@ -113,25 +121,19 @@ public class Player : MonoBehaviour
                 camera.GetComponent<CamPosition>().currentPoint = newPos;
             }
         }
-        
+
     }
 
     #endregion
 
     IEnumerator ReduceStressLevel()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(3);
             currentStressLvl--;
         }
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireCube(transform.position + boxPos, boxSize);
-    }
-
 }
 
 

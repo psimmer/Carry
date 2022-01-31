@@ -40720,6 +40720,10 @@ PrefabInstance:
       propertyPath: outputField
       value: 
       objectReference: {fileID: 1382508795}
+    - target: {fileID: 5774400311079403257, guid: 0715e5321ce40774691e08fcb64143c9, type: 3}
+      propertyPath: m_Name
+      value: TextVorgabe
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0715e5321ce40774691e08fcb64143c9, type: 3}
 --- !u!1001 &1414732855553576960
