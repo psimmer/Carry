@@ -119,6 +119,7 @@ public class Player : MonoBehaviour
             if (camera.GetComponent<CamPosition>().currentPoint != newPos)
             {
                 camera.GetComponent<CamPosition>().currentPoint = newPos;
+                camera.GetComponent<CamPosition>().lastPoint = newPos;
             }
         }
 

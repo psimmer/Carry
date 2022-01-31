@@ -19787,8 +19787,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camPoints: {fileID: 1752384742}
   movePoints: {fileID: 1752384743}
-  cameraSpeed: 0.6
+  cameraSpeedOut: 2
+  cameraSpeedIn: 0.7
   currentPoint: {fileID: 721536810}
+  lastPoint: {fileID: 721536810}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
