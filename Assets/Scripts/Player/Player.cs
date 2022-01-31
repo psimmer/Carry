@@ -107,15 +107,10 @@ public class Player : MonoBehaviour
 
         if(other.GetComponent<CamColliders>() != null)
         {
-            Transform lastPos = other.GetComponent<CamColliders>().FirstPosition;
             Transform newPos = other.GetComponent<CamColliders>().NewPosition;
             if (camera.GetComponent<CamPosition>().currentPoint != newPos)
             {
                 camera.GetComponent<CamPosition>().currentPoint = newPos;
-            }
-            else if(camera.GetComponent<CamPosition>().currentPoint == newPos)
-            {
-                camera.GetComponent<CamPosition>().currentPoint = lastPos;
             }
         }
         
