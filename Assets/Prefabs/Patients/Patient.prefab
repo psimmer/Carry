@@ -663,6 +663,7 @@ GameObject:
   - component: {fileID: 1003468066801226954}
   - component: {fileID: 4815715235222263265}
   - component: {fileID: 5303922921525176870}
+  - component: {fileID: 7233444928091778791}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Patient
@@ -749,6 +750,24 @@ MonoBehaviour:
   healingParticles: {fileID: 5048721385892816507, guid: 172cc0eeeb0c10e4289ade386f0b8dcd, type: 3}
   damageParticles: {fileID: 1547498293661416764, guid: c15b5077315498b4ca930299472479f7, type: 3}
   particlesDuration: 3
+--- !u!114 &7233444928091778791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540936381063408768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 2
+  outlineColor: {r: 0.35978103, g: 0.8098287, b: 0.990566, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &4851985195599141529
 GameObject:
   m_ObjectHideFlags: 0
