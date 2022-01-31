@@ -113,6 +113,12 @@ public class Patient : MonoBehaviour
         }
     }
 
+    public Transform Canvas
+    {
+        get { return canvas; }
+        set { canvas = value; }
+    }
+
     #endregion
 
 
@@ -168,7 +174,7 @@ public class Patient : MonoBehaviour
                 currentHP = patientMaxHP;
                 GlobalData.instance.SetPatientHealedStatistics();
                 Debug.Log($"patient vollgeheilt {health}");
-                Destroy(this.gameObject);
+                currentIllness = TaskType.ReleasePatient;
                 //SpawnParticles(fullHealingParticles, particlesDuration);
             }
             // patient dead

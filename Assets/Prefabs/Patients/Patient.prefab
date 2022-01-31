@@ -736,6 +736,7 @@ MonoBehaviour:
   popUpList:
   - {fileID: 1360661134648728818, guid: be7335628a72584469b1020da3d5028a, type: 3}
   - {fileID: 1360661134648728818, guid: 05455ea590b10624d87a7721fea9a516, type: 3}
+  - {fileID: 1360661134648728818, guid: 66084169ca04d3b4eaec4f10a3e77d79, type: 3}
   canvas: {fileID: 3520177203202608619}
   minCurrentHp: 0
   maxCurrentHp: 0

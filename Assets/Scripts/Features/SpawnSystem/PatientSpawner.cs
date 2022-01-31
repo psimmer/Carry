@@ -8,8 +8,12 @@ public class PatientSpawner : MonoBehaviour
     [SerializeField] int maxRandomTime;
     [SerializeField] List<GameObject> differentPatients;
     [SerializeField] List<GameObject> patientList;
+    public List<GameObject> PatientList { get { return patientList; } set { patientList = value; } }
+
     [SerializeField] List<Transform> spawnPoints;
     [SerializeField] List<Bed> bedList;
+    public List<Bed> BedList { get { return bedList; } set { bedList = value; } }
+
 
     //timer Stuff
     float spawnTimer;
@@ -53,6 +57,8 @@ public class PatientSpawner : MonoBehaviour
             {
                 patient.transform.position = bedList[i].BedPos.position;
                 patient.transform.rotation = bedList[i].BedPos.rotation;
+                Vector3 lookDir = Camera.main.transform.forward;
+                patient.Healthbar.transform.parent.LookAt(patient.Healthbar.transform.parent.position + lookDir);
                 bedList[i].IsPatientInBed = true;
                 bedList[i].CurrentPatient = patient;
                 patient.CurrentIllness = (TaskType)Random.Range(0, 2);

@@ -98,6 +98,17 @@ public class GameManager : MonoBehaviour
             {
                 patientSpawner.MoveToBed(patient);
             }
+            else if (player.currentItem == null)
+            {
+                Damage(patient);
+                if (patient.CurrentHP <= 0)
+                {
+                    GlobalData.instance.SetPatientDeadStatistics();
+                    patientSpawner.PatientList.Remove(patient.gameObject);
+                    Destroy(patient.gameObject);
+                    //SpawnParticles(deathParticles, particlesDuration);
+                }
+            }
 
             else if (patient.CurrentIllness == player.currentItem.item.task)
             {
@@ -111,12 +122,8 @@ public class GameManager : MonoBehaviour
             }
             else if (patient.CurrentIllness != player.currentItem.item.task)
             {
-                //Damage
-                patient.HasPopUp = false;
-                patient.Treatment(-player.currentItem.item.restoreHealth);
-                player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
-                uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
-                isGameOver();
+                Damage(patient);
+               
             }
 
             if (itemSlot.CurrentItem != null)
@@ -128,6 +135,24 @@ public class GameManager : MonoBehaviour
 
             player.IsInContact = false;
         }
+    }
+
+    private void Damage(Patient patient)
+    {
+        patient.HasPopUp = false;
+
+        if (player.currentItem == null)
+        {
+            patient.Treatment(-player.NoItemDamage);
+            player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
+        }
+        else
+        {
+            patient.Treatment(-player.currentItem.item.restoreHealth);
+            player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
+        }
+        uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
+        isGameOver();
     }
 
     private void isGameOver()

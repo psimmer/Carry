@@ -25,5 +25,9 @@ public class Bed : MonoBehaviour
         }
     }
 
-
+    private void Update()
+    {
+        if(currentPatient == null)
+            this.isPatientInBed = false;
+    }
 }

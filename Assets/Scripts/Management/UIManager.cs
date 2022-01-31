@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
     public void GamePaused()
     {
         
-        if (Input.GetKeyUp(KeyCode.Escape)) //&& !optionsElements.activeSelf && pauseElements!= null)
+        if (Input.GetKeyUp(KeyCode.Escape) && !optionsElements.activeSelf && pauseElements!= null)
         {
             if (Time.timeScale > 0)
             {
