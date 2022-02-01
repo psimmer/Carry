@@ -15,9 +15,11 @@ public class Healthbar : MonoBehaviour
     {
         healthbar = GetComponent<Slider>();
         Vector3 lookDir;
+
+
         if (GetComponentInParent<Patient>() != null && GetComponentInParent<Patient>().IsInBed)
         {
-            transform.parent.rotation = Quaternion.Euler(0, 0, 0);
+            transform.parent.rotation = Quaternion.Euler(0, 0, 0); // reset rotation of the health bar so it fits the whiteboard
         }
         else
         {

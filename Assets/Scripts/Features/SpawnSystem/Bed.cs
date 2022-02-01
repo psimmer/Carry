@@ -36,7 +36,7 @@ public class Bed : MonoBehaviour
         if(currentPatient == null)
             this.isPatientInBed = false;
 
-        if(currentPatient != null && positionHealthbarOfFirstPatients)
+        if(currentPatient != null && positionHealthbarOfFirstPatients) // position healthbars in the whiteboard if there is a patient in bed
         {
             currentPatient.Healthbar.transform.position = new Vector3(WhiteboardPos.position.x, WhiteboardPos.position.y, WhiteboardPos.position.z - WhiteboardPos.localScale.z);
             positionHealthbarOfFirstPatients = false;

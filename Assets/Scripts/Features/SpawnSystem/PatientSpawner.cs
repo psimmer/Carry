@@ -58,7 +58,7 @@ public class PatientSpawner : MonoBehaviour
                 Transform healthbarTransform = patient.Healthbar.transform.parent.transform;
                 patient.transform.position = bedList[i].BedPos.position;
                 patient.transform.rotation = bedList[i].BedPos.rotation;
-                patient.Healthbar.transform.parent.rotation = Quaternion.Euler(0,0,0);
+                patient.Healthbar.transform.parent.rotation = Quaternion.Euler(0,0,0); // these 2 lines position the healthbar on the whiteboard when you move the patient
                 patient.Healthbar.transform.position = new Vector3(BedList[i].WhiteboardPos.position.x, BedList[i].WhiteboardPos.position.y, BedList[i].WhiteboardPos.position.z - BedList[i].WhiteboardPos.localScale.z);
                 bedList[i].IsPatientInBed = true;
                 bedList[i].CurrentPatient = patient;
