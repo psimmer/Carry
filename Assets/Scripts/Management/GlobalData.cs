@@ -99,5 +99,13 @@ public class GlobalData : MonoBehaviour
     {
         totalTreatments++;
         shiftTreatments++;
+        shiftPatientsHealed++;
+        TotalPatientsHealed++;
+    }
+
+    public void SetPatientTreatmentStatistics()
+    {
+        shiftTreatments++;
+        TotalTreatments++;
     }
 }

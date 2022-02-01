@@ -6,11 +6,21 @@ using UnityEngine.UI;
 
 public class SceneMan : MonoBehaviour
 {
+    [SerializeField] UIManager uiManager;
+
+    private void Awake()
+    {
+        if (SceneManager.GetActiveScene().name == "GameOver")
+            uiManager.ShowStatsGameOver();
+        else if (SceneManager.GetActiveScene().name == "LevelComplete")
+            uiManager.ShowStatsCompleteShift();
+    }
 
     public void StartGame()
     {
         Time.timeScale = 1f;
         GlobalData.instance.ResetTotalStatistics();
+        GlobalData.instance.ResetShiftStatistics();
         SceneManager.LoadScene("Level 1");
     }
 
@@ -35,6 +45,7 @@ public class SceneMan : MonoBehaviour
 
     public void GameOver()
     {
+
         SceneManager.LoadScene("GameOver");
     }
 

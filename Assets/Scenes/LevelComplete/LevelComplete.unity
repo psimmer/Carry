@@ -840,6 +840,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstButton: {fileID: 556665320}
+  coffeeCounter: {fileID: 0}
+  patientsHealed: {fileID: 802679524}
+  patientsLost: {fileID: 73584690}
+  treatments: {fileID: 1133638660}
+  stressLvlBar: {fileID: 0}
+  pauseElements: {fileID: 0}
+  optionsElements: {fileID: 0}
 --- !u!1 &527003924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,6 +2794,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8045221819806218624, guid: f50efb01be9220c49923122737042940, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 525321980}
     - target: {fileID: 8045221819806218625, guid: f50efb01be9220c49923122737042940, type: 3}
       propertyPath: m_Name
       value: SceneManager

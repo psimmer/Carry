@@ -9,6 +9,10 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] Button firstButton;
     [SerializeField] TMP_Text coffeeCounter;
+    [SerializeField] TMP_Text patientsHealed;
+    [SerializeField] TMP_Text patientsLost;
+    [SerializeField] TMP_Text treatments;
+
     [SerializeField] Slider stressLvlBar;
     [SerializeField] GameObject pauseElements;
     [SerializeField] GameObject optionsElements;
@@ -44,6 +48,20 @@ public class UIManager : MonoBehaviour
 
         //Game will be paused
         GamePaused();
+    }
+
+    public void ShowStatsCompleteShift()
+    {
+        patientsHealed.text = "Patients Healed: " + GlobalData.instance.ShiftPatientsHealed;
+        patientsLost.text = "Patients Lost: " + GlobalData.instance.ShiftPatientsLost;
+        treatments.text = "Treatments: " + GlobalData.instance.ShiftTreatments;
+    }
+
+    public void ShowStatsGameOver()
+    {
+        patientsHealed.text = "Patients Healed: " + GlobalData.instance.TotalPatientsHealed;
+        patientsLost.text = "Patients Lost: " + GlobalData.instance.TotalPatientsLost;
+        treatments.text = "Treatments: " + GlobalData.instance.TotalTreatments;
     }
 
     #region Pausing the Game

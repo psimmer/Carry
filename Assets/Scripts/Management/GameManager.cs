@@ -94,25 +94,28 @@ public class GameManager : MonoBehaviour
 
         if (player.IsInContact)
         {
+            //assign the patient from the hallway to the bed
             if (player.currentItem == null && patient.CurrentIllness == TaskType.AssignBed)
             {
                 patientSpawner.MoveToBed(patient);
             }
+            //damage to the patient, when you try to treat him without an item
             else if (player.currentItem == null)
             {
                 Damage(patient);
                 if (patient.CurrentHP <= 0)
                 {
-                    GlobalData.instance.SetPatientDeadStatistics();
+                    //GlobalData.instance.SetPatientDeadStatistics();
                     patientSpawner.PatientList.Remove(patient.gameObject);
                     Destroy(patient.gameObject);
                     //SpawnParticles(deathParticles, particlesDuration);
                 }
-            }
 
+            }
+            //Success, right treatment
             else if (patient.CurrentIllness == player.currentItem.item.task)
             {
-                //Success
+
                 patient.HasPopUp = false;
                 patient.Treatment(+player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
@@ -120,6 +123,7 @@ public class GameManager : MonoBehaviour
                 GlobalData.instance.ShiftTreatments++;
 
             }
+            //Failure, wrong treatment
             else if (patient.CurrentIllness != player.currentItem.item.task)
             {
                 Damage(patient);
