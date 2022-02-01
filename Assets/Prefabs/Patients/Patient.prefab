@@ -1576,6 +1576,10 @@ PrefabInstance:
       propertyPath: heartbeatImage
       value: 
       objectReference: {fileID: 1002066313662850162}
+    - target: {fileID: 7072038440202392216, guid: f6bac63d9ce2da24b814ac187f5ccf76, type: 3}
+      propertyPath: heartbeatLerpSpeed
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7670834803035930243, guid: f6bac63d9ce2da24b814ac187f5ccf76, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

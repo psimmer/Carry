@@ -9,8 +9,8 @@ public class Healthbar : MonoBehaviour
 {
     private Slider healthbar;
     [SerializeField] Image heartbeatImage;
-    [SerializeField] float lerpSpeed;
-    float tValue = 0;
+    [SerializeField] float heartbeatLerpSpeed;
+    float heartBeatTValue = 0;
 
     private void Start()
     {
@@ -33,11 +33,11 @@ public class Healthbar : MonoBehaviour
     {
         if(heartbeatImage != null && heartbeatImage.IsActive())
         {
-            tValue += lerpSpeed * Time.deltaTime;
-            heartbeatImage.fillAmount = Mathf.Lerp(0, 1, tValue);
+            heartBeatTValue += heartbeatLerpSpeed * Time.deltaTime;
+            heartbeatImage.fillAmount = Mathf.Lerp(0, 1, heartBeatTValue);
             if(heartbeatImage.fillAmount == 1)
             {
-                tValue = 0;
+                heartBeatTValue = 0;
                 heartbeatImage.fillAmount = 0;
             }
         }

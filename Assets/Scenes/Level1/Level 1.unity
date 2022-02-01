@@ -6714,6 +6714,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1866187252}
     m_Modifications:
+    - target: {fileID: 1002066313662850162, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1880868913730923386, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -11751,6 +11755,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1866187252}
     m_Modifications:
+    - target: {fileID: 1002066313662850162, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1880868913730923386, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -11814,6 +11822,14 @@ PrefabInstance:
     - target: {fileID: 4540936381063408768, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: m_TagString
       value: Patient
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675780852294350789, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752116795722589124, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
+      propertyPath: heartBeatLerpTime
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 5004992781707481872, guid: 65ddc8157ff593e42ba2cdd4f29ffeaa, type: 3}
       propertyPath: m_IsActive
