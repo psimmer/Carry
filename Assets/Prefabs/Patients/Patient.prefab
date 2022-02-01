@@ -745,7 +745,7 @@ MonoBehaviour:
   patientID: 0
   isPopping: 0
   hasTask: 0
-  healthbar: {fileID: 0}
+  healthbar: {fileID: 4752116795722589124}
   isInBed: 0
   healingParticles: {fileID: 5048721385892816507, guid: 172cc0eeeb0c10e4289ade386f0b8dcd, type: 3}
   damageParticles: {fileID: 1547498293661416764, guid: c15b5077315498b4ca930299472479f7, type: 3}
@@ -1502,3 +1502,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 769319584638283303, guid: f6bac63d9ce2da24b814ac187f5ccf76, type: 3}
   m_PrefabInstance: {fileID: 2582256322910990684}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4752116795722589124 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7072038440202392216, guid: f6bac63d9ce2da24b814ac187f5ccf76, type: 3}
+  m_PrefabInstance: {fileID: 2582256322910990684}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2746178118cab994990a59f45bef878e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

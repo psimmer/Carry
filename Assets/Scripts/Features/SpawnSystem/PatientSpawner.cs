@@ -55,10 +55,11 @@ public class PatientSpawner : MonoBehaviour
         {
             if (!bedList[i].IsPatientInBed && bedList[i].CurrentPatient == null)
             {
+                Transform healthbarTransform = patient.Healthbar.transform.parent.transform;
                 patient.transform.position = bedList[i].BedPos.position;
                 patient.transform.rotation = bedList[i].BedPos.rotation;
-                Vector3 lookDir = Camera.main.transform.forward;
-                patient.Healthbar.transform.parent.LookAt(patient.Healthbar.transform.parent.position + lookDir);
+                patient.Healthbar.transform.parent.rotation = Quaternion.Euler(0,0,0);
+                patient.Healthbar.transform.position = new Vector3(BedList[i].WhiteboardPos.position.x, BedList[i].WhiteboardPos.position.y, BedList[i].WhiteboardPos.position.z - BedList[i].WhiteboardPos.localScale.z);
                 bedList[i].IsPatientInBed = true;
                 bedList[i].CurrentPatient = patient;
                 patient.CurrentIllness = (TaskType)Random.Range(0, 2);
