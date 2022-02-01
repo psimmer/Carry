@@ -24,7 +24,7 @@ public class SceneMan : MonoBehaviour
         SceneManager.LoadScene("Level 1");
     }
 
-    public void NextLvl()
+    public void ContinueNextLvl()
     {
         GlobalData.instance.ResetShiftStatistics();
     }
