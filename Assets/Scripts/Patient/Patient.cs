@@ -37,6 +37,7 @@ public class Patient : MonoBehaviour
 
     //[SerializeField] private GameObject healthbarPrefab;
     [SerializeField] private Healthbar healthbar;
+    [SerializeField] private GameObject heartbeat;
     TaskType RandomTask;
     [SerializeField] bool isInBed = false;
 
@@ -80,6 +81,12 @@ public class Patient : MonoBehaviour
     {
         get { return healthbar; }
         set { healthbar = value; }
+    }
+
+    public GameObject Heartbeat
+    {
+        get { return heartbeat; }
+        set { heartbeat = value; }
     }
 
     public bool IsPopping

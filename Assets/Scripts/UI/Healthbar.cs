@@ -8,8 +8,9 @@ using UnityEngine.UI;
 public class Healthbar : MonoBehaviour
 {
     private Slider healthbar;
-    
-
+    [SerializeField] Image heartbeatImage;
+    [SerializeField] float lerpSpeed;
+    float tValue = 0;
 
     private void Start()
     {
@@ -28,6 +29,19 @@ public class Healthbar : MonoBehaviour
         }
 
     }
+    private void Update()
+    {
+        if(heartbeatImage != null && heartbeatImage.IsActive())
+        {
+            tValue += lerpSpeed * Time.deltaTime;
+            heartbeatImage.fillAmount = Mathf.Lerp(0, 1, tValue);
+            if(heartbeatImage.fillAmount == 1)
+            {
+                tValue = 0;
+                heartbeatImage.fillAmount = 0;
+            }
+        }
+    }
 
     public void UpdateHealthbar(float percent)
     {
@@ -35,7 +49,4 @@ public class Healthbar : MonoBehaviour
             return;
         healthbar.value = percent;
     }
-
-
-
 }
