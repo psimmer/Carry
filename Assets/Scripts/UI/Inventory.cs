@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour
         set { Ui_element = value; }
     }
 
+
     private void Update()
     {
         InstantiateItem();
@@ -38,6 +39,7 @@ public class Inventory : MonoBehaviour
                 player.IsHoldingItem = false;
                 currentItem = Instantiate(player.currentItem.item.UI_prefab, itemSlotPos);
                 Ui_element = player.currentItem.item.UI_prefab;
+                currentItem.transform.localScale *= 1.2f;
             }
         }
 

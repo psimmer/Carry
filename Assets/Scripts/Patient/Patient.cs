@@ -133,8 +133,9 @@ public class Patient : MonoBehaviour
     {
         tag = "Patient";
         hasPopUp = false;
-        timetillPopUp = Random.Range(10, 20);       //this gets serialized;
+        timetillPopUp = Random.Range(5, 10);       //this gets serialized;
         healthbar = GetComponentInChildren<Healthbar>();
+        CurrentIllness = (TaskType)Random.Range(0, 6);
         HasTask = false;
         IsPopping = false;
 
@@ -162,7 +163,7 @@ public class Patient : MonoBehaviour
             //Damage
             if (health < 0)
             {
-                CurrentIllness = (TaskType)Random.Range(0, 3);
+                CurrentIllness = (TaskType)Random.Range(0, 6);
                 SpawnParticles(damageParticles, particlesDuration);
                 Debug.Log($"health kleiner als 0 {health}");
             }
@@ -170,7 +171,7 @@ public class Patient : MonoBehaviour
             else if (health > 0)
             {
 
-                CurrentIllness = (TaskType)Random.Range(0, 3);
+                CurrentIllness = (TaskType)Random.Range(0, 6);
                 SpawnParticles(healingParticles, particlesDuration);
                 Debug.Log($"health größer als 0 {health}");
             }
