@@ -160,8 +160,9 @@ public class Patient : MonoBehaviour
     {
         if (CurrentIllness != TaskType.AssignBed)
         {
+
             currentHP += health;
-            Destroy(currentPopUp);
+            //Destroy(currentPopUp);
             //Damage
             if (health < 0)
             {

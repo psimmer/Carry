@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Timer dayTime;
     #endregion
 
-   
+
     void Update()
     {
         //player Stuff
@@ -86,8 +86,9 @@ public class GameManager : MonoBehaviour
     public void Treatment(Patient patient)
     {
 
-        if (player.IsInContact)
+        if (Input.GetKey(KeyCode.Space) && player.IsInContact)
         {
+
             //assign the patient from the hallway to the bed
             if (player.currentItem == null && patient.CurrentIllness == TaskType.AssignBed)
             {
@@ -106,7 +107,7 @@ public class GameManager : MonoBehaviour
 
             }
             //Success, right treatment
-            else if (patient.CurrentIllness == player.currentItem.item.task)
+            else if (patient.CurrentIllness == player.currentItem.item.task && patient.GetComponentInChildren<PopUp>().RadialBarImage.fillAmount >= 1)
             {
 
                 patient.HasPopUp = false;

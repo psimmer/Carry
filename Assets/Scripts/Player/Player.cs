@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -11,7 +12,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxStressLvl;
     [SerializeField] private int noItemDamage;
     Coroutine reduceStressIfOutside;
-
     private bool isAtPC;
 
 
@@ -43,9 +43,13 @@ public class Player : MonoBehaviour
     {
         IsHoldingItem = false;
         IsAtPc = false;
+        PopUp.e_OnPopUpTimeOut += TimeOutDamage;
     }
 
-
+    private void TimeOutDamage(float damage)
+    {
+        CurrentStressLvl += damage;
+    }
 
     /// <summary>
     /// Interacting with Objects/ with Items and Patients
