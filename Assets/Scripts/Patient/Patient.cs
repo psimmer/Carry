@@ -137,7 +137,6 @@ public class Patient : MonoBehaviour
         healthbar = GetComponentInChildren<Healthbar>();
         HasTask = false;
         IsPopping = false;
-        //CurrentIllness = (TaskType)Random.Range(1, 3);
 
     }
 
@@ -163,7 +162,7 @@ public class Patient : MonoBehaviour
             //Damage
             if (health < 0)
             {
-                CurrentIllness = (TaskType)Random.Range(0, 2);
+                CurrentIllness = (TaskType)Random.Range(0, 3);
                 SpawnParticles(damageParticles, particlesDuration);
                 Debug.Log($"health kleiner als 0 {health}");
             }
@@ -171,7 +170,7 @@ public class Patient : MonoBehaviour
             else if (health > 0)
             {
 
-                CurrentIllness = (TaskType)Random.Range(0, 2);
+                CurrentIllness = (TaskType)Random.Range(0, 3);
                 SpawnParticles(healingParticles, particlesDuration);
                 Debug.Log($"health größer als 0 {health}");
             }
