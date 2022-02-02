@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8768567057133209515}
   - component: {fileID: 7068046412790778128}
   m_Layer: 5
-  m_Name: BandageImage
+  m_Name: TransfusionImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: d2ff3b936ce802b4485db929d54744f8, type: 3}
+  m_Texture: {fileID: 2800000, guid: f43b31615f9e93a41828d911d4c5c9cf, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

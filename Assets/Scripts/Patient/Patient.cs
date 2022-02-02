@@ -135,7 +135,9 @@ public class Patient : MonoBehaviour
         hasPopUp = false;
         timetillPopUp = Random.Range(5, 10);       //this gets serialized;
         healthbar = GetComponentInChildren<Healthbar>();
-        CurrentIllness = (TaskType)Random.Range(0, 6);
+        
+        //CurrentIllness = (TaskType)Random.Range(0, 6);
+        
         HasTask = false;
         IsPopping = false;
 
@@ -229,6 +231,8 @@ public class Patient : MonoBehaviour
                         hasPopUp = true;
                         currentPopUp = Instantiate(popUp.gameObject, canvas);
                         currentPopUp.transform.position = new Vector3(canvas.position.x, canvas.position.y + 1f, canvas.position.z);
+                        //Vector3 lookDir = Camera.main.transform.forward;
+                        //currentPopUp.transform.parent.LookAt(currentPopUp.transform.parent.position + lookDir);
                     }
                 }
             }

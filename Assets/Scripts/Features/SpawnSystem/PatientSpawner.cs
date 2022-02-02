@@ -61,7 +61,7 @@ public class PatientSpawner : MonoBehaviour
                 patient.Healthbar.transform.parent.rotation = Quaternion.Euler(0,0,0); // these 2 lines position the healthbar on the whiteboard when you move the patient
                 bedList[i].IsPatientInBed = true;
                 bedList[i].CurrentPatient = patient;
-                patient.CurrentIllness = (TaskType)Random.Range(0, 2);
+                patient.CurrentIllness = (TaskType)Random.Range(0, 6);
                 return;
             }
         }
