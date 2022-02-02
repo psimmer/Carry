@@ -45,11 +45,11 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-
         //Game will be paused
         GamePaused();
     }
 
+    #region Show Statistics after Complete Level/GameOver
     public void ShowStatsCompleteShift()
     {
         patientsHealed.text = "Patients Healed: " + GlobalData.instance.ShiftPatientsHealed;
@@ -63,6 +63,7 @@ public class UIManager : MonoBehaviour
         patientsLost.text = "Patients Lost: " + GlobalData.instance.TotalPatientsLost;
         treatments.text = "Treatments: " + GlobalData.instance.TotalTreatments;
     }
+    #endregion
 
     #region Pausing the Game
     /// <summary>

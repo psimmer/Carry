@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
 
     #region Features
     [SerializeField] private Camera mainCam;
-    [SerializeField] private CoffeMachine coffeMachine;
     [SerializeField] private CPU computer;
     [SerializeField] private DayCycle dayCycle;
     [SerializeField] private Timer dayTime;
@@ -70,12 +69,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.IsDrinkingCoffee)
         {
-            if (coffeeMachine.CoffeeCount <= 0)
-            {
-                Debug.Log("No Coffee left");
-                //show in UI that nothing is left
-            }
-            else
+            if (coffeeMachine.CoffeeCount > 0)
             {
                 player.CurrentStressLvl -= coffeeMachine.HealCoffee;  //multiply it by the stressReductionMultiplier?
                 uiManager.updateCoffeCounter(--coffeeMachine.CoffeeCount);
@@ -105,7 +99,6 @@ public class GameManager : MonoBehaviour
                 Damage(patient);
                 if (patient.CurrentHP <= 0)
                 {
-                    //GlobalData.instance.SetPatientDeadStatistics();
                     patientSpawner.PatientList.Remove(patient.gameObject);
                     Destroy(patient.gameObject);
                     //SpawnParticles(deathParticles, particlesDuration);
@@ -120,14 +113,12 @@ public class GameManager : MonoBehaviour
                 patient.Treatment(+player.currentItem.item.restoreHealth);
                 player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
                 uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
-                GlobalData.instance.ShiftTreatments++;
 
             }
             //Failure, wrong treatment
             else if (patient.CurrentIllness != player.currentItem.item.task)
             {
                 Damage(patient);
-               
             }
 
             if (itemSlot.CurrentItem != null)

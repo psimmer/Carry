@@ -1123,6 +1123,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstButton: {fileID: 556665320}
   coffeeCounter: {fileID: 0}
+  patientsHealed: {fileID: 0}
+  patientsLost: {fileID: 0}
+  treatments: {fileID: 0}
   stressLvlBar: {fileID: 0}
   pauseElements: {fileID: 0}
   optionsElements: {fileID: 1040821359}
@@ -3280,7 +3283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1595595628
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3293,7 +3296,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 2690178304613372280, guid: 8185773bc35a60c42b69da452e5019c1, type: 2}
   m_audioClip: {fileID: 8300000, guid: 3736d970c7b019b4898c656318dd49f8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.217
   m_Pitch: 1
   Loop: 0
   Mute: 0
