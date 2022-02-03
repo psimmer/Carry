@@ -38,7 +38,6 @@ public class Inventory : MonoBehaviour
 
                 player.IsHoldingItem = false;
                 currentItem = Instantiate(player.currentItem.item.UI_prefab, itemSlotPos);
-                Debug.Log("item größe");
                 Ui_element = player.currentItem.item.UI_prefab;
             }
         }

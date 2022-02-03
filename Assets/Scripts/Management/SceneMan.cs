@@ -24,6 +24,36 @@ public class SceneMan : MonoBehaviour
         SceneManager.LoadScene("Level 1");
     }
 
+    public void SaveAndQuit()
+    {
+        //SaveSystem.SavePlayer(FindObjectOfType<playerScript>(), GlobalData.instance.timeLeft);
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadSaveFile()
+    {
+        //PlayerData data = SaveSystem.LoadPlayer();
+        //if (data != null)
+        //{
+        //    GlobalData.instance.isSaveFileLoaded = true;
+
+        //    GlobalData.instance.currentStresslvl = data.currentStressLvl;
+        //    GlobalData.instance.currentItem = data.currentItem;
+
+        //    Vector3 position;
+        //    position.x = data.position[0];
+        //    position.y = data.position[1];
+        //    position.z = data.position[2];
+
+        //    GlobalData.instance.currentPlayerPosition = position;
+        //    SceneManager.LoadScene("Main Scene");
+        //}
+        //else
+        //{
+        //    SceneManager.LoadScene("Main Scene");
+        //}
+    }
+
     public void ContinueNextLvl()
     {
         GlobalData.instance.ResetShiftStatistics();

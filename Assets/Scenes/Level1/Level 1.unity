@@ -38878,6 +38878,34 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1043475242738521548, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043475242738521548, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043475242738521548, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 711209936}
+    - target: {fileID: 1043475242738521548, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043475242738521548, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveAndQuit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043475242738521548, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneMan, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043475242738521548, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1137389972179468857, guid: 883dc3fa86632c342b177f9308f67fa1, type: 3}
       propertyPath: m_Value
       value: 0.117
