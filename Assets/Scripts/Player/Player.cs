@@ -58,7 +58,6 @@ public class Player : MonoBehaviour, ISaveSystem
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
             Collider[] objects = Physics.OverlapBox(transform.position + boxPos, boxSize);
             foreach (var obj in objects)
             {
@@ -67,7 +66,6 @@ public class Player : MonoBehaviour, ISaveSystem
                     //Pickup
                     IsHoldingItem = true;
                     currentItem = obj.GetComponent<Item>();
-                    Debug.Log(currentItem);
                 }
                 if (obj.CompareTag("Patient"))
                 {
@@ -136,7 +134,7 @@ public class Player : MonoBehaviour, ISaveSystem
         while (true)
         {
             yield return new WaitForSeconds(3);
-            currentStressLvl--;
+            CurrentStressLvl--;
         }
     }
 

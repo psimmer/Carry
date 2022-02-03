@@ -13,13 +13,17 @@ public class PopUp : MonoBehaviour , ISaveSystem
     [SerializeField] Gradient gradient;
     [SerializeField] int timeOutDamagePatient;
     [SerializeField] float timeOutDamagePlayer;
-    private float timePassed;
-    public TaskType popUpTaskType;
+    [SerializeField] float healingSpeed;
     public static event Action<float> e_OnPopUpTimeOut;
-    private bool isHealing;
 
-    public bool IsHealing { get { return isHealing; } set { isHealing = value; } }
+    public TaskType popUpTaskType;
     public TaskType TaskType { get { return popUpTaskType; } set { popUpTaskType = value; } }
+
+
+    private float timePassed;
+    private bool isHealing;
+    public bool IsHealing { get { return isHealing; } set { isHealing = value; } }
+
 
     private void Start()
     {
@@ -35,12 +39,13 @@ public class PopUp : MonoBehaviour , ISaveSystem
             {
                 GetComponentInParent<Patient>().Treatment(-timeOutDamagePatient);
                 e_OnPopUpTimeOut?.Invoke(timeOutDamagePlayer);
+                GetComponentInParent<Patient>().HasPopUp = false;
                 Destroy(this.gameObject);
             }
             else if (radialBarImage.fillAmount >= 1)
             {
                 GetComponentInParent<Patient>().HasPopUp = false;
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
             }
         }
     }
@@ -48,7 +53,7 @@ public class PopUp : MonoBehaviour , ISaveSystem
     private void UpdateRadialBar()
     {
         if (isHealing)
-            timePassed += Time.deltaTime;
+            timePassed += Time.deltaTime * healingSpeed;
         else
             timePassed -= Time.deltaTime;
 

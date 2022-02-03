@@ -303,4 +303,5 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   timeOutDamagePatient: 22
   timeOutDamagePlayer: 15
+  healingSpeed: 4
   popUpTaskType: 2

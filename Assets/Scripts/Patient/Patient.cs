@@ -134,7 +134,7 @@ public class Patient : MonoBehaviour , ISaveSystem
     {
         tag = "Patient";
         hasPopUp = false;
-        timetillPopUp = Random.Range(5, 10);       //this gets serialized;
+        timetillPopUp = Random.Range(10, 15);       //this gets serialized;
         healthbar = GetComponentInChildren<Healthbar>();
         
         //CurrentIllness = (TaskType)Random.Range(0, 6);
@@ -148,12 +148,7 @@ public class Patient : MonoBehaviour , ISaveSystem
     {
         popUpTimer += Time.deltaTime;
         PopUpTimer(CurrentIllness, canvas);
-
-        //if(Input.GetKeyUp(KeyCode.Space) && currentPopUp.GetComponentInChildren<PopUp>().IsHealing)
-        //{
-        //    currentPopUp.GetComponentInChildren<PopUp>().IsHealing = false;
-        //    Destroy(currentPopUp);
-        //}
+       
 
 
     }
@@ -176,7 +171,7 @@ public class Patient : MonoBehaviour , ISaveSystem
             {
                 CurrentIllness = (TaskType)Random.Range(0, 6);
                 SpawnParticles(damageParticles, particlesDuration);
-                Destroy(currentPopUp);
+                //Destroy(currentPopUp);
 
                 Debug.Log($"health kleiner als 0 {health}");
             }
@@ -232,7 +227,6 @@ public class Patient : MonoBehaviour , ISaveSystem
     {
         if (CurrentIllness != TaskType.RelocateAPatient)
         {
-
             foreach (GameObject popUp in popUpList)
             {
                 if (illness == popUp.GetComponent<PopUp>().TaskType)
@@ -242,8 +236,6 @@ public class Patient : MonoBehaviour , ISaveSystem
                         hasPopUp = true;
                         currentPopUp = Instantiate(popUp.gameObject, canvas);
                         currentPopUp.transform.position = new Vector3(canvas.position.x, canvas.position.y + 1f, canvas.position.z);
-                        //Vector3 lookDir = Camera.main.transform.forward;
-                        //currentPopUp.transform.parent.LookAt(currentPopUp.transform.parent.position + lookDir);
                     }
                 }
             }

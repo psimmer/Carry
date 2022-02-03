@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Timer dayTime;
     #endregion
 
+    private void Awake()
+    {
+    }
+
 
     void Update()
     {
@@ -47,6 +51,11 @@ public class GameManager : MonoBehaviour
         DocumentationTask();
         DrinkingCoffee();
         uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
+
+        isGameOver();
+
+        if (player.CurrentStressLvl <= 0)
+            player.CurrentStressLvl = 0;
     }
 
     private void DocumentationTask()
@@ -59,7 +68,6 @@ public class GameManager : MonoBehaviour
             else
             {
                 player.CurrentStressLvl += 20;
-                isGameOver();
             }
             player.IsAtPc = false;
         }
@@ -93,6 +101,7 @@ public class GameManager : MonoBehaviour
             if (player.currentItem == null && patient.CurrentIllness == TaskType.AssignBed)
             {
                 patientSpawner.MoveToBed(patient);
+                player.IsInContact = false;
             }
             //damage to the patient, when you try to treat him without an item
             else if (player.currentItem == null)
@@ -102,40 +111,30 @@ public class GameManager : MonoBehaviour
                 {
                     patientSpawner.PatientList.Remove(patient.gameObject);
                     Destroy(patient.gameObject);
+                    //player.IsInContact = false;
                     //SpawnParticles(deathParticles, particlesDuration);
                 }
+                player.IsInContact = false;
 
-            }
-            else if (Input.GetKey(KeyCode.Space))
-            {
-                patient.GetComponentInChildren<PopUp>().IsHealing = true;
-                //Success, right treatment
-                if (patient.CurrentIllness == player.currentItem.item.task && patient.GetComponentInChildren<PopUp>().RadialBarImage.fillAmount >= 1)
-                {
-                    patient.GetComponentInChildren<PopUp>().IsHealing = false;
-                    //patient.HasPopUp = false;
-                    patient.Treatment(+player.currentItem.item.restoreHealth);
-                    player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
-                    uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
-
-                }
             }
 
             //Failure, wrong treatment
-            if (patient.CurrentIllness != player.currentItem.item.task)
+            else if (patient.CurrentIllness != player.currentItem.item.task)
             {
                 Damage(patient);
-                Debug.Log("HAllo");
+                ResetItem();
+                Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
+                player.IsInContact = false;
             }
 
-            if (itemSlot.CurrentItem != null)
+          
+            //Success, right treatment
+            else if (patient.CurrentIllness == player.currentItem.item.task)
             {
-                Destroy(itemSlot.CurrentItem);
-                player.currentItem = null;
-                itemSlot.UI_Element = null;
+                patient.GetComponentInChildren<PopUp>().IsHealing = true;
+                StartCoroutine(TreatmentProgress(patient));
             }
-
-            player.IsInContact = false;
+           
         }
     }
 
@@ -154,7 +153,6 @@ public class GameManager : MonoBehaviour
             player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
         }
         uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
-        isGameOver();
     }
 
     private void isGameOver()
@@ -162,6 +160,55 @@ public class GameManager : MonoBehaviour
         if (player.CurrentStressLvl >= player.MaxStressLvl)
         {
             sceneManager.GameOver();
+        }
+    }
+
+    IEnumerator TreatmentProgress(Patient patient)
+    {
+        while (player.IsInContact)
+        {
+            if (patient.CurrentPopUp != null)
+            {
+                if (player.currentItem != null)
+                {
+
+                    //Success
+                    if (patient.GetComponentInChildren<PopUp>().RadialBarImage.fillAmount >= 1)
+                    {
+                        patient.GetComponentInChildren<PopUp>().IsHealing = false;
+
+                        patient.Treatment(+player.currentItem.item.restoreHealth);
+                        player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
+                        uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
+
+                        ResetItem();
+                        player.IsInContact = false;
+                        Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
+                        StopCoroutine(TreatmentProgress(patient));
+                    }
+                    //Fail
+                    else if (!Input.GetKey(KeyCode.Space))
+                    {
+                        Damage(patient);
+                        ResetItem();
+                        player.IsInContact = false;
+                        Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
+                        StopCoroutine(TreatmentProgress(patient));
+                    }
+                }
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+
+    private void ResetItem()
+    {
+        if (itemSlot.CurrentItem != null)
+        {
+            Destroy(itemSlot.CurrentItem);
+            player.currentItem = null;
+            itemSlot.UI_Element = null;
         }
     }
 

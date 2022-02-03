@@ -159,6 +159,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   timeOutDamagePatient: 10
   timeOutDamagePlayer: 30
+  healingSpeed: 4
   popUpTaskType: 0
 --- !u!1 &7151000756691187861
 GameObject:
