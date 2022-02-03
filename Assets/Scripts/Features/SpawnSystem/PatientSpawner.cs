@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public class PatientSpawner : MonoBehaviour
+public class PatientSpawner : MonoBehaviour, ISaveSystem
 {
     [SerializeField] int minRandomTime;
     [SerializeField] int maxRandomTime;
@@ -67,7 +69,28 @@ public class PatientSpawner : MonoBehaviour
         }
     }
 
+    public void SaveData()
+    {
+        //BinaryFormatter formatter = new BinaryFormatter();
 
+        //string path = Application.persistentDataPath + "/player.carry";
+        //Debug.Log("Save File location: " + path);
+        //FileStream stream = new FileStream(path, FileMode.Create);
+        ////PlayerData data = new PlayerData(player, timeLeft);
 
+        ////save each patient from the list and the count!
+        //formatter.Serialize(stream, patientList.Count);
+        //foreach (var patient in patientList)
+        //{
+        //    patient.GetComponent<Patient>().SaveToStream(stream);
+        //}
 
+        //formatter.Serialize(stream, bedList);
+        //stream.Close();
+    }
+
+    public void LoadData()
+    {
+        throw new System.NotImplementedException();
+    }
 }

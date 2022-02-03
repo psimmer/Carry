@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopUp : MonoBehaviour
+public class PopUp : MonoBehaviour , ISaveSystem
 {
     [SerializeField] float duration;
     [SerializeField] Image radialBarImage;
@@ -54,5 +54,15 @@ public class PopUp : MonoBehaviour
 
         radialBarImage.fillAmount = timePassed / duration;
         radialBarImage.color = gradient.Evaluate(radialBarImage.fillAmount);
+    }
+
+    public void SaveData()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void LoadData()
+    {
+        throw new NotImplementedException();
     }
 }

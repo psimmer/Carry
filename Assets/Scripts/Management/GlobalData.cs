@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalData : MonoBehaviour
+public class GlobalData : MonoBehaviour, ISaveSystem
 {
     public static GlobalData instance;
 
@@ -107,5 +107,15 @@ public class GlobalData : MonoBehaviour
     {
         shiftTreatments++;
         TotalTreatments++;
+    }
+
+    public void SaveData()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void LoadData()
+    {
+        throw new System.NotImplementedException();
     }
 }

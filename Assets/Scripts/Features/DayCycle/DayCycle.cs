@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class DayCycle : MonoBehaviour
+public class DayCycle : MonoBehaviour, ISaveSystem
 {
     [SerializeField] private float interpolationValue;
     private float interpolation;
@@ -23,6 +23,13 @@ public class DayCycle : MonoBehaviour
         transform.rotation = Quaternion.Lerp(startPos, endPos, interpolation);
     }
 
+    public void SaveData()
+    {
+        throw new NotImplementedException();
+    }
 
-
+    public void LoadData()
+    {
+        throw new NotImplementedException();
+    }
 }

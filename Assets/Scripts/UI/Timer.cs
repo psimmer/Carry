@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Timer : MonoBehaviour
+public class Timer : MonoBehaviour , ISaveSystem
 {
     [SerializeField] private Text timeText;
     [SerializeField] private int startTimeHours;
@@ -58,4 +58,13 @@ public class Timer : MonoBehaviour
         }
     }
 
+    public void SaveData()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void LoadData()
+    {
+        throw new System.NotImplementedException();
+    }
 }

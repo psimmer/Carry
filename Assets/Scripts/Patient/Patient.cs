@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 // I know it is the wrong script for this but i dont know in which script it should be
@@ -18,7 +19,7 @@ public enum TaskType
     AssignBed
 }
 
-public class Patient : MonoBehaviour
+public class Patient : MonoBehaviour , ISaveSystem
 {
     [SerializeField] private int currentHP;
     [SerializeField] private int patientMaxHP;
@@ -250,5 +251,20 @@ public class Patient : MonoBehaviour
         yield return new WaitForEndOfFrame();
     }
 
+    public void SaveToStream(System.IO.FileStream fileStream)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
 
+        formatter.Serialize(fileStream, currentHP);
+    }
+
+    public void SaveData()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void LoadData()
+    {
+        throw new System.NotImplementedException();
+    }
 }

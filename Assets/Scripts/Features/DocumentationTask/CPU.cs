@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CPU : MonoBehaviour
+public class CPU : MonoBehaviour, ISaveSystem
 {
     [SerializeField] private GameObject canvas;
     [SerializeField] private TextMeshProUGUI inputfield;
@@ -33,6 +33,13 @@ public class CPU : MonoBehaviour
         }
     }
 
+    public void LoadData()
+    {
+        throw new System.NotImplementedException();
+    }
 
-
+    public void SaveData()
+    {
+        throw new System.NotImplementedException();
+    }
 }

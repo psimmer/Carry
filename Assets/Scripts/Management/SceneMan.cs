@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,32 +27,22 @@ public class SceneMan : MonoBehaviour
 
     public void SaveAndQuit()
     {
-        //SaveSystem.SavePlayer(FindObjectOfType<playerScript>(), GlobalData.instance.timeLeft);
-        SceneManager.LoadScene("MainMenu");
+        //searches all scripts after the interface and executes the method (so everything gets saved)
+        //foreach(var saveMethod in FindObjectsOfType<MonoBehaviour>().OfType<ISaveSystem>())
+        //{
+        //    saveMethod.SaveData();
+        //}
+        //SceneManager.LoadScene("MainMenu");
     }
 
     public void LoadSaveFile()
     {
-        //PlayerData data = SaveSystem.LoadPlayer();
-        //if (data != null)
+        //searches all scripts after the interface and executes the method (so everything gets saved)
+        //foreach (var loadMethod in FindObjectsOfType<MonoBehaviour>().OfType<ISaveSystem>())
         //{
-        //    GlobalData.instance.isSaveFileLoaded = true;
-
-        //    GlobalData.instance.currentStresslvl = data.currentStressLvl;
-        //    GlobalData.instance.currentItem = data.currentItem;
-
-        //    Vector3 position;
-        //    position.x = data.position[0];
-        //    position.y = data.position[1];
-        //    position.z = data.position[2];
-
-        //    GlobalData.instance.currentPlayerPosition = position;
-        //    SceneManager.LoadScene("Main Scene");
+        //    loadMethod.LoadData();
         //}
-        //else
-        //{
-        //    SceneManager.LoadScene("Main Scene");
-        //}
+        //Load saved scene
     }
 
     public void ContinueNextLvl()

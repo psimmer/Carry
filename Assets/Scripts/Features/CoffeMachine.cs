@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CoffeMachine : MonoBehaviour
+public class CoffeMachine : MonoBehaviour , ISaveSystem
 {
 
     [SerializeField] private int coffeeCount;
@@ -18,4 +18,13 @@ public class CoffeMachine : MonoBehaviour
         get { return healCoffee; }
     }
 
+    public void LoadData()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SaveData()
+    {
+        throw new System.NotImplementedException();
+    }
 }

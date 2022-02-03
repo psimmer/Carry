@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ISaveSystem
 {
     [SerializeField] private Camera camera;
     [SerializeField] private Vector3 boxSize = Vector3.one;
@@ -138,6 +138,16 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(3);
             currentStressLvl--;
         }
+    }
+
+    public void SaveData()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void LoadData()
+    {
+        throw new NotImplementedException();
     }
 }
 
