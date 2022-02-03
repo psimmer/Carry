@@ -39,6 +39,7 @@ public class PopUp : MonoBehaviour
             }
             else if (radialBarImage.fillAmount >= 1)
             {
+                GetComponentInParent<Patient>().HasPopUp = false;
                 Destroy(this.gameObject);
             }
         }

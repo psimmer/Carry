@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
     public void Treatment(Patient patient)
     {
 
-        if (Input.GetKey(KeyCode.Space) && player.IsInContact)
+        if (player.IsInContact)
         {
 
             //assign the patient from the hallway to the bed
@@ -106,20 +106,26 @@ public class GameManager : MonoBehaviour
                 }
 
             }
-            //Success, right treatment
-            else if (patient.CurrentIllness == player.currentItem.item.task && patient.GetComponentInChildren<PopUp>().RadialBarImage.fillAmount >= 1)
+            else if (Input.GetKey(KeyCode.Space))
             {
+                patient.GetComponentInChildren<PopUp>().IsHealing = true;
+                //Success, right treatment
+                if (patient.CurrentIllness == player.currentItem.item.task && patient.GetComponentInChildren<PopUp>().RadialBarImage.fillAmount >= 1)
+                {
+                    patient.GetComponentInChildren<PopUp>().IsHealing = false;
+                    //patient.HasPopUp = false;
+                    patient.Treatment(+player.currentItem.item.restoreHealth);
+                    player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
+                    uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
 
-                patient.HasPopUp = false;
-                patient.Treatment(+player.currentItem.item.restoreHealth);
-                player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
-                uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
-
+                }
             }
+
             //Failure, wrong treatment
-            else if (patient.CurrentIllness != player.currentItem.item.task)
+            if (patient.CurrentIllness != player.currentItem.item.task)
             {
                 Damage(patient);
+                Debug.Log("HAllo");
             }
 
             if (itemSlot.CurrentItem != null)

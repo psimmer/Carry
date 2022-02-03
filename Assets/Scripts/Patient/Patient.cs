@@ -147,6 +147,14 @@ public class Patient : MonoBehaviour
     {
         popUpTimer += Time.deltaTime;
         PopUpTimer(CurrentIllness, canvas);
+
+        //if(Input.GetKeyUp(KeyCode.Space) && currentPopUp.GetComponentInChildren<PopUp>().IsHealing)
+        //{
+        //    currentPopUp.GetComponentInChildren<PopUp>().IsHealing = false;
+        //    Destroy(currentPopUp);
+        //}
+
+
     }
 
     private void LateUpdate()
@@ -162,12 +170,13 @@ public class Patient : MonoBehaviour
         {
 
             currentHP += health;
-            //Destroy(currentPopUp);
             //Damage
             if (health < 0)
             {
                 CurrentIllness = (TaskType)Random.Range(0, 6);
                 SpawnParticles(damageParticles, particlesDuration);
+                Destroy(currentPopUp);
+
                 Debug.Log($"health kleiner als 0 {health}");
             }
             //Heal
