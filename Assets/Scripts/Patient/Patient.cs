@@ -235,7 +235,8 @@ public class Patient : MonoBehaviour , ISaveSystem
                     {
                         hasPopUp = true;
                         currentPopUp = Instantiate(popUp.gameObject, canvas);
-                        currentPopUp.transform.position = new Vector3(canvas.position.x, canvas.position.y + 1f, canvas.position.z);
+                        //currentPopUp.transform.position = new Vector3(canvas.position.x, canvas.position.y + 1f, canvas.position.z);
+
                     }
                 }
             }

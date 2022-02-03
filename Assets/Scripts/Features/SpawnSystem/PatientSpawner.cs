@@ -65,6 +65,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 bedList[i].IsPatientInBed = true;
                 bedList[i].CurrentPatient = patient;
                 patient.CurrentIllness = (TaskType)Random.Range(0, 6);
+                patient.Canvas = BedList[i].PopUpPosTransform;
                 return;
             }
         }

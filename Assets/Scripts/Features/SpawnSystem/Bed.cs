@@ -11,13 +11,17 @@ public class Bed : MonoBehaviour
     [SerializeField] Transform whiteboardPos;
     public Transform WhiteboardPos => whiteboardPos;
 
+    [SerializeField] private Transform popUpPosTransform;
+
+    public Transform PopUpPosTransform => popUpPosTransform;
+
     [SerializeField] private bool isPatientInBed;
     public bool IsPatientInBed { get { return isPatientInBed; } set { isPatientInBed = value; } }
 
     [SerializeField] private Patient currentPatient;
     public Patient CurrentPatient { get { return currentPatient; } set { currentPatient = value; } }
 
-    private bool positionHealthBarInWhiteboard = true;
+    private bool setHealthBarAndPopUpSpawnPos = true;
 
     private void Start()
     {
@@ -29,6 +33,9 @@ public class Bed : MonoBehaviour
         {
             isPatientInBed = true;
         }
+
+        Vector3 lookDir = Camera.main.transform.forward;
+        popUpPosTransform.LookAt(popUpPosTransform.position + lookDir);
     }
 
     private void Update()
@@ -36,11 +43,11 @@ public class Bed : MonoBehaviour
         if (currentPatient == null)
         {
             this.isPatientInBed = false;
-            positionHealthBarInWhiteboard = true;
+            setHealthBarAndPopUpSpawnPos = true;
         }
 
 
-        if (currentPatient != null && positionHealthBarInWhiteboard) // position healthbars in the whiteboard if there is a patient in bed
+        if (currentPatient != null && setHealthBarAndPopUpSpawnPos) // position healthbars in the whiteboard if there is a patient in bed
         {
             currentPatient.Healthbar.transform.position = new Vector3(
                 WhiteboardPos.position.x,
@@ -54,8 +61,15 @@ public class Bed : MonoBehaviour
                 whiteboardPos.position.z - whiteboardPos.localScale.z
                 );
 
+            Vector3 popUpPos = popUpPosTransform.position;
+            Vector3 popUpRotation = PopUpPosTransform.eulerAngles;
+
+            CurrentPatient.Canvas.transform.position = popUpPos;
+            CurrentPatient.Canvas.transform.eulerAngles= popUpRotation;
+
             currentPatient.Heartbeat.SetActive(true);
-            positionHealthBarInWhiteboard = false;
+            setHealthBarAndPopUpSpawnPos = false;
+
         }
         
     }
