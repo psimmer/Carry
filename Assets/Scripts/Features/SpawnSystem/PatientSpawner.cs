@@ -58,14 +58,12 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         {
             if (!bedList[i].IsPatientInBed && bedList[i].CurrentPatient == null)
             {
-                Transform healthbarTransform = patient.Healthbar.transform.parent.transform;
                 patient.transform.position = bedList[i].BedPos.position;
                 patient.transform.rotation = bedList[i].BedPos.rotation;
                 patient.Healthbar.transform.parent.rotation = Quaternion.Euler(0,0,0); // these 2 lines position the healthbar on the whiteboard when you move the patient
                 bedList[i].IsPatientInBed = true;
                 bedList[i].CurrentPatient = patient;
                 patient.CurrentIllness = (TaskType)Random.Range(0, 6);
-                patient.Canvas = BedList[i].PopUpPosTransform;
                 return;
             }
         }
