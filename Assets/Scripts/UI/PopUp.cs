@@ -15,6 +15,7 @@ public class PopUp : MonoBehaviour , ISaveSystem
     [SerializeField] float timeOutDamagePlayer;
     [SerializeField] float healingSpeed;
     public static event Action<float> e_OnPopUpTimeOut;
+    public static event Action<Patient> e_RemovePatient;
 
     public TaskType popUpTaskType;
     public TaskType TaskType { get { return popUpTaskType; } set { popUpTaskType = value; } }
@@ -41,6 +42,10 @@ public class PopUp : MonoBehaviour , ISaveSystem
                 e_OnPopUpTimeOut?.Invoke(timeOutDamagePlayer);
                 GetComponentInParent<Patient>().HasPopUp = false;
                 Destroy(this.gameObject);
+                if(GetComponentInParent<Patient>().CurrentHP <= 0)
+                {
+                    e_RemovePatient?.Invoke(GetComponentInParent<Patient>());
+                }
             }
             else if (radialBarImage.fillAmount >= 1)
             {

@@ -111,7 +111,6 @@ public class GameManager : MonoBehaviour
                 {
                     patientSpawner.PatientList.Remove(patient.gameObject);
                     Destroy(patient.gameObject);
-                    //player.IsInContact = false;
                     //SpawnParticles(deathParticles, particlesDuration);
                 }
                 player.IsInContact = false;
@@ -123,7 +122,7 @@ public class GameManager : MonoBehaviour
             {
                 Damage(patient);
                 ResetItem();
-                Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
+                Destroy(patient.GetComponentInChildren<PopUp>().gameObject); // some errors could happens...
                 player.IsInContact = false;
             }
 
