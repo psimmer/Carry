@@ -11,9 +11,10 @@ public class Player : MonoBehaviour, ISaveSystem
     [SerializeField] private float currentStressLvl;
     [SerializeField] private float maxStressLvl;
     [SerializeField] private int noItemDamage;
+    [SerializeField] private Animator animator;
     Coroutine reduceStressIfOutside;
     private bool isAtPC;
-
+    
 
     #region Properties
     public int NoItemDamage
@@ -64,6 +65,7 @@ public class Player : MonoBehaviour, ISaveSystem
                 if (obj.CompareTag("Item"))
                 {
                     //Pickup
+                    animator.Play("Picking Up");
                     IsHoldingItem = true;
                     currentItem = obj.GetComponent<Item>();
                 }
