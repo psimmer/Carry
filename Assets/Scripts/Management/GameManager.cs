@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] SceneMan sceneManager;
     [SerializeField] UIManager uiManager;
     [SerializeField] PatientSpawner patientSpawner;
+    [SerializeField] private Animator playerAnimator;
 
     #region Multipliers
     [SerializeField] private float healCoffee;
@@ -130,6 +131,7 @@ public class GameManager : MonoBehaviour
             //Success, right treatment
             else if (patient.CurrentIllness == player.currentItem.item.task)
             {
+                playerAnimator.SetBool("isTreating", true);
                 patient.GetComponentInChildren<PopUp>().IsHealing = true;
                 StartCoroutine(TreatmentProgress(patient));
             }
@@ -180,6 +182,7 @@ public class GameManager : MonoBehaviour
                         player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
                         uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
 
+                        playerAnimator.SetBool("isTreating", false);
                         ResetItem();
                         player.IsInContact = false;
                         Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
@@ -188,6 +191,7 @@ public class GameManager : MonoBehaviour
                     //Fail
                     else if (!Input.GetKey(KeyCode.Space))
                     {
+                        playerAnimator.SetBool("isTreating", false);
                         Damage(patient);
                         ResetItem();
                         player.IsInContact = false;

@@ -83,6 +83,7 @@ public class Player : MonoBehaviour, ISaveSystem
                 }
                 if (obj.CompareTag("CoffeeMachine"))
                 {
+                    animator.Play("Picking Up");
                     IsDrinkingCoffee = true;
                 }
             }
