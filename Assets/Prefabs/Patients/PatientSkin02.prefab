@@ -988,7 +988,7 @@ MonoBehaviour:
   - {fileID: 1360661134648728818, guid: f92f06ad432e1b141b9cc39e33b78d77, type: 3}
   - {fileID: 1360661134648728818, guid: b33414f6051a78943aefd5b19923fb57, type: 3}
   - {fileID: 1360661134648728818, guid: b821aa9fab037084da4ceeff42d9083c, type: 3}
-  canvas: {fileID: 1698449109629869800}
+  canvas: {fileID: 926155281594610805}
   minCurrentHp: 0
   maxCurrentHp: 0
   currentIllness: 10
