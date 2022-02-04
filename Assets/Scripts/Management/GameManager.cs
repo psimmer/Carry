@@ -97,15 +97,26 @@ public class GameManager : MonoBehaviour
 
         if (player.IsInContact)
         {
-
+            // release the patient to leave the hospital
+            if(player.currentItem == null && patient.CurrentIllness == TaskType.ReleasePatient && !patient.IsReleasing)
+            {
+                //patient.transform.position = patient.LeaveHospital.position;
+                //patient.transform.SetParent(patient.LeaveHospital);
+                Debug.Log("WHY?");
+                patient.transform.position = patient.LeaveHospital.transform.position;
+                patient.transform.rotation = Quaternion.Euler(0, 0, 0);
+                patient.PopUpCanvas.gameObject.SetActive(false);
+                patient.HealthBarCanvas.gameObject.SetActive(false);
+                patient.IsReleasing = true;
+            }
             //assign the patient from the hallway to the bed
-            if (player.currentItem == null && patient.CurrentIllness == TaskType.AssignBed)
+            else if (player.currentItem == null && patient.CurrentIllness == TaskType.AssignBed)
             {
                 patientSpawner.MoveToBed(patient);
                 player.IsInContact = false;
             }
             //damage to the patient, when you try to treat him without an item
-            else if (player.currentItem == null)
+            else if (player.currentItem == null && !(patient.CurrentIllness == TaskType.ReleasePatient))
             {
                 Damage(patient);
                 if (patient.CurrentHP <= 0)

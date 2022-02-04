@@ -25,7 +25,10 @@ public class Patient : MonoBehaviour , ISaveSystem
     [SerializeField] private int patientMaxHP;
     [SerializeField] private List<GameObject> popUpList;
     [SerializeField] private Transform popUpCanvas;
-    [SerializeField] private Transform healtBarCanvas;
+    public Transform PopUpCanvas { get { return popUpCanvas; } set { popUpCanvas = value; } }
+
+    [SerializeField] private Transform healthBarCanvas;
+    public Transform HealthBarCanvas { get { return healthBarCanvas; } set { healthBarCanvas = value; } }
 
     //range for the random HP that the patient spawns with
     [SerializeField] private int minCurrentHp;
@@ -40,8 +43,14 @@ public class Patient : MonoBehaviour , ISaveSystem
     //[SerializeField] private GameObject healthbarPrefab;
     [SerializeField] private Healthbar healthbar;
     [SerializeField] private GameObject heartbeat;
-    TaskType RandomTask;
+
     [SerializeField] bool isInBed = false;
+    [SerializeField] private Transform destroyPosition;
+    private Transform leaveHospital;
+    public Transform LeaveHospital => leaveHospital;
+
+    private bool isReleasing;
+    public bool IsReleasing { get { return isReleasing; } set { isReleasing = value; } }
 
     //PopUpStuff
     GameObject currentPopUp;
@@ -130,7 +139,11 @@ public class Patient : MonoBehaviour , ISaveSystem
 
     #endregion
 
-
+    private void Awake()
+    {
+        leaveHospital = GameObject.Find("LeaveHospitalPoint").transform;
+        destroyPosition = GameObject.Find("DestoyPos").transform;
+    }
     void Start()
     {
         tag = "Patient";
@@ -143,14 +156,19 @@ public class Patient : MonoBehaviour , ISaveSystem
         HasTask = false;
         IsPopping = false;
 
+        if (isInBed)
+        {
+            CurrentIllness = (TaskType)Random.Range(0, 6);
+        }
+
     }
 
     private void Update()
     {
         popUpTimer += Time.deltaTime;
         PopUpTimer(CurrentIllness, popUpCanvas);
-       
 
+        ReleasingPatient();
 
     }
 
@@ -208,6 +226,17 @@ public class Patient : MonoBehaviour , ISaveSystem
             healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
         }
     }
+
+    private void ReleasingPatient()
+    {
+        if (IsReleasing)
+        {
+            float interpolation = 0.5f * Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, destroyPosition.position, interpolation);
+        }
+    }
+
+
 
     private void SpawnParticles(GameObject particles, float duration)
     {

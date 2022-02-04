@@ -989,7 +989,7 @@ MonoBehaviour:
   - {fileID: 1360661134648728818, guid: b33414f6051a78943aefd5b19923fb57, type: 3}
   - {fileID: 1360661134648728818, guid: b821aa9fab037084da4ceeff42d9083c, type: 3}
   popUpCanvas: {fileID: 1255426915089454425}
-  healtBarCanvas: {fileID: 1698449109629869800}
+  healthBarCanvas: {fileID: 1698449109629869800}
   minCurrentHp: 0
   maxCurrentHp: 0
   currentIllness: 10
@@ -998,7 +998,7 @@ MonoBehaviour:
   hasTask: 0
   healthbar: {fileID: 6019247201364345339}
   heartbeat: {fileID: 7490145752033055991}
-  isInBed: 1
+  isInBed: 0
   healingParticles: {fileID: 5048721385892816507, guid: 172cc0eeeb0c10e4289ade386f0b8dcd, type: 3}
   damageParticles: {fileID: 1547498293661416764, guid: c15b5077315498b4ca930299472479f7, type: 3}
   particlesDuration: 3
