@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour , ISaveSystem
 {
-    [SerializeField] private Text timeText;
+    [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private int startTimeHours;
 
 
@@ -17,7 +18,7 @@ public class Timer : MonoBehaviour , ISaveSystem
 
     private void Awake()
     {
-        timeText = GetComponentInChildren<Text>();
+        //timeText = GetComponentInChildren<TextMeshProUGUI>();
     }
     private void Update()
     {

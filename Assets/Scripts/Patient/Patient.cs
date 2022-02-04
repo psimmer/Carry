@@ -24,7 +24,8 @@ public class Patient : MonoBehaviour , ISaveSystem
     [SerializeField] private int currentHP;
     [SerializeField] private int patientMaxHP;
     [SerializeField] private List<GameObject> popUpList;
-    [SerializeField] private Transform canvas;
+    [SerializeField] private Transform popUpCanvas;
+    [SerializeField] private Transform healtBarCanvas;
 
     //range for the random HP that the patient spawns with
     [SerializeField] private int minCurrentHp;
@@ -123,8 +124,8 @@ public class Patient : MonoBehaviour , ISaveSystem
 
     public Transform Canvas
     {
-        get { return canvas; }
-        set { canvas = value; }
+        get { return popUpCanvas; }
+        set { popUpCanvas = value; }
     }
 
     #endregion
@@ -147,7 +148,7 @@ public class Patient : MonoBehaviour , ISaveSystem
     private void Update()
     {
         popUpTimer += Time.deltaTime;
-        PopUpTimer(CurrentIllness, canvas);
+        PopUpTimer(CurrentIllness, popUpCanvas);
        
 
 

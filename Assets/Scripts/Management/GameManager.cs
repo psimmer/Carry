@@ -115,7 +115,8 @@ public class GameManager : MonoBehaviour
                     //SpawnParticles(deathParticles, particlesDuration);
                 }
                 player.IsInContact = false;
-
+                if (patient.CurrentPopUp != null)
+                    Destroy(patient.CurrentPopUp);
             }
 
             //Failure, wrong treatment
@@ -123,11 +124,12 @@ public class GameManager : MonoBehaviour
             {
                 Damage(patient);
                 ResetItem();
-                Destroy(patient.GetComponentInChildren<PopUp>().gameObject); // some errors could happens...
+                if (patient.CurrentPopUp != null)
+                    Destroy(patient.CurrentPopUp);
                 player.IsInContact = false;
             }
 
-          
+
             //Success, right treatment
             else if (patient.CurrentIllness == player.currentItem.item.task)
             {
@@ -135,7 +137,7 @@ public class GameManager : MonoBehaviour
                 patient.GetComponentInChildren<PopUp>().IsHealing = true;
                 StartCoroutine(TreatmentProgress(patient));
             }
-           
+
         }
     }
 
