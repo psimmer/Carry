@@ -17,6 +17,10 @@ public class MovePoints : MonoBehaviour
     bool isCameraFixed;
     public bool IsCameraFixed { get { return isCameraFixed; } set { isCameraFixed = value; } }
 
+    private void Awake()
+    {
+        IsCameraFixed = true;
+    }
 
     private void Update()
     {
