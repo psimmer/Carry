@@ -80,7 +80,8 @@ public class GameManager : MonoBehaviour
         {
             if (coffeeMachine.CoffeeCount > 0)
             {
-                player.CurrentStressLvl -= coffeeMachine.HealCoffee;  //multiply it by the stressReductionMultiplier?
+                coffeeMachine.Drinking = true;
+                //player.CurrentStressLvl -= coffeeMachine.HealCoffee;  //multiply it by the stressReductionMultiplier?
                 uiManager.updateCoffeCounter(--coffeeMachine.CoffeeCount);
             }
         }

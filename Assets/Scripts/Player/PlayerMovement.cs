@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float playerMovementSpeed;
+    public float PlayerMovementSpeed
+    {
+        get { return playerMovementSpeed; }
+        set { playerMovementSpeed = value; }
+    }
+
     [SerializeField] private float maxSpeed;
     [SerializeField] private Animator playerAnimator;
 
