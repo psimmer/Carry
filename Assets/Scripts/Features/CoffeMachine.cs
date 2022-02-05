@@ -69,7 +69,7 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         }
 
         timer -= Time.deltaTime;
-        coffeeFill.fillAmount -= Time.deltaTime/timer;
+        coffeeFill.fillAmount -= Time.deltaTime/maxTimer;
         //Debug.Log("FillAmount: "+ coffeeFill.fillAmount);
 
         if (totalTime <= 0)
