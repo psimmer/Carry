@@ -21898,7 +21898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6386689812334777364, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.781
+      value: -0.36
       objectReference: {fileID: 0}
     - target: {fileID: 6386689812334777364, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -21906,7 +21906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6386689812334777364, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.139
+      value: 2.47
       objectReference: {fileID: 0}
     - target: {fileID: 6703738231962610112, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28189,6 +28189,10 @@ PrefabInstance:
     - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: isInBed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: currentHP
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: currentIllness

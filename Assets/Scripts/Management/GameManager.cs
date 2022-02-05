@@ -147,6 +147,7 @@ public class GameManager : MonoBehaviour
             {
                 playerAnimator.SetBool("isTreating", true);
                 patient.GetComponentInChildren<PopUp>().IsHealing = true;
+                player.GetComponent<PlayerMovement>().enabled = false;
                 StartCoroutine(TreatmentProgress(patient));
             }
 
@@ -199,6 +200,7 @@ public class GameManager : MonoBehaviour
                         playerAnimator.SetBool("isTreating", false);
                         ResetItem();
                         player.IsInContact = false;
+                        player.GetComponent<PlayerMovement>().enabled = true;
                         Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
                         StopCoroutine(TreatmentProgress(patient));
                     }
@@ -209,6 +211,7 @@ public class GameManager : MonoBehaviour
                         Damage(patient);
                         ResetItem();
                         player.IsInContact = false;
+                        player.GetComponent<PlayerMovement>().enabled = true;
                         Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
                         StopCoroutine(TreatmentProgress(patient));
                     }
