@@ -165,7 +165,9 @@ public class Patient : MonoBehaviour , ISaveSystem
 
     private void Update()
     {
-        popUpTimer += Time.deltaTime;
+        if(!hasPopUp)
+            popUpTimer += Time.deltaTime;
+
         PopUpTimer(CurrentIllness, popUpCanvas);
 
         ReleasingPatient();
