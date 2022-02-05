@@ -70,10 +70,11 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
 
         timer -= Time.deltaTime;
         coffeeFill.fillAmount -= Time.deltaTime/timer;
-        Debug.Log("FillAmount: "+ coffeeFill.fillAmount);
+        //Debug.Log("FillAmount: "+ coffeeFill.fillAmount);
 
         if (totalTime <= 0)
         {
+            coffeeFill.fillAmount = 0;
             coffeeCup.gameObject.SetActive(false);
             drinking = false;
             timer = maxTimer; // refill the timer once the coffee effect is over
