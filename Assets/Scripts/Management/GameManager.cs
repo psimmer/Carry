@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
     public void Treatment(Patient patient)
     {
 
-        if (player.IsInContact)
+        if (player.IsInContact && patient.IsInBed) // the patient.isinbed fixed the issue with the null reference
         {
             // release the patient to leave the hospital
             if(player.currentItem == null && patient.CurrentIllness == TaskType.ReleasePatient && !patient.IsReleasing)
@@ -108,13 +108,8 @@ public class GameManager : MonoBehaviour
                 patient.transform.rotation = Quaternion.Euler(0, 0, 0);
                 patient.PopUpCanvas.gameObject.SetActive(false);
                 patient.HealthBarCanvas.gameObject.SetActive(false);
+                patient.IsInBed = false;
                 patient.IsReleasing = true;
-            }
-            //assign the patient from the hallway to the bed
-            else if (player.currentItem == null && patient.CurrentIllness == TaskType.AssignBed)
-            {
-                patientSpawner.MoveToBed(patient);
-                player.IsInContact = false;
             }
             //damage to the patient, when you try to treat him without an item
             else if (player.currentItem == null && !(patient.CurrentIllness == TaskType.ReleasePatient))
@@ -151,6 +146,16 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(TreatmentProgress(patient));
             }
 
+        }
+
+        else if(player.IsInContact && !patient.IsInBed)
+        {
+            //assign the patient from the hallway to the bed
+            if (player.currentItem == null && patient.CurrentIllness == TaskType.AssignBed)
+            {
+                patientSpawner.MoveToBed(patient);
+                player.IsInContact = false;
+            }
         }
     }
 
