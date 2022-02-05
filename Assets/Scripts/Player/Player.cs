@@ -83,7 +83,7 @@ public class Player : MonoBehaviour, ISaveSystem
                     {
                         camera.GetComponent<CamPosition>().MovePoint.IsCameraFixed = false;
                     }
-                    //camera.GetComponent<CamPosition>().currentPoint = obj.GetComponent<Computer>().DocumentationCamPos;
+                    GetComponent<PlayerMovement>().enabled = false;
                     camera.GetComponent<CamPosition>().lastPoint = obj.GetComponent<Computer>().DocumentationCamPos;
                     camera.transform.rotation = obj.GetComponent<Computer>().DocumentationCamPos.rotation;
                 }

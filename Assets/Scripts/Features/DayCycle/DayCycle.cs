@@ -14,11 +14,11 @@ public class DayCycle : MonoBehaviour, ISaveSystem
 
     private void Awake()
     {
-        if (GlobalData.instance.IsSaveFileLoaded)
-        {
-            LoadData();
-            //GlobalData.instance.IsSaveFileLoaded = false;
-        }
+        //if (GlobalData.instance.IsSaveFileLoaded)  // hab ich auskommentiert damit keine errors im build sind....
+        //{
+        //    LoadData();
+        //    GlobalData.instance.IsSaveFileLoaded = false;
+        //}
     }
 
     private void Start()

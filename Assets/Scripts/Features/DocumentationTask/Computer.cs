@@ -6,12 +6,21 @@ using TMPro;
 
 public class Computer : MonoBehaviour, ISaveSystem
 {
+    [SerializeField] private GameObject clipBoardCanvas;
+    public GameObject ClipBoardCanvas { get { return clipBoardCanvas; } set { clipBoardCanvas = value; } }
+
     [SerializeField] private GameObject canvas;
-    [SerializeField] private TextMeshProUGUI inputfield;
-    [SerializeField] private TextMeshProUGUI outputField;
+    public GameObject Canvas { get { return canvas; } set { canvas = value; } }
+    //[SerializeField] private TextMeshProUGUI hintText;
+    [SerializeField] private TMP_InputField inputField;
     [SerializeField] Transform documentationCamPos;
     public Transform DocumentationCamPos { get { return documentationCamPos; } set { documentationCamPos = value; } }
 
+    private void Awake()
+    {
+        canvas.gameObject.SetActive(false);
+        ClipBoardCanvas.gameObject.SetActive(false);
+    }
 
     private void Update()
     {
@@ -21,25 +30,9 @@ public class Computer : MonoBehaviour, ISaveSystem
     public void BeginDocumentation()
     {
         Camera.main.transform.position = documentationCamPos.position;
+        canvas.gameObject.SetActive(true);
+        ClipBoardCanvas.gameObject.SetActive(true);
     }
-
-    //public bool EndDocumentation()
-    //{
-
-    //    outputField = outputField.GetComponentInChildren<TextMeshProUGUI>();
-    //    Debug.Log(outputField.text);
-
-    //    if(outputField.text == "Twelve hours of work completed.")
-    //    {
-    //        canvas.gameObject.SetActive(false);
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        canvas.gameObject.SetActive(false);
-    //        return false;
-    //    }
-    //}
 
     public void LoadData()
     {

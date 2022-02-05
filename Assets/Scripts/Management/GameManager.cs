@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     #region Features
     [SerializeField] private Camera mainCam;
-    //[SerializeField] private CPU computer;
+    [SerializeField] private Computer computer;
     [SerializeField] private DayCycle dayCycle;
     [SerializeField] private Timer dayTime;
     #endregion
@@ -48,12 +48,16 @@ public class GameManager : MonoBehaviour
 
         //Features
         dayCycle.dayCycle();
+
         dayTime.DoubledRealTime();
         if (player.IsAtPc)
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 player.IsAtPc = false;
+                player.GetComponent<PlayerMovement>().enabled = true;
+                computer.Canvas.gameObject.SetActive(false);
+                computer.ClipBoardCanvas.gameObject.SetActive(false);
                 Camera.main.GetComponent<CamPosition>().lastPoint = Camera.main.GetComponent<CamPosition>().currentPoint;
                 Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().lastPoint.position;
                 Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraRotation;
