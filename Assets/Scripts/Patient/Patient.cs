@@ -25,6 +25,7 @@ public class Patient : MonoBehaviour , ISaveSystem
     [SerializeField] private int patientMaxHP;
     [SerializeField] private List<GameObject> popUpList;
     [SerializeField] private Transform popUpCanvas;
+    [SerializeField] private PatientSpawner spawner; // this is ugly but its the only way if we use this script to release patients (patient shouldnt know about the patientspawner)
     public Transform PopUpCanvas { get { return popUpCanvas; } set { popUpCanvas = value; } }
 
     [SerializeField] private Transform healthBarCanvas;
@@ -50,6 +51,7 @@ public class Patient : MonoBehaviour , ISaveSystem
     public Transform LeaveHospital => leaveHospital;
 
     private bool isReleasing;
+    private float destroyTimer = 0;
     public bool IsReleasing { get { return isReleasing; } set { isReleasing = value; } }
 
     //PopUpStuff
@@ -143,6 +145,7 @@ public class Patient : MonoBehaviour , ISaveSystem
     {
         leaveHospital = GameObject.Find("LeaveHospitalPoint").transform;
         destroyPosition = GameObject.Find("DestoyPos").transform;
+        spawner = GameObject.Find("PatientSpawner").GetComponent<PatientSpawner>();
     }
     void Start()
     {
@@ -231,8 +234,16 @@ public class Patient : MonoBehaviour , ISaveSystem
     {
         if (IsReleasing)
         {
+            destroyTimer += Time.deltaTime;
             float interpolation = 0.5f * Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, destroyPosition.position, interpolation);
+            if (destroyTimer >= 3) // the value is the time which will take the patient to be destroyed after being released
+            {
+                Destroy(gameObject);
+                destroyTimer = 0;
+                spawner.RemovePatientFromList(this); // this is ugly! (check patient spawner reference in this script for more details)
+            }
+            
         }
     }
 
