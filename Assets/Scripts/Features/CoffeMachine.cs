@@ -1,9 +1,6 @@
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
 public class CoffeMachine : MonoBehaviour, ISaveSystem
 {
 
@@ -17,14 +14,6 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
     private float maxTimer;
     [SerializeField] private int extraSpeed; // gained speed through coffee
 
-    private void Awake()
-    {
-        if (GlobalData.instance.IsSaveFileLoaded)
-        {
-            LoadData();
-            //GlobalData.instance.IsSaveFileLoaded = false;
-        }
-    }
 
     private void Start()
     {
@@ -93,36 +82,13 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         }
     }
 
-    
+    public void LoadData()
+    {
+        //throw new System.NotImplementedException();
+    }
 
     public void SaveData()
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-
-        string path = Application.persistentDataPath + "/SaveDataCoffeeMachine.carry";
-        Debug.Log("Save File location: " + path);
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-        formatter.Serialize(stream, coffeeCount);
-        stream.Close();
-    }
-
-    public void LoadData()
-    {
-        string path = Application.persistentDataPath + "/SaveDataCoffeeMachine.carry";
-        if (File.Exists(path))
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-            Debug.Log("Save File loaded: " + path);
-
-            coffeeCount = (int)formatter.Deserialize(stream);
-            stream.Close();
-
-        }
-        else
-        {
-            Debug.Log("Save File not found" + path);
-        }
+        //throw new System.NotImplementedException();
     }
 }
