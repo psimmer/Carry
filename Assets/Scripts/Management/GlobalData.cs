@@ -137,6 +137,12 @@ public class GlobalData : MonoBehaviour, ISaveSystem
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, GlobalData.instance.currentLevel);
+        formatter.Serialize(stream, GlobalData.instance.shiftPatientsHealed);
+        formatter.Serialize(stream, GlobalData.instance.shiftPatientsLost);
+        formatter.Serialize(stream, GlobalData.instance.shiftTreatments);
+        formatter.Serialize(stream, GlobalData.instance.totalPatientsHealed);
+        formatter.Serialize(stream, GlobalData.instance.totalPatientsLost);
+        formatter.Serialize(stream, GlobalData.instance.totalTreatments);
         stream.Close();        
     }
 
@@ -150,6 +156,13 @@ public class GlobalData : MonoBehaviour, ISaveSystem
             Debug.Log("Save File loaded: " + path);
          
             GlobalData.instance.currentLevel = (int)formatter.Deserialize(stream);
+            GlobalData.instance.shiftPatientsHealed = (int)formatter.Deserialize(stream);
+            GlobalData.instance.shiftPatientsLost = (int)formatter.Deserialize(stream);
+            GlobalData.instance.shiftTreatments = (int)formatter.Deserialize(stream);
+            GlobalData.instance.totalPatientsHealed = (int)formatter.Deserialize(stream);
+            GlobalData.instance.totalPatientsLost = (int)formatter.Deserialize(stream);
+            GlobalData.instance.totalTreatments = (int)formatter.Deserialize(stream);
+
             stream.Close();
          
         }

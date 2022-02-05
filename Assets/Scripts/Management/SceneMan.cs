@@ -39,6 +39,7 @@ public class SceneMan : MonoBehaviour
     public void LoadSaveFile()
     {
         //searches all scripts after the interface and executes the method (so everything gets saved)
+        Time.timeScale = 1f;
         GlobalData.instance.IsSaveFileLoaded = true;
         GlobalData.instance.LoadData();
         SceneManager.LoadScene("Level " + GlobalData.instance.CurrentLevel);
