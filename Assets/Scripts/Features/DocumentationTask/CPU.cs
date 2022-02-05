@@ -35,11 +35,11 @@ public class CPU : MonoBehaviour, ISaveSystem
 
     public void LoadData()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void SaveData()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

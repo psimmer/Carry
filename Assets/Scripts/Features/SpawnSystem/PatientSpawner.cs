@@ -97,6 +97,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
 
     public void LoadData()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

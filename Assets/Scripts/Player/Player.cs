@@ -143,12 +143,12 @@ public class Player : MonoBehaviour, ISaveSystem
 
     public void SaveData()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public void LoadData()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }
 

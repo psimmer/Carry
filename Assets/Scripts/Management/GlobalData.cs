@@ -23,7 +23,14 @@ public class GlobalData : MonoBehaviour, ISaveSystem
     private int shiftPatientsHealed;
     private int shiftPatientsLost;
 
+    private int currentScene;
     #region Properties
+
+    public int CurrentScene
+    {
+        get { return currentScene; }
+        set { currentScene = value; }
+    }
     public int TotalTreatments
     {
         get { return totalTreatments; }
@@ -111,11 +118,11 @@ public class GlobalData : MonoBehaviour, ISaveSystem
 
     public void SaveData()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void LoadData()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

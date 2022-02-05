@@ -61,11 +61,11 @@ public class Timer : MonoBehaviour , ISaveSystem
 
     public void SaveData()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void LoadData()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

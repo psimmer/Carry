@@ -28,20 +28,21 @@ public class SceneMan : MonoBehaviour
     public void SaveAndQuit()
     {
         //searches all scripts after the interface and executes the method (so everything gets saved)
-        //foreach(var saveMethod in FindObjectsOfType<MonoBehaviour>().OfType<ISaveSystem>())
-        //{
-        //    saveMethod.SaveData();
-        //}
-        //SceneManager.LoadScene("MainMenu");
+        foreach(var saveMethod in FindObjectsOfType<MonoBehaviour>().OfType<ISaveSystem>())
+        {
+            saveMethod.SaveData();
+        }
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void LoadSaveFile()
     {
         //searches all scripts after the interface and executes the method (so everything gets saved)
-        //foreach (var loadMethod in FindObjectsOfType<MonoBehaviour>().OfType<ISaveSystem>())
-        //{
-        //    loadMethod.LoadData();
-        //}
+        foreach (var loadMethod in FindObjectsOfType<MonoBehaviour>().OfType<ISaveSystem>())
+        {
+            loadMethod.LoadData();
+            
+        }
         //Load saved scene
     }
 
