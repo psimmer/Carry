@@ -13,6 +13,8 @@ TagManager:
   - SpawnPoint
   - Inside
   - Ground
+  - PatientDestroy
+  - Computer
   layers:
   - Default
   - TransparentFX

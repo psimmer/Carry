@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     #region Features
     [SerializeField] private Camera mainCam;
-    [SerializeField] private CPU computer;
+    //[SerializeField] private CPU computer;
     [SerializeField] private DayCycle dayCycle;
     [SerializeField] private Timer dayTime;
     #endregion
@@ -49,7 +49,16 @@ public class GameManager : MonoBehaviour
         //Features
         dayCycle.dayCycle();
         dayTime.DoubledRealTime();
-        DocumentationTask();
+        if (player.IsAtPc)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                player.IsAtPc = false;
+                Camera.main.GetComponent<CamPosition>().lastPoint = Camera.main.GetComponent<CamPosition>().currentPoint;
+                Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().lastPoint.position;
+                Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraRotation;
+            }
+        }
         DrinkingCoffee();
         uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
 
@@ -57,21 +66,6 @@ public class GameManager : MonoBehaviour
 
         if (player.CurrentStressLvl <= 0)
             player.CurrentStressLvl = 0;
-    }
-
-    private void DocumentationTask()
-    {
-        if (Input.GetKeyDown(KeyCode.Return) && player.IsAtPc)
-        {
-            bool IsInputCorrect = computer.EndDocumentation();
-            if (IsInputCorrect)
-                player.CurrentStressLvl -= 20;
-            else
-            {
-                player.CurrentStressLvl += 20;
-            }
-            player.IsAtPc = false;
-        }
     }
 
     private void DrinkingCoffee()
@@ -101,15 +95,13 @@ public class GameManager : MonoBehaviour
             // release the patient to leave the hospital
             if(player.currentItem == null && patient.CurrentIllness == TaskType.ReleasePatient && !patient.IsReleasing)
             {
-                //patient.transform.position = patient.LeaveHospital.position;
-                //patient.transform.SetParent(patient.LeaveHospital);
-                Debug.Log("WHY?");
                 patient.transform.position = patient.LeaveHospital.transform.position;
                 patient.transform.rotation = Quaternion.Euler(0, 0, 0);
                 patient.PopUpCanvas.gameObject.SetActive(false);
                 patient.HealthBarCanvas.gameObject.SetActive(false);
                 patient.IsInBed = false;
                 patient.IsReleasing = true;
+                patientSpawner.PatientList.Remove(patient.gameObject);
             }
             //damage to the patient, when you try to treat him without an item
             else if (player.currentItem == null && !(patient.CurrentIllness == TaskType.ReleasePatient))

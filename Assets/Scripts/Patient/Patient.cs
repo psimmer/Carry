@@ -25,7 +25,7 @@ public class Patient : MonoBehaviour , ISaveSystem
     [SerializeField] private int patientMaxHP;
     [SerializeField] private List<GameObject> popUpList;
     [SerializeField] private Transform popUpCanvas;
-    [SerializeField] private PatientSpawner spawner; // this is ugly but its the only way if we use this script to release patients (patient shouldnt know about the patientspawner)
+    //[SerializeField] private PatientSpawner spawner; // this is ugly but its the only way if we use this script to release patients (patient shouldnt know about the patientspawner)
     public Transform PopUpCanvas { get { return popUpCanvas; } set { popUpCanvas = value; } }
 
     [SerializeField] private Transform healthBarCanvas;
@@ -145,7 +145,6 @@ public class Patient : MonoBehaviour , ISaveSystem
     {
         leaveHospital = GameObject.Find("LeaveHospitalPoint").transform;
         destroyPosition = GameObject.Find("DestoyPos").transform;
-        spawner = GameObject.Find("PatientSpawner").GetComponent<PatientSpawner>();
     }
     void Start()
     {
@@ -153,8 +152,6 @@ public class Patient : MonoBehaviour , ISaveSystem
         hasPopUp = false;
         timetillPopUp = Random.Range(10, 15);       //this gets serialized;
         healthbar = GetComponentInChildren<Healthbar>();
-        
-        //CurrentIllness = (TaskType)Random.Range(0, 6);
         
         HasTask = false;
         IsPopping = false;
@@ -172,7 +169,6 @@ public class Patient : MonoBehaviour , ISaveSystem
         PopUpTimer(CurrentIllness, popUpCanvas);
 
         ReleasingPatient();
-
     }
 
     private void LateUpdate()
@@ -230,7 +226,7 @@ public class Patient : MonoBehaviour , ISaveSystem
         }
     }
 
-    private void ReleasingPatient()
+    public void ReleasingPatient()
     {
         if (IsReleasing)
         {
@@ -241,7 +237,7 @@ public class Patient : MonoBehaviour , ISaveSystem
             {
                 Destroy(gameObject);
                 destroyTimer = 0;
-                spawner.RemovePatientFromList(this); // this is ugly! (check patient spawner reference in this script for more details)
+                //spawner.RemovePatientFromList(this); // this is ugly! (check patient spawner reference in this script for more details)
             }
             
         }
@@ -284,6 +280,15 @@ public class Patient : MonoBehaviour , ISaveSystem
         }
         yield return new WaitForEndOfFrame();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PatientDestroy"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 
     public void SaveToStream(System.IO.FileStream fileStream)
     {

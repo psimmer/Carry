@@ -4,13 +4,23 @@ public class CamPosition : MonoBehaviour
 {
     [SerializeField] private Transform camPoints;
     [SerializeField] MovePoints movePoints;
+    public MovePoints MovePoint { get { return movePoints; } set { movePoints = value; } }
     [SerializeField] float cameraSpeedOut;
     [SerializeField] float cameraSpeedIn;
 
     [SerializeField] public Transform currentPoint;
     [SerializeField] public Transform lastPoint;
 
+    Quaternion cameraRotation;
+    public Quaternion CameraRotation => cameraRotation;
     private float interpolation;
+
+    private void Awake()
+    {
+        cameraRotation = this.gameObject.transform.rotation;
+    }
+
+
 
     private void Update()
     {

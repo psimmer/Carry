@@ -13,15 +13,16 @@ public class Player : MonoBehaviour, ISaveSystem
     [SerializeField] private int noItemDamage;
     [SerializeField] private Animator animator;
     Coroutine reduceStressIfOutside;
+
     private bool isAtPC;
-    
+    public bool IsAtPc { get { return isAtPC; } set { isAtPC = value; } }
+
 
     #region Properties
     public int NoItemDamage
     {
         get { return noItemDamage; }
     }
-    public bool IsAtPc { get { return isAtPC; } set { isAtPC = value; } }
     public float CurrentStressLvl
     {
         get { return currentStressLvl; }
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour, ISaveSystem
     private void Awake()
     {
         IsHoldingItem = false;
-        IsAtPc = false;
+        //IsAtPc = false;
         PopUp.e_OnPopUpTimeOut += TimeOutDamage;
     }
 
@@ -74,12 +75,17 @@ public class Player : MonoBehaviour, ISaveSystem
                     currentPatient = obj.GetComponent<Patient>();
                     IsInContact = true;
                 }
-                if (obj.CompareTag("CPU"))
+                if (obj.GetComponent<Computer>())
                 {
-                    Debug.Log("Documentation Starts.");
                     IsAtPc = true;
-                    obj.GetComponent<CPU>().BeginDocumentation();
-                    //Start Documentation.
+                    obj.GetComponent<Computer>().BeginDocumentation();
+                    if (camera.GetComponent<CamPosition>().MovePoint.IsCameraFixed)
+                    {
+                        camera.GetComponent<CamPosition>().MovePoint.IsCameraFixed = false;
+                    }
+                    //camera.GetComponent<CamPosition>().currentPoint = obj.GetComponent<Computer>().DocumentationCamPos;
+                    camera.GetComponent<CamPosition>().lastPoint = obj.GetComponent<Computer>().DocumentationCamPos;
+                    camera.transform.rotation = obj.GetComponent<Computer>().DocumentationCamPos.rotation;
                 }
                 if (obj.CompareTag("CoffeeMachine"))
                 {
@@ -127,6 +133,8 @@ public class Player : MonoBehaviour, ISaveSystem
                 camera.GetComponent<CamPosition>().lastPoint = newPos;
             }
         }
+
+       
 
     }
 
