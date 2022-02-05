@@ -120,7 +120,7 @@ public class UIManager : MonoBehaviour
     /// Updates the amount of Coffees left in the UI
     /// </summary>
     /// <param name="coffeeCount"></param>
-    public void updateCoffeCounter(int coffeeCount)
+    public void UpdateCoffeCounter(int coffeeCount)
     {
         coffeeCounter.text = "Coffee: " + coffeeCount;
     }

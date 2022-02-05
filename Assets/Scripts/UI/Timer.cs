@@ -4,7 +4,10 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
+[System.Serializable]
 public class Timer : MonoBehaviour , ISaveSystem
 {
     [SerializeField] private TextMeshProUGUI timeText;
@@ -18,7 +21,10 @@ public class Timer : MonoBehaviour , ISaveSystem
 
     private void Awake()
     {
-        //timeText = GetComponentInChildren<TextMeshProUGUI>();
+        if (GlobalData.instance.IsSaveFileLoaded)
+        {
+            LoadData();
+        }
     }
     private void Update()
     {
@@ -61,11 +67,37 @@ public class Timer : MonoBehaviour , ISaveSystem
 
     public void SaveData()
     {
-        //throw new System.NotImplementedException();
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        string path = Application.persistentDataPath + "/SaveDataTimer.carry";
+        Debug.Log("Save File location: " + path);
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, startTimeHours);
+        formatter.Serialize(stream, realTime);
+
+        stream.Close();
+
     }
 
     public void LoadData()
     {
-        //throw new System.NotImplementedException();
+        string path = Application.persistentDataPath + "/SaveDataTimer.carry";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+            Debug.Log("Save File loaded: " + path);
+
+            startTimeHours = (int)formatter.Deserialize(stream);
+            realTime = (float)formatter.Deserialize(stream);
+
+            stream.Close();
+
+        }
+        else
+        {
+            Debug.Log("Save File not found" + path);
+        }
     }
 }

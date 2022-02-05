@@ -22,6 +22,7 @@ public class SceneMan : MonoBehaviour
         Time.timeScale = 1f;
         GlobalData.instance.ResetTotalStatistics();
         GlobalData.instance.ResetShiftStatistics();
+        GlobalData.instance.CurrentLevel = 1;
         SceneManager.LoadScene("Level 1");
     }
 
@@ -38,24 +39,25 @@ public class SceneMan : MonoBehaviour
     public void LoadSaveFile()
     {
         //searches all scripts after the interface and executes the method (so everything gets saved)
-        foreach (var loadMethod in FindObjectsOfType<MonoBehaviour>().OfType<ISaveSystem>())
-        {
-            loadMethod.LoadData();
-            
-        }
-        //Load saved scene
+        Time.timeScale = 1f;
+        GlobalData.instance.IsSaveFileLoaded = true;
+        GlobalData.instance.LoadData();
+        SceneManager.LoadScene("Level " + GlobalData.instance.CurrentLevel);
     }
 
     public void ContinueNextLvl()
     {
+        GlobalData.instance.CurrentLevel++;
         GlobalData.instance.ResetShiftStatistics();
+        SceneManager.LoadScene("Level " + GlobalData.instance.CurrentLevel);
     }
 
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f;
-        GlobalData.instance.ResetTotalStatistics();
-        //GlobalData.instance.isSaveFileLoaded = false;
+        GlobalData.instance.ResetShiftStatistics();     //just for safety
+        GlobalData.instance.ResetTotalStatistics();     //just for safety
+        GlobalData.instance.IsSaveFileLoaded = false;
         SceneManager.LoadScene("MainMenu");
     }
 
