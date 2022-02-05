@@ -12,6 +12,14 @@ public class DayCycle : MonoBehaviour, ISaveSystem
     private Quaternion endPos;
     public Action dayCycle;
 
+    private void Awake()
+    {
+        if (GlobalData.instance.IsSaveFileLoaded)
+        {
+            LoadData();
+            //GlobalData.instance.IsSaveFileLoaded = false;
+        }
+    }
 
     private void Start()
     {
@@ -32,7 +40,7 @@ public class DayCycle : MonoBehaviour, ISaveSystem
 
         string path = Application.persistentDataPath + "/SaveDataDayCycle.carry";
         Debug.Log("Save File location: " + path);
-        FileStream stream = new FileStream(path, FileMode.Append, FileAccess.Write);
+        FileStream stream = new FileStream(path, FileMode.Create);
 
         float[] position = new float[3];
         position[0] = this.transform.rotation.x;
@@ -45,11 +53,12 @@ public class DayCycle : MonoBehaviour, ISaveSystem
 
     public void LoadData()
     {
-        string path = Application.persistentDataPath + "/SaveDataDayCycle.carry.carry";
+        string path = Application.persistentDataPath + "/SaveDataDayCycle.carry";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
+            Debug.Log("Save File loaded: " + path);
 
             float[] position = new float[3];
             position = (float[])formatter.Deserialize(stream);

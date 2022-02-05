@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+[System.Serializable]
 public class GlobalData : MonoBehaviour, ISaveSystem
 {
     public static GlobalData instance;
@@ -23,13 +26,21 @@ public class GlobalData : MonoBehaviour, ISaveSystem
     private int shiftPatientsHealed;
     private int shiftPatientsLost;
 
-    private int currentScene;
+    private int currentLevel = 1;
+
+    private bool isSaveFileLoaded;
+
     #region Properties
 
-    public int CurrentScene
+    public bool IsSaveFileLoaded
     {
-        get { return currentScene; }
-        set { currentScene = value; }
+        get { return isSaveFileLoaded; }
+        set { isSaveFileLoaded = value; }
+    }
+    public int CurrentLevel
+    {
+        get { return currentLevel; }
+        set { currentLevel = value; }
     }
     public int TotalTreatments
     {
@@ -79,6 +90,7 @@ public class GlobalData : MonoBehaviour, ISaveSystem
             Destroy(this.gameObject);
         }
 
+
         DontDestroyOnLoad(gameObject);  //take GlobalData to the next scene
     }
 
@@ -118,11 +130,32 @@ public class GlobalData : MonoBehaviour, ISaveSystem
 
     public void SaveData()
     {
-        //throw new System.NotImplementedException();
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        string path = Application.persistentDataPath + "/SaveDataGlobalData.carry";
+        Debug.Log("Save File location: " + path);
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, GlobalData.instance.currentLevel);
+        stream.Close();        
     }
 
     public void LoadData()
     {
-        //throw new System.NotImplementedException();
+        string path = Application.persistentDataPath + "/SaveDataGlobalData.carry";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+            Debug.Log("Save File loaded: " + path);
+         
+            GlobalData.instance.currentLevel = (int)formatter.Deserialize(stream);
+            stream.Close();
+         
+        }
+        else
+        {
+            Debug.Log("Save File not found" + path);
+        }
     }
 }
