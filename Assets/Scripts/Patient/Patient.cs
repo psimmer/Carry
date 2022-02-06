@@ -195,6 +195,7 @@ public class Patient : MonoBehaviour , ISaveSystem
             //Damage
             if (health < 0)
             {
+                SoundManager.instance.PlayAudioClip(ESoundeffects.Damage, GetComponent<AudioSource>());
                 CurrentIllness = (TaskType)Random.Range(0, 6);
                 SpawnParticles(damageParticles, particlesDuration);
                 //Destroy(currentPopUp);
@@ -204,7 +205,7 @@ public class Patient : MonoBehaviour , ISaveSystem
             //Heal
             else if (health > 0)
             {
-
+                SoundManager.instance.PlayAudioClip(ESoundeffects.Heal, GetComponent<AudioSource>());
                 CurrentIllness = (TaskType)Random.Range(0, 6);
                 SpawnParticles(healingParticles, particlesDuration);
                 Debug.Log($"health größer als 0 {health}");
@@ -213,6 +214,7 @@ public class Patient : MonoBehaviour , ISaveSystem
             // patient full recovered
             if (currentHP >= patientMaxHP)
             {
+                SoundManager.instance.PlayAudioClip(ESoundeffects.Heal, GetComponent<AudioSource>());
                 currentHP = patientMaxHP;
                 GlobalData.instance.SetPatientHealedStatistics();
                 Debug.Log($"patient vollgeheilt {health}");
@@ -222,6 +224,7 @@ public class Patient : MonoBehaviour , ISaveSystem
             // patient dead
             else if (currentHP <= 0)
             {
+                SoundManager.instance.PlayAudioClip(ESoundeffects.Death, GetComponent<AudioSource>());
                 GlobalData.instance.SetPatientDeadStatistics();
                 Debug.Log($"patient tot {health}");
                 Destroy(this.gameObject);
@@ -280,6 +283,7 @@ public class Patient : MonoBehaviour , ISaveSystem
                     {
                         hasPopUp = true;
                         currentPopUp = Instantiate(popUp.gameObject, canvas);
+                        SoundManager.instance.PlayAudioClip(ESoundeffects.PopUp, GetComponent<AudioSource>());
                         //currentPopUp.transform.position = new Vector3(canvas.position.x, canvas.position.y + 1f, canvas.position.z);
 
                     }

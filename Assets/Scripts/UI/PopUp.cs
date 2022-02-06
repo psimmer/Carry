@@ -37,10 +37,10 @@ public class PopUp : MonoBehaviour , ISaveSystem
         {
             UpdateRadialBar();
             PopUpCondition();
+            
         }
     }
-
-
+    
     private void PopUpCondition()
     {
         if (radialBarImage.fillAmount <= 0)

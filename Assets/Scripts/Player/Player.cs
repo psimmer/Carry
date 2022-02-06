@@ -65,6 +65,7 @@ public class Player : MonoBehaviour, ISaveSystem
             {
                 if (obj.CompareTag("Item"))
                 {
+                    SoundManager.instance.PlayAudioClip(ESoundeffects.PickUpItem, GetComponent<AudioSource>());
                     //Pickup
                     animator.Play("Picking Up");
                     IsHoldingItem = true;

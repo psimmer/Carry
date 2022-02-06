@@ -46,23 +46,27 @@ public class PlayerMovement : MonoBehaviour
         {
             verticalMovement = 1f;
             playerAnimator.SetBool("isWalking", true);
+            SoundManager.instance.PlayAudioClip(ESoundeffects.FootSteps, GetComponent<AudioSource>());
         }
         else if (Input.GetKey(KeyCode.S))
         {
             verticalMovement = -1f;
             playerAnimator.SetBool("isWalking", true);
+            SoundManager.instance.PlayAudioClip(ESoundeffects.FootSteps, GetComponent<AudioSource>());
         }
         if (Input.GetKey(KeyCode.A))
         {
             horizontalMovement = -1f;
             playerAnimator.SetBool("isWalking", true);
+            SoundManager.instance.PlayAudioClip(ESoundeffects.FootSteps, GetComponent<AudioSource>());
         }
         else if (Input.GetKey(KeyCode.D))
         {
             horizontalMovement = 1f;
             playerAnimator.SetBool("isWalking", true);
+            SoundManager.instance.PlayAudioClip(ESoundeffects.FootSteps, GetComponent<AudioSource>());
         }
-        if(!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+        if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
         {
             playerAnimator.SetBool("isWalking", false);
         }

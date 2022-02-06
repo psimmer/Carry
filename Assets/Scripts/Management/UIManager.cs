@@ -52,6 +52,7 @@ public class UIManager : MonoBehaviour
     #region Show Statistics after Complete Level/GameOver
     public void ShowStatsCompleteShift()
     {
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Winning, GetComponent<AudioSource>());
         patientsHealed.text = "Patients Healed: " + GlobalData.instance.ShiftPatientsHealed;
         patientsLost.text = "Patients Lost: " + GlobalData.instance.ShiftPatientsLost;
         treatments.text = "Treatments: " + GlobalData.instance.ShiftTreatments;
@@ -59,6 +60,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowStatsGameOver()
     {
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Losing, GetComponent<AudioSource>());
         patientsHealed.text = "Patients Healed: " + GlobalData.instance.TotalPatientsHealed;
         patientsLost.text = "Patients Lost: " + GlobalData.instance.TotalPatientsLost;
         treatments.text = "Treatments: " + GlobalData.instance.TotalTreatments;
@@ -126,6 +128,8 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateStressLvlBar(float percent)
     {
+        GetComponent<AudioSource>().volume = percent;
+        SoundManager.instance.PlayAudioClip(ESoundeffects.StressLevel, GetComponent<AudioSource>());
         stressLvlBar.value = percent;
     }
     #endregion

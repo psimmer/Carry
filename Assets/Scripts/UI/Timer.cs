@@ -33,7 +33,6 @@ public class Timer : MonoBehaviour , ISaveSystem
         if (startTimeHours == endTimeHours && (int)realTime == 59)
         {
             SceneManager.LoadScene("LevelComplete");    //should be in the GameManager
-            Debug.Log("SceneManager....");
         }
 
     }
