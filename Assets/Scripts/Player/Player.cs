@@ -77,6 +77,7 @@ public class Player : MonoBehaviour, ISaveSystem
                 }
                 if (obj.GetComponent<Computer>())
                 {
+                    animator.SetBool("isWalking", false);
                     IsAtPc = true;
                     obj.GetComponent<Computer>().BeginDocumentation();
                     if (camera.GetComponent<CamPosition>().MovePoint.IsCameraFixed)

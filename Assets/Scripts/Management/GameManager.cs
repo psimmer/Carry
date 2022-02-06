@@ -99,12 +99,13 @@ public class GameManager : MonoBehaviour
             if(player.currentItem == null && patient.CurrentIllness == TaskType.ReleasePatient && !patient.IsReleasing)
             {
                 patient.transform.position = patient.LeaveHospital.transform.position;
-                patient.transform.rotation = Quaternion.Euler(0, 0, 0);
+                patient.transform.rotation = patient.LeaveHospital.transform.rotation;
                 patient.PopUpCanvas.gameObject.SetActive(false);
                 patient.HealthBarCanvas.gameObject.SetActive(false);
                 patient.IsInBed = false;
                 patient.IsReleasing = true;
                 patientSpawner.PatientList.Remove(patient.gameObject);
+                patient.GetComponent<Animator>().SetBool("isWalking", true);
             }
             //damage to the patient, when you try to treat him without an item
             else if (player.currentItem == null && !(patient.CurrentIllness == TaskType.ReleasePatient))

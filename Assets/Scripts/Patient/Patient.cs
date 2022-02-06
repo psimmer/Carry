@@ -62,6 +62,8 @@ public class Patient : MonoBehaviour , ISaveSystem
     bool hasPopUp;
     public bool HasPopUp { get { return hasPopUp; } set { hasPopUp = value; } }
 
+    [SerializeField] bool isLayingSinceStart;
+
     #region Particles
 
     [SerializeField] private GameObject healingParticles;
@@ -143,6 +145,10 @@ public class Patient : MonoBehaviour , ISaveSystem
 
     private void Awake()
     {
+        if (isLayingSinceStart)
+        {
+            GetComponent<Animator>().SetBool("isLaying", true);
+        }
         leaveHospital = GameObject.Find("LeaveHospitalPoint").transform;
         destroyPosition = GameObject.Find("DestoyPos").transform;
     }
@@ -233,9 +239,9 @@ public class Patient : MonoBehaviour , ISaveSystem
         if (IsReleasing)
         {
             destroyTimer += Time.deltaTime;
-            float interpolation = 0.5f * Time.deltaTime;
+            float interpolation = 0.2f * Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, destroyPosition.position, interpolation);
-            if (destroyTimer >= 3) // the value is the time which will take the patient to be destroyed after being released
+            if (destroyTimer >= 6) // the value is the time which will take the patient to be destroyed after being released
             {
                 Destroy(gameObject);
                 destroyTimer = 0;
