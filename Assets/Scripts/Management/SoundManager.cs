@@ -43,17 +43,18 @@ public class SoundManager : MonoBehaviour
     {
         for (int i = 0; i < soundeffects.Count; i++)
         {
-            if(soundeffects[i].TypeOfSound == soundType &&  IsSoundPlayable(soundeffects[i]))
+            if(soundeffects[i].TypeOfSound == soundType &&  IsSoundPlayable(soundeffects[i], soundeffects[i].Offset))
             {
+                audioSource.volume = soundeffects[i].SoundVolume;
                 audioSource.PlayOneShot(soundeffects[i].ClipSound);
                 return;
             }
         }
     }
 
-    bool IsSoundPlayable(SoundFile sound)
+    bool IsSoundPlayable(SoundFile sound, float offset)
     {
-        if(sound.SoundTimer <= Time.time)
+        if(sound.SoundTimer - offset <= Time.time)
         {
             SetTimer(sound);
             return true;
@@ -83,10 +84,17 @@ public class SoundFile
     [SerializeField] AudioClip clipSound;
     public AudioClip ClipSound => clipSound;
 
+    [SerializeField] float offset;
+    public float Offset { get { return offset; } }
+
     [SerializeField] float soundTimer;
     public float SoundTimer { get { return soundTimer; } set { soundTimer = value; } }
 
+    [SerializeField] float soundVolume;
+    public float SoundVolume { get { return soundVolume; } }
+
     [SerializeField] bool isStackable;
     public bool IsStackable { get { return isStackable; } }
+
 }
 

@@ -22347,51 +22347,75 @@ MonoBehaviour:
   soundeffects:
   - typeOfSound: 0
     clipSound: {fileID: 8300000, guid: a85bf90ef44e6924e8b1e0cb98d5fe34, type: 3}
+    offset: 0
     soundTimer: 0
+    soundVolume: 0.3
     isStackable: 1
   - typeOfSound: 1
     clipSound: {fileID: 8300000, guid: 94e92b61bbef3d044b43b5bf0a1fec1e, type: 3}
+    offset: 0
     soundTimer: 0
+    soundVolume: 0.2
     isStackable: 0
   - typeOfSound: 2
     clipSound: {fileID: 8300000, guid: 9ad8758003fdd52419fbb0a56f952c1b, type: 3}
+    offset: 0
     soundTimer: 0
+    soundVolume: 0.3
     isStackable: 0
   - typeOfSound: 3
     clipSound: {fileID: 8300000, guid: 32e793ec5f863fe4786bea7ff4d4ede3, type: 3}
+    offset: 0
     soundTimer: 0
+    soundVolume: 0
     isStackable: 1
   - typeOfSound: 4
     clipSound: {fileID: 8300000, guid: 1b2135dd5ff42d44abb7b80b04eed745, type: 3}
+    offset: 0.3
     soundTimer: 0
+    soundVolume: 0.25
     isStackable: 0
   - typeOfSound: 5
     clipSound: {fileID: 8300000, guid: 882725e7626abd4408ad3cf6fbf7f6d9, type: 3}
+    offset: 0
     soundTimer: 0
+    soundVolume: 0
     isStackable: 1
   - typeOfSound: 6
     clipSound: {fileID: 8300000, guid: ce49ee316f57da54580bea5e6d833e8d, type: 3}
+    offset: 0
     soundTimer: 0
+    soundVolume: 0.05
     isStackable: 0
   - typeOfSound: 7
     clipSound: {fileID: 8300000, guid: 2cb7b77327d928c4ca038741eebe6d86, type: 3}
+    offset: 0
     soundTimer: 0
+    soundVolume: 0
     isStackable: 0
   - typeOfSound: 8
     clipSound: {fileID: 8300000, guid: ac6b0364c36abce4e89b8039187d19d4, type: 3}
+    offset: 0
     soundTimer: 0
+    soundVolume: 0.4
     isStackable: 1
   - typeOfSound: 9
     clipSound: {fileID: 8300000, guid: 3e59720608080de418a2dc7cca48be42, type: 3}
+    offset: -0.2
     soundTimer: 0
+    soundVolume: 0
     isStackable: 0
   - typeOfSound: 10
     clipSound: {fileID: 8300000, guid: 13ab7b3786e98fd4cb7c4578307fa520, type: 3}
+    offset: 0
     soundTimer: 0
+    soundVolume: 0.5
     isStackable: 0
   - typeOfSound: 11
     clipSound: {fileID: 8300000, guid: 6128f977deb75fa49802a7bf2fd2f86f, type: 3}
+    offset: 0
     soundTimer: 0
+    soundVolume: 0.4
     isStackable: 1
 --- !u!4 &1066123349
 Transform:
