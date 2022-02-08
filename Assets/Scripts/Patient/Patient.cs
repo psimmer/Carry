@@ -73,10 +73,17 @@ public class Patient : MonoBehaviour , ISaveSystem
     #region Particles
 
     [SerializeField] private GameObject healingParticles;
-    //[SerializeField] private GameObject fullHealingParticles;
+    public GameObject HealingParticles => healingParticles;
+    [SerializeField] private GameObject healParticles;
+    [SerializeField] private GameObject healingRayParticles;
     [SerializeField] private GameObject damageParticles;
-    //[SerializeField] private GameObject deathParticles;
+    [SerializeField] private GameObject sittingDamageParticles;
+    [SerializeField] private GameObject deathParticles;
+    public GameObject DeathParticles => deathParticles;
     [SerializeField] private float particlesDuration;
+    public float ParticlesDuration => particlesDuration;
+    private GameObject currentParticles;
+    public GameObject CurrentParticles { get { return currentParticles; } set { currentParticles = value; } }
 
     #endregion
 
@@ -219,7 +226,7 @@ public class Patient : MonoBehaviour , ISaveSystem
             {
                 SoundManager.instance.PlayAudioClip(ESoundeffects.Heal, GetComponent<AudioSource>());
                 CurrentIllness = (TaskType)Random.Range(0, 6);
-                SpawnParticles(healingParticles, particlesDuration);
+                SpawnParticles(healParticles, particlesDuration);
                 Debug.Log($"health größer als 0 {health}");
             }
 
@@ -236,10 +243,11 @@ public class Patient : MonoBehaviour , ISaveSystem
             // patient dead
             else if (currentHP <= 0)
             {
+                SpawnParticles(DeathParticles, particlesDuration);
                 SoundManager.instance.PlayAudioClip(ESoundeffects.Death, GetComponent<AudioSource>());
                 GlobalData.instance.SetPatientDeadStatistics();
                 Debug.Log($"patient tot {health}");
-                Destroy(this.gameObject);
+                Destroy(this.gameObject, particlesDuration);
                 //SpawnParticles(deathParticles, particlesDuration);
             }
             if (currentHP > 0 && currentHP < patientMaxHP && health > 0)
@@ -268,7 +276,7 @@ public class Patient : MonoBehaviour , ISaveSystem
 
 
 
-    private void SpawnParticles(GameObject particles, float duration)
+    public void SpawnParticles(GameObject particles, float duration)
     {
         GameObject newParticles = Instantiate(particles, this.transform);
         Destroy(newParticles, duration);
@@ -319,7 +327,7 @@ public class Patient : MonoBehaviour , ISaveSystem
         {
             losingHpTimer = 0;
             currentHP--;
-            SpawnParticles(damageParticles, particlesDuration);
+            SpawnParticles(sittingDamageParticles, particlesDuration);
         }
 
         losingHpTimer += Time.deltaTime;

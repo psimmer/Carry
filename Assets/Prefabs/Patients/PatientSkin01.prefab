@@ -1002,8 +1002,12 @@ MonoBehaviour:
   isInBed: 0
   destroyPosition: {fileID: 0}
   isLayingSinceStart: 0
-  healingParticles: {fileID: 5048721385892816507, guid: 172cc0eeeb0c10e4289ade386f0b8dcd, type: 3}
-  damageParticles: {fileID: 1547498293661416764, guid: c15b5077315498b4ca930299472479f7, type: 3}
+  healingParticles: {fileID: 5404059796577138036, guid: 639b46de5ce210d4aa6a001f3af4c2d7, type: 3}
+  healParticles: {fileID: 5404059796577138036, guid: 76a8313e80bd92e42bbe3ec90cbc5038, type: 3}
+  healingRayParticles: {fileID: 5404059796577138036, guid: 69d1ab495e3eb7c4b89ab4fdbef0af52, type: 3}
+  damageParticles: {fileID: 5404059796577138036, guid: bb1a28e29393cf7439c149f4fb2c5436, type: 3}
+  sittingDamageParticles: {fileID: 5404059796577138036, guid: b52488c8c23e22f4db1ba3cb3b104ca6, type: 3}
+  deathParticles: {fileID: 5404059796577138036, guid: b22c17f8913f6cf4b80a93073f5903e1, type: 3}
   particlesDuration: 3
 --- !u!82 &-7594616705205704858
 AudioSource:

@@ -29104,17 +29104,37 @@ PrefabInstance:
       value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: healParticles
+      value: 
+      objectReference: {fileID: 5404059796577138036, guid: 76a8313e80bd92e42bbe3ec90cbc5038, type: 3}
+    - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: currentIllness
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: deathParticles
+      value: 
+      objectReference: {fileID: 5404059796577138036, guid: b22c17f8913f6cf4b80a93073f5903e1, type: 3}
     - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: healthBarCanvas
       value: 
       objectReference: {fileID: 2086800856}
     - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: healingParticles
+      value: 
+      objectReference: {fileID: 5404059796577138036, guid: 639b46de5ce210d4aa6a001f3af4c2d7, type: 3}
+    - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: particlesDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: isLayingSinceStart
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: healingRayParticles
+      value: 
+      objectReference: {fileID: 5404059796577138036, guid: 69d1ab495e3eb7c4b89ab4fdbef0af52, type: 3}
     - target: {fileID: 6618043574851546592, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -29645,17 +29665,41 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: healParticles
+      value: 
+      objectReference: {fileID: 5404059796577138036, guid: 76a8313e80bd92e42bbe3ec90cbc5038, type: 3}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: currentIllness
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: deathParticles
+      value: 
+      objectReference: {fileID: 5404059796577138036, guid: b22c17f8913f6cf4b80a93073f5903e1, type: 3}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: damageParticles
+      value: 
+      objectReference: {fileID: 5404059796577138036, guid: bb1a28e29393cf7439c149f4fb2c5436, type: 3}
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: healthBarCanvas
       value: 
       objectReference: {fileID: 1953947949}
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: healingParticles
+      value: 
+      objectReference: {fileID: 5404059796577138036, guid: 639b46de5ce210d4aa6a001f3af4c2d7, type: 3}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: particlesDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: isLayingSinceStart
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: healingRayParticles
+      value: 
+      objectReference: {fileID: 5404059796577138036, guid: 69d1ab495e3eb7c4b89ab4fdbef0af52, type: 3}
     - target: {fileID: 6618043574851546592, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -35375,9 +35419,17 @@ PrefabInstance:
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1513948465030397886, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_RestoreOriginalTextOnEscape
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2334655723973113164, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3565615849516372378, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_text
+      value: Shift of 12 hours finished.
       objectReference: {fileID: 0}
     - target: {fileID: 3828206668431659987, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: m_Camera
@@ -35387,8 +35439,23 @@ PrefabInstance:
       propertyPath: m_BlockingMask.m_Bits
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 5930743008484771852, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: hintText
+      value: 
+      objectReference: {fileID: 1826692751}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+--- !u!114 &1826692751 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3565615849516372378, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+  m_PrefabInstance: {fileID: 1826692750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1826692753 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5930743008484771852, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}

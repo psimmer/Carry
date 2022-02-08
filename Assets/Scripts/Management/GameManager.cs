@@ -140,8 +140,7 @@ public class GameManager : MonoBehaviour
                 if (patient.CurrentHP <= 0)
                 {
                     patientSpawner.PatientList.Remove(patient.gameObject);
-                    Destroy(patient.gameObject);
-                    //SpawnParticles(deathParticles, particlesDuration);
+                    Destroy(patient.gameObject, patient.ParticlesDuration);
                 }
                 player.IsInContact = false;
                 if (patient.CurrentPopUp != null)
@@ -160,9 +159,15 @@ public class GameManager : MonoBehaviour
 
 
             //Success, right treatment
-            else if (patient.CurrentIllness == player.currentItem.item.task)
+            else if (Input.GetKeyDown(KeyCode.Space) && patient.CurrentIllness == player.currentItem.item.task)
             {
                 playerAnimator.SetBool("isTreating", true);
+                patient.CurrentParticles = Instantiate(patient.HealingParticles, patient.transform);
+                ParticleSystem[] ParticleLoops = patient.GetComponentsInChildren<ParticleSystem>();
+                for (int i = 0; i < ParticleLoops.Length; i++)
+                {
+                    ParticleLoops[i].loop = false;
+                }
                 patient.GetComponentInChildren<PopUp>().IsHealing = true;
                 player.GetComponent<PlayerMovement>().enabled = false;
                 StartCoroutine(TreatmentProgress(patient));
@@ -225,6 +230,7 @@ public class GameManager : MonoBehaviour
                         uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
 
                         playerAnimator.SetBool("isTreating", false);
+                        Destroy(patient.CurrentParticles, patient.ParticlesDuration);
                         ResetItem();
                         player.IsInContact = false;
                         player.GetComponent<PlayerMovement>().enabled = true;
@@ -235,6 +241,7 @@ public class GameManager : MonoBehaviour
                     else if (!Input.GetKey(KeyCode.Space))
                     {
                         playerAnimator.SetBool("isTreating", false);
+                        Destroy(patient.CurrentParticles);
                         Damage(patient);
                         ResetItem();
                         player.IsInContact = false;
