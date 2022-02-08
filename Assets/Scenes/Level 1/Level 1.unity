@@ -42057,7 +42057,7 @@ PrefabInstance:
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: coffeeMachine
       value: 
-      objectReference: {fileID: 2117576457}
+      objectReference: {fileID: 269122295}
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: patientSpawner
       value: 
