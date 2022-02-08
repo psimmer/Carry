@@ -29,7 +29,8 @@ public class DayCycle : MonoBehaviour, ISaveSystem
 
     public void LerpTheSun()
     {
-        interpolation += Time.deltaTime * (interpolationValue / 1000); 
+        interpolation += Time.deltaTime * (interpolationValue / 1000);
+        Debug.Log(interpolation);
         transform.rotation = Quaternion.Lerp(startPos, endPos, interpolation);
     }
 
@@ -41,12 +42,7 @@ public class DayCycle : MonoBehaviour, ISaveSystem
         Debug.Log("Save File location: " + path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        float[] position = new float[3];
-        position[0] = this.transform.rotation.x;
-        position[1] = this.transform.rotation.y;
-        position[2] = this.transform.rotation.z;
-
-        formatter.Serialize(stream, position);
+        formatter.Serialize(stream, interpolation);
         stream.Close();
     }
 
@@ -59,16 +55,11 @@ public class DayCycle : MonoBehaviour, ISaveSystem
             FileStream stream = new FileStream(path, FileMode.Open);
             Debug.Log("Save File loaded: " + path);
 
-            float[] position = new float[3];
-            position = (float[])formatter.Deserialize(stream);
+            interpolation = (float)formatter.Deserialize(stream);
+
             stream.Close();
 
-            Quaternion loadedQuaternion = new Quaternion();
-            loadedQuaternion.x = position[0];
-            loadedQuaternion.y = position[1];
-            loadedQuaternion.z = position[2];
-            this.transform.rotation = loadedQuaternion;
-
+            LerpTheSun();
         }
         else
         {
