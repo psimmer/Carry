@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
             if (coffeeMachine.CoffeeCount > 0)
             {
                 coffeeMachine.Drinking = true;
-                uiManager.UpdateCoffeCounter(--coffeeMachine.CoffeeCount);
+                coffeeMachine.UpdateCoffeCounter(--coffeeMachine.CoffeeCount);
             }
         }
         player.IsDrinkingCoffee = false;

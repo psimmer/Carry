@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -72,6 +73,16 @@ public class PopUp : MonoBehaviour , ISaveSystem
 
         radialBarImage.fillAmount = timePassed / duration;
         radialBarImage.color = gradient.Evaluate(radialBarImage.fillAmount);
+    }
+
+    public void SaveToStream(System.IO.FileStream fileStream)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        formatter.Serialize(fileStream, timePassed);
+        formatter.Serialize(fileStream, isHealing);
+
+        //how do i save the popup
     }
 
     public void SaveData()

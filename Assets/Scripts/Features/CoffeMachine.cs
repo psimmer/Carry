@@ -1,31 +1,22 @@
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class CoffeMachine : MonoBehaviour, ISaveSystem
 {
 
     [SerializeField] private int coffeeCount;
-    [SerializeField] private float healCoffee;
     [SerializeField] Image coffeeFill;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] Image coffeeCup;
+    [SerializeField] TMP_Text coffeeCounter;
     private bool drinking = false;
     [SerializeField] private float timer; // how long the effect lasts
     private float maxTimer;
     [SerializeField] private int extraSpeed; // gained speed through coffee
-
-
-    private void Start()
-    {
-        maxTimer = timer;
-    }
-    private void Update()
-    {
-        if (drinking)
-        {
-            CoffeeIsActive(timer, extraSpeed);
-        }
-    }
 
     #region Getters and setters
     public int CoffeeCount
@@ -51,12 +42,25 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         set { drinking = value; }
     }
 
-    public float HealCoffee
-    {
-        get { return healCoffee; }
-    }
     #endregion
+   
+    private void Awake()
+    {
+        if (GlobalData.instance.IsSaveFileLoaded)
+            LoadData();
+    }
 
+    private void Start()
+    {
+        maxTimer = timer;
+    }
+    private void Update()
+    {
+        if (drinking)
+        {
+            CoffeeIsActive(timer, extraSpeed);
+        }
+    }
 
     private void CoffeeIsActive(float totalTime, float gainedSpeed)
     {
@@ -81,14 +85,48 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
             playerMovement.PlayerMovementSpeed -= gainedSpeed;
         }
     }
-
-    public void LoadData()
+    public void UpdateCoffeCounter(int coffeeCount)
     {
-        //throw new System.NotImplementedException();
+        coffeeCounter.text = "Coffee: " + coffeeCount;
     }
 
     public void SaveData()
     {
-        //throw new System.NotImplementedException();
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        string path = Application.persistentDataPath + "/SaveDataCoffeeMachine.carry";
+        Debug.Log("Save File location: " + path);
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, coffeeCount);
+        formatter.Serialize(stream, timer);
+        formatter.Serialize(stream, drinking);
+
+        stream.Close();
     }
+
+    public void LoadData()
+    {
+        string path = Application.persistentDataPath + "/SaveDataCoffeeMachine.carry";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+            Debug.Log("Save File loaded: " + path);
+
+            coffeeCount = (int)formatter.Deserialize(stream);
+            timer = (float)formatter.Deserialize(stream);
+            drinking = (bool)formatter.Deserialize(stream);
+
+            stream.Close();
+            UpdateCoffeCounter(coffeeCount);
+
+        }
+        else
+        {
+            Debug.Log("Save File not found" + path);
+        }
+    }
+
+   
 }

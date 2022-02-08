@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] Button firstButton;
-    [SerializeField] TMP_Text coffeeCounter;
     [SerializeField] TMP_Text patientsHealed;
     [SerializeField] TMP_Text patientsLost;
     [SerializeField] TMP_Text treatments;
@@ -118,14 +117,8 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region StressLvlBar and CoffeeCounter
-    /// <summary>
-    /// Updates the amount of Coffees left in the UI
-    /// </summary>
-    /// <param name="coffeeCount"></param>
-    public void UpdateCoffeCounter(int coffeeCount)
-    {
-        coffeeCounter.text = "Coffee: " + coffeeCount;
-    }
+
+
     public void UpdateStressLvlBar(float percent)
     {
         GetComponent<AudioSource>().volume = percent;

@@ -2875,7 +2875,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstButton: {fileID: 7625184580526160212}
-  coffeeCounter: {fileID: 7098006510700971287}
   patientsHealed: {fileID: 0}
   patientsLost: {fileID: 0}
   treatments: {fileID: 0}
@@ -39122,10 +39121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coffeeCount: 3
-  healCoffee: 1
   coffeeFill: {fileID: 55094050}
   playerMovement: {fileID: 1564864119}
   coffeeCup: {fileID: 682372826}
+  coffeeCounter: {fileID: 7098006510700971287}
   timer: 25
   extraSpeed: 15000
 --- !u!1 &2120681264

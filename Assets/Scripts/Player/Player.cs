@@ -164,13 +164,16 @@ public class Player : MonoBehaviour, ISaveSystem
         string path = Application.persistentDataPath + "/SaveDataPlayer.carry";
         Debug.Log("Save File location: " + path);
         FileStream stream = new FileStream(path, FileMode.Create);
-
+        
+        formatter.Serialize(stream, transform.position.x);
+        formatter.Serialize(stream, transform.position.y);
+        formatter.Serialize(stream, transform.position.z);
         formatter.Serialize(stream, IsInContact);
         formatter.Serialize(stream, IsDrinkingCoffee);
         formatter.Serialize(stream, IsHoldingItem);
         formatter.Serialize(stream, isAtPC);
         formatter.Serialize(stream, currentStressLvl);
-        
+
         //how do i save the currentItem
         //formatter.Serialize(stream, currentItem.item.itemName);
         //formatter.Serialize(stream, currentItem.item.restoreHealth);
@@ -179,6 +182,7 @@ public class Player : MonoBehaviour, ISaveSystem
         //formatter.Serialize(stream, currentItem.item.UI_prefab);
 
         //how do i save the currentPatient
+        //currentPatient.SaveToStream(stream);
 
         stream.Close();
     }

@@ -315,6 +315,7 @@ public class Patient : MonoBehaviour , ISaveSystem
         formatter.Serialize(fileStream, isInBed);
         formatter.Serialize(fileStream, hasPopUp);
         //how do i save the popup
+        //currentPopUp.GetComponent<PopUp>().SaveToStream(fileStream);
     }
 
     public void SaveData()
