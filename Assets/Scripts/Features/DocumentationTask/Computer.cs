@@ -54,7 +54,8 @@ public class Computer : MonoBehaviour, ISaveSystem
         //camPosition[3] = documentationCamPos.rotation.x;
         //camPosition[4] = documentationCamPos.position.x;
         //camPosition[5] = documentationCamPos.position.x;
-        formatter.Serialize(stream, inputField.ToString());
+        //ring test = inputField.text;
+        formatter.Serialize(stream, inputField.text);
 
         stream.Close();
     }
