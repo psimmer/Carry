@@ -46,7 +46,8 @@ public class Bed : MonoBehaviour
         {
             isPatientInBed = false;
             setHealthBarAndPopUpSpawnPos = true;
-            lights.SetActive(false);
+            if(lights)
+                lights.SetActive(false);
         }
 
 
@@ -72,7 +73,8 @@ public class Bed : MonoBehaviour
 
             currentPatient.Heartbeat.SetActive(true);
             setHealthBarAndPopUpSpawnPos = false;
-            lights.SetActive(true);
+            if(lights)
+                lights.SetActive(true);
 
         }
         
