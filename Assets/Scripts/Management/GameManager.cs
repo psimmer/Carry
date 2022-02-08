@@ -50,20 +50,7 @@ public class GameManager : MonoBehaviour
         dayCycle.dayCycle();
 
         dayTime.DoubledRealTime();
-        if (player.IsAtPc)
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                player.IsAtPc = false;
-                player.GetComponent<PlayerMovement>().enabled = true;
-                computer.Canvas.gameObject.SetActive(false);
-                computer.ClipBoardCanvas.gameObject.SetActive(false);
-                Camera.main.GetComponent<CamPosition>().lastPoint = Camera.main.GetComponent<CamPosition>().currentPoint;
-                Camera.main.GetComponent<CamPosition>().MovePoint.CameraOnPc = false;
-                Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().lastPoint.position;
-                Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraRotation;
-            }
-        }
+       
         DrinkingCoffee();
         uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
 
@@ -87,6 +74,26 @@ public class GameManager : MonoBehaviour
         player.IsDrinkingCoffee = false;
 
     }
+
+
+    private void ComputerTaskSuccessCondition()
+    {
+        if (player.IsAtPc)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                player.IsAtPc = false;
+                player.GetComponent<PlayerMovement>().enabled = true;
+                computer.Canvas.gameObject.SetActive(false);
+                computer.ClipBoardCanvas.gameObject.SetActive(false);
+                Camera.main.GetComponent<CamPosition>().lastPoint = Camera.main.GetComponent<CamPosition>().currentPoint;
+                Camera.main.GetComponent<CamPosition>().MovePoint.CameraOnPc = false;
+                Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().lastPoint.position;
+                Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraRotation;
+            }
+        }
+    }
+
 
     /// <summary>
     /// Heals or damages the patient if it is the wrong item
