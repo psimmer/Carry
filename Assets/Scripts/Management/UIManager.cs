@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Slider stressLvlBar;
     [SerializeField] GameObject pauseElements;
     [SerializeField] GameObject optionsElements;
+    [SerializeField] AudioSource LevelMusic;
     GameObject mainMenuElements;
 
 
@@ -79,6 +80,8 @@ public class UIManager : MonoBehaviour
             {
                 Time.timeScale = 0f;
                 pauseElements.SetActive(true);
+                LevelMusic.Pause();
+
                 //TODO: dimm light
                 //TODO: Pause AUdio
                 //TODO: Pause Camera
@@ -87,6 +90,7 @@ public class UIManager : MonoBehaviour
             {
                 pauseElements.SetActive(false);
                 Time.timeScale = 1f;
+                LevelMusic.Play();
 
                 //TODO: dimm light
                 //TODO: play audio
@@ -110,6 +114,8 @@ public class UIManager : MonoBehaviour
     {
         pauseElements.SetActive(false);
         Time.timeScale = 1f;
+        LevelMusic.Play();
+
         //TODO: dimm light
         //TODO: play audio
         //TODO: Play Camera

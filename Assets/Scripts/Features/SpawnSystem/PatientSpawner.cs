@@ -46,6 +46,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
             Transform randomSpawn = spawnPoints[Random.Range(0, spawnPoints.Count)];
             if (randomSpawn.GetComponent<SpawnPoint>().IsFree)
             {
+                SoundManager.instance.PlayAudioClip(ESoundeffects.NewPatientArrived, GetComponent<AudioSource>());
                 GameObject newPatient = Instantiate(differentPatients[Random.Range(0, differentPatients.Count)], randomSpawn);
                 patientList.Add(newPatient);
                 newPatient.GetComponent<Patient>().CurrentIllness = TaskType.AssignBed;
