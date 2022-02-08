@@ -1369,14 +1369,14 @@ RectTransform:
   m_GameObject: {fileID: 55094048}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.81966966, y: 0.5479558, z: 1}
   m_Children: []
-  m_Father: {fileID: 682372825}
+  m_Father: {fileID: 1417730712}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -869.18005, y: 403.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &55094050
@@ -1399,12 +1399,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 28108f9e8ecd88e43982300f65728fd9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d0eeee151b99c4e448f124810455636e, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -5868,6 +5868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coffeeCount: 3
+  coffeeUI: {fileID: 1417730711}
   coffeeFill: {fileID: 55094050}
   playerMovement: {fileID: 1564864119}
   coffeeCup: {fileID: 682372826}
@@ -13407,7 +13408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &682372825
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13415,17 +13416,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682372824}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 55094049}
-  m_Father: {fileID: 7630062443464294066}
-  m_RootOrder: 7
+  m_Children: []
+  m_Father: {fileID: 1417730712}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -860, y: 415}
+  m_AnchoredPosition: {x: -860.00006, y: 414.99997}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &682372826
@@ -28487,6 +28487,10 @@ PrefabInstance:
       value: Coffee Maker
       objectReference: {fileID: 0}
     - target: {fileID: 1239201142768515450, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1239201142768515450, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
       propertyPath: m_TagString
       value: CoffeeMachine
       objectReference: {fileID: 0}
@@ -28630,6 +28634,43 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4461001548019060, guid: 76c585ac98c30b748a376638342e4e16, type: 3}
   m_PrefabInstance: {fileID: 1412599866}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1417730711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1417730712}
+  m_Layer: 5
+  m_Name: CoffeeUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1417730712
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417730711}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 55094049}
+  - {fileID: 682372825}
+  m_Father: {fileID: 7630062443464294066}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1420325854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39240,6 +39281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coffeeCount: 3
+  coffeeUI: {fileID: 0}
   coffeeFill: {fileID: 55094050}
   playerMovement: {fileID: 1564864119}
   coffeeCup: {fileID: 682372826}
@@ -42097,7 +42139,7 @@ PrefabInstance:
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: coffeeMachine
       value: 
-      objectReference: {fileID: 2117576457}
+      objectReference: {fileID: 269122295}
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: patientSpawner
       value: 
@@ -44549,7 +44591,7 @@ RectTransform:
   - {fileID: 594330451485613849}
   - {fileID: 8967026989001563917}
   - {fileID: 670758007}
-  - {fileID: 682372825}
+  - {fileID: 1417730712}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
