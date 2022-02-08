@@ -319,6 +319,7 @@ public class Patient : MonoBehaviour , ISaveSystem
         {
             losingHpTimer = 0;
             currentHP--;
+            SpawnParticles(damageParticles, particlesDuration);
         }
 
         losingHpTimer += Time.deltaTime;
