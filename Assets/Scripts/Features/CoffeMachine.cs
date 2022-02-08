@@ -9,11 +9,13 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
 {
 
     [SerializeField] private int coffeeCount;
+    [SerializeField] GameObject coffeeUI;
     [SerializeField] Image coffeeFill;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] Image coffeeCup;
     [SerializeField] TMP_Text coffeeCounter;
     private bool drinking = false;
+    private bool refillCup = false;
     [SerializeField] private float timer; // how long the effect lasts
     private float maxTimer;
     [SerializeField] private int extraSpeed; // gained speed through coffee
@@ -41,9 +43,14 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         get { return drinking; }
         set { drinking = value; }
     }
+    public bool RefillCup
+    {
+        get { return refillCup; }
+        set { refillCup = value; }
+    }
 
     #endregion
-   
+
     private void Awake()
     {
         if (GlobalData.instance.IsSaveFileLoaded)
@@ -58,30 +65,36 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
     {
         if (drinking)
         {
-            CoffeeIsActive(timer, extraSpeed);
+            CoffeeIsActive(maxTimer, extraSpeed);
         }
     }
 
     private void CoffeeIsActive(float totalTime, float gainedSpeed)
     {
 
-        if (timer == maxTimer)
+        if (timer == totalTime)
         {
-            coffeeCup.gameObject.SetActive(true);
+            coffeeUI.SetActive(true);
             playerMovement.PlayerMovementSpeed += gainedSpeed;
+        }
+
+        if(refillCup)
+        {
             coffeeFill.fillAmount = 1f;
+            timer = totalTime;
+            refillCup = false;
         }
 
         timer -= Time.deltaTime;
-        coffeeFill.fillAmount -= Time.deltaTime/maxTimer;
+        coffeeFill.fillAmount -= Time.deltaTime/totalTime;
         //Debug.Log("FillAmount: "+ coffeeFill.fillAmount);
 
-        if (totalTime <= 0)
+        if (timer <= 0)
         {
             coffeeFill.fillAmount = 0;
-            coffeeCup.gameObject.SetActive(false);
+            coffeeUI.SetActive(false);
             drinking = false;
-            timer = maxTimer; // refill the timer once the coffee effect is over
+            timer = totalTime; // refill the timer once the coffee effect is over
             playerMovement.PlayerMovementSpeed -= gainedSpeed;
         }
     }
