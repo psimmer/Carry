@@ -29,8 +29,7 @@ public class DayCycle : MonoBehaviour, ISaveSystem
 
     public void LerpTheSun()
     {
-        interpolation += Time.deltaTime * (interpolationValue / 1000);
-        Debug.Log(interpolation);
+        interpolation += Time.deltaTime * (interpolationValue / 1000); 
         transform.rotation = Quaternion.Lerp(startPos, endPos, interpolation);
     }
 
