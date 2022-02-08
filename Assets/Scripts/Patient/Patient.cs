@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ public enum TaskType
     AssignBed
 }
 
+[System.Serializable]
 public class Patient : MonoBehaviour , ISaveSystem
 {
     [SerializeField] private int currentHP;
@@ -307,11 +309,26 @@ public class Patient : MonoBehaviour , ISaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
 
         formatter.Serialize(fileStream, currentHP);
+        formatter.Serialize(fileStream, (int)currentIllness);
+        formatter.Serialize(fileStream, isPopping);
+        formatter.Serialize(fileStream, hasTask);
+        formatter.Serialize(fileStream, isInBed);
+        formatter.Serialize(fileStream, hasPopUp);
+        //how do i save the popup
     }
 
     public void SaveData()
     {
-        //throw new System.NotImplementedException();
+        //BinaryFormatter formatter = new BinaryFormatter();
+
+        //string path = Application.persistentDataPath + "/SaveDataPatientg.carry";
+        //Debug.Log("Save File location: " + path);
+        //FileStream stream = new FileStream(path, FileMode.Create);
+
+        //formatter.Serialize(stream, currentHP);
+
+
+        //stream.Close();
     }
 
     public void LoadData()

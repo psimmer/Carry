@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+[System.Serializable]
 public class Player : MonoBehaviour, ISaveSystem
 {
     [SerializeField] private Camera camera;
@@ -46,6 +49,9 @@ public class Player : MonoBehaviour, ISaveSystem
         IsHoldingItem = false;
         //IsAtPc = false;
         PopUp.e_OnPopUpTimeOut += TimeOutDamage;
+        if (GlobalData.instance.IsSaveFileLoaded)
+            LoadData();
+
     }
 
     private void TimeOutDamage(float damage)
@@ -153,7 +159,28 @@ public class Player : MonoBehaviour, ISaveSystem
 
     public void SaveData()
     {
-        //throw new NotImplementedException();
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        string path = Application.persistentDataPath + "/SaveDataPlayer.carry";
+        Debug.Log("Save File location: " + path);
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, IsInContact);
+        formatter.Serialize(stream, IsDrinkingCoffee);
+        formatter.Serialize(stream, IsHoldingItem);
+        formatter.Serialize(stream, isAtPC);
+        formatter.Serialize(stream, currentStressLvl);
+        
+        //how do i save the currentItem
+        //formatter.Serialize(stream, currentItem.item.itemName);
+        //formatter.Serialize(stream, currentItem.item.restoreHealth);
+        //formatter.Serialize(stream, currentItem.item.task);
+        //formatter.Serialize(stream, currentItem.item.prefab);
+        //formatter.Serialize(stream, currentItem.item.UI_prefab);
+
+        //how do i save the currentPatient
+
+        stream.Close();
     }
 
     public void LoadData()
