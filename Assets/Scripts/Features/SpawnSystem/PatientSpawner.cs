@@ -31,7 +31,10 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
 
     private void Update()
     {
-        spawnTimer += Time.deltaTime;
+        if(patientList.Count < bedList.Count)
+        {
+            spawnTimer += Time.deltaTime;
+        }
         SpawnPatient();
     }
 
@@ -41,14 +44,14 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         {
             spawnTimer = 0;
             Transform randomSpawn = spawnPoints[Random.Range(0, spawnPoints.Count)];
-            //if (randomSpawn.GetComponent<SpawnPoint>().IsFree)
-            //{
+            if (randomSpawn.GetComponent<SpawnPoint>().IsFree)
+            {
                 GameObject newPatient = Instantiate(differentPatients[Random.Range(0, differentPatients.Count)], randomSpawn);
                 patientList.Add(newPatient);
                 newPatient.GetComponent<Patient>().CurrentIllness = TaskType.AssignBed;
-                //randomSpawn.GetComponent<SpawnPoint>().IsFree = false;
+                randomSpawn.GetComponent<SpawnPoint>().IsFree = false;
                 randomTime = Random.Range(minRandomTime, maxRandomTime);
-            //}
+            }
         }
     }
 

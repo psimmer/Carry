@@ -158,7 +158,7 @@ public class Patient : MonoBehaviour , ISaveSystem
     {
         tag = "Patient";
         hasPopUp = false;
-        timetillPopUp = Random.Range(10, 15);       //this gets serialized;
+        timetillPopUp = Random.Range(7, 30);       //this gets serialized;
         healthbar = GetComponentInChildren<Healthbar>();
         
         HasTask = false;

@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
                 computer.Canvas.gameObject.SetActive(false);
                 computer.ClipBoardCanvas.gameObject.SetActive(false);
                 Camera.main.GetComponent<CamPosition>().lastPoint = Camera.main.GetComponent<CamPosition>().currentPoint;
+                Camera.main.GetComponent<CamPosition>().MovePoint.CameraOnPc = false;
                 Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().lastPoint.position;
                 Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraRotation;
             }

@@ -16,6 +16,8 @@ public class MovePoints : MonoBehaviour
     //[SerializeField] float interpolationValue;
     bool isCameraFixed;
     public bool IsCameraFixed { get { return isCameraFixed; } set { isCameraFixed = value; } }
+    private bool cameraOnPc;
+    public bool CameraOnPc { get { return cameraOnPc; } set { cameraOnPc = value; } }
 
     private void Awake()
     {
@@ -32,12 +34,12 @@ public class MovePoints : MonoBehaviour
     public void MoveCamera()
     {
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q) && !CameraOnPc)
         {
             IsCameraFixed = true;
             transform.position += new Vector3(0, cameraHeight, -cameraDirection) * Time.deltaTime;
         }
-        else if (Input.GetKey(KeyCode.E))
+        else if (Input.GetKey(KeyCode.E) && !CameraOnPc)
         {
             IsCameraFixed = false;
             transform.position -= new Vector3(0, cameraHeight, -cameraDirection) * Time.deltaTime;

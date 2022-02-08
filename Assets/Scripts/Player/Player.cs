@@ -77,6 +77,10 @@ public class Player : MonoBehaviour, ISaveSystem
                     IsHoldingItem = true;
                     currentItem = obj.GetComponent<Item>();
                 }
+                if (obj.GetComponent<SpawnPoint>())
+                {
+                    obj.GetComponent<SpawnPoint>().IsFree = true;
+                }
                 if (obj.CompareTag("Patient"))
                 {
                     currentPatient = obj.GetComponent<Patient>();
@@ -85,6 +89,7 @@ public class Player : MonoBehaviour, ISaveSystem
                 if (obj.GetComponent<Computer>())
                 {
                     animator.SetBool("isWalking", false);
+                    camera.GetComponent<CamPosition>().MovePoint.CameraOnPc = true;
                     IsAtPc = true;
                     obj.GetComponent<Computer>().BeginDocumentation();
                     if (camera.GetComponent<CamPosition>().MovePoint.IsCameraFixed)

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33841074899037668}
   - component: {fileID: 23131300874466490}
   - component: {fileID: 65763723568189142}
+  - component: {fileID: 5930743008484771852}
   m_Layer: 0
   m_Name: Laptop_Off
   m_TagString: Untagged
@@ -99,6 +100,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4128768, y: 0.2859333, z: 0.3141266}
   m_Center: {x: 0, y: 0.160399, z: -0.017604299}
+--- !u!114 &5930743008484771852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179622459644578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cbc8c5c12e759c40a9374e0b3873d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipBoardCanvas: {fileID: 8452463068719452880}
+  canvas: {fileID: 2334655723973113164}
+  inputField: {fileID: 1513948465030397886}
+  documentationCamPos: {fileID: 1306974473465553213}
 --- !u!1 &2205161705229506005
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,5 +933,10 @@ PrefabInstance:
 --- !u!4 &6817711711883083144 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4795266759639050, guid: 72653085a6b827f48b10b434c7972f1c, type: 3}
+  m_PrefabInstance: {fileID: 6812936794678525314}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8452463068719452880 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3152879880021077842, guid: 72653085a6b827f48b10b434c7972f1c, type: 3}
   m_PrefabInstance: {fileID: 6812936794678525314}
   m_PrefabAsset: {fileID: 0}
