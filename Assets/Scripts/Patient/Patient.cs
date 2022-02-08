@@ -66,6 +66,10 @@ public class Patient : MonoBehaviour , ISaveSystem
 
     [SerializeField] bool isLayingSinceStart;
 
+
+    //Lose HP if not in bed
+    private float losingHpTimer = 0;
+
     #region Particles
 
     [SerializeField] private GameObject healingParticles;
@@ -179,6 +183,12 @@ public class Patient : MonoBehaviour , ISaveSystem
         PopUpTimer(CurrentIllness, popUpCanvas);
 
         ReleasingPatient();
+
+        if (!isInBed)
+        {
+            TakeDamageByTime();
+        }
+
     }
 
     private void LateUpdate()
@@ -302,6 +312,18 @@ public class Patient : MonoBehaviour , ISaveSystem
             Destroy(this.gameObject);
         }
     }
+
+    private void TakeDamageByTime()
+    {
+        if (losingHpTimer >= 5)
+        {
+            losingHpTimer = 0;
+            currentHP--;
+        }
+
+        losingHpTimer += Time.deltaTime;
+    }
+
 
 
     public void SaveToStream(System.IO.FileStream fileStream)
