@@ -11,6 +11,8 @@ public class Bed : MonoBehaviour
     [SerializeField] Transform whiteboardPos;
     public Transform WhiteboardPos => whiteboardPos;
 
+    [SerializeField] GameObject lights;
+
     [SerializeField] private Transform popUpPosTransform;
 
     public Transform PopUpPosTransform => popUpPosTransform;
@@ -33,7 +35,7 @@ public class Bed : MonoBehaviour
         {
             isPatientInBed = true;
         }
-
+        lights.SetActive(false);
         Vector3 lookDir = Camera.main.transform.forward;
         popUpPosTransform.LookAt(popUpPosTransform.position + lookDir);
     }
@@ -42,8 +44,10 @@ public class Bed : MonoBehaviour
     {
         if (currentPatient == null)
         {
-            this.isPatientInBed = false;
+            isPatientInBed = false;
             setHealthBarAndPopUpSpawnPos = true;
+            if(lights)
+                lights.SetActive(false);
         }
 
 
@@ -69,6 +73,8 @@ public class Bed : MonoBehaviour
 
             currentPatient.Heartbeat.SetActive(true);
             setHealthBarAndPopUpSpawnPos = false;
+            if(lights)
+                lights.SetActive(true);
 
         }
         

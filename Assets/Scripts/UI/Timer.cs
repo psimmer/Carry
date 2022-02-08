@@ -12,10 +12,13 @@ public class Timer : MonoBehaviour , ISaveSystem
 {
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private int startTimeHours;
+    public int TimeInHours => startTimeHours;
 
 
     [Tooltip("This is the hour when the Game ends + 59 minutes")]
     [SerializeField] private int endTimeHours;
+    public int EndTimeHours => endTimeHours;
+
     private string dayOrNight;
     private float realTime;
 
