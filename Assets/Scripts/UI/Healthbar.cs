@@ -47,6 +47,13 @@ public class Healthbar : MonoBehaviour
     {
         if (healthbar == null)
             return;
-        healthbar.value = percent;
+        if (healthbar.value < percent)
+        {
+            healthbar.value += 0.005f; // this could have errors but it works for now, if anyone finds an error, it's here and it would be about the increment/decrement of the healthbar values (it should be calculated instead)
+        }
+        if(healthbar.value > percent)
+        {
+            healthbar.value -= 0.005f;
+        }
     }
 }
