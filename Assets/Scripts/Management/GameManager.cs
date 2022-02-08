@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] UIManager uiManager;
     [SerializeField] PatientSpawner patientSpawner;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] float documentationReward;
 
     #region Multipliers
     [SerializeField] private float healCoffee;
@@ -48,9 +49,10 @@ public class GameManager : MonoBehaviour
 
         //Features
         dayCycle.dayCycle();
+        ComputerTaskSuccessCondition();
 
         dayTime.DoubledRealTime();
-       
+
         DrinkingCoffee();
         uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
 
@@ -75,7 +77,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-
     private void ComputerTaskSuccessCondition()
     {
         if (player.IsAtPc)
@@ -90,10 +91,26 @@ public class GameManager : MonoBehaviour
                 Camera.main.GetComponent<CamPosition>().MovePoint.CameraOnPc = false;
                 Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().lastPoint.position;
                 Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraRotation;
+
+                if (dayTime.TimeInHours >= dayTime.EndTimeHours)
+                {
+                    if (computer.HintText.text == computer.InputField.text)
+                    {
+                        //Success
+                        player.GetComponent<Player>().CurrentStressLvl -= documentationReward;
+                        Debug.Log("Success DocumentationTask");
+                    }
+                    else
+                    {
+                        //Failed
+                        player.GetComponent<Player>().CurrentStressLvl += documentationReward;
+                        Debug.Log("Failed DocumentationTask");
+                    }
+                }
+
             }
         }
     }
-
 
     /// <summary>
     /// Heals or damages the patient if it is the wrong item
@@ -105,7 +122,7 @@ public class GameManager : MonoBehaviour
         if (player.IsInContact && patient.IsInBed) // the patient.isinbed fixed the issue with the null reference
         {
             // release the patient to leave the hospital
-            if(player.currentItem == null && patient.CurrentIllness == TaskType.ReleasePatient && !patient.IsReleasing)
+            if (player.currentItem == null && patient.CurrentIllness == TaskType.ReleasePatient && !patient.IsReleasing)
             {
                 patient.transform.position = patient.LeaveHospital.transform.position;
                 patient.transform.rotation = patient.LeaveHospital.transform.rotation;
@@ -153,7 +170,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-        else if(player.IsInContact && !patient.IsInBed)
+        else if (player.IsInContact && !patient.IsInBed)
         {
             //assign the patient from the hallway to the bed
             if (player.currentItem == null && patient.CurrentIllness == TaskType.AssignBed)
