@@ -37,8 +37,7 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(this);
         }
-        DontDestroyOnLoad(gameObject);
-    }
+        DontDestroyOnLoad(gameObject);    }
 
     public void PlayAudioClip(ESoundeffects soundType, AudioSource audioSource)
     {
