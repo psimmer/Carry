@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pill
   m_EditorClassIdentifier: 
   itemName: Pill
-  restoreHealth: 15
+  restoreHealth: 20
   prefab: {fileID: 1242479854823279035, guid: b49b0d9f6fdcd3344ad0b763be91804d, type: 3}
   UI_prefab: {fileID: 1986560152118566592, guid: f4a8494ac5272bb43a96ceda56b98a5b, type: 3}
   task: 1

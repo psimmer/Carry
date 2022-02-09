@@ -49,9 +49,14 @@ public class Player : MonoBehaviour, ISaveSystem
         IsHoldingItem = false;
         //IsAtPc = false;
         PopUp.e_OnPopUpTimeOut += TimeOutDamage;
+        
+
+    }
+
+    private void Start()
+    {
         if (GlobalData.instance.IsSaveFileLoaded)
             LoadData();
-
     }
 
     private void TimeOutDamage(float damage)

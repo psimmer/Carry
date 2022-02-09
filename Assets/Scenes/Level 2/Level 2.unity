@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: ad266650d9610e740af4842b9d3e023a, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 51599bb42fe633046b6de8cb9785b029, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -672,6 +672,7 @@ MonoBehaviour:
   stressLvlBar: {fileID: 2047719658383020601}
   pauseElements: {fileID: 5094996734600876445}
   optionsElements: {fileID: 3078613400110150248}
+  LevelMusic: {fileID: 0}
 --- !u!1 &162505656
 GameObject:
   m_ObjectHideFlags: 0
