@@ -30,6 +30,11 @@ public class Computer : MonoBehaviour, ISaveSystem
     {
         canvas.gameObject.SetActive(false);
         ClipBoardCanvas.gameObject.SetActive(false);
+        
+    }
+
+    private void Start()
+    {
         if (GlobalData.instance.IsSaveFileLoaded)
             LoadData();
     }

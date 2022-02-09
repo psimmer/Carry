@@ -14,14 +14,15 @@ public class DayCycle : MonoBehaviour, ISaveSystem
 
     private void Awake()
     {
-        if (GlobalData.instance.IsSaveFileLoaded)  // hab ich auskommentiert damit keine errors im build sind....
-        {
-            LoadData();
-        }
+       
     }
 
     private void Start()
     {
+        if (GlobalData.instance.IsSaveFileLoaded)  // hab ich auskommentiert damit keine errors im build sind....
+        {
+            LoadData();
+        }
         startPos = Quaternion.Euler(10, -50, 0);
         endPos = Quaternion.Euler(180, -50, 0);
         dayCycle = LerpTheSun;

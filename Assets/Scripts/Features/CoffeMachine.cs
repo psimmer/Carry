@@ -53,12 +53,14 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
 
     private void Awake()
     {
-        if (GlobalData.instance.IsSaveFileLoaded)
-            LoadData();
+        
     }
 
     private void Start()
     {
+        if (GlobalData.instance.IsSaveFileLoaded)
+            LoadData();
+
         maxTimer = timer;
     }
     private void Update()

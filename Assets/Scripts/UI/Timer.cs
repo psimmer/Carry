@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour , ISaveSystem
     private string dayOrNight;
     private float realTime;
 
-    private void Awake()
+    private void Start()
     {
         if (GlobalData.instance.IsSaveFileLoaded)
         {
