@@ -43818,7 +43818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: maxStressLvl
-      value: 100
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: noItemDamage
