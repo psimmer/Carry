@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 5193262505905465329}
   - component: {fileID: 5193262505905465339}
   - component: {fileID: 1965056011918014494}
+  - component: {fileID: 488911550332001021}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -688,6 +689,7 @@ MonoBehaviour:
   currentStressLvl: 0
   maxStressLvl: 0
   noItemDamage: 0
+  animator: {fileID: 0}
 --- !u!114 &1965056011918014494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,6 +708,14 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!81 &488911550332001021
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959383937220050687}
+  m_Enabled: 1
 --- !u!1 &5026201969650757101
 GameObject:
   m_ObjectHideFlags: 0

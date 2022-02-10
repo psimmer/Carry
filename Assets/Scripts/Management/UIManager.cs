@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMP_Text treatments;
 
     [SerializeField] Slider stressLvlBar;
+    public Slider StressLevelBar => stressLvlBar;
     [SerializeField] GameObject pauseElements;
     [SerializeField] GameObject optionsElements;
     [SerializeField] AudioSource LevelMusic;
@@ -73,9 +74,11 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void GamePaused()
     {
-        
-        if (Input.GetKeyUp(KeyCode.Escape) && !optionsElements.activeSelf && pauseElements!= null)
+
+        if (Input.GetKeyUp(KeyCode.Escape) && !optionsElements.activeSelf && pauseElements != null)
         {
+            SoundManager.instance.PlayAudioClip(ESoundeffects.Button, stressLvlBar.gameObject.GetComponent<AudioSource>());
+
             if (Time.timeScale > 0)
             {
                 Time.timeScale = 0f;
@@ -97,21 +100,23 @@ public class UIManager : MonoBehaviour
                 //TODO: Play Camera
 
             }
-        } else if(Input.GetKeyUp(KeyCode.Escape) && optionsElements.activeSelf)
+        }
+        else if (Input.GetKeyUp(KeyCode.Escape) && optionsElements.activeSelf)
         {
-            if(pauseElements != null)
+            if (pauseElements != null)
                 pauseElements.SetActive(true);
 
             if (mainMenuElements != null)
                 mainMenuElements.SetActive(true);
 
             optionsElements.SetActive(false);
-
+            SoundManager.instance.PlayAudioClip(ESoundeffects.Button, stressLvlBar.gameObject.GetComponent<AudioSource>());
         }
     }
 
     public void Continue()
     {
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Button, stressLvlBar.gameObject.GetComponent<AudioSource>());
         pauseElements.SetActive(false);
         Time.timeScale = 1f;
         LevelMusic.Play();
@@ -127,12 +132,12 @@ public class UIManager : MonoBehaviour
 
     public void UpdateStressLvlBar(float percent)
     {
-        GetComponent<AudioSource>().volume = percent;
+        GetComponent<AudioSource>().volume = percent / 10;
         SoundManager.instance.PlayAudioClip(ESoundeffects.StressLevel, GetComponent<AudioSource>());
         stressLvlBar.value = percent;
     }
     #endregion
-    
+
     #region Activate/Deactive Options
     //i think following two methods can be optimized. iam tired, i will look over it another time
     /// <summary>
@@ -140,18 +145,23 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void EnterOptions()
     {
+
         if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" ||
             SceneManager.GetActiveScene().name == "Level 3" || SceneManager.GetActiveScene().name == "Level 4")
         {
             pauseElements.SetActive(false);
             optionsElements.SetActive(true);
+            SoundManager.instance.PlayAudioClip(ESoundeffects.Button, optionsElements.GetComponent<AudioSource>());
         }
 
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
             mainMenuElements.SetActive(false);
             if (optionsElements != null)
+            {
                 optionsElements.SetActive(true);
+                SoundManager.instance.PlayAudioClip(ESoundeffects.Button, optionsElements.GetComponent<AudioSource>());
+            }
         }
     }
 
@@ -160,16 +170,19 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void LeaveOptions()
     {
+
         if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" ||
             SceneManager.GetActiveScene().name == "Level 3" || SceneManager.GetActiveScene().name == "Level 4")
         {
             pauseElements.SetActive(true);
+            SoundManager.instance.PlayAudioClip(ESoundeffects.Button, pauseElements.GetComponent<AudioSource>());
             optionsElements.SetActive(false);
         }
 
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
             mainMenuElements.SetActive(true);
+            SoundManager.instance.PlayAudioClip(ESoundeffects.Button, mainMenuElements.GetComponent<AudioSource>());
             optionsElements.SetActive(false);
         }
     }

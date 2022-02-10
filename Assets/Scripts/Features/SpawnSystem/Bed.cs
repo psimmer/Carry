@@ -24,7 +24,7 @@ public class Bed : MonoBehaviour
     public Patient CurrentPatient { get { return currentPatient; } set { currentPatient = value; } }
 
     private bool setHealthBarAndPopUpSpawnPos = true;
-
+    float timer;
     private void Start()
     {
         if(currentPatient == null)
@@ -42,6 +42,8 @@ public class Bed : MonoBehaviour
 
     private void Update()
     {
+        timer += Time.deltaTime;
+
         if (currentPatient == null)
         {
             isPatientInBed = false;
@@ -49,7 +51,7 @@ public class Bed : MonoBehaviour
             if(lights)
                 lights.SetActive(false);
         }
-
+        
 
         if (currentPatient != null && setHealthBarAndPopUpSpawnPos) // position healthbars in the whiteboard if there is a patient in bed
         {
@@ -76,7 +78,15 @@ public class Bed : MonoBehaviour
             if(lights)
                 lights.SetActive(true);
 
+           
         }
-        
+
+        if (timer >= 1 && currentPatient != null)
+        {
+            SoundManager.instance.PlayAudioClip(ESoundeffects.ECG, GetComponentInChildren<AudioSource>());
+            timer = 0;
+        }
+
+
     }
 }

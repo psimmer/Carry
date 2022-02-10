@@ -20,6 +20,7 @@ public class SceneMan : MonoBehaviour
     public void StartGame()
     {
         Time.timeScale = 1f;
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.ResetTotalStatistics();
         GlobalData.instance.ResetShiftStatistics();
         GlobalData.instance.CurrentLevel = 1;
@@ -33,6 +34,7 @@ public class SceneMan : MonoBehaviour
         {
             saveMethod.SaveData();
         }
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.StressLevelBar.gameObject.GetComponent<AudioSource>());
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -40,6 +42,7 @@ public class SceneMan : MonoBehaviour
     {
         //searches all scripts after the interface and executes the method (so everything gets saved)
         Time.timeScale = 1f;
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.IsSaveFileLoaded = true;
         GlobalData.instance.LoadData();
         SceneManager.LoadScene("Level " + GlobalData.instance.CurrentLevel);
@@ -47,6 +50,7 @@ public class SceneMan : MonoBehaviour
 
     public void ContinueNextLvl()
     {
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.CurrentLevel++;
         GlobalData.instance.ResetShiftStatistics();
         SceneManager.LoadScene("Level " + GlobalData.instance.CurrentLevel);
@@ -55,6 +59,7 @@ public class SceneMan : MonoBehaviour
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f;
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.StressLevelBar.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.ResetShiftStatistics();     //just for safety
         GlobalData.instance.ResetTotalStatistics();     //just for safety
         GlobalData.instance.IsSaveFileLoaded = false;
@@ -64,17 +69,26 @@ public class SceneMan : MonoBehaviour
     public void StartTutorial()
     {
         Time.timeScale = 1f;
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
         SceneManager.LoadScene("Tutorial");
     }
 
     public void GameOver()
     {
-
         SceneManager.LoadScene("GameOver");
     }
 
     public void ExitGame()
     {
+        if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" ||
+            SceneManager.GetActiveScene().name == "Level 3" || SceneManager.GetActiveScene().name == "Level 4")
+        {
+            SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.StressLevelBar.gameObject.GetComponent<AudioSource>());
+        }
+        else
+        {
+            SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
+        }
         Application.Quit();
     }
 

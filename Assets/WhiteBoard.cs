@@ -4,9 +4,5 @@ using UnityEngine;
 
 public class WhiteBoard : MonoBehaviour
 {
-
-
-    private void Awake()
-    {
-    }
+    
 }
