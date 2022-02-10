@@ -17,19 +17,25 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
     [SerializeField] List<Bed> bedList;
     public List<Bed> BedList { get { return bedList; } set { bedList = value; } }
 
-
     //timer Stuff
     float spawnTimer;
     float randomTime;
 
     private void Start()
     {
-        if (GlobalData.instance.IsSaveFileLoaded)
-            LoadData();
 
         PopUp.e_RemovePatient += RemovePatientFromList;
         patientList.AddRange(GameObject.FindGameObjectsWithTag("Patient"));
         randomTime = Random.Range(minRandomTime, maxRandomTime);
+        if (GlobalData.instance.IsSaveFileLoaded)
+        {
+            Patient[] pArray = FindObjectsOfType<Patient>();
+            for (int i = 0; i < pArray.Length; i++)
+            {
+                Destroy(pArray[i].gameObject);
+            }
+            LoadData();
+        }
     }
 
 
@@ -51,8 +57,10 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
             if (randomSpawn.GetComponent<SpawnPoint>().IsFree)
             {
                 SoundManager.instance.PlayAudioClip(ESoundeffects.NewPatientArrived, GetComponent<AudioSource>());
-                GameObject newPatient = Instantiate(differentPatients[Random.Range(0, differentPatients.Count)], randomSpawn);
+                int differentPatientsIndex = Random.Range(0, differentPatients.Count);
+                GameObject newPatient = Instantiate(differentPatients[differentPatientsIndex], randomSpawn);
                 patientList.Add(newPatient);
+                newPatient.GetComponent<Patient>().PatientID = differentPatientsIndex;
                 newPatient.GetComponent<Patient>().CurrentIllness = TaskType.AssignBed;
                 randomSpawn.GetComponent<SpawnPoint>().IsFree = false;
                 randomTime = Random.Range(minRandomTime, maxRandomTime);
@@ -122,12 +130,16 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
             for (int i = 0; i < patientListCount; i++)
             {
                 PatientData data = (PatientData)formatter.Deserialize(stream);
-                Patient p = new Patient();
-                
-                //setting position of patient
-                Vector3 vector = new Vector3(data.position[0], data.position[1], data.position[2]);
-                p.transform.position = vector;
+                GameObject go = Instantiate(differentPatients[data.patientID]);
+                Patient p = go.GetComponent<Patient>();
 
+                //setting patient position
+                Vector3 vector = new Vector3(data.position[0], data.position[1], data.position[2]);
+                go.transform.position = vector;
+                Quaternion quat = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
+                go.transform.rotation = quat;
+
+                p.PatientID = data.patientID;
                 p.CurrentHP = data.currentHP;
                 p.CurrentIllness = (TaskType)data.currentIllnes;
                 p.IsPopping = data.isPopping;
@@ -136,7 +148,10 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 p.HasPopUp = data.hasPopUp;
                 p.IsReleasing = data.isReleasing;
 
-                loadedPatientList.Add(p.gameObject);
+                if(p.IsInBed)
+                    p.GetComponent<Animator>().SetBool("isLaying", true);
+
+                loadedPatientList.Add(go);
 
             }
             patientList = loadedPatientList;
