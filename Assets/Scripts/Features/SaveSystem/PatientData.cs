@@ -25,7 +25,7 @@ public class PatientData
         rotation[1] = patient.transform.rotation.y;
         rotation[2] = patient.transform.rotation.z;
         rotation[3] = patient.transform.rotation.w;
-        patientID = patient.PatientID;
+        patientID = patient.DifferentPatientsIndex;
         currentHP = patient.CurrentHP;
         currentIllnes = (int)patient.CurrentIllness;
         isPopping = patient.IsPopping;

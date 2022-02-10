@@ -60,7 +60,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 int differentPatientsIndex = Random.Range(0, differentPatients.Count);
                 GameObject newPatient = Instantiate(differentPatients[differentPatientsIndex], randomSpawn);
                 patientList.Add(newPatient);
-                newPatient.GetComponent<Patient>().PatientID = differentPatientsIndex;
+                newPatient.GetComponent<Patient>().DifferentPatientsIndex = differentPatientsIndex;
                 newPatient.GetComponent<Patient>().CurrentIllness = TaskType.AssignBed;
                 randomSpawn.GetComponent<SpawnPoint>().IsFree = false;
                 randomTime = Random.Range(minRandomTime, maxRandomTime);
@@ -139,7 +139,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 Quaternion quat = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
                 go.transform.rotation = quat;
 
-                p.PatientID = data.patientID;
+                p.DifferentPatientsIndex = data.patientID;
                 p.CurrentHP = data.currentHP;
                 p.CurrentIllness = (TaskType)data.currentIllnes;
                 p.IsPopping = data.isPopping;
