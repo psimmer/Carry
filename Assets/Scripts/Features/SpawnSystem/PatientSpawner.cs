@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+[System.Serializable]
 public class PatientSpawner : MonoBehaviour, ISaveSystem
 {
     [SerializeField] int minRandomTime;
@@ -23,6 +24,9 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
 
     private void Start()
     {
+        if (GlobalData.instance.IsSaveFileLoaded)
+            LoadData();
+
         PopUp.e_RemovePatient += RemovePatientFromList;
         patientList.AddRange(GameObject.FindGameObjectsWithTag("Patient"));
         randomTime = Random.Range(minRandomTime, maxRandomTime);
@@ -31,9 +35,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
 
     private void Update()
     {
-        Debug.Log("Patientlist Count: " + patientList.Count);
-        Debug.Log("Bedlist Count: " + bedList.Count);
-        Debug.Log("Timer for spawning: " + spawnTimer);
         if (patientList.Count < bedList.Count)
         {
             spawnTimer += Time.deltaTime;
@@ -87,26 +88,66 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
 
     public void SaveData()
     {
-        //BinaryFormatter formatter = new BinaryFormatter();
+        BinaryFormatter formatter = new BinaryFormatter();
 
-        //string path = Application.persistentDataPath + "/player.carry";
-        //Debug.Log("Save File location: " + path);
-        //FileStream stream = new FileStream(path, FileMode.Create);
-        ////PlayerData data = new PlayerData(player, timeLeft);
+        string path = Application.persistentDataPath + "/SaveDataPatientSpawner.carry";
+        Debug.Log("Save File location: " + path);
+        FileStream stream = new FileStream(path, FileMode.Create);
 
-        ////save each patient from the list and the count!
-        //formatter.Serialize(stream, patientList.Count);
-        //foreach (var patient in patientList)
-        //{
-        //    patient.GetComponent<Patient>().SaveToStream(stream);
-        //}
+        //serialize patientlist
+        formatter.Serialize(stream, patientList.Count);
+        foreach (var p in patientList)
+        {
+            PatientData data = new PatientData(p.GetComponent<Patient>());
+            formatter.Serialize(stream, data);
+        }
 
-        //formatter.Serialize(stream, bedList);
-        //stream.Close();
+        //serialize bedlist
+        
+        stream.Close();
     }
 
     public void LoadData()
     {
-        //throw new System.NotImplementedException();
+        string path = Application.persistentDataPath + "/SaveDataPatientSpawner.carry";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+            Debug.Log("Save File loaded: " + path);
+
+            //deseriialize patientlist
+            int patientListCount = (int)formatter.Deserialize(stream);
+            List<GameObject> loadedPatientList = new List<GameObject>();
+            for (int i = 0; i < patientListCount; i++)
+            {
+                PatientData data = (PatientData)formatter.Deserialize(stream);
+                Patient p = new Patient();
+                
+                //setting position of patient
+                Vector3 vector = new Vector3(data.position[0], data.position[1], data.position[2]);
+                p.transform.position = vector;
+
+                p.CurrentHP = data.currentHP;
+                p.CurrentIllness = (TaskType)data.currentIllnes;
+                p.IsPopping = data.isPopping;
+                p.HasTask = data.hasTask;
+                p.IsInBed = data.isInBed;
+                p.HasPopUp = data.hasPopUp;
+                p.IsReleasing = data.isReleasing;
+
+                loadedPatientList.Add(p.gameObject);
+
+            }
+            patientList = loadedPatientList;
+
+            //deserialize Bedlist
+            stream.Close();
+
+        }
+        else
+        {
+            Debug.Log("Save File not found" + path);
+        }
     }
 }

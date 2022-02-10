@@ -5,14 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class PatientData 
 {
-    float[] position = new float[3];
-    int currentHP;
-    int currentIllnes;
-    bool isPopping;
-    bool hasTask;
-    bool isInBed;
-    bool hasPopUp;
-    bool isReleasing;
+   public float[] position = new float[3];
+   public int currentHP;
+   public int currentIllnes;
+   public bool isPopping;
+   public bool hasTask;
+   public bool isInBed;
+   public bool hasPopUp;
+   public bool isReleasing;
 
     public PatientData(Patient patient)
     {
