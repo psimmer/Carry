@@ -31,9 +31,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
 
     private void Update()
     {
-        Debug.Log("Patientlist Count: " + patientList.Count);
-        Debug.Log("Bedlist Count: " + bedList.Count);
-        Debug.Log("Timer for spawning: " + spawnTimer);
         if (patientList.Count < bedList.Count)
         {
             spawnTimer += Time.deltaTime;
