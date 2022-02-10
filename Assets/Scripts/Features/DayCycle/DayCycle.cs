@@ -59,7 +59,7 @@ public class DayCycle : MonoBehaviour, ISaveSystem
 
             stream.Close();
 
-            LerpTheSun();
+            //LerpTheSun();
         }
         else
         {
