@@ -19,7 +19,7 @@ public class DayCycle : MonoBehaviour, ISaveSystem
 
     private void Start()
     {
-        if (GlobalData.instance.IsSaveFileLoaded)  // hab ich auskommentiert damit keine errors im build sind....
+        if (GlobalData.instance.IsSaveFileLoaded)  
         {
             LoadData();
         }
@@ -59,7 +59,6 @@ public class DayCycle : MonoBehaviour, ISaveSystem
 
             stream.Close();
 
-            //LerpTheSun();
         }
         else
         {

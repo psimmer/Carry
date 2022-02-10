@@ -12,36 +12,22 @@ public class Player : MonoBehaviour, ISaveSystem
     public Vector3 boxPos;
     //Player values
     [SerializeField] private float currentStressLvl;
+    public float CurrentStressLvl { get { return currentStressLvl; } set { currentStressLvl = value; } }
     [SerializeField] private float maxStressLvl;
+    public float MaxStressLvl { get { return maxStressLvl; } }
     [SerializeField] private int noItemDamage;
     [SerializeField] private Animator animator;
     Coroutine reduceStressIfOutside;
 
     private bool isAtPC;
     public bool IsAtPc { get { return isAtPC; } set { isAtPC = value; } }
-
-
-    #region Properties
-    public int NoItemDamage
-    {
-        get { return noItemDamage; }
-    }
-    public float CurrentStressLvl
-    {
-        get { return currentStressLvl; }
-        set { currentStressLvl = value; }
-    }
-
-    public float MaxStressLvl
-    {
-        get { return maxStressLvl; }
-    }
+    public int NoItemDamage { get { return noItemDamage; } }
     public Item currentItem { get; set; }
     public Patient currentPatient { get; set; }
     public bool IsInContact { get; set; }
     public bool IsDrinkingCoffee { get; set; }
     public bool IsHoldingItem { get; set; }
-    #endregion
+    
 
 
     private void Awake()
@@ -49,7 +35,7 @@ public class Player : MonoBehaviour, ISaveSystem
         IsHoldingItem = false;
         //IsAtPc = false;
         PopUp.e_OnPopUpTimeOut += TimeOutDamage;
-        
+
 
     }
 
@@ -152,7 +138,7 @@ public class Player : MonoBehaviour, ISaveSystem
             }
         }
 
-       
+
 
     }
 
@@ -174,32 +160,58 @@ public class Player : MonoBehaviour, ISaveSystem
         string path = Application.persistentDataPath + "/SaveDataPlayer.carry";
         Debug.Log("Save File location: " + path);
         FileStream stream = new FileStream(path, FileMode.Create);
-        
+
+        //Serialize player data
         formatter.Serialize(stream, transform.position.x);
         formatter.Serialize(stream, transform.position.y);
         formatter.Serialize(stream, transform.position.z);
+        formatter.Serialize(stream, currentStressLvl);
         formatter.Serialize(stream, IsInContact);
         formatter.Serialize(stream, IsDrinkingCoffee);
         formatter.Serialize(stream, IsHoldingItem);
         formatter.Serialize(stream, isAtPC);
-        formatter.Serialize(stream, currentStressLvl);
 
-        //how do i save the currentItem
-        //formatter.Serialize(stream, currentItem.item.itemName);
-        //formatter.Serialize(stream, currentItem.item.restoreHealth);
-        //formatter.Serialize(stream, currentItem.item.task);
-        //formatter.Serialize(stream, currentItem.item.prefab);
-        //formatter.Serialize(stream, currentItem.item.UI_prefab);
-
-        //how do i save the currentPatient
-        //currentPatient.SaveToStream(stream);
+        //serialize currentPatient
+        //PatientData patientData = new PatientData(currentPatient);
+        //formatter.Serialize(stream, patientData);
 
         stream.Close();
     }
 
     public void LoadData()
     {
-        //throw new NotImplementedException();
+        string path = Application.persistentDataPath + "/SaveDataPlayer.carry";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+            Debug.Log("Save File loaded: " + path);
+
+            //Set Player position
+            float[] position = new float[3];
+            position[0] = (float)formatter.Deserialize(stream);
+            position[1] = (float)formatter.Deserialize(stream);
+            position[2] = (float)formatter.Deserialize(stream);
+            Vector3 vector = new Vector3(position[0], position[1], position[2]);
+            transform.position = vector;
+
+            //setting the rest of the player data
+            currentStressLvl = (float)formatter.Deserialize(stream);
+            IsInContact = (bool)formatter.Deserialize(stream);
+            IsDrinkingCoffee = (bool)formatter.Deserialize(stream);
+            IsHoldingItem = (bool)formatter.Deserialize(stream);
+            isAtPC = (bool)formatter.Deserialize(stream);
+
+            //setting currentPatient
+            //PatientData patientData = (PatientData)formatter.Deserialize(stream);
+            //currentPatient. = patientData;
+            stream.Close();
+
+        }
+        else
+        {
+            Debug.Log("Save File not found" + path);
+        }
     }
 }
 

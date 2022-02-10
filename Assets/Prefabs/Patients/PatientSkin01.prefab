@@ -912,7 +912,7 @@ GameObject:
   - component: {fileID: -7594616705205704858}
   m_Layer: 0
   m_Name: PatientSkin01
-  m_TagString: Untagged
+  m_TagString: Patient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

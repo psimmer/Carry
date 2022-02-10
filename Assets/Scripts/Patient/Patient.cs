@@ -39,7 +39,8 @@ public class Patient : MonoBehaviour , ISaveSystem
 
 
     [SerializeField] private TaskType currentIllness;
-    [SerializeField] private int patientID;
+    [SerializeField] private int differentPatiensIndex;
+    public int DifferentPatientsIndex { get { return differentPatiensIndex; } set { differentPatiensIndex = value; } }
     [SerializeField] private bool isPopping;
     [SerializeField] private bool hasTask;
 
@@ -129,11 +130,6 @@ public class Patient : MonoBehaviour , ISaveSystem
         set { hasTask = value; }
     }
 
-    public int PatientID
-    {
-        get { return patientID; }
-        set { patientID = value; }
-    }
 
     public TaskType CurrentIllness
     {
