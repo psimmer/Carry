@@ -29030,6 +29030,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatientSkin02
       objectReference: {fileID: 0}
+    - target: {fileID: 6951617271039977802, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: m_TagString
+      value: Patient
+      objectReference: {fileID: 0}
     - target: {fileID: 7724460333107950576, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -29594,6 +29598,10 @@ PrefabInstance:
     - target: {fileID: 6951617271039977802, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: m_Name
       value: PatientSkin04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951617271039977802, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: m_TagString
+      value: Patient
       objectReference: {fileID: 0}
     - target: {fileID: 7724460333107950576, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: m_RootOrder

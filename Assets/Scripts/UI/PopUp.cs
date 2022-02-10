@@ -24,6 +24,7 @@ public class PopUp : MonoBehaviour , ISaveSystem
 
 
     private float timePassed;
+
     private bool isHealing;
     public bool IsHealing { get { return isHealing; } set { isHealing = value; } }
 
