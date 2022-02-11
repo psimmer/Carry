@@ -1,15 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float playerMovementSpeed;
-    public float PlayerMovementSpeed
-    {
-        get { return playerMovementSpeed; }
-        set { playerMovementSpeed = value; }
-    }
+    public float PlayerMovementSpeed{get { return playerMovementSpeed; }set { playerMovementSpeed = value; }}
 
     [SerializeField] private float maxSpeed;
     [SerializeField] private Animator playerAnimator;
@@ -22,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody playerRigidbody;
     Transform playerTransform;
     public bool IsLocked = false;
+
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -33,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
         if(!IsLocked)
             playerMovement();
     }
-
 
     void playerMovement()
     {
@@ -89,8 +83,5 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
-    
-
 
 }

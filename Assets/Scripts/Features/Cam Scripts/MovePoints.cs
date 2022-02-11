@@ -13,7 +13,7 @@ public class MovePoints : MonoBehaviour
 
     [SerializeField] private Transform overViewPoint;
     public Transform OverViewPoint => overViewPoint;
-    //[SerializeField] float interpolationValue;
+
     bool isCameraFixed;
     public bool IsCameraFixed { get { return isCameraFixed; } set { isCameraFixed = value; } }
     private bool cameraOnPc;

@@ -20,8 +20,6 @@ public class CamPosition : MonoBehaviour
         cameraRotation = this.gameObject.transform.rotation;
     }
 
-
-
     private void Update()
     {
         if (!movePoints.IsCameraFixed)
@@ -42,7 +40,6 @@ public class CamPosition : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.E) && transform.position.y > 10.174f && !MovePoint.CameraOnPc)
         {
-            //currentPoint = lastPoint;
             transform.position -= new Vector3(0, movePoints.CamHeight, -movePoints.CameraDirection) * Time.deltaTime;
         }
     }

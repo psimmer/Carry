@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -33,11 +32,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DayCycle dayCycle;
     [SerializeField] private Timer dayTime;
     #endregion
-
-    private void Awake()
-    {
-    }
-
 
     void Update()
     {

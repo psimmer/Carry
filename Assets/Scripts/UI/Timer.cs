@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-[System.Serializable]
 public class Timer : MonoBehaviour , ISaveSystem
 {
     [SerializeField] private TextMeshProUGUI timeText;
@@ -35,7 +31,7 @@ public class Timer : MonoBehaviour , ISaveSystem
         //This would be the condition to end the scene with a success
         if (startTimeHours == endTimeHours && (int)realTime == 59)
         {
-            SceneManager.LoadScene("LevelComplete");    //should be in the GameManager
+            SceneManager.LoadScene("LevelComplete");    
         }
 
     }
@@ -96,10 +92,6 @@ public class Timer : MonoBehaviour , ISaveSystem
 
             stream.Close();
 
-        }
-        else
-        {
-            Debug.Log("Save File not found" + path);
         }
     }
 }

@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SceneMan : MonoBehaviour
 {
@@ -40,7 +37,6 @@ public class SceneMan : MonoBehaviour
 
     public void LoadSaveFile()
     {
-        //searches all scripts after the interface and executes the method (so everything gets saved)
         Time.timeScale = 1f;
         SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.IsSaveFileLoaded = true;

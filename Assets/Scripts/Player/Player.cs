@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-[System.Serializable]
+
 public class Player : MonoBehaviour, ISaveSystem
 {
     [SerializeField] private Camera camera;
@@ -33,10 +32,7 @@ public class Player : MonoBehaviour, ISaveSystem
     private void Awake()
     {
         IsHoldingItem = false;
-        //IsAtPc = false;
         PopUp.e_OnPopUpTimeOut += TimeOutDamage;
-
-
     }
 
     private void Start()
@@ -138,8 +134,6 @@ public class Player : MonoBehaviour, ISaveSystem
             }
         }
 
-
-
     }
 
     #endregion
@@ -171,10 +165,6 @@ public class Player : MonoBehaviour, ISaveSystem
         formatter.Serialize(stream, IsHoldingItem);
         formatter.Serialize(stream, isAtPC);
 
-        //serialize currentPatient
-        //PatientData patientData = new PatientData(currentPatient);
-        //formatter.Serialize(stream, patientData);
-
         stream.Close();
     }
 
@@ -202,15 +192,7 @@ public class Player : MonoBehaviour, ISaveSystem
             IsHoldingItem = (bool)formatter.Deserialize(stream);
             isAtPC = (bool)formatter.Deserialize(stream);
 
-            //setting currentPatient
-            //PatientData patientData = (PatientData)formatter.Deserialize(stream);
-            //currentPatient. = patientData;
             stream.Close();
-
-        }
-        else
-        {
-            Debug.Log("Save File not found" + path);
         }
     }
 }

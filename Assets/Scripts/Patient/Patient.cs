@@ -1,33 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-// I know it is the wrong script for this but i dont know in which script it should be
-public enum TaskType
-{
-    Bandages,
-    Pills,
-    Syringe,
-    Transfusion,
-    Defibrillator,
-    Sponge,
-    RelocateAPatient,
-    ReleasePatient,
-    AnswerTheTelephone,
-    Documentation,
-    AssignBed
-}
 
-[System.Serializable]
-public class Patient : MonoBehaviour , ISaveSystem
+public class Patient : MonoBehaviour
 {
     [SerializeField] private int currentHP;
+    public int CurrentHP { get { return currentHP; } set { currentHP = value; } }
+
     [SerializeField] private int patientMaxHP;
     [SerializeField] private List<GameObject> popUpList;
     [SerializeField] private Transform popUpCanvas;
-    //[SerializeField] private PatientSpawner spawner; // this is ugly but its the only way if we use this script to release patients (patient shouldnt know about the patientspawner)
     public Transform PopUpCanvas { get { return popUpCanvas; } set { popUpCanvas = value; } }
 
     [SerializeField] private Transform healthBarCanvas;
@@ -39,23 +22,35 @@ public class Patient : MonoBehaviour , ISaveSystem
 
 
     [SerializeField] private TaskType currentIllness;
-    [SerializeField] private int differentPatiensIndex;
-    public int DifferentPatientsIndex { get { return differentPatiensIndex; } set { differentPatiensIndex = value; } }
+    public TaskType CurrentIllness { get { return currentIllness; } set { currentIllness = value; } }
+    
     [SerializeField] private bool isPopping;
+    public bool IsPopping { get { return isPopping; } set { isPopping = value; } }
+    
     [SerializeField] private bool hasTask;
+    public bool HasTask { get { return hasTask; } set { hasTask = value; } }
 
-    //[SerializeField] private GameObject healthbarPrefab;
     [SerializeField] private Healthbar healthbar;
+    public Healthbar Healthbar { get { return healthbar; } set { healthbar = value; } }
+
     [SerializeField] private GameObject heartbeat;
+    public GameObject Heartbeat { get { return heartbeat; } set { heartbeat = value; } }
 
     [SerializeField] bool isInBed = false;
+    public bool IsInBed { get { return isInBed; } set { isInBed = value; } }
+
     [SerializeField] private Transform destroyPosition;
+
     private Transform leaveHospital;
     public Transform LeaveHospital => leaveHospital;
 
+    private int differentPatiensIndex;
+    public int DifferentPatientsIndex { get { return differentPatiensIndex; } set { differentPatiensIndex = value; } }
+
     private bool isReleasing;
-    private float destroyTimer = 0;
     public bool IsReleasing { get { return isReleasing; } set { isReleasing = value; } }
+
+    private float destroyTimer = 0;
 
     //PopUpStuff
     GameObject currentPopUp;
@@ -67,9 +62,9 @@ public class Patient : MonoBehaviour , ISaveSystem
 
     [SerializeField] bool isLayingSinceStart;
 
-
     //Lose HP if not in bed
     private float losingHpTimer = 0;
+    public Transform Canvas    {get { return popUpCanvas; }set { popUpCanvas = value; }}
 
     #region Particles
 
@@ -88,70 +83,6 @@ public class Patient : MonoBehaviour , ISaveSystem
 
     #endregion
 
-    #region Properties
-    //public GameObject Prefab => healthbarPrefab;
-
-    public int CurrentHP
-    {
-        get { return currentHP; }
-        set { currentHP = value; }
-    }
-    public bool IsInBed
-    {
-        get { return isInBed; }
-        set { isInBed = value; }
-    }
-    public int PatientMaxHP
-    {
-        get { return patientMaxHP; }
-    }
-
-    public Healthbar Healthbar
-    {
-        get { return healthbar; }
-        set { healthbar = value; }
-    }
-
-    public GameObject Heartbeat
-    {
-        get { return heartbeat; }
-        set { heartbeat = value; }
-    }
-
-    public bool IsPopping
-    {
-        get { return isPopping; }
-        set { isPopping = value; }
-    }
-
-    public bool HasTask
-    {
-        get { return hasTask; }
-        set { hasTask = value; }
-    }
-
-
-    public TaskType CurrentIllness
-    {
-        get { return currentIllness; }
-        set
-        {
-            currentIllness = value;
-            //if (isInBed == false)
-            //    currentIllness = TaskType.RelocateAPatient;
-            //else
-            //    currentIllness = (TaskType)Random.Range(1, 3);
-        }
-    }
-
-    public Transform Canvas
-    {
-        get { return popUpCanvas; }
-        set { popUpCanvas = value; }
-    }
-
-    #endregion
-
     private void Awake()
     {
         if (isLayingSinceStart)
@@ -167,7 +98,7 @@ public class Patient : MonoBehaviour , ISaveSystem
         hasPopUp = false;
         timetillPopUp = Random.Range(7, 30);       //this gets serialized;
         healthbar = GetComponentInChildren<Healthbar>();
-        
+
         HasTask = false;
         IsPopping = false;
 
@@ -180,7 +111,7 @@ public class Patient : MonoBehaviour , ISaveSystem
 
     private void Update()
     {
-        if(!hasPopUp)
+        if (!hasPopUp)
             popUpTimer += Time.deltaTime;
 
         PopUpTimer(CurrentIllness, popUpCanvas);
@@ -213,7 +144,6 @@ public class Patient : MonoBehaviour , ISaveSystem
                 SoundManager.instance.PlayAudioClip(ESoundeffects.Damage, GetComponent<AudioSource>());
                 CurrentIllness = (TaskType)Random.Range(0, 6);
                 SpawnParticles(damageParticles, particlesDuration);
-                //Destroy(currentPopUp);
 
                 Debug.Log($"health kleiner als 0 {health}");
             }
@@ -248,7 +178,7 @@ public class Patient : MonoBehaviour , ISaveSystem
             }
             if (currentHP > 0 && currentHP < patientMaxHP && health > 0)
                 GlobalData.instance.SetPatientTreatmentStatistics();
-            
+
             healthbar.UpdateHealthbar(currentHP / (float)patientMaxHP);
         }
     }
@@ -264,13 +194,9 @@ public class Patient : MonoBehaviour , ISaveSystem
             {
                 Destroy(gameObject);
                 destroyTimer = 0;
-                //spawner.RemovePatientFromList(this); // this is ugly! (check patient spawner reference in this script for more details)
             }
-            
         }
     }
-
-
 
     public void SpawnParticles(GameObject particles, float duration)
     {
@@ -300,8 +226,6 @@ public class Patient : MonoBehaviour , ISaveSystem
                         hasPopUp = true;
                         currentPopUp = Instantiate(popUp.gameObject, canvas);
                         SoundManager.instance.PlayAudioClip(ESoundeffects.PopUp, GetComponent<AudioSource>());
-                        //currentPopUp.transform.position = new Vector3(canvas.position.x, canvas.position.y + 1f, canvas.position.z);
-
                     }
                 }
             }
@@ -327,40 +251,5 @@ public class Patient : MonoBehaviour , ISaveSystem
         }
 
         losingHpTimer += Time.deltaTime;
-    }
-
-
-
-    public void SaveToStream(System.IO.FileStream fileStream)
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-
-        formatter.Serialize(fileStream, currentHP);
-        formatter.Serialize(fileStream, (int)currentIllness);
-        formatter.Serialize(fileStream, isPopping);
-        formatter.Serialize(fileStream, hasTask);
-        formatter.Serialize(fileStream, isInBed);
-        formatter.Serialize(fileStream, hasPopUp);
-        //how do i save the popup
-        //currentPopUp.GetComponent<PopUp>().SaveToStream(fileStream);
-    }
-
-    public void SaveData()
-    {
-        //BinaryFormatter formatter = new BinaryFormatter();
-
-        //string path = Application.persistentDataPath + "/SaveDataPatientg.carry";
-        //Debug.Log("Save File location: " + path);
-        //FileStream stream = new FileStream(path, FileMode.Create);
-
-        //formatter.Serialize(stream, currentHP);
-
-
-        //stream.Close();
-    }
-
-    public void LoadData()
-    {
-        //throw new System.NotImplementedException();
     }
 }

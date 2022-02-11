@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-[System.Serializable]
+
 public class DayCycle : MonoBehaviour, ISaveSystem
 {
     [SerializeField] private float interpolationValue;
@@ -11,11 +11,6 @@ public class DayCycle : MonoBehaviour, ISaveSystem
     private Quaternion startPos;
     private Quaternion endPos;
     public Action dayCycle;
-
-    private void Awake()
-    {
-       
-    }
 
     private void Start()
     {
@@ -59,10 +54,6 @@ public class DayCycle : MonoBehaviour, ISaveSystem
 
             stream.Close();
 
-        }
-        else
-        {
-            Debug.Log("Save File not found" + path);
         }
     }
 }

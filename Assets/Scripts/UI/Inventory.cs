@@ -1,25 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private Transform itemSlotPos;
     private GameObject currentItem;
-    private GameObject Ui_element;
+    public GameObject CurrentItem{get { return currentItem; }set { currentItem = value; }}
 
-    public GameObject CurrentItem
-    {
-        get { return currentItem; }
-        set { currentItem = value; }
-    }
-    public GameObject UI_Element
-    {
-        get { return Ui_element; }
-        set { Ui_element = value; }
-    }
+    private GameObject Ui_element;
+    public GameObject UI_Element{get { return Ui_element; }set { Ui_element = value; }}
+
 
 
     private void Update()

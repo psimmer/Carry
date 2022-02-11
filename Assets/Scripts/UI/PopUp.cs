@@ -1,12 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class PopUp : MonoBehaviour , ISaveSystem
+
+public class PopUp : MonoBehaviour 
 {
     [SerializeField] float duration;
     [SerializeField] Image radialBarImage;
@@ -22,11 +19,10 @@ public class PopUp : MonoBehaviour , ISaveSystem
     public TaskType popUpTaskType;
     public TaskType TaskType { get { return popUpTaskType; } set { popUpTaskType = value; } }
 
-
-    private float timePassed;
-
     private bool isHealing;
     public bool IsHealing { get { return isHealing; } set { isHealing = value; } }
+
+    private float timePassed;
 
 
     private void Start()
@@ -63,8 +59,6 @@ public class PopUp : MonoBehaviour , ISaveSystem
         }
     }
 
-
-
     private void UpdateRadialBar()
     {
         if (isHealing)
@@ -76,23 +70,5 @@ public class PopUp : MonoBehaviour , ISaveSystem
         radialBarImage.color = gradient.Evaluate(radialBarImage.fillAmount);
     }
 
-    public void SaveToStream(System.IO.FileStream fileStream)
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
 
-        formatter.Serialize(fileStream, timePassed);
-        formatter.Serialize(fileStream, isHealing);
-
-        //how do i save the popup
-    }
-
-    public void SaveData()
-    {
-        //throw new NotImplementedException();
-    }
-
-    public void LoadData()
-    {
-        //throw new NotImplementedException();
-    }
 }

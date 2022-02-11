@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-[System.Serializable]
+
 public class PatientSpawner : MonoBehaviour, ISaveSystem
 {
     [SerializeField] int minRandomTime;
@@ -76,7 +75,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
             {
                 patient.transform.position = bedList[i].BedPos.position;
                 patient.transform.rotation = bedList[i].BedPos.rotation;
-                //patient.transform.rotation = Quaternion.Euler(0, 0, 0)
                 patient.Healthbar.transform.parent.rotation = Quaternion.Euler(0,0,0); // these 2 lines position the healthbar on the whiteboard when you move the patient
                 bedList[i].IsPatientInBed = true;
                 bedList[i].CurrentPatient = patient;
@@ -159,10 +157,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
             //deserialize Bedlist
             stream.Close();
 
-        }
-        else
-        {
-            Debug.Log("Save File not found" + path);
         }
     }
 }

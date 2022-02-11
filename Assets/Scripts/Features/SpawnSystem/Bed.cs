@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bed : MonoBehaviour
@@ -51,9 +49,9 @@ public class Bed : MonoBehaviour
             if(lights)
                 lights.SetActive(false);
         }
-        
 
-        if (currentPatient != null && setHealthBarAndPopUpSpawnPos) // position healthbars in the whiteboard if there is a patient in bed
+        // position healthbars in the whiteboard if there is a patient in bed
+        if (currentPatient != null && setHealthBarAndPopUpSpawnPos) 
         {
             currentPatient.Healthbar.transform.position = new Vector3(
                 WhiteboardPos.position.x,
@@ -86,7 +84,5 @@ public class Bed : MonoBehaviour
             SoundManager.instance.PlayAudioClip(ESoundeffects.ECG, GetComponentInChildren<AudioSource>());
             timer = 0;
         }
-
-
     }
 }

@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-[System.Serializable]
 public class GlobalData : MonoBehaviour, ISaveSystem
 {
     public static GlobalData instance;
@@ -12,66 +9,31 @@ public class GlobalData : MonoBehaviour, ISaveSystem
 
     //Overall statistics
     private int totalTreatments;
+    public int TotalTreatments { get { return totalTreatments; } set { totalTreatments = value; } }
+
     private int totalPatientsHealed;
+    public int TotalPatientsHealed { get { return totalPatientsHealed; } set { totalPatientsHealed = value; } }
+
     private int totalPatientsLost;
+    public int TotalPatientsLost { get { return totalPatientsLost; } set { totalPatientsLost = value; } }
 
     //Shift statistics
     private int shiftTreatments;
+    public int ShiftTreatments { get { return shiftTreatments; } set { shiftTreatments = value; } }
+    
     private int shiftPatientsHealed;
+    public int ShiftPatientsHealed { get { return shiftPatientsHealed; } set { shiftPatientsHealed = value; } }
+    
     private int shiftPatientsLost;
+    public int ShiftPatientsLost { get { return shiftPatientsLost; } set { shiftPatientsLost = value; } }
+
+    public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
+
+    private bool isSaveFileLoaded;
+    public bool IsSaveFileLoaded { get { return isSaveFileLoaded; } set { isSaveFileLoaded = value; } }
 
     private int currentLevel = 1;
 
-    private bool isSaveFileLoaded;
-
-    #region Properties
-
-    public bool IsSaveFileLoaded
-    {
-        get { return isSaveFileLoaded; }
-        set { isSaveFileLoaded = value; }
-    }
-    public int CurrentLevel
-    {
-        get { return currentLevel; }
-        set { currentLevel = value; }
-    }
-    public int TotalTreatments
-    {
-        get { return totalTreatments; }
-        set { totalTreatments = value; }
-    }
-
-    public int TotalPatientsHealed
-    {
-        get { return totalPatientsHealed; }
-        set { totalPatientsHealed = value; }
-    }
-
-    public int TotalPatientsLost
-    {
-        get { return totalPatientsLost; }
-        set { totalPatientsLost = value; }
-    }
-
-    public int ShiftTreatments
-    {
-        get { return shiftTreatments; }
-        set { shiftTreatments = value; }
-    }
-
-    public int ShiftPatientsHealed
-    {
-        get { return shiftPatientsHealed; }
-        set { shiftPatientsHealed = value; }
-    }
-
-    public int ShiftPatientsLost
-    {
-        get { return shiftPatientsLost; }
-        set { shiftPatientsLost = value; }
-    }
-    #endregion
 
     private void Awake()
     {
@@ -137,7 +99,7 @@ public class GlobalData : MonoBehaviour, ISaveSystem
         formatter.Serialize(stream, GlobalData.instance.totalPatientsHealed);
         formatter.Serialize(stream, GlobalData.instance.totalPatientsLost);
         formatter.Serialize(stream, GlobalData.instance.totalTreatments);
-        stream.Close();        
+        stream.Close();
     }
 
     public void LoadData()
@@ -148,7 +110,7 @@ public class GlobalData : MonoBehaviour, ISaveSystem
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
             Debug.Log("Save File loaded: " + path);
-         
+
             GlobalData.instance.currentLevel = (int)formatter.Deserialize(stream);
             GlobalData.instance.shiftPatientsHealed = (int)formatter.Deserialize(stream);
             GlobalData.instance.shiftPatientsLost = (int)formatter.Deserialize(stream);
@@ -158,11 +120,7 @@ public class GlobalData : MonoBehaviour, ISaveSystem
             GlobalData.instance.totalTreatments = (int)formatter.Deserialize(stream);
 
             stream.Close();
-         
-        }
-        else
-        {
-            Debug.Log("Save File not found" + path);
+
         }
     }
 }

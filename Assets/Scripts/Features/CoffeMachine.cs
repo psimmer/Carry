@@ -4,57 +4,26 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
+
 public class CoffeMachine : MonoBehaviour, ISaveSystem
 {
 
     [SerializeField] private int coffeeCount;
+    public int CoffeeCount{get { return coffeeCount; }set { coffeeCount = value; }}
     [SerializeField] GameObject coffeeUI;
     [SerializeField] Image coffeeFill;
+    public Image CoffeeFill{get { return coffeeFill; }set { coffeeFill = value; }}
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] Image coffeeCup;
+    public Image CoffeeCup{get { return coffeeCup; }set { coffeeCup = value; }}
     [SerializeField] TMP_Text coffeeCounter;
-    private bool drinking = false;
-    private bool refillCup = false;
     [SerializeField] private float timer; // how long the effect lasts
     private float maxTimer;
     [SerializeField] private int extraSpeed; // gained speed through coffee
-
-    #region Getters and setters
-    public int CoffeeCount
-    {
-        get { return coffeeCount; }
-        set { coffeeCount = value; }
-    }
-
-    public Image CoffeeFill
-    {
-        get { return coffeeFill; }
-        set { coffeeFill = value; }
-    }
-    public Image CoffeeCup
-    {
-        get { return coffeeCup; }
-        set { coffeeCup = value; }
-    }
-
-    public bool Drinking
-    {
-        get { return drinking; }
-        set { drinking = value; }
-    }
-    public bool RefillCup
-    {
-        get { return refillCup; }
-        set { refillCup = value; }
-    }
-
-    #endregion
-
-    private void Awake()
-    {
-        
-    }
+    private bool drinking = false;
+    public bool Drinking{get { return drinking; }set { drinking = value; }}
+    private bool refillCup = false;
+    public bool RefillCup{get { return refillCup; }set { refillCup = value; }}
 
     private void Start()
     {
@@ -89,7 +58,6 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
 
         timer -= Time.deltaTime;
         coffeeFill.fillAmount -= Time.deltaTime/totalTime;
-        //Debug.Log("FillAmount: "+ coffeeFill.fillAmount);
 
         if (timer <= 0)
         {
@@ -136,10 +104,6 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
             stream.Close();
             UpdateCoffeCounter(coffeeCount);
 
-        }
-        else
-        {
-            Debug.Log("Save File not found" + path);
         }
     }
 

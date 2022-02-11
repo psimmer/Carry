@@ -1,23 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
-
-public enum ESoundeffects
-{
-    Damage,
-    Heal,
-    PickUpItem,
-    ECG,
-    FootSteps,
-    Death,
-    Losing,
-    NewPatientArrived,
-    PopUp,
-    StressLevel,
-    Winning,
-    Button
-}
 
 public class SoundManager : MonoBehaviour
 {
