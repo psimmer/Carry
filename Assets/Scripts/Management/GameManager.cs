@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 player.IsAtPc = false;
-                player.GetComponent<PlayerMovement>().enabled = true;
+                player.GetComponent<NewPlayerMovement>().enabled = true;
                 computer.Canvas.gameObject.SetActive(false);
                 computer.ClipBoardCanvas.gameObject.SetActive(false);
                 Camera.main.GetComponent<CamPosition>().lastPoint = Camera.main.GetComponent<CamPosition>().currentPoint;
@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
                     ParticleLoops[i].loop = false;
                 }
                 patient.GetComponentInChildren<PopUp>().IsHealing = true;
-                player.GetComponent<PlayerMovement>().enabled = false;
+                player.GetComponent<NewPlayerMovement>().enabled = false;
                 StartCoroutine(TreatmentProgress(patient));
             }
 
@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
                         Destroy(patient.CurrentParticles, patient.ParticlesDuration);
                         ResetItem();
                         player.IsInContact = false;
-                        player.GetComponent<PlayerMovement>().enabled = true;
+                        player.GetComponent<NewPlayerMovement>().enabled = true;
                         Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
                         StopCoroutine(TreatmentProgress(patient));
                     }
@@ -239,7 +239,7 @@ public class GameManager : MonoBehaviour
                         Damage(patient);
                         ResetItem();
                         player.IsInContact = false;
-                        player.GetComponent<PlayerMovement>().enabled = true;
+                        player.GetComponent<NewPlayerMovement>().enabled = true;
                         Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
                         StopCoroutine(TreatmentProgress(patient));
                     }
