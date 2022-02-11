@@ -46,7 +46,6 @@ public class GlobalData : MonoBehaviour, ISaveSystem
             Destroy(this.gameObject);
         }
 
-
         DontDestroyOnLoad(gameObject);  //take GlobalData to the next scene
     }
 

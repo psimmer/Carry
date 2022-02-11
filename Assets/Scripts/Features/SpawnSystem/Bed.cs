@@ -22,7 +22,9 @@ public class Bed : MonoBehaviour
     public Patient CurrentPatient { get { return currentPatient; } set { currentPatient = value; } }
 
     private bool setHealthBarAndPopUpSpawnPos = true;
+    public bool SetHealthBarAndPopUpSpawnPos { get { return setHealthBarAndPopUpSpawnPos; } set { setHealthBarAndPopUpSpawnPos = value; } }
     float timer;
+    public float Timer { get { return timer; } set { timer = value; } }
     private void Start()
     {
         if(currentPatient == null)
