@@ -13,7 +13,7 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
     [SerializeField] GameObject coffeeUI;
     [SerializeField] Image coffeeFill;
     public Image CoffeeFill{get { return coffeeFill; }set { coffeeFill = value; }}
-    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] NewPlayerMovement playerMovement;
     [SerializeField] Image coffeeCup;
     public Image CoffeeCup{get { return coffeeCup; }set { coffeeCup = value; }}
     [SerializeField] TMP_Text coffeeCounter;
@@ -46,10 +46,12 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         if (timer == totalTime)
         {
             coffeeUI.SetActive(true);
-            playerMovement.PlayerMovementSpeed += gainedSpeed;
+            playerMovement.PlayerSpeed += gainedSpeed;
+
+            playerMovement.PlayerAnimator.speed = 1.5f;
         }
 
-        if(refillCup)
+        if (refillCup)
         {
             coffeeFill.fillAmount = 1f;
             timer = totalTime;
@@ -65,7 +67,9 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
             coffeeUI.SetActive(false);
             drinking = false;
             timer = totalTime; // refill the timer once the coffee effect is over
-            playerMovement.PlayerMovementSpeed -= gainedSpeed;
+            playerMovement.PlayerSpeed -= gainedSpeed;
+            playerMovement.PlayerAnimator.speed = 1;
+
         }
     }
     public void UpdateCoffeCounter(int coffeeCount)

@@ -5,9 +5,12 @@ using UnityEngine;
 public class NewPlayerMovement : MonoBehaviour
 {
     [Header("PlayerSpeed")] [SerializeField] float playerSpeed;
-    CharacterController characterController;
-    Animator animator;
+    public float PlayerSpeed { get { return playerSpeed; } set { playerSpeed = value; } }
 
+    Animator animator;
+    public Animator PlayerAnimator { get { return animator; } set { animator = value; } }
+
+    CharacterController characterController;
     float gravity;
     Vector3 velocity;
     bool isPlayerGrounded;
@@ -33,20 +36,13 @@ public class NewPlayerMovement : MonoBehaviour
             velocity.y = 0;
         }
 
-        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * Time.deltaTime;
+        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
-            characterController.Move((movement * playerSpeed) / 1.25f);
-        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
-            characterController.Move((movement * playerSpeed) / 1.25f);
-        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
-            characterController.Move((movement * playerSpeed) / 1.25f);
-        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
-            characterController.Move((movement * playerSpeed) / 1.25f);
-        else
-            characterController.Move(movement * playerSpeed);
+        movement = Vector3.ClampMagnitude(movement, 1) * playerSpeed * Time.deltaTime;
+       
+        characterController.Move(movement);
 
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             animator.SetBool("isWalking", true);
         if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
             animator.SetBool("isWalking", false);
@@ -57,8 +53,6 @@ public class NewPlayerMovement : MonoBehaviour
             gameObject.transform.forward = movement;
         }
 
-        velocity.y += gravity * Time.deltaTime;
-        characterController.Move(velocity * Time.deltaTime);
     }
 
 

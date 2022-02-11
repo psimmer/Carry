@@ -2815,13 +2815,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 55094050}
     - target: {fileID: 2637345656872736395, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
+      propertyPath: extraSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2637345656872736395, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
       propertyPath: coffeeCounter
       value: 
       objectReference: {fileID: 7098006510700971287}
     - target: {fileID: 2637345656872736395, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
       propertyPath: playerMovement
       value: 
-      objectReference: {fileID: 1564864119}
+      objectReference: {fileID: 595119217}
     - target: {fileID: 4083191782085738514, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -11956,7 +11960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63239e3a98a9c70448416bb136794339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 3
+  playerSpeed: 4
 --- !u!82 &595119218
 AudioSource:
   m_ObjectHideFlags: 0
@@ -31690,17 +31694,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &1564864119 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5193262505905465329, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
-  m_PrefabInstance: {fileID: 5193262505109292018}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595119212}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3932ce26f9968244a0bf7238d0c0672, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1566647746
 PrefabInstance:
   m_ObjectHideFlags: 0
