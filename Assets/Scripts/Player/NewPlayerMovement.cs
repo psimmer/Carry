@@ -48,7 +48,8 @@ public class NewPlayerMovement : MonoBehaviour
 
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             animator.SetBool("isWalking", true);
-
+        if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+            animator.SetBool("isWalking", false);
 
 
         if (movement != Vector3.zero)
