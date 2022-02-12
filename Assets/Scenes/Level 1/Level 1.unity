@@ -42821,6 +42821,54 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[0].name
+      value: Damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[1].name
+      value: Heal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[2].name
+      value: PickUpItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[3].name
+      value: ElectroCardioGramm
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[4].name
+      value: FootSteps
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[5].name
+      value: Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[6].name
+      value: Losing
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[7].name
+      value: NewPatientArrived
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[8].name
+      value: PopUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[9].name
+      value: StressLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[10].name
+      value: Winning
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
+      propertyPath: soundeffects.Array.data[11].name
+      value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672895498784593178, guid: c50994b64a715be44a10b35064f57394, type: 3}
       propertyPath: soundeffects.Array.data[3].offset
       value: 0
       objectReference: {fileID: 0}

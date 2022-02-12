@@ -60,6 +60,7 @@ public class SoundManager : MonoBehaviour
 [System.Serializable]
 public class SoundFile
 {
+    [SerializeField] string name;
     [SerializeField] ESoundeffects typeOfSound;
     public ESoundeffects TypeOfSound => typeOfSound;
 

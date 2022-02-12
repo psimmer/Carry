@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
         if (player.IsInContact && patient.IsInBed) // the patient.isinbed fixed the issue with the null reference
         {
             // release the patient to leave the hospital
-            if (player.currentItem == null && patient.CurrentIllness == TaskType.ReleasePatient && !patient.IsReleasing)
+            if (patient.CurrentIllness == TaskType.ReleasePatient && !patient.IsReleasing)
             {
                 patient.transform.position = patient.LeaveHospital.transform.position;
                 patient.transform.rotation = patient.LeaveHospital.transform.rotation;
@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
         else if (player.IsInContact && !patient.IsInBed)
         {
             //assign the patient from the hallway to the bed
-            if (player.currentItem == null && patient.CurrentIllness == TaskType.AssignBed)
+            if (patient.CurrentIllness == TaskType.AssignBed)
             {
                 patientSpawner.MoveToBed(patient);
                 player.IsInContact = false;
