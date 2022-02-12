@@ -42,11 +42,11 @@ public class NewPlayerMovement : MonoBehaviour
        
         characterController.Move(movement);
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if(movement.magnitude >= 0)
             animator.SetBool("isWalking", true);
-        if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+        
+        if(movement.magnitude <= 0)
             animator.SetBool("isWalking", false);
-
 
         if (movement != Vector3.zero)
         {
