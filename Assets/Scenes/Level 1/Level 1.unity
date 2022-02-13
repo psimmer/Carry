@@ -41258,6 +41258,7 @@ GameObject:
   - component: {fileID: 121423932}
   - component: {fileID: 121423933}
   - component: {fileID: 101184569212572836}
+  - component: {fileID: 101184569212572837}
   m_Layer: 5
   m_Name: UIManager
   m_TagString: Untagged
@@ -41361,6 +41362,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &101184569212572837
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101184569212572835}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 35637393202b0b240847a470637c08de, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!224 &140174420050721639
 RectTransform:
   m_ObjectHideFlags: 0

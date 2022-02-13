@@ -36,7 +36,7 @@ public class PopUp : MonoBehaviour
         {
             UpdateRadialBar();
             PopUpCondition();
-            
+            PopUpAnimation();
         }
     }
     
@@ -70,5 +70,15 @@ public class PopUp : MonoBehaviour
         radialBarImage.color = gradient.Evaluate(radialBarImage.fillAmount);
     }
 
-
+    private void PopUpAnimation()
+    {
+        if (radialBarImage.fillAmount >= 0.25)
+        {
+            GetComponentInChildren<Animator>().SetBool("doAnimation", false);
+        }
+        else if (radialBarImage.fillAmount < 0.25)
+        {
+            GetComponentInChildren<Animator>().SetBool("doAnimation", true);
+        }
+    }
 }
