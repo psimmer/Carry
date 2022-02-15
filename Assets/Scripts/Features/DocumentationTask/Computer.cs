@@ -17,9 +17,11 @@ public class Computer : MonoBehaviour
 
     [SerializeField] Transform documentationCamPos;
     public Transform DocumentationCamPos { get { return documentationCamPos; } set { documentationCamPos = value; } }
-
+    [SerializeField] Transform popUpCanvas;
     [SerializeField] GameObject DocumentationPopUp;
-
+    [SerializeField] Transform popUpPos;
+    float timer;
+    bool oneTimeBool = true;
     private void Awake()
     {
         canvas.gameObject.SetActive(false);
@@ -27,11 +29,29 @@ public class Computer : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        //if((int)timer == 10 && oneTimeBool)
+        //{
+        //    oneTimeBool = false;
+        //    SpawnPopUpDocumentation();
+        //}
+    }
+
+
     public void BeginDocumentation()
     {
         Camera.main.transform.position = documentationCamPos.position;
         canvas.gameObject.SetActive(true);
         ClipBoardCanvas.gameObject.SetActive(true);
+    }
+    public void SpawnPopUpDocumentation()
+    {
+        GameObject docPopUp = Instantiate(DocumentationPopUp, popUpCanvas);
+        docPopUp.transform.position = popUpPos.position;
+        docPopUp.transform.LookAt(Camera.main.transform);
+
     }
 
 }
