@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     public Slider StressLevelBar => stressLvlBar;
     [SerializeField] GameObject pauseElements;
     [SerializeField] GameObject optionsElements;
+    [SerializeField] GameObject pauseButton;
+    [SerializeField] GameObject playButton;
     [SerializeField] AudioSource LevelMusic;
     GameObject mainMenuElements;
 
@@ -78,6 +80,8 @@ public class UIManager : MonoBehaviour
 
             if (Time.timeScale > 0)
             {
+                pauseButton.gameObject.SetActive(false);
+                playButton.gameObject.SetActive(true);
                 Time.timeScale = 0f;
                 pauseElements.SetActive(true);
                 LevelMusic.Pause();
@@ -88,6 +92,8 @@ public class UIManager : MonoBehaviour
             }
             else
             {
+                pauseButton.gameObject.SetActive(true);
+                playButton.gameObject.SetActive(false);
                 pauseElements.SetActive(false);
                 Time.timeScale = 1f;
                 LevelMusic.Play();
@@ -108,6 +114,37 @@ public class UIManager : MonoBehaviour
 
             optionsElements.SetActive(false);
             SoundManager.instance.PlayAudioClip(ESoundeffects.Button, stressLvlBar.gameObject.GetComponent<AudioSource>());
+        }
+    }
+
+    public void GamePauseByClick()
+    {
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Button, stressLvlBar.gameObject.GetComponent<AudioSource>());
+
+        if (Time.timeScale > 0)
+        {
+            pauseButton.gameObject.SetActive(false);
+            playButton.gameObject.SetActive(true);
+            Time.timeScale = 0f;
+            pauseElements.SetActive(true);
+            LevelMusic.Pause();
+
+            //TODO: dimm light
+            //TODO: Pause AUdio
+            //TODO: Pause Camera
+        }
+        else
+        {
+            playButton.gameObject.SetActive(false);
+            pauseButton.gameObject.SetActive(true);
+            pauseElements.SetActive(false);
+            Time.timeScale = 1f;
+            LevelMusic.Play();
+
+            //TODO: dimm light
+            //TODO: play audio
+            //TODO: Play Camera
+
         }
     }
 

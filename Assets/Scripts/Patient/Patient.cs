@@ -5,54 +5,46 @@ using UnityEngine;
 
 public class Patient : MonoBehaviour
 {
+
+    [Header("Patient Values")]
     [SerializeField] private int currentHP;
     public int CurrentHP { get { return currentHP; } set { currentHP = value; } }
-
-    [SerializeField] private int patientMaxHP;
-    [SerializeField] private List<GameObject> popUpList;
-    [SerializeField] private Transform popUpCanvas;
-    public Transform PopUpCanvas { get { return popUpCanvas; } set { popUpCanvas = value; } }
-
-    [SerializeField] private Transform healthBarCanvas;
-    public Transform HealthBarCanvas { get { return healthBarCanvas; } set { healthBarCanvas = value; } }
-
+    private int patientMaxHP = 100;
     //range for the random HP that the patient spawns with
     [SerializeField] private int minCurrentHp;
     [SerializeField] private int maxCurrentHp;
-
-
+    //Patient Illnes
     [SerializeField] private TaskType currentIllness;
     public TaskType CurrentIllness { get { return currentIllness; } set { currentIllness = value; } }
-    
-    [SerializeField] private bool isPopping;
-    public bool IsPopping { get { return isPopping; } set { isPopping = value; } }
-    
-    [SerializeField] private bool hasTask;
-    public bool HasTask { get { return hasTask; } set { hasTask = value; } }
-
-    [SerializeField] private Healthbar healthbar;
-    public Healthbar Healthbar { get { return healthbar; } set { healthbar = value; } }
-
-    [SerializeField] private GameObject heartbeat;
-    public GameObject Heartbeat { get { return heartbeat; } set { heartbeat = value; } }
-
+    //Is to check if the patient is in a bed or is the bed free
     [SerializeField] bool isInBed = false;
     public bool IsInBed { get { return isInBed; } set { isInBed = value; } }
 
     [SerializeField] private Transform destroyPosition;
+    private float destroyTimer = 0;
 
     private Transform leaveHospital;
     public Transform LeaveHospital => leaveHospital;
 
     private int differentPatiensIndex;
     public int DifferentPatientsIndex { get { return differentPatiensIndex; } set { differentPatiensIndex = value; } }
+    private float losingHpTimer = 0;
+
+    [Header("PopUp")]
+    [SerializeField] private Transform popUpCanvas;
+    public Transform PopUpCanvas { get { return popUpCanvas; } set { popUpCanvas = value; } }
+
+    [SerializeField] private List<GameObject> popUpList;
+
+    [SerializeField] private bool isPopping;
+    public bool IsPopping { get { return isPopping; } set { isPopping = value; } }
+
+    [SerializeField] private bool hasTask;
+    public bool HasTask { get { return hasTask; } set { hasTask = value; } }
 
     private bool isReleasing;
     public bool IsReleasing { get { return isReleasing; } set { isReleasing = value; } }
 
-    private float destroyTimer = 0;
-
-    //PopUpStuff
     GameObject currentPopUp;
     public GameObject CurrentPopUp { get { return currentPopUp; } set { currentPopUp = value; } }
     float popUpTimer;
@@ -60,15 +52,24 @@ public class Patient : MonoBehaviour
     bool hasPopUp;
     public bool HasPopUp { get { return hasPopUp; } set { hasPopUp = value; } }
 
+
+
+    [Header("HealthBar")]
+    [SerializeField] private Transform healthBarCanvas;
+    public Transform HealthBarCanvas { get { return healthBarCanvas; } set { healthBarCanvas = value; } }
+
+    [SerializeField] private Healthbar healthbar;
+    public Healthbar Healthbar { get { return healthbar; } set { healthbar = value; } }
+
+    [SerializeField] private GameObject heartbeat;
+    public GameObject Heartbeat { get { return heartbeat; } set { heartbeat = value; } }
+
     [SerializeField] bool isLayingSinceStart;
-
-    //Lose HP if not in bed
-    private float losingHpTimer = 0;
-    public Transform Canvas    {get { return popUpCanvas; }set { popUpCanvas = value; }}
-
-    #region Particles
-
+    
+    
+    [Header("Particels")]
     [SerializeField] private GameObject healingParticles;
+    public Transform Canvas    {get { return popUpCanvas; }set { popUpCanvas = value; }}
     public GameObject HealingParticles => healingParticles;
     [SerializeField] private GameObject healParticles;
     [SerializeField] private GameObject healingRayParticles;
@@ -81,7 +82,15 @@ public class Patient : MonoBehaviour
     private GameObject currentParticles;
     public GameObject CurrentParticles { get { return currentParticles; } set { currentParticles = value; } }
 
-    #endregion
+
+
+
+
+
+
+
+
+
 
     private void Awake()
     {
