@@ -10,7 +10,8 @@ public class CamPosition : MonoBehaviour
 
     [SerializeField] public Transform currentPoint;
     [SerializeField] public Transform lastPoint;
-
+    [SerializeField] private GameObject camImageUnfixed;
+    [SerializeField] private GameObject camImageFixed;
     Quaternion cameraRotation;
     public Quaternion CameraRotation => cameraRotation;
     private float interpolation;
@@ -35,11 +36,15 @@ public class CamPosition : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Q) && transform.position.y < 15.249f && !MovePoint.CameraOnPc)
         {
+            camImageUnfixed.gameObject.SetActive(false);
+            camImageFixed.gameObject.SetActive(true);
             currentPoint = movePoints.OverViewPoint;
             transform.position += new Vector3(0, movePoints.CamHeight, -movePoints.CameraDirection) * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.E) && transform.position.y > 10.174f && !MovePoint.CameraOnPc)
         {
+            camImageFixed.gameObject.SetActive(false);
+            camImageUnfixed.gameObject.SetActive(true);
             transform.position -= new Vector3(0, movePoints.CamHeight, -movePoints.CameraDirection) * Time.deltaTime;
         }
     }

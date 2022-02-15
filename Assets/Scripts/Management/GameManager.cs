@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour
         dayTime.DoubledRealTime();
 
         DrinkingCoffee();
-        uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
-
+        //uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
+        uiManager.transform.GetComponent<StressLvl>().FillOfStress.fillAmount = player.CurrentStressLvl / player.MaxStressLvl;
         isGameOver();
 
         if (player.CurrentStressLvl <= 0)
@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour
             patient.Treatment(-player.currentItem.item.restoreHealth);
             player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
         }
-        uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
+        //uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
     }
 
     private void isGameOver()
@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour
 
                         patient.Treatment(+player.currentItem.item.restoreHealth);
                         player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
-                        uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
+                        //uiManager.UpdateStressLvlBar(player.CurrentStressLvl / player.MaxStressLvl);
 
                         playerAnimator.SetBool("isTreating", false);
                         Destroy(patient.CurrentParticles, patient.ParticlesDuration);

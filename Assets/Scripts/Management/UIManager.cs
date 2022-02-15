@@ -127,12 +127,12 @@ public class UIManager : MonoBehaviour
     #region StressLvlBar and CoffeeCounter
 
 
-    public void UpdateStressLvlBar(float percent)
-    {
-        GetComponent<AudioSource>().volume = percent / 10;
-        SoundManager.instance.PlayAudioClip(ESoundeffects.StressLevel, GetComponent<AudioSource>());
-        stressLvlBar.value = percent;
-    }
+    //public void UpdateStressLvlBar(float percent)
+    //{
+    //    GetComponent<AudioSource>().volume = percent / 10;
+    //    SoundManager.instance.PlayAudioClip(ESoundeffects.StressLevel, GetComponent<AudioSource>());
+    //    stressLvlBar.value = percent;
+    //}
     #endregion
 
     #region Activate/Deactive Options
