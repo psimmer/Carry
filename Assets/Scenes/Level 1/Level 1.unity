@@ -4257,6 +4257,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197061367}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!224 &198306191 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2368307792965690527, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+  m_PrefabInstance: {fileID: 1826692750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &198445044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32873,6 +32878,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7711277700711003573, guid: 3f6077384a917af46aeaf0915d49ece9, type: 3}
   m_PrefabInstance: {fileID: 1579874006}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1581638762 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7855500006121050356, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+  m_PrefabInstance: {fileID: 1826692750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1582117381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36381,6 +36391,14 @@ PrefabInstance:
       propertyPath: m_RestoreOriginalTextOnEscape
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1637798048519166889, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 1637798048519166889, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2334655723973113164, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -36401,6 +36419,18 @@ PrefabInstance:
       propertyPath: hintText
       value: 
       objectReference: {fileID: 1826692751}
+    - target: {fileID: 5930743008484771852, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: popUpPos
+      value: 
+      objectReference: {fileID: 1581638762}
+    - target: {fileID: 5930743008484771852, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: popUpCanvas
+      value: 
+      objectReference: {fileID: 198306191}
+    - target: {fileID: 5930743008484771852, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: DocumentationPopUp
+      value: 
+      objectReference: {fileID: 1360661134648728818, guid: 084eb550b1ad621479ac3fc1c02eae02, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
 --- !u!114 &1826692751 stripped
