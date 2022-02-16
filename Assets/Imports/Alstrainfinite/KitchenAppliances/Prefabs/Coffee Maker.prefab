@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3809520769806320230, guid: 41a656146f36f7a4287ca6e8bf87248d, type: 3}
+  - {fileID: 2100000, guid: f7bbd21b1298745458209aed31d9c489, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,14 +111,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9668a560f8c540142b4e7ad61e0b71ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coffeeCount: 3
   coffeeUI: {fileID: 0}
   coffeeFill: {fileID: 0}
   playerMovement: {fileID: 0}
   coffeeCup: {fileID: 0}
-  coffeeCounter: {fileID: 0}
   timer: 20
-  extraSpeed: 15000
+  extraSpeed: 2
+  cooldownDuration: 30
 --- !u!114 &8532349878868869186
 MonoBehaviour:
   m_ObjectHideFlags: 0
