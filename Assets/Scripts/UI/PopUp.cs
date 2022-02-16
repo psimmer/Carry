@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class PopUp : MonoBehaviour 
+public class PopUp : MonoBehaviour
 {
     [SerializeField] float duration;
     [SerializeField] Image radialBarImage;
@@ -12,7 +12,10 @@ public class PopUp : MonoBehaviour
     [SerializeField] Gradient gradient;
     [SerializeField] int timeOutDamagePatient;
     [SerializeField] float timeOutDamagePlayer;
-    [SerializeField] float healingSpeed;
+    [SerializeField] ItemSO item;
+    float remainingHealingTimer;
+    bool startedHealing;
+    // [SerializeField] float healingSpeed; this variable we dont need
     public static event Action<float> e_OnPopUpTimeOut;
     public static event Action<Patient> e_RemovePatient;
 
@@ -39,7 +42,7 @@ public class PopUp : MonoBehaviour
             PopUpAnimation();
         }
     }
-    
+
     private void PopUpCondition()
     {
         if (radialBarImage.fillAmount <= 0)
@@ -61,8 +64,16 @@ public class PopUp : MonoBehaviour
 
     private void UpdateRadialBar()
     {
+
         if (isHealing)
-            timePassed += Time.deltaTime * healingSpeed;
+        {
+            if (!startedHealing)  // this saves the time that has been running already in the variable remainingHealingTimer
+            {
+                remainingHealingTimer = duration - timePassed; // for example, if the total duration of an item is 20 seconds, and 4 seconds passed already, the variable will take the value 4
+                startedHealing = true; // it only does in the first frame of the healing system, so the variable wnot change mid-healing
+            }
+            timePassed += remainingHealingTimer / item.healingTime * Time.deltaTime; // we divide the variable mentioned by the desired healing time, and multiply it by the delta time
+        }
         else
             timePassed -= Time.deltaTime;
 

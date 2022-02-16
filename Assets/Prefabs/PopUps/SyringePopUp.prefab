@@ -304,6 +304,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   timeOutDamagePatient: 22
   timeOutDamagePlayer: 15
+  item: {fileID: 11400000, guid: 170307f2f3e29b54f9af1b04b72484ab, type: 2}
   healingSpeed: 4
   popUpTaskType: 2
 --- !u!1001 &6104552859543324850
