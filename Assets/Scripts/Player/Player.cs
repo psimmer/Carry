@@ -75,17 +75,7 @@ public class Player : MonoBehaviour, ISaveSystem
                 }
                 if (obj.GetComponent<Computer>())
                 {
-                    animator.SetBool("isWalking", false);
-                    camera.GetComponent<CamPosition>().MovePoint.CameraOnPc = true;
-                    IsAtPc = true;
-                    obj.GetComponent<Computer>().BeginDocumentation();
-                    if (camera.GetComponent<CamPosition>().MovePoint.IsCameraFixed)
-                    {
-                        camera.GetComponent<CamPosition>().MovePoint.IsCameraFixed = false;
-                    }
-                    GetComponent<NewPlayerMovement>().enabled = false;
-                    camera.GetComponent<CamPosition>().lastPoint = obj.GetComponent<Computer>().DocumentationCamPos;
-                    camera.transform.rotation = obj.GetComponent<Computer>().DocumentationCamPos.rotation;
+                    InteractWithLaptop(obj.GetComponent<Computer>());
                 }
                 if (obj.CompareTag("CoffeeMachine"))
                 {
@@ -95,6 +85,28 @@ public class Player : MonoBehaviour, ISaveSystem
             }
         }
     }
+
+    private void InteractWithLaptop(Computer obj)
+    {
+        animator.SetBool("isWalking", false);
+        camera.GetComponent<CamPosition>().MovePoint.CameraOnPc = true;
+        IsAtPc = true;
+        if (obj.GetComponent<Computer>().CurrentPopUp != null)
+        {
+            Destroy(obj.GetComponent<Computer>().CurrentPopUp);
+        }
+        obj.GetComponent<Computer>().BeginDocumentation();
+        if (camera.GetComponent<CamPosition>().MovePoint.IsCameraFixed)
+        {
+            camera.GetComponent<CamPosition>().MovePoint.IsCameraFixed = false;
+        }
+        GetComponent<NewPlayerMovement>().enabled = false;
+        camera.GetComponent<CamPosition>().lastPoint = obj.GetComponent<Computer>().DocumentationCamPos;
+        camera.transform.rotation = obj.GetComponent<Computer>().DocumentationCamPos.rotation;
+    }
+
+
+
 
     public void DropItem()
     {

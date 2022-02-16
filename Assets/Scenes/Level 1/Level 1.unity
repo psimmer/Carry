@@ -36403,6 +36403,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2368307792965690527, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368307792965690527, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 3565615849516372378, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: m_text
       value: Shift of 12 hours finished.
@@ -36431,6 +36439,14 @@ PrefabInstance:
       propertyPath: DocumentationPopUp
       value: 
       objectReference: {fileID: 1360661134648728818, guid: 084eb550b1ad621479ac3fc1c02eae02, type: 3}
+    - target: {fileID: 7855500006121050356, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7855500006121050356, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00000005463923
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
 --- !u!114 &1826692751 stripped

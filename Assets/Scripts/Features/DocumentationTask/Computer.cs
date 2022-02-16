@@ -22,6 +22,8 @@ public class Computer : MonoBehaviour
     [SerializeField] Transform popUpPos;
     float timer;
     bool oneTimeBool = true;
+    GameObject currentPopUp;
+    public GameObject CurrentPopUp { get { return currentPopUp; } set { currentPopUp = value; } }
     private void Awake()
     {
         canvas.gameObject.SetActive(false);
@@ -32,11 +34,11 @@ public class Computer : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        //if((int)timer == 10 && oneTimeBool)
-        //{
-        //    oneTimeBool = false;
-        //    SpawnPopUpDocumentation();
-        //}
+        if ((int)timer == 10 && oneTimeBool)
+        {
+            oneTimeBool = false;
+            SpawnPopUpDocumentation();
+        }
     }
 
 
@@ -48,9 +50,9 @@ public class Computer : MonoBehaviour
     }
     public void SpawnPopUpDocumentation()
     {
-        GameObject docPopUp = Instantiate(DocumentationPopUp, popUpCanvas);
-        docPopUp.transform.position = popUpPos.position;
-        docPopUp.transform.LookAt(Camera.main.transform);
+        currentPopUp = Instantiate(DocumentationPopUp, popUpCanvas);
+        currentPopUp.transform.position = popUpPos.position;
+        currentPopUp.transform.LookAt(Camera.main.transform);
 
     }
 
