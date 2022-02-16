@@ -85,6 +85,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   timeOutDamagePatient: 10
   timeOutDamagePlayer: 12
+  item: {fileID: 11400000, guid: 8cca0973c9eb25747972251700504a48, type: 2}
   healingSpeed: 4
   popUpTaskType: 1
 --- !u!1 &2739811046824720057

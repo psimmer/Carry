@@ -17,3 +17,4 @@ MonoBehaviour:
   prefab: {fileID: 3933883604701664506, guid: 3147ec5b3ec82c544a57d3a790e5eb1d, type: 3}
   UI_prefab: {fileID: 3120767470966570582, guid: a63c1ff6b6839f6458941e1da5aca5f4, type: 3}
   task: 5
+  healingTime: 3

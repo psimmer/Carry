@@ -21,6 +21,10 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
     private bool drinking = false;
     public bool Drinking{get { return drinking; }set { drinking = value; }}
     private bool refillCup = false;
+    [SerializeField] private float cooldownDuration; // new variable @patrick! (from coffee update)
+    private float cooldownTimer = 0; // new variable @patrick! (from coffee update)
+    private bool isOnCooldown = false; // new variable @patrick! (from coffee update)
+    public bool IsOnCooldown{get { return isOnCooldown; }set { isOnCooldown = value; } }
     public bool RefillCup{get { return refillCup; }set { refillCup = value; }}
 
     private void Start()
@@ -33,17 +37,19 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
     private void Update()
     {
         if (drinking)
-        {
             CoffeeIsActive(maxTimer, extraSpeed);
-        }
+        
+        if(!drinking && isOnCooldown)
+            CoffeeCooldown(cooldownDuration);
     }
 
     private void CoffeeIsActive(float totalTime, float gainedSpeed)
     {
-
         if (timer == totalTime)
         {
-            coffeeUI.SetActive(true);
+            Color tempColor = coffeeCup.color;
+            tempColor.a = 1;
+            coffeeCup.color = tempColor;
             playerMovement.PlayerSpeed += gainedSpeed;
 
             playerMovement.PlayerAnimator.speed = 1.5f;
@@ -62,14 +68,40 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         if (timer <= 0)
         {
             coffeeFill.fillAmount = 0;
-            coffeeUI.SetActive(false);
             drinking = false;
+            Color tempColor = coffeeCup.color;
+            tempColor.a = .2f;
+            coffeeCup.color = tempColor;
+            isOnCooldown = true;
             timer = totalTime; // refill the timer once the coffee effect is over
             playerMovement.PlayerSpeed -= gainedSpeed;
             playerMovement.PlayerAnimator.speed = 1;
 
         }
     }
+
+    private void CoffeeCooldown(float coffeeColdown)
+    {
+        if (cooldownTimer < coffeeColdown)
+        {
+            Color tempColor = coffeeCup.color;
+            tempColor.a += 1f/coffeeColdown * Time.deltaTime;
+            coffeeFill.color = tempColor;
+            coffeeFill.fillAmount += 1f/coffeeColdown * Time.deltaTime;
+            coffeeCup.color = tempColor;
+            cooldownTimer += Time.deltaTime;
+        }
+        else
+        {
+            Color tempColor = coffeeCup.color;
+            tempColor.a = 1;
+            coffeeCup.color = tempColor;
+            coffeeFill.color = tempColor;
+            cooldownTimer = 0;
+            isOnCooldown = false;
+        }
+    }
+
 
     public void SaveData()
     {

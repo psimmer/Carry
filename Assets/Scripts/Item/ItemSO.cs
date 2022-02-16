@@ -8,4 +8,5 @@ public class ItemSO : ScriptableObject
     public GameObject prefab;
     public GameObject UI_prefab;
     public TaskType task;
+    public float healingTime;
 }
