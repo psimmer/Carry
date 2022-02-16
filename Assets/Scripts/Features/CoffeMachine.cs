@@ -8,18 +8,16 @@ using UnityEngine.UI;
 public class CoffeMachine : MonoBehaviour, ISaveSystem
 {
 
-    [SerializeField] private int coffeeCount;
-    public int CoffeeCount{get { return coffeeCount; }set { coffeeCount = value; }}
+
     [SerializeField] GameObject coffeeUI;
     [SerializeField] Image coffeeFill;
     public Image CoffeeFill{get { return coffeeFill; }set { coffeeFill = value; }}
     [SerializeField] NewPlayerMovement playerMovement;
     [SerializeField] Image coffeeCup;
     public Image CoffeeCup{get { return coffeeCup; }set { coffeeCup = value; }}
-    [SerializeField] TMP_Text coffeeCounter;
     [SerializeField] private float timer; // how long the effect lasts
     private float maxTimer;
-    [SerializeField] private int extraSpeed; // gained speed through coffee
+    [SerializeField] private int extraSpeed; // gained speed through coffee  
     private bool drinking = false;
     public bool Drinking{get { return drinking; }set { drinking = value; }}
     private bool refillCup = false;
@@ -72,10 +70,6 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
 
         }
     }
-    public void UpdateCoffeCounter(int coffeeCount)
-    {
-        coffeeCounter.text = "Coffee: " + coffeeCount;
-    }
 
     public void SaveData()
     {
@@ -85,7 +79,6 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         Debug.Log("Save File location: " + path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        formatter.Serialize(stream, coffeeCount);
         formatter.Serialize(stream, timer);
         formatter.Serialize(stream, drinking);
 
@@ -101,12 +94,10 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
             FileStream stream = new FileStream(path, FileMode.Open);
             Debug.Log("Save File loaded: " + path);
 
-            coffeeCount = (int)formatter.Deserialize(stream);
             timer = (float)formatter.Deserialize(stream);
             drinking = (bool)formatter.Deserialize(stream);
 
             stream.Close();
-            UpdateCoffeCounter(coffeeCount);
 
         }
     }
