@@ -41488,6 +41488,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1127159734}
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
+      propertyPath: coffeeDamage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: sceneManager
       value: 
       objectReference: {fileID: 711209936}
