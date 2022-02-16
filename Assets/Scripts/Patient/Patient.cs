@@ -83,15 +83,6 @@ public class Patient : MonoBehaviour
     public GameObject CurrentParticles { get { return currentParticles; } set { currentParticles = value; } }
 
 
-
-
-
-
-
-
-
-
-
     private void Awake()
     {
         if (isLayingSinceStart)

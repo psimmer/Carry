@@ -6,11 +6,29 @@ using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
+    [SerializeField] Player player;
     [SerializeField] TMP_Text doctorTextField;
+    [SerializeField] GameObject patientTutorialPrefab;
+    [SerializeField] Transform patientSpawnPoint;
+    [SerializeField] Transform patientBedPos;
     [SerializeField] List<Texts> tutorialTexts;
-
+    GameObject currentPatient;
     float tutorialTimer;
     int textDirectionIndex = 0;
+    bool isSpawned = false;
+
+    #region TutorialCheckList
+
+    bool IsWPressed = false;
+    bool IsAPressed = false;
+    bool IsSPressed = false;
+    bool IsDPressed = false;
+    bool IsSpacePressed = false;
+    bool playerGrabItem = false;
+    bool isLayingInBed = false;
+    #endregion
+
+
 
     void Awake()
     {
@@ -20,18 +38,131 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.N))
         {
             doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
         }
+        MovePatientInBed();
+        player.Interact();
 
-        //tutorialTimer += Time.deltaTime;
-        //TutorialLoop();
+        if(textDirectionIndex == 7 && !isSpawned)
+        {
+            isSpawned = true;
+            currentPatient = Instantiate(patientTutorialPrefab);
+            currentPatient.transform.position = patientSpawnPoint.position;
+            currentPatient.transform.eulerAngles = new Vector3(0, 90, 0);
+        }
+
+        //doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+        tutorialTimer += Time.deltaTime;
+        TutorialLoop();
     }
+
+    private void MovePatientInBed()
+    {
+        if (player.IsInContact)
+        {
+            player.currentPatient.transform.position = patientBedPos.position;
+            player.currentPatient.transform.rotation = patientBedPos.rotation;
+            player.currentPatient.GetComponent<Animator>().SetBool("isLaying", true);
+            player.currentPatient.IsInBed = true;
+        }
+    }
+
+    private void CheckListMovement()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            IsWPressed = true;
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            IsAPressed = true;
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            IsSPressed = true;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            IsDPressed = true;
+        }
+    }
+
+    private void CheckForInteractionInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            IsSpacePressed = true;
+        }
+    }
+
 
     private void TutorialLoop()
     {
-        if(tutorialTimer >= 5 && tutorialTexts[textDirectionIndex].NumberOfExecution == textDirectionIndex) doctorTextField.text = tutorialTexts[++textDirectionIndex].Text; tutorialTimer = 0f;
+        if((int)tutorialTimer == 5)
+        {
+            if(textDirectionIndex <= 2)
+            {
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                tutorialTimer = 0;
+            }
+        }
+        if(tutorialTexts[textDirectionIndex].NumberOfExecution == 3)
+        {
+            CheckListMovement();
+            if(IsWPressed && IsAPressed && IsSPressed && IsDPressed)
+            {
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                IsDPressed = false;
+                IsWPressed = false;
+            }
+        }
+        else if(tutorialTexts[textDirectionIndex].NumberOfExecution == 4)
+        {
+            CheckForInteractionInput();
+            if (IsSpacePressed)
+            {
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                IsSpacePressed = false;
+            }
+        }
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 5)
+        {
+            if(player.currentItem != null && !playerGrabItem)
+            {
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                playerGrabItem = true;
+                tutorialTimer = 0;
+            }
+        }
+        else if(tutorialTexts[textDirectionIndex].NumberOfExecution == 6)
+        {
+            if(tutorialTimer >= 3)
+            {
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                tutorialTimer = 0;
+            }
+        }
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 7)
+        {
+            if(tutorialTimer >= 4)
+            {
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                tutorialTimer = 0;
+            }
+        }
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 8)
+        {
+            if (currentPatient.GetComponent<Patient>().IsInBed && !isLayingInBed)
+            {
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                isLayingInBed = true;
+            }
+        }
+
+
+
     }
 
 }
