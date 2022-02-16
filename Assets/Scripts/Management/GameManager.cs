@@ -57,9 +57,8 @@ public class GameManager : MonoBehaviour
 
     private void DrinkingCoffee()
     {
-        if (player.IsDrinkingCoffee)
+        if (player.IsDrinkingCoffee && !coffeeMachine.Drinking && !coffeeMachine.IsOnCooldown)
         {
-
                 coffeeMachine.Drinking = true;
                 coffeeMachine.RefillCup = true;
         }

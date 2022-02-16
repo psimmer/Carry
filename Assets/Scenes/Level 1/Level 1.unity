@@ -2803,17 +2803,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2637345656872736395, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
+      propertyPath: timer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2637345656872736395, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
       propertyPath: coffeeUI
       value: 
-      objectReference: {fileID: 1417730711}
+      objectReference: {fileID: 1717348002}
     - target: {fileID: 2637345656872736395, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
       propertyPath: coffeeCup
       value: 
-      objectReference: {fileID: 682372826}
+      objectReference: {fileID: 1786806876}
     - target: {fileID: 2637345656872736395, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
       propertyPath: coffeeFill
       value: 
-      objectReference: {fileID: 55094050}
+      objectReference: {fileID: 1352423107}
     - target: {fileID: 2637345656872736395, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
       propertyPath: extraSpeed
       value: 2
@@ -2826,6 +2830,10 @@ PrefabInstance:
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 595119217}
+    - target: {fileID: 2637345656872736395, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
+      propertyPath: cooldownDuration
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4083191782085738514, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -27968,11 +27976,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 3c073ec8a2b502a40ba213c0bc0464a7, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillMethod: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
