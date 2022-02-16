@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float documentationReward;
 
     #region Multipliers
+    [Tooltip("Damage that the player takes when drinking coffee")]
     [SerializeField] private float coffeeDamage;
     [Tooltip("This value multiplies the stress")]
     [Range(1, 4)]
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.IsDrinkingCoffee && !coffeeMachine.Drinking && !coffeeMachine.IsOnCooldown)
         {
-            if (coffeeMachine.Drinking == false) // inflict damage to the patient if the patient activates the coffee
+            if (coffeeMachine.Drinking == false) // inflict damage to the player if the player activates the coffee
                 player.CurrentStressLvl += coffeeDamage;
 
                 coffeeMachine.Drinking = true;
