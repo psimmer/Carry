@@ -52,7 +52,8 @@ public class Computer : MonoBehaviour
     {
         currentPopUp = Instantiate(DocumentationPopUp, popUpCanvas);
         currentPopUp.transform.position = popUpPos.position;
-        currentPopUp.transform.LookAt(Camera.main.transform);
+        Vector3 lookDir = Camera.main.transform.forward;
+        currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
 
     }
 
