@@ -2080,7 +2080,7 @@ MonoBehaviour:
     text3: 
     numberOfExecution: 4
   - text: 
-    text2: Go and grab a item!
+    text2: Go and grab an item!
     text3: 
     numberOfExecution: 5
   - text: 
@@ -2096,7 +2096,7 @@ MonoBehaviour:
     text3: A Patient came in.
     numberOfExecution: 8
   - text: 
-    text2: Interact with him to lay him in a bed!
+    text2: Interact with him to assign him to a bed!
     text3: 
     numberOfExecution: 9
   - text: 
@@ -2104,7 +2104,7 @@ MonoBehaviour:
     text3: 
     numberOfExecution: 10
   - text: 
-    text2: The patient need your help!
+    text2: The patient needs your help!
     text3: 
     numberOfExecution: 11
   - text: 
