@@ -43,7 +43,7 @@ public class Player : MonoBehaviour, ISaveSystem
         if (SceneManager.GetActiveScene().name == "Level 2" || SceneManager.GetActiveScene().name == "Level 3" ||
             SceneManager.GetActiveScene().name == "Level 4")
         {
-            currentStressLvl = GlobalData.instance.CurrentStressLvl;
+            CurrentStressLvl = GlobalData.instance.CurrentStressLvl;
         }
         if (GlobalData.instance.IsSaveFileLoaded)
             LoadData();
