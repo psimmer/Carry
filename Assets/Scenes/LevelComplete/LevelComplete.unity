@@ -853,13 +853,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstButton: {fileID: 556665320}
-  coffeeCounter: {fileID: 0}
   patientsHealed: {fileID: 802679524}
   patientsLost: {fileID: 73584690}
   treatments: {fileID: 1133638660}
   stressLvlBar: {fileID: 0}
   pauseElements: {fileID: 0}
   optionsElements: {fileID: 0}
+  pauseButton: {fileID: 0}
+  playButton: {fileID: 0}
+  LevelMusic: {fileID: 0}
 --- !u!82 &525321981
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1013,7 +1015,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit to Main Menu
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e990d2a3a6f203c418d5ddabb84a1299, type: 2}
   m_sharedMaterial: {fileID: -8850064736600883788, guid: e990d2a3a6f203c418d5ddabb84a1299, type: 2}
@@ -1040,7 +1042,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.75
+  m_fontSize: 68.35
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
