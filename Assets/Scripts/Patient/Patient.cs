@@ -76,6 +76,7 @@ public class Patient : MonoBehaviour
     [SerializeField] private GameObject healParticles;
     [SerializeField] private GameObject healingRayParticles;
     [SerializeField] private GameObject damageParticles;
+    public GameObject DamageParticles { get { return damageParticles; } }
     [SerializeField] private GameObject sittingDamageParticles;
     [SerializeField] private GameObject deathParticles;
     public GameObject DeathParticles => deathParticles;

@@ -211,43 +211,61 @@ public class TutorialManager : MonoBehaviour
         {
             if (player.currentItem != null)
             {
-                if (player.currentItem.item.task == TaskType.Bandages)
+                if (Input.GetKeyDown(KeyCode.Space) && player.currentItem.item.task == TaskType.Bandages)
                 {
                     doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                     player.IsInContact = false;
-                    currentPatient.GetComponent<Patient>().IsPopping = true;
                 }
             }
         }
         //Interact with the patient to heal him and hold space
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 13)
         {
-            if (player.IsInContact && currentPatient.GetComponent<Patient>().IsPopping == true)
+            if (player.IsInContact)
             {
-                if (Input.GetKeyDown(KeyCode.Space) && currentPatient.GetComponent<Patient>().CurrentIllness == player.currentItem.item.task)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    player.GetComponent<Animator>().SetBool("isTreating", true);
-                    currentPatient.GetComponent<Patient>().CurrentParticles = Instantiate(currentPatient.GetComponent<Patient>().HealingParticles, currentPatient.GetComponent<Patient>().transform);
-                    ParticleSystem[] ParticleLoops = currentPatient.GetComponent<Patient>().GetComponentsInChildren<ParticleSystem>();
-                    for (int i = 0; i < ParticleLoops.Length; i++)
+                    if (Input.GetKey(KeyCode.Space))
                     {
-                        ParticleLoops[i].loop = false;
+                        currentPopUp.GetComponent<PopUp>().IsHealing = true;
+                        player.GetComponent<Animator>().SetBool("isTreating", true);
+                        currentPatient.GetComponent<Patient>().CurrentParticles = Instantiate(currentPatient.GetComponent<Patient>().HealingParticles, currentPatient.GetComponent<Patient>().transform);
+                        ParticleSystem[] ParticleLoops = currentPatient.GetComponent<Patient>().GetComponentsInChildren<ParticleSystem>();
+                        //while (player.IsInContact)
+                        //{
+                        //    for (int i = 0; i < ParticleLoops.Length; i++)
+                        //    {
+                        //        ParticleLoops[i].loop = false;
+                        //    }
+                        //    player.GetComponent<NewPlayerMovement>().enabled = false;
+                        //}
+                        //StartCoroutine(TreatmentProgress(currentPatient.GetComponent<Patient>()));
                     }
-                    currentPatient.GetComponent<Patient>().GetComponentInChildren<PopUp>().IsHealing = true;
-                    player.GetComponent<NewPlayerMovement>().enabled = false;
-                    StartCoroutine(TreatmentProgress(currentPatient.GetComponent<Patient>()));
+                }
+                else if (!Input.GetKey(KeyCode.Space))
+                {
+                    Destroy(currentPatient.GetComponent<Patient>().CurrentParticles);
+
+                    player.IsInContact = false;
+                    currentPopUp.GetComponent<PopUp>().IsHealing = false;
+                    player.GetComponent<Animator>().SetBool("isTreating", false);
+                    player.GetComponent<NewPlayerMovement>().enabled = true;
+                    Destroy(currentPopUp);
+                    Damage(currentPatient.GetComponent<Patient>());
                 }
             }
-
             if (currentPopUp != null)
             {
+
                 if (currentPopUp.GetComponent<PopUp>().RadialBarImage.fillAmount >= 1)
                 {
                     Destroy(currentPopUp);
                     doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 }
-
             }
+
+            //}
+            //if()
         }
     }
 
@@ -279,8 +297,10 @@ public class TutorialManager : MonoBehaviour
                     //Fail
                     else if (!Input.GetKey(KeyCode.Space))
                     {
+                        
                         player.GetComponent<Animator>().SetBool("isTreating", false);
                         Destroy(patient.CurrentParticles);
+                        currentPatient.GetComponent<Patient>().SpawnParticles(currentPatient.GetComponent<Patient>().DamageParticles, 3);
                         Damage(patient);
                         player.currentItem = null;
                         player.IsInContact = false;
@@ -293,7 +313,7 @@ public class TutorialManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
-   
+
 
     private void Damage(Patient patient)
     {
