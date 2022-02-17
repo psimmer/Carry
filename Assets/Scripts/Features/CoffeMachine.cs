@@ -21,9 +21,9 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
     private bool drinking = false;
     public bool Drinking{get { return drinking; }set { drinking = value; }}
     private bool refillCup = false;
-    [SerializeField] private float cooldownDuration; // new variable @patrick! (from coffee update)
-    private float cooldownTimer = 0; // new variable @patrick! (from coffee update)
-    private bool isOnCooldown = false; // new variable @patrick! (from coffee update)
+    [SerializeField] private float cooldownDuration; 
+    private float cooldownTimer = 0; 
+    private bool isOnCooldown = false; 
     public bool IsOnCooldown{get { return isOnCooldown; }set { isOnCooldown = value; } }
     public bool RefillCup{get { return refillCup; }set { refillCup = value; }}
 
@@ -36,6 +36,7 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
     }
     private void Update()
     {
+        Debug.Log(cooldownTimer);
         if (drinking)
             CoffeeIsActive(maxTimer, extraSpeed);
         
@@ -113,6 +114,11 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
 
         formatter.Serialize(stream, timer);
         formatter.Serialize(stream, drinking);
+        formatter.Serialize(stream, cooldownDuration);
+        formatter.Serialize(stream, cooldownTimer);
+        formatter.Serialize(stream, isOnCooldown);
+        formatter.Serialize(stream, coffeeFill.fillAmount);
+        formatter.Serialize(stream, coffeeCup.color.a);
 
         stream.Close();
     }
@@ -128,6 +134,16 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
 
             timer = (float)formatter.Deserialize(stream);
             drinking = (bool)formatter.Deserialize(stream);
+            cooldownDuration = (float)formatter.Deserialize(stream);
+            cooldownTimer = (float)formatter.Deserialize(stream);
+            isOnCooldown = (bool)formatter.Deserialize(stream);
+            coffeeFill.fillAmount = (float)formatter.Deserialize(stream);
+
+            //setting the transparency
+            Color tempColor = coffeeCup.color;
+            tempColor.a = (float)formatter.Deserialize(stream);
+            coffeeCup.color = tempColor;
+            coffeeFill.color = tempColor;
 
             stream.Close();
 
