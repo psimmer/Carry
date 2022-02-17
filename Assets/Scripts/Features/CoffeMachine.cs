@@ -36,7 +36,6 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
     }
     private void Update()
     {
-        Debug.Log(cooldownTimer);
         if (drinking)
             CoffeeIsActive(maxTimer, extraSpeed);
         
