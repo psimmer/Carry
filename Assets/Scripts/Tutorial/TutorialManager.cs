@@ -11,8 +11,11 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] GameObject patientTutorialPrefab;
     [SerializeField] Transform patientSpawnPoint;
     [SerializeField] Transform patientBedPos;
+    [SerializeField] GameObject popUpPrefab;
+    [SerializeField] Transform popUpPos;
     [SerializeField] List<Texts> tutorialTexts;
     GameObject currentPatient;
+    GameObject currentPopUp;
     float tutorialTimer;
     int textDirectionIndex = 0;
     bool isSpawned = false;
@@ -26,6 +29,8 @@ public class TutorialManager : MonoBehaviour
     bool IsSpacePressed = false;
     bool playerGrabItem = false;
     bool isLayingInBed = false;
+    bool isPopUpSpawned = false;
+    bool playerdroppedItem = false;
     #endregion
 
 
@@ -45,7 +50,7 @@ public class TutorialManager : MonoBehaviour
         MovePatientInBed();
         player.Interact();
 
-        if(textDirectionIndex == 7 && !isSpawned)
+        if (textDirectionIndex == 7 && !isSpawned)
         {
             isSpawned = true;
             currentPatient = Instantiate(patientTutorialPrefab);
@@ -100,25 +105,27 @@ public class TutorialManager : MonoBehaviour
 
     private void TutorialLoop()
     {
-        if((int)tutorialTimer == 5)
+        if ((int)tutorialTimer == 5)
         {
-            if(textDirectionIndex <= 2)
+            if (textDirectionIndex <= 2)
             {
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 tutorialTimer = 0;
             }
         }
-        if(tutorialTexts[textDirectionIndex].NumberOfExecution == 3)
+        //ToMove: WASD
+        if (tutorialTexts[textDirectionIndex].NumberOfExecution == 3)
         {
             CheckListMovement();
-            if(IsWPressed && IsAPressed && IsSPressed && IsDPressed)
+            if (IsWPressed && IsAPressed && IsSPressed && IsDPressed)
             {
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 IsDPressed = false;
                 IsWPressed = false;
             }
         }
-        else if(tutorialTexts[textDirectionIndex].NumberOfExecution == 4)
+        //ToInteract: Space
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 4)
         {
             CheckForInteractionInput();
             if (IsSpacePressed)
@@ -127,43 +134,183 @@ public class TutorialManager : MonoBehaviour
                 IsSpacePressed = false;
             }
         }
+        //Go and grab a item!
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 5)
         {
-            if(player.currentItem != null && !playerGrabItem)
+            if (player.currentItem != null && !playerGrabItem)
             {
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 playerGrabItem = true;
                 tutorialTimer = 0;
             }
         }
-        else if(tutorialTexts[textDirectionIndex].NumberOfExecution == 6)
+        //Drop Item
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 6)
         {
-            if(tutorialTimer >= 3)
+            if (Input.GetKeyDown(KeyCode.F) && !playerdroppedItem)
             {
+                playerdroppedItem = true;
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
-                tutorialTimer = 0;
             }
         }
+        //Great
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 7)
         {
-            if(tutorialTimer >= 4)
+            if (tutorialTimer >= 3)
             {
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 tutorialTimer = 0;
             }
         }
+        //Patient came in
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 8)
+        {
+            if (tutorialTimer >= 4)
+            {
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                tutorialTimer = 0;
+            }
+        }
+        //Interact with patient to lay him in bed
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 9)
         {
             if (currentPatient.GetComponent<Patient>().IsInBed && !isLayingInBed)
             {
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 isLayingInBed = true;
+                tutorialTimer = 0;
             }
         }
+        //Great
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 10 && !isPopUpSpawned)
+        {
+            if ((int)tutorialTimer == 2)
+            {
+                currentPopUp = Instantiate(popUpPrefab, popUpPos);
+                currentPopUp.transform.position = popUpPos.position;
+                Vector3 lookDir = Camera.main.transform.forward;
+                currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
+                currentPopUp.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+                isPopUpSpawned = true;
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                tutorialTimer = 0;
+            }
+        }
+        // Patient need your help
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 11)
+        {
+            if ((int)tutorialTimer >= 3)
+            {
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                isPopUpSpawned = true;
+                tutorialTimer = 0;
+            }
+        }
+        //grab the correct item
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 12)
+        {
+            if (player.currentItem != null)
+            {
+                if (player.currentItem.item.task == TaskType.Bandages)
+                {
+                    doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                    player.IsInContact = false;
+                    currentPatient.GetComponent<Patient>().IsPopping = true;
+                }
+            }
+        }
+        //Interact with the patient to heal him and hold space
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 13)
+        {
+            if (player.IsInContact && currentPatient.GetComponent<Patient>().IsPopping == true)
+            {
+                if (Input.GetKeyDown(KeyCode.Space) && currentPatient.GetComponent<Patient>().CurrentIllness == player.currentItem.item.task)
+                {
+                    player.GetComponent<Animator>().SetBool("isTreating", true);
+                    currentPatient.GetComponent<Patient>().CurrentParticles = Instantiate(currentPatient.GetComponent<Patient>().HealingParticles, currentPatient.GetComponent<Patient>().transform);
+                    ParticleSystem[] ParticleLoops = currentPatient.GetComponent<Patient>().GetComponentsInChildren<ParticleSystem>();
+                    for (int i = 0; i < ParticleLoops.Length; i++)
+                    {
+                        ParticleLoops[i].loop = false;
+                    }
+                    currentPatient.GetComponent<Patient>().GetComponentInChildren<PopUp>().IsHealing = true;
+                    player.GetComponent<NewPlayerMovement>().enabled = false;
+                    StartCoroutine(TreatmentProgress(currentPatient.GetComponent<Patient>()));
+                }
+            }
 
+            if (currentPopUp != null)
+            {
+                if (currentPopUp.GetComponent<PopUp>().RadialBarImage.fillAmount >= 1)
+                {
+                    Destroy(currentPopUp);
+                    doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                }
 
-
+            }
+        }
     }
+
+    IEnumerator TreatmentProgress(Patient patient)
+    {
+        while (player.IsInContact)
+        {
+            if (patient.CurrentPopUp != null)
+            {
+                if (player.currentItem != null)
+                {
+
+                    //Success
+                    if (patient.GetComponentInChildren<PopUp>().RadialBarImage.fillAmount >= 1)
+                    {
+                        patient.GetComponentInChildren<PopUp>().IsHealing = false;
+
+                        patient.Treatment(+player.currentItem.item.restoreHealth);
+                        //player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
+
+                        player.GetComponent<Animator>().SetBool("isTreating", false);
+                        Destroy(patient.CurrentParticles, patient.ParticlesDuration);
+                        player.currentItem = null;
+                        player.IsInContact = false;
+                        player.GetComponent<NewPlayerMovement>().enabled = true;
+                        Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
+                        StopCoroutine(TreatmentProgress(patient));
+                    }
+                    //Fail
+                    else if (!Input.GetKey(KeyCode.Space))
+                    {
+                        player.GetComponent<Animator>().SetBool("isTreating", false);
+                        Destroy(patient.CurrentParticles);
+                        Damage(patient);
+                        player.currentItem = null;
+                        player.IsInContact = false;
+                        player.GetComponent<NewPlayerMovement>().enabled = true;
+                        Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
+                        StopCoroutine(TreatmentProgress(patient));
+                    }
+                }
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+   
+
+    private void Damage(Patient patient)
+    {
+        patient.HasPopUp = false;
+
+        if (player.currentItem == null)
+        {
+            patient.Treatment(-player.NoItemDamage);
+            player.CurrentStressLvl += player.NoItemDamage * 1;
+        }
+        else
+        {
+            patient.Treatment(-player.currentItem.item.restoreHealth);
+            player.CurrentStressLvl += player.currentItem.item.restoreHealth * 1;
+        }
+    }
+
 
 }
 

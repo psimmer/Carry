@@ -70,7 +70,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.252
+  m_FillAmount: 0.296
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -161,7 +161,6 @@ MonoBehaviour:
   timeOutDamagePatient: 10
   timeOutDamagePlayer: 30
   item: {fileID: 11400000, guid: c2e61b20ebb69234bac6dcc4c5c54dfa, type: 2}
-  healingSpeed: 4
   popUpTaskType: 0
 --- !u!1 &7151000756691187861
 GameObject:
