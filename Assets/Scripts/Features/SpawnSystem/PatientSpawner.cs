@@ -63,6 +63,9 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 newPatient.GetComponent<Patient>().CurrentIllness = TaskType.AssignBed;
                 randomSpawn.GetComponent<SpawnPoint>().IsFree = false;
                 randomTime = Random.Range(minRandomTime, maxRandomTime);
+                GameObject newParticles = Instantiate(newPatient.GetComponent<Patient>().SpawningParticles, randomSpawn.position + Vector3.up, Quaternion.identity);
+                Destroy(newParticles, newPatient.GetComponent<Patient>().ParticlesDuration);
+                Debug.Log(randomSpawn);
             }
         }
     }

@@ -28606,6 +28606,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: spawningParticles
+      value: 
+      objectReference: {fileID: 2146659793090223710, guid: 061fce563510f56459194e42f7fdc839, type: 3}
+    - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: isLayingSinceStart
       value: 1
       objectReference: {fileID: 0}
@@ -29174,6 +29178,10 @@ PrefabInstance:
       propertyPath: particlesDuration
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: spawningParticles
+      value: 
+      objectReference: {fileID: 2146659793090223710, guid: 061fce563510f56459194e42f7fdc839, type: 3}
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: isLayingSinceStart
       value: 1
