@@ -68,6 +68,8 @@ public class Patient : MonoBehaviour
     
     
     [Header("Particels")]
+    [SerializeField] private GameObject spawningParticles;
+    public GameObject SpawningParticles => spawningParticles;
     [SerializeField] private GameObject healingParticles;
     public Transform Canvas    {get { return popUpCanvas; }set { popUpCanvas = value; }}
     public GameObject HealingParticles => healingParticles;

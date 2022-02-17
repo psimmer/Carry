@@ -980,7 +980,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHP: 50
-  patientMaxHP: 100
+  minCurrentHp: 0
+  maxCurrentHp: 0
+  currentIllness: 10
+  isInBed: 0
+  destroyPosition: {fileID: 0}
+  popUpCanvas: {fileID: 8783280524901983822}
   popUpList:
   - {fileID: 1360661134648728818, guid: be7335628a72584469b1020da3d5028a, type: 3}
   - {fileID: 1360661134648728818, guid: 05455ea590b10624d87a7721fea9a516, type: 3}
@@ -989,19 +994,13 @@ MonoBehaviour:
   - {fileID: 1360661134648728818, guid: f92f06ad432e1b141b9cc39e33b78d77, type: 3}
   - {fileID: 1360661134648728818, guid: b33414f6051a78943aefd5b19923fb57, type: 3}
   - {fileID: 1360661134648728818, guid: b821aa9fab037084da4ceeff42d9083c, type: 3}
-  popUpCanvas: {fileID: 8783280524901983822}
-  healthBarCanvas: {fileID: 1698449109629869800}
-  minCurrentHp: 0
-  maxCurrentHp: 0
-  currentIllness: 10
-  patientID: 0
   isPopping: 0
   hasTask: 0
+  healthBarCanvas: {fileID: 1698449109629869800}
   healthbar: {fileID: 6019247201364345339}
   heartbeat: {fileID: 7490145752033055991}
-  isInBed: 0
-  destroyPosition: {fileID: 0}
   isLayingSinceStart: 0
+  spawningParticles: {fileID: 2146659793090223710, guid: 061fce563510f56459194e42f7fdc839, type: 3}
   healingParticles: {fileID: 5404059796577138036, guid: 639b46de5ce210d4aa6a001f3af4c2d7, type: 3}
   healParticles: {fileID: 5404059796577138036, guid: 76a8313e80bd92e42bbe3ec90cbc5038, type: 3}
   healingRayParticles: {fileID: 5404059796577138036, guid: 69d1ab495e3eb7c4b89ab4fdbef0af52, type: 3}
