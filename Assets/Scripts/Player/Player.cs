@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, ISaveSystem
 {
@@ -26,17 +27,24 @@ public class Player : MonoBehaviour, ISaveSystem
     public bool IsInContact { get; set; }
     public bool IsDrinkingCoffee { get; set; }
     public bool IsHoldingItem { get; set; }
-    
+
 
 
     private void Awake()
     {
         IsHoldingItem = false;
         PopUp.e_OnPopUpTimeOut += TimeOutDamage;
+        Timer.e_OnLevelCompleteSaveStressLvl += SaveStressLevel;
+
     }
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Level 2" || SceneManager.GetActiveScene().name == "Level 3" ||
+            SceneManager.GetActiveScene().name == "Level 4")
+        {
+            currentStressLvl = GlobalData.instance.CurrentStressLvl;
+        }
         if (GlobalData.instance.IsSaveFileLoaded)
             LoadData();
     }
@@ -157,6 +165,11 @@ public class Player : MonoBehaviour, ISaveSystem
             yield return new WaitForSeconds(3);
             CurrentStressLvl--;
         }
+    }
+
+    private void SaveStressLevel()
+    {
+        GlobalData.instance.CurrentStressLvl = currentStressLvl;
     }
 
     public void SaveData()

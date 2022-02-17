@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StressLvl : MonoBehaviour
@@ -10,6 +11,7 @@ public class StressLvl : MonoBehaviour
 
     private void Awake()
     {
+  
         fillAmountofStress = Random.Range(0,30);
         fillofStress.fillAmount = fillAmountofStress / 100;
     }

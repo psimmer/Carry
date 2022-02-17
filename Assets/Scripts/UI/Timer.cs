@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System;
 
 public class Timer : MonoBehaviour , ISaveSystem
 {
@@ -17,6 +18,7 @@ public class Timer : MonoBehaviour , ISaveSystem
 
     private string dayOrNight;
     private float realTime;
+    public static event Action e_OnLevelCompleteSaveStressLvl;
 
     private void Start()
     {
@@ -31,6 +33,7 @@ public class Timer : MonoBehaviour , ISaveSystem
         //This would be the condition to end the scene with a success
         if (startTimeHours == endTimeHours && (int)realTime == 59)
         {
+            e_OnLevelCompleteSaveStressLvl?.Invoke();
             SceneManager.LoadScene("LevelComplete");    
         }
 

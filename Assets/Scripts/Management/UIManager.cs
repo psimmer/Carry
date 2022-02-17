@@ -85,10 +85,6 @@ public class UIManager : MonoBehaviour
                 Time.timeScale = 0f;
                 pauseElements.SetActive(true);
                 LevelMusic.Pause();
-
-                //TODO: dimm light
-                //TODO: Pause AUdio
-                //TODO: Pause Camera
             }
             else
             {
@@ -97,10 +93,6 @@ public class UIManager : MonoBehaviour
                 pauseElements.SetActive(false);
                 Time.timeScale = 1f;
                 LevelMusic.Play();
-
-                //TODO: dimm light
-                //TODO: play audio
-                //TODO: Play Camera
 
             }
         }
@@ -128,10 +120,6 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 0f;
             pauseElements.SetActive(true);
             LevelMusic.Pause();
-
-            //TODO: dimm light
-            //TODO: Pause AUdio
-            //TODO: Pause Camera
         }
         else
         {
@@ -140,11 +128,6 @@ public class UIManager : MonoBehaviour
             pauseElements.SetActive(false);
             Time.timeScale = 1f;
             LevelMusic.Play();
-
-            //TODO: dimm light
-            //TODO: play audio
-            //TODO: Play Camera
-
         }
     }
 
@@ -155,9 +138,6 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         LevelMusic.Play();
 
-        //TODO: dimm light
-        //TODO: play audio
-        //TODO: Play Camera
     }
     #endregion
 

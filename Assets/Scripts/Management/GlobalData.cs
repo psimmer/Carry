@@ -27,12 +27,15 @@ public class GlobalData : MonoBehaviour, ISaveSystem
     private int shiftPatientsLost;
     public int ShiftPatientsLost { get { return shiftPatientsLost; } set { shiftPatientsLost = value; } }
 
-    public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
 
     private bool isSaveFileLoaded;
     public bool IsSaveFileLoaded { get { return isSaveFileLoaded; } set { isSaveFileLoaded = value; } }
 
+    //Stats for Level transition
     private int currentLevel = 1;
+    public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
+    private float currentStressLvl;
+    public float CurrentStressLvl { get { return currentStressLvl; } set { currentStressLvl = value; } }
 
 
     private void Awake()
