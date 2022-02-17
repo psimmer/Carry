@@ -138,7 +138,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
             for (int i = 0; i < patientListCount; i++)
             {
                 PatientData data = (PatientData)formatter.Deserialize(stream);
-                GameObject go = Instantiate(differentPatients[data.patientID]);
+                GameObject go = Instantiate(differentPatients[data.differentPatientsIndex]);
                 Patient p = go.GetComponent<Patient>();
 
                 //setting patient position
@@ -147,7 +147,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 Quaternion quat = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
                 go.transform.rotation = quat;
 
-                p.DifferentPatientsIndex = data.patientID;
+                p.DifferentPatientsIndex = data.differentPatientsIndex;
                 p.CurrentHP = data.currentHP;
                 p.CurrentIllness = (TaskType)data.currentIllnes;
                 p.IsPopping = data.isPopping;

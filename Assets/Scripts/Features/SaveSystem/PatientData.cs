@@ -4,7 +4,7 @@ public class PatientData
 {
     public float[] position = new float[3];
     public float[] rotation = new float[4];
-    public int patientID;
+    public int differentPatientsIndex;
     public int currentHP;
     public int currentIllnes;
     public bool isPopping;
@@ -22,7 +22,7 @@ public class PatientData
         rotation[1] = patient.transform.rotation.y;
         rotation[2] = patient.transform.rotation.z;
         rotation[3] = patient.transform.rotation.w;
-        patientID = patient.DifferentPatientsIndex;
+        differentPatientsIndex = patient.DifferentPatientsIndex;
         currentHP = patient.CurrentHP;
         currentIllnes = (int)patient.CurrentIllness;
         isPopping = patient.IsPopping;
