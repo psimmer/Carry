@@ -108,7 +108,6 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = Application.persistentDataPath + "/SaveDataCoffeeMachine.carry";
-        Debug.Log("Save File location: " + path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, timer);
@@ -129,7 +128,6 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-            Debug.Log("Save File loaded: " + path);
 
             timer = (float)formatter.Deserialize(stream);
             drinking = (bool)formatter.Deserialize(stream);

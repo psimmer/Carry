@@ -78,13 +78,33 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
             {
                 patient.transform.position = bedList[i].BedPos.position;
                 patient.transform.rotation = bedList[i].BedPos.rotation;
-                patient.Healthbar.transform.parent.rotation = Quaternion.Euler(0,0,0); // these 2 lines position the healthbar on the whiteboard when you move the patient
+                patient.Healthbar.transform.parent.rotation = Quaternion.Euler(0, 0, 0); // these 2 lines position the healthbar on the whiteboard when you move the patient
                 bedList[i].IsPatientInBed = true;
                 bedList[i].CurrentPatient = patient;
                 patient.CurrentIllness = (TaskType)Random.Range(0, 6);
                 patient.IsInBed = true;
+                patient.CurrentBed = bedList[i].gameObject;
                 patient.GetComponent<Animator>().SetBool("isLaying", true);
                 return;
+            }
+        }
+    }
+
+    public void MoveToBed(Patient patient, string bedname)
+    {
+        for (int i = 0; i < bedList.Count; i++)
+        {
+            if (bedList[i].name == bedname)
+            {
+                patient.transform.position = bedList[i].BedPos.position;
+                patient.transform.rotation = bedList[i].BedPos.rotation;
+                patient.Healthbar.transform.parent.rotation = Quaternion.Euler(0, 0, 0); // these 2 lines position the healthbar on the whiteboard when you move the patient
+                bedList[i].IsPatientInBed = true;
+                bedList[i].CurrentPatient = patient;
+                patient.CurrentIllness = (TaskType)Random.Range(0, 6);
+                patient.IsInBed = true;
+                patient.CurrentBed = bedList[i].gameObject;
+                patient.GetComponent<Animator>().SetBool("isLaying", true);
             }
         }
     }
@@ -100,7 +120,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = Application.persistentDataPath + "/SaveDataPatientSpawner.carry";
-        Debug.Log("Save File location: " + path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
         //serialize patientlist
@@ -130,7 +149,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-            Debug.Log("Save File loaded: " + path);
 
             //deseriialize patientlist
             int patientListCount = (int)formatter.Deserialize(stream);
@@ -141,11 +159,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 GameObject go = Instantiate(differentPatients[data.differentPatientsIndex]);
                 Patient p = go.GetComponent<Patient>();
 
-                //setting patient position
-                Vector3 vector = new Vector3(data.position[0], data.position[1], data.position[2]);
-                go.transform.position = vector;
-                Quaternion quat = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
-                go.transform.rotation = quat;
+                
 
                 p.DifferentPatientsIndex = data.differentPatientsIndex;
                 p.CurrentHP = data.currentHP;
@@ -155,9 +169,25 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 p.IsInBed = data.isInBed;
                 p.HasPopUp = data.hasPopUp;
                 p.IsReleasing = data.isReleasing;
+                foreach (Bed b in bedList)
+                {
+                    if (b.name == data.currentBed)
+                    {
+                        MoveToBed(p, data.currentBed);
+                    }
+                    else
+                    {
+                        //setting patient position
+                        Vector3 vector = new Vector3(data.position[0], data.position[1], data.position[2]);
+                        go.transform.position = vector;
+                        Quaternion quat = new Quaternion(data.rotation[0], data.rotation[1], data.rotation[2], data.rotation[3]);
+                        go.transform.rotation = quat;
+                    }
 
-                if(p.IsInBed)
-                    p.GetComponent<Animator>().SetBool("isLaying", true);
+                }
+
+                //if(p.IsInBed)
+                //    p.GetComponent<Animator>().SetBool("isLaying", true);
 
                 loadedPatientList.Add(go);
 

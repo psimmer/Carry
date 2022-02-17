@@ -12,6 +12,7 @@ public class PatientData
     public bool isInBed;
     public bool hasPopUp;
     public bool isReleasing;
+    public string currentBed;
 
     public PatientData(Patient patient)
     {
@@ -30,5 +31,7 @@ public class PatientData
         isInBed = patient.IsInBed;
         hasPopUp = patient.HasPopUp;
         isReleasing = patient.IsReleasing;
+        if(patient.CurrentBed != null)
+            currentBed = patient.CurrentBed.name;
     }
 }

@@ -19,6 +19,8 @@ public class Patient : MonoBehaviour
     //Is to check if the patient is in a bed or is the bed free
     [SerializeField] bool isInBed = false;
     public bool IsInBed { get { return isInBed; } set { isInBed = value; } }
+    [SerializeField] private GameObject currentBed;
+    public GameObject CurrentBed { get { return currentBed; } set { currentBed = value; } }
 
     [SerializeField] private Transform destroyPosition;
     private float destroyTimer = 0;
@@ -51,8 +53,6 @@ public class Patient : MonoBehaviour
     float timetillPopUp;
     bool hasPopUp;
     public bool HasPopUp { get { return hasPopUp; } set { hasPopUp = value; } }
-
-
 
     [Header("HealthBar")]
     [SerializeField] private Transform healthBarCanvas;

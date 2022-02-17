@@ -164,7 +164,6 @@ public class Player : MonoBehaviour, ISaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = Application.persistentDataPath + "/SaveDataPlayer.carry";
-        Debug.Log("Save File location: " + path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
         //Serialize player data
@@ -187,7 +186,6 @@ public class Player : MonoBehaviour, ISaveSystem
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-            Debug.Log("Save File loaded: " + path);
 
             //Set Player position
             float[] position = new float[3];

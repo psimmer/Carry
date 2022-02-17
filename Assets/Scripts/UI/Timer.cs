@@ -68,7 +68,6 @@ public class Timer : MonoBehaviour , ISaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = Application.persistentDataPath + "/SaveDataTimer.carry";
-        Debug.Log("Save File location: " + path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, startTimeHours);
@@ -85,7 +84,6 @@ public class Timer : MonoBehaviour , ISaveSystem
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-            Debug.Log("Save File loaded: " + path);
 
             startTimeHours = (int)formatter.Deserialize(stream);
             realTime = (float)formatter.Deserialize(stream);

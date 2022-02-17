@@ -32,9 +32,7 @@ public class DayCycle : MonoBehaviour, ISaveSystem
     public void SaveData()
     {
         BinaryFormatter formatter = new BinaryFormatter();
-
         string path = Application.persistentDataPath + "/SaveDataDayCycle.carry";
-        Debug.Log("Save File location: " + path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, interpolation);
