@@ -2057,6 +2057,7 @@ MonoBehaviour:
   patientSpawnPoint: {fileID: 42778576}
   patientBedPos: {fileID: 1966082423}
   popUpPrefab: {fileID: 9145750747078486605, guid: 35a4957ea04eb6448b1a73ff7834e129, type: 3}
+  releasePopUpPrefab: {fileID: 1360661134648728818, guid: dc1046bfc70bd064a86b83fe1090864b, type: 3}
   popUpPos: {fileID: 284359512}
   tutorialTexts:
   - text: 
@@ -2091,9 +2092,9 @@ MonoBehaviour:
     text2: Great!
     text3: 
     numberOfExecution: 7
-  - text: 
-    text2: Look!
-    text3: A Patient came in.
+  - text: Look!
+    text2: A Patient came in.
+    text3: 
     numberOfExecution: 8
   - text: 
     text2: Interact with him to assign him to a bed!
@@ -2115,6 +2116,14 @@ MonoBehaviour:
     text2: Now interact with the patient and hold Space!
     text3: 
     numberOfExecution: 13
+  - text: 
+    text2: Great you did it!
+    text3: 
+    numberOfExecution: 14
+  - text: 
+    text2: The Patient is fully healed you can release him!
+    text3: 
+    numberOfExecution: 15
 --- !u!4 &260040124
 Transform:
   m_ObjectHideFlags: 0

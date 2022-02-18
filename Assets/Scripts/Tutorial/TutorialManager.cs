@@ -12,6 +12,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] Transform patientSpawnPoint;
     [SerializeField] Transform patientBedPos;
     [SerializeField] GameObject popUpPrefab;
+    [SerializeField] GameObject releasePopUpPrefab;
     [SerializeField] Transform popUpPos;
     [SerializeField] List<Texts> tutorialTexts;
     GameObject currentPatient;
@@ -186,11 +187,11 @@ public class TutorialManager : MonoBehaviour
         {
             if ((int)tutorialTimer == 2)
             {
-                currentPopUp = Instantiate(popUpPrefab, popUpPos);
+                currentPopUp = Instantiate(popUpPrefab, currentPatient.GetComponent<Patient>().PopUpCanvas);
+                currentPatient.GetComponent<Patient>().PopUpCanvas.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
                 currentPopUp.transform.position = popUpPos.position;
                 Vector3 lookDir = Camera.main.transform.forward;
                 currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
-                currentPopUp.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
                 isPopUpSpawned = true;
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 tutorialTimer = 0;
@@ -231,15 +232,6 @@ public class TutorialManager : MonoBehaviour
                         player.GetComponent<Animator>().SetBool("isTreating", true);
                         currentPatient.GetComponent<Patient>().CurrentParticles = Instantiate(currentPatient.GetComponent<Patient>().HealingParticles, currentPatient.GetComponent<Patient>().transform);
                         ParticleSystem[] ParticleLoops = currentPatient.GetComponent<Patient>().GetComponentsInChildren<ParticleSystem>();
-                        //while (player.IsInContact)
-                        //{
-                        //    for (int i = 0; i < ParticleLoops.Length; i++)
-                        //    {
-                        //        ParticleLoops[i].loop = false;
-                        //    }
-                        //    player.GetComponent<NewPlayerMovement>().enabled = false;
-                        //}
-                        //StartCoroutine(TreatmentProgress(currentPatient.GetComponent<Patient>()));
                     }
                 }
                 else if (!Input.GetKey(KeyCode.Space))
@@ -256,64 +248,49 @@ public class TutorialManager : MonoBehaviour
             }
             if (currentPopUp != null)
             {
-
                 if (currentPopUp.GetComponent<PopUp>().RadialBarImage.fillAmount >= 1)
                 {
                     Destroy(currentPopUp);
+                    Destroy(currentPatient.GetComponent<Patient>().CurrentParticles);
+                    currentPopUp = null;
+                    player.GetComponent<Animator>().SetBool("isTreating", false);
                     doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                    currentPatient.GetComponent<Patient>().CurrentHP = 100;
+                    tutorialTimer = 0;
                 }
             }
-
-            //}
-            //if()
         }
-    }
-
-    IEnumerator TreatmentProgress(Patient patient)
-    {
-        while (player.IsInContact)
+        //great you did it
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 14)
         {
-            if (patient.CurrentPopUp != null)
+            if (tutorialTimer >= 3)
             {
-                if (player.currentItem != null)
-                {
-
-                    //Success
-                    if (patient.GetComponentInChildren<PopUp>().RadialBarImage.fillAmount >= 1)
-                    {
-                        patient.GetComponentInChildren<PopUp>().IsHealing = false;
-
-                        patient.Treatment(+player.currentItem.item.restoreHealth);
-                        //player.CurrentStressLvl -= player.currentItem.item.restoreHealth * stressReductionMultiplier;
-
-                        player.GetComponent<Animator>().SetBool("isTreating", false);
-                        Destroy(patient.CurrentParticles, patient.ParticlesDuration);
-                        player.currentItem = null;
-                        player.IsInContact = false;
-                        player.GetComponent<NewPlayerMovement>().enabled = true;
-                        Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
-                        StopCoroutine(TreatmentProgress(patient));
-                    }
-                    //Fail
-                    else if (!Input.GetKey(KeyCode.Space))
-                    {
-                        
-                        player.GetComponent<Animator>().SetBool("isTreating", false);
-                        Destroy(patient.CurrentParticles);
-                        currentPatient.GetComponent<Patient>().SpawnParticles(currentPatient.GetComponent<Patient>().DamageParticles, 3);
-                        Damage(patient);
-                        player.currentItem = null;
-                        player.IsInContact = false;
-                        player.GetComponent<NewPlayerMovement>().enabled = true;
-                        Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
-                        StopCoroutine(TreatmentProgress(patient));
-                    }
-                }
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                isPopUpSpawned = false;
+                tutorialTimer = 0;
             }
-            yield return new WaitForEndOfFrame();
         }
-    }
+        //release patient
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 15)
+        {
+            if(currentPatient.GetComponent<Patient>().CurrentHP >= 100 && !isPopUpSpawned)
+            {
+                isPopUpSpawned = true;
+                currentPopUp = Instantiate(releasePopUpPrefab, currentPatient.GetComponent<Patient>().PopUpCanvas);
+                currentPopUp.transform.position = popUpPos.position;
+                Vector3 lookDir = Camera.main.transform.forward;
+                currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
 
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+
+            }
+        }
+
+
+
+    }
 
     private void Damage(Patient patient)
     {
