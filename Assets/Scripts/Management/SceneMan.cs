@@ -49,6 +49,7 @@ public class SceneMan : MonoBehaviour
         SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.CurrentLevel++;
         GlobalData.instance.ResetShiftStatistics();
+        GlobalData.instance.IsSaveFileLoaded = false;
         SceneManager.LoadScene("Level " + GlobalData.instance.CurrentLevel);
     }
 

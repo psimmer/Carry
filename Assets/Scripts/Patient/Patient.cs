@@ -43,6 +43,8 @@ public class Patient : MonoBehaviour
 
     [SerializeField] private bool hasTask;
     public bool HasTask { get { return hasTask; } set { hasTask = value; } }
+    [Tooltip("Lvl 1 = 3; Lvl 2 = 5; Lvl 3 = 7; Lvl 4 = 7")]
+    [SerializeField] int maxTaskIndex;
 
     private bool isReleasing;
     public bool IsReleasing { get { return isReleasing; } set { isReleasing = value; } }
@@ -107,7 +109,7 @@ public class Patient : MonoBehaviour
 
         if (isInBed)
         {
-            CurrentIllness = (TaskType)Random.Range(0, 6);
+            CurrentIllness = (TaskType)Random.Range(0, maxTaskIndex);
         }
 
     }
@@ -145,18 +147,15 @@ public class Patient : MonoBehaviour
             if (health < 0)
             {
                 SoundManager.instance.PlayAudioClip(ESoundeffects.Damage, GetComponent<AudioSource>());
-                CurrentIllness = (TaskType)Random.Range(0, 6);
+                CurrentIllness = (TaskType)Random.Range(0, maxTaskIndex);
                 SpawnParticles(damageParticles, particlesDuration);
-
-                Debug.Log($"health kleiner als 0 {health}");
             }
             //Heal
             else if (health > 0)
             {
                 SoundManager.instance.PlayAudioClip(ESoundeffects.Heal, GetComponent<AudioSource>());
-                CurrentIllness = (TaskType)Random.Range(0, 6);
+                CurrentIllness = (TaskType)Random.Range(0, maxTaskIndex);
                 SpawnParticles(healParticles, particlesDuration);
-                Debug.Log($"health größer als 0 {health}");
             }
 
             // patient full recovered
@@ -165,9 +164,7 @@ public class Patient : MonoBehaviour
                 SoundManager.instance.PlayAudioClip(ESoundeffects.Heal, GetComponent<AudioSource>());
                 currentHP = patientMaxHP;
                 GlobalData.instance.SetPatientHealedStatistics();
-                Debug.Log($"patient vollgeheilt {health}");
                 currentIllness = TaskType.ReleasePatient;
-                //SpawnParticles(fullHealingParticles, particlesDuration);
             }
             // patient dead
             else if (currentHP <= 0)
@@ -175,9 +172,7 @@ public class Patient : MonoBehaviour
                 SpawnParticles(DeathParticles, particlesDuration);
                 SoundManager.instance.PlayAudioClip(ESoundeffects.Death, GetComponent<AudioSource>());
                 GlobalData.instance.SetPatientDeadStatistics();
-                Debug.Log($"patient tot {health}");
                 Destroy(this.gameObject, particlesDuration);
-                //SpawnParticles(deathParticles, particlesDuration);
             }
             if (currentHP > 0 && currentHP < patientMaxHP && health > 0)
                 GlobalData.instance.SetPatientTreatmentStatistics();
@@ -218,7 +213,7 @@ public class Patient : MonoBehaviour
 
     IEnumerator PopUpSpawn(TaskType illness, Transform canvas)
     {
-        if (CurrentIllness != TaskType.RelocateAPatient)
+        if (CurrentIllness != TaskType.AssignBed)
         {
             foreach (GameObject popUp in popUpList)
             {

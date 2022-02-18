@@ -984,18 +984,21 @@ MonoBehaviour:
   maxCurrentHp: 0
   currentIllness: 10
   isInBed: 0
+  currentBed: {fileID: 0}
   destroyPosition: {fileID: 0}
   popUpCanvas: {fileID: 926155281594610805}
   popUpList:
   - {fileID: 1360661134648728818, guid: be7335628a72584469b1020da3d5028a, type: 3}
   - {fileID: 1360661134648728818, guid: 05455ea590b10624d87a7721fea9a516, type: 3}
-  - {fileID: 1360661134648728818, guid: 66084169ca04d3b4eaec4f10a3e77d79, type: 3}
+  - {fileID: 1360661134648728818, guid: dc1046bfc70bd064a86b83fe1090864b, type: 3}
   - {fileID: 6686945816185498516, guid: d513b178b5630f342ab540d089193926, type: 3}
   - {fileID: 1360661134648728818, guid: f92f06ad432e1b141b9cc39e33b78d77, type: 3}
   - {fileID: 1360661134648728818, guid: b33414f6051a78943aefd5b19923fb57, type: 3}
   - {fileID: 1360661134648728818, guid: b821aa9fab037084da4ceeff42d9083c, type: 3}
+  - {fileID: 1360661134648728818, guid: 987387f6674259e43964490d347ac4e5, type: 3}
   isPopping: 0
   hasTask: 0
+  maxTaskIndex: 0
   healthBarCanvas: {fileID: 1698449109629869800}
   healthbar: {fileID: 6019247201364345339}
   heartbeat: {fileID: 7490145752033055991}

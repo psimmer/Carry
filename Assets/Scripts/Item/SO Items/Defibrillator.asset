@@ -16,5 +16,5 @@ MonoBehaviour:
   restoreHealth: 40
   prefab: {fileID: 6556839584298884841, guid: a2195506f50fbc04b9c6cc4dfd04283e, type: 3}
   UI_prefab: {fileID: 3120767470966570582, guid: 9b703448827a06648887c57fc2599021, type: 3}
-  task: 4
+  task: 6
   healingTime: 4

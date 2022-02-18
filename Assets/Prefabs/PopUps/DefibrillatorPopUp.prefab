@@ -86,8 +86,7 @@ MonoBehaviour:
   timeOutDamagePatient: 20
   timeOutDamagePlayer: 40
   item: {fileID: 11400000, guid: 89f52ddb20a36e84ca5546f1ec62bda1, type: 2}
-  healingSpeed: 3
-  popUpTaskType: 4
+  popUpTaskType: 6
 --- !u!1 &6565085415656995867
 GameObject:
   m_ObjectHideFlags: 0

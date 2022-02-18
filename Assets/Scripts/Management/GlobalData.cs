@@ -91,7 +91,6 @@ public class GlobalData : MonoBehaviour, ISaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = Application.persistentDataPath + "/SaveDataGlobalData.carry";
-        Debug.Log("Save File location: " + path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, GlobalData.instance.currentLevel);
@@ -111,7 +110,6 @@ public class GlobalData : MonoBehaviour, ISaveSystem
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-            Debug.Log("Save File loaded: " + path);
 
             GlobalData.instance.currentLevel = (int)formatter.Deserialize(stream);
             GlobalData.instance.shiftPatientsHealed = (int)formatter.Deserialize(stream);

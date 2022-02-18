@@ -46,7 +46,6 @@ public class DayCycle : MonoBehaviour, ISaveSystem
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-            Debug.Log("Save File loaded: " + path);
 
             interpolation = (float)formatter.Deserialize(stream);
 
