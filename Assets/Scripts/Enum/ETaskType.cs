@@ -1,14 +1,15 @@
 public enum TaskType
 {
+    //Please dont change the order!
     Bandages,
     Pills,
     Syringe,
-    Transfusion,
-    Defibrillator,
+    Documentation,
     Sponge,
     RelocateAPatient,
-    ReleasePatient,
+    Transfusion,
+    Defibrillator,
     AnswerTheTelephone,
-    Documentation,
-    AssignBed
+    AssignBed, 
+    ReleasePatient
 }
