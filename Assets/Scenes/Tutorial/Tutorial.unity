@@ -2052,6 +2052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 70181312}
+  gameTime: {fileID: 1138620996}
   doctor: {fileID: 6193388610922612758}
   doctorDocPos: {fileID: 1486860232}
   doctorLevelStartPos: {fileID: 728129657}
@@ -2098,8 +2099,8 @@ MonoBehaviour:
     text2: Great!
     text3: 
     numberOfExecution: 7
-  - text: Look!
-    text2: A Patient came in.
+  - text: 
+    text2: Look!                    A Patient came in.
     text3: 
     numberOfExecution: 8
   - text: 
@@ -2143,7 +2144,7 @@ MonoBehaviour:
     text3: 
     numberOfExecution: 18
   - text: 
-    text2: Bye!
+    text2: Good Luck!
     text3: 
     numberOfExecution: 19
 --- !u!4 &260040124
@@ -2736,7 +2737,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 56.60198, y: -10.4852295, z: 58.17638, w: 18.13037}
+  m_margin: {x: 56.60198, y: -7.4336624, z: 58.17638, w: 18.13037}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6449,7 +6450,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 59.951424, y: 1.658268, z: 57.668175, w: 6.890354}
+  m_margin: {x: 59.951424, y: -0.51525307, z: 57.668175, w: 8.147675}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9265,7 +9266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2000617163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9336,7 +9337,7 @@ RectTransform:
   m_GameObject: {fileID: 2000617162}
   m_LocalRotation: {x: -0, y: -0.90656185, z: -0, w: -0.42207295}
   m_LocalPosition: {x: 0, y: 0, z: -3.208}
-  m_LocalScale: {x: 0.01, y: 0.0073461486, z: 0.01}
+  m_LocalScale: {x: 0.008859, y: 0.0073461486, z: 0.01}
   m_Children:
   - {fileID: 1428920708}
   m_Father: {fileID: 0}

@@ -8,8 +8,9 @@ using System;
 public class Timer : MonoBehaviour , ISaveSystem
 {
     [SerializeField] private TextMeshProUGUI timeText;
+    public TextMeshProUGUI TimeText { get { return timeText; } set { timeText = value; } }
     [SerializeField] private int startTimeHours;
-    public int TimeInHours => startTimeHours;
+    public int TimeInHours { get { return startTimeHours; } set { startTimeHours = value; } }
 
 
     [Tooltip("This is the hour when the Game ends + 59 minutes")]
@@ -18,6 +19,7 @@ public class Timer : MonoBehaviour , ISaveSystem
 
     private string dayOrNight;
     private float realTime;
+    public float RealTime { get { return realTime; } set { realTime = value; } }
     public static event Action e_OnLevelCompleteSaveStressLvl;
 
     private void Start()

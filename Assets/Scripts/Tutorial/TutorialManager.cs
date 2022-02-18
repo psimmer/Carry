@@ -8,6 +8,7 @@ using TMPro;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] Player player;
+    [SerializeField] Timer gameTime;
     [SerializeField] GameObject doctor;
     [SerializeField] Transform doctorDocPos;
     [SerializeField] Transform doctorLevelStartPos;
@@ -24,6 +25,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] List<Texts> tutorialTexts;
     GameObject currentPatient;
     GameObject currentPopUp;
+    float realTime;
     float tutorialTimer;
     int textDirectionIndex = 0;
     bool isSpawned = false;
@@ -40,6 +42,8 @@ public class TutorialManager : MonoBehaviour
     bool isPopUpSpawned = false;
     bool playerdroppedItem = false;
     bool releaseBool = true;
+    bool timerBool = false;
+
     #endregion
 
 
@@ -53,13 +57,20 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
         }
         MovePatientInBed();
         player.Interact();
-
+        if (!timerBool)
+        {
+            gameTime.DoubledRealTime();
+        }
+        else
+        {
+            RealTime();
+        }
         if (textDirectionIndex == 7 && !isSpawned)
         {
             isSpawned = true;
@@ -67,7 +78,10 @@ public class TutorialManager : MonoBehaviour
             currentPatient.transform.position = patientSpawnPoint.position;
             currentPatient.transform.eulerAngles = new Vector3(0, 90, 0);
         }
-
+        if(gameTime.TimeInHours == 18)
+        {
+            SceneManager.LoadScene(0);
+        }
         //doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
         tutorialTimer += Time.deltaTime;
         TutorialLoop();
@@ -305,10 +319,14 @@ public class TutorialManager : MonoBehaviour
                     currentPatient.GetComponent<Patient>().IsReleasing = true;
                     currentPatient = null;
                     releaseBool = false;
+                    gameTime.TimeInHours = 17;
+                    gameTime.RealTime = 0;
+                    timerBool = true;
                     doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 }
             }
         }
+        //Lets go to computer
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 16)
         {
             if (player.IsAtPc)
@@ -319,6 +337,10 @@ public class TutorialManager : MonoBehaviour
                 documentationBubbleCanvas.gameObject.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
+                    if(laptop.GetComponent<Computer>().ClipBoardCanvas.GetComponentInChildren<TMP_Text>().text != laptop.GetComponent<Computer>().Canvas.GetComponentInChildren<TMP_InputField>().text)
+                    {
+                        player.CurrentStressLvl += 50;
+                    }
                     Camera.main.transform.position = cameraPositionOverview.position;
                     Camera.main.transform.rotation = cameraPositionOverview.rotation;
                     doctor.transform.position = doctorLevelStartPos.position;
@@ -327,11 +349,12 @@ public class TutorialManager : MonoBehaviour
                     documentationBubbleCanvas.gameObject.SetActive(false);
                     laptop.GetComponent<Computer>().ClipBoardCanvas.SetActive(false);
                     laptop.GetComponent<Computer>().Canvas.SetActive(false);
-                    doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                     tutorialTimer = 0;
+                    doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 }
             }
         }
+        //Litlle tip
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 17)
         {
             if(tutorialTimer >= 4)
@@ -340,6 +363,7 @@ public class TutorialManager : MonoBehaviour
                 tutorialTimer = 0;
             }
         }
+        //You can zoom
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 18)
         {
             if(tutorialTimer >= 5)
@@ -348,6 +372,7 @@ public class TutorialManager : MonoBehaviour
                 tutorialTimer = 0;
             }
         }
+        //Good Luck
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 19)
         {
             if(tutorialTimer >= 3)
@@ -355,11 +380,6 @@ public class TutorialManager : MonoBehaviour
                 SceneManager.LoadScene(0);
             }
         }
-
-
-
-
-
     }
 
     private void Damage(Patient patient)
@@ -378,7 +398,29 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    public void RealTime()
+    {
+        realTime += Time.deltaTime;
 
+        if ((int)realTime <= 9 && gameTime.TimeInHours <= 9)
+            gameTime.TimeText.text = "0" + gameTime.TimeInHours.ToString() + ":" + "0" + (int)realTime;
+
+        if ((int)realTime <= 9 && gameTime.TimeInHours > 9)
+            gameTime.TimeText.text = gameTime.TimeInHours.ToString() + ":" + "0" + (int)realTime;
+
+        if ((int)realTime >= 10 && gameTime.TimeInHours <= 9)
+            gameTime.TimeText.text = "0" + gameTime.TimeInHours.ToString() + ":" + (int)realTime;
+
+        if ((int)realTime > 9 && gameTime.TimeInHours > 9)
+            gameTime.TimeText.text = gameTime.TimeInHours.ToString() + ":" + (int)realTime;
+
+        if ((int)realTime == 60)
+        {
+            gameTime.TimeInHours++;
+            realTime = 0;
+            gameTime.TimeText.text = "0" + gameTime.TimeInHours.ToString() + ":" + (int)realTime;
+        }
+    }
 }
 
 [System.Serializable]
