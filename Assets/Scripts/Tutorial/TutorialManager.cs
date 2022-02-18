@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] Player player;
+    [SerializeField] GameObject doctor;
+    [SerializeField] Transform doctorDocPos;
+    [SerializeField] Transform doctorLevelStartPos;
+    [SerializeField] GameObject documentationBubbleCanvas;
     [SerializeField] TMP_Text doctorTextField;
+    [SerializeField] Transform cameraPositionOverview;
     [SerializeField] GameObject patientTutorialPrefab;
     [SerializeField] Transform patientSpawnPoint;
     [SerializeField] Transform patientBedPos;
     [SerializeField] GameObject popUpPrefab;
     [SerializeField] GameObject releasePopUpPrefab;
     [SerializeField] Transform popUpPos;
+    [SerializeField] GameObject laptop;
     [SerializeField] List<Texts> tutorialTexts;
     GameObject currentPatient;
     GameObject currentPopUp;
@@ -32,6 +39,7 @@ public class TutorialManager : MonoBehaviour
     bool isLayingInBed = false;
     bool isPopUpSpawned = false;
     bool playerdroppedItem = false;
+    bool releaseBool = true;
     #endregion
 
 
@@ -39,6 +47,7 @@ public class TutorialManager : MonoBehaviour
     void Awake()
     {
         doctorTextField.text = $"{tutorialTexts[textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+        documentationBubbleCanvas.gameObject.SetActive(false);
         TutorialLoop();
     }
 
@@ -273,20 +282,81 @@ public class TutorialManager : MonoBehaviour
         //release patient
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 15)
         {
-            if(currentPatient.GetComponent<Patient>().CurrentHP >= 100 && !isPopUpSpawned)
+            if (currentPatient != null)
             {
-                isPopUpSpawned = true;
-                currentPopUp = Instantiate(releasePopUpPrefab, currentPatient.GetComponent<Patient>().PopUpCanvas);
-                currentPopUp.transform.position = popUpPos.position;
-                Vector3 lookDir = Camera.main.transform.forward;
-                currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
-
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-
+                if (currentPatient.GetComponent<Patient>().CurrentHP >= 100 && !isPopUpSpawned)
+                {
+                    isPopUpSpawned = true;
+                    currentPopUp = Instantiate(releasePopUpPrefab, currentPatient.GetComponent<Patient>().PopUpCanvas);
+                    currentPopUp.transform.position = popUpPos.position;
+                    Vector3 lookDir = Camera.main.transform.forward;
+                    currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
+                    player.IsInContact = false;
+                }
+                if (Input.GetKeyDown(KeyCode.Space) && player.IsInContact && releaseBool)
+                {
+                    Destroy(currentPopUp);
+                    currentPopUp = null;
+                    player.IsInContact = false;
+                    currentPatient.GetComponent<Patient>().HealthBarCanvas.gameObject.SetActive(false);
+                    currentPatient.GetComponent<Patient>().PopUpCanvas.gameObject.SetActive(false);
+                    currentPatient.GetComponent<Animator>().SetBool("isWalking", true);
+                    currentPatient.transform.position = currentPatient.GetComponent<Patient>().LeaveHospital.position;
+                    currentPatient.GetComponent<Patient>().IsReleasing = true;
+                    currentPatient = null;
+                    releaseBool = false;
+                    doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                }
             }
         }
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 16)
+        {
+            if (player.IsAtPc)
+            {
+                doctor.transform.position = doctorDocPos.position;
+                doctor.transform.rotation = doctorDocPos.rotation;
+                player.GetComponent<NewPlayerMovement>().enabled = false;
+                documentationBubbleCanvas.gameObject.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    Camera.main.transform.position = cameraPositionOverview.position;
+                    Camera.main.transform.rotation = cameraPositionOverview.rotation;
+                    doctor.transform.position = doctorLevelStartPos.position;
+                    doctor.transform.rotation = doctorLevelStartPos.rotation;
+                    player.GetComponent<NewPlayerMovement>().enabled = true;
+                    documentationBubbleCanvas.gameObject.SetActive(false);
+                    laptop.GetComponent<Computer>().ClipBoardCanvas.SetActive(false);
+                    laptop.GetComponent<Computer>().Canvas.SetActive(false);
+                    doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                    tutorialTimer = 0;
+                }
+            }
+        }
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 17)
+        {
+            if(tutorialTimer >= 4)
+            {
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                tutorialTimer = 0;
+            }
+        }
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 18)
+        {
+            if(tutorialTimer >= 5)
+            {
+                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                tutorialTimer = 0;
+            }
+        }
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 19)
+        {
+            if(tutorialTimer >= 3)
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
+
+
 
 
 

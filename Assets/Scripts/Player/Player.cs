@@ -97,20 +97,20 @@ public class Player : MonoBehaviour, ISaveSystem
     private void InteractWithLaptop(Computer obj)
     {
         animator.SetBool("isWalking", false);
-        camera.GetComponent<CamPosition>().MovePoint.CameraOnPc = true;
+        Camera.main.GetComponent<CamPosition>().MovePoint.CameraOnPc = true;
         IsAtPc = true;
         if (obj.GetComponent<Computer>().CurrentPopUp != null)
         {
             Destroy(obj.GetComponent<Computer>().CurrentPopUp);
         }
         obj.GetComponent<Computer>().BeginDocumentation();
-        if (camera.GetComponent<CamPosition>().MovePoint.IsCameraFixed)
+        if (Camera.main.GetComponent<CamPosition>().MovePoint.IsCameraFixed)
         {
-            camera.GetComponent<CamPosition>().MovePoint.IsCameraFixed = false;
+            Camera.main.GetComponent<CamPosition>().MovePoint.IsCameraFixed = false;
         }
         GetComponent<NewPlayerMovement>().enabled = false;
-        camera.GetComponent<CamPosition>().lastPoint = obj.GetComponent<Computer>().DocumentationCamPos;
-        camera.transform.rotation = obj.GetComponent<Computer>().DocumentationCamPos.rotation;
+        Camera.main.GetComponent<CamPosition>().lastPoint = obj.GetComponent<Computer>().DocumentationCamPos;
+        Camera.main.transform.rotation = obj.GetComponent<Computer>().DocumentationCamPos.rotation;
     }
 
 
