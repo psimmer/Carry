@@ -5646,6 +5646,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261338831}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &266879473 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1693428794228340, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
+  m_PrefabInstance: {fileID: 40681003}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &266937448
 GameObject:
   m_ObjectHideFlags: 0
@@ -8389,7 +8394,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
   m_PrefabInstance: {fileID: 40681003}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 266879473}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8116966c82c7f244bc62cdd8ac6d0b6, type: 3}
@@ -28582,6 +28587,10 @@ PrefabInstance:
       value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: currentBed
+      value: 
+      objectReference: {fileID: 266879473}
+    - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: healParticles
       value: 
       objectReference: {fileID: 5404059796577138036, guid: 76a8313e80bd92e42bbe3ec90cbc5038, type: 3}
@@ -29150,6 +29159,10 @@ PrefabInstance:
       propertyPath: isLaying
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: currentBed
+      value: 
+      objectReference: {fileID: 1860931968}
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: healParticles
       value: 
@@ -34949,6 +34962,10 @@ PrefabInstance:
       value: Laptop_Off
       objectReference: {fileID: 0}
     - target: {fileID: 1179622459644578, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179622459644578, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: m_TagString
       value: Computer
       objectReference: {fileID: 0}
@@ -35864,6 +35881,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857585683}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1860931968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1693428794228340, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
+  m_PrefabInstance: {fileID: 1566647746}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1865654850
 GameObject:
   m_ObjectHideFlags: 0
@@ -39183,7 +39205,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
   m_PrefabInstance: {fileID: 1566647746}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1860931968}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8116966c82c7f244bc62cdd8ac6d0b6, type: 3}
@@ -41307,7 +41329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4107777168366850494, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
       propertyPath: startTimeHours
-      value: 17
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4107777169680041946, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
       propertyPath: LevelMusic

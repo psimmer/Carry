@@ -13,7 +13,6 @@ public class StressLvl : MonoBehaviour
     {
   
         fillAmountofStress = Random.Range(0,30);
-        Debug.Log(fillAmountofStress);
         fillofStress.fillAmount = fillAmountofStress / 100;
     }
 

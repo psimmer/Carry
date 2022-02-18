@@ -1,13 +1,11 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class CoffeMachine : MonoBehaviour, ISaveSystem
 {
-
 
     [SerializeField] GameObject coffeeUI;
     [SerializeField] Image coffeeFill;

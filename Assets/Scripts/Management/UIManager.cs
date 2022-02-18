@@ -1,9 +1,11 @@
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, ISaveSystem
 {
     [SerializeField] Button firstButton;
     [SerializeField] TMP_Text patientsHealed;
@@ -44,6 +46,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (GlobalData.instance.IsSaveFileLoaded)
+        {
+            LoadData();
+        }
+    }
     private void Update()
     {
         GamePaused();
@@ -189,7 +198,38 @@ public class UIManager : MonoBehaviour
             optionsElements.SetActive(false);
         }
     }
+
+
     #endregion
 
+    public void SaveData()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
 
+        string path = Application.persistentDataPath + "/SaveDataAudio.carry";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, LevelMusic.time);
+
+        stream.Close();
+    }
+
+    public void LoadData()
+    {
+        string path = Application.persistentDataPath + "/SaveDataAudio.carry";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            if (LevelMusic != null)
+            {
+                LevelMusic.time = (float)formatter.Deserialize(stream);
+                LevelMusic.Play();
+            }
+
+            stream.Close();
+
+        }
+    }
 }
