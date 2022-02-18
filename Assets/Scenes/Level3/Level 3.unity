@@ -29187,6 +29187,10 @@ PrefabInstance:
       value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: maxTaskIndex
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: healParticles
       value: 
       objectReference: {fileID: 5404059796577138036, guid: 76a8313e80bd92e42bbe3ec90cbc5038, type: 3}
@@ -29750,6 +29754,10 @@ PrefabInstance:
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: isLaying
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: maxTaskIndex
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: healParticles
@@ -31839,11 +31847,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6386689812334777364, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.62
+      value: -2.31
       objectReference: {fileID: 0}
     - target: {fileID: 6386689812334777364, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.46
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 6386689812334777364, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -35660,6 +35668,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2368307792965690527, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 3565615849516372378, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: m_text
       value: Shift of 12 hours finished.
@@ -36775,6 +36787,7 @@ MonoBehaviour:
   - {fileID: 2074558469}
   - {fileID: 657548985}
   - {fileID: 406820916}
+  maxTaskIndex: 7
 --- !u!4 &1879866311
 Transform:
   m_ObjectHideFlags: 0

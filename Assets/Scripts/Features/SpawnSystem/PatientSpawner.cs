@@ -15,7 +15,8 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
     [SerializeField] List<Transform> spawnPoints;
     [SerializeField] List<Bed> bedList;
     public List<Bed> BedList { get { return bedList; } set { bedList = value; } }
-
+    [Tooltip("Lvl 1 = 3; Lvl 2 = 5; Lvl 3 = 7; Lvl 4 = 7")]
+    [SerializeField] int maxTaskIndex;
     //timer Stuff
     float spawnTimer;
     float randomTime;
@@ -80,7 +81,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 patient.Healthbar.transform.parent.rotation = Quaternion.Euler(0, 0, 0); // these 2 lines position the healthbar on the whiteboard when you move the patient
                 bedList[i].IsPatientInBed = true;
                 bedList[i].CurrentPatient = patient;
-                patient.CurrentIllness = (TaskType)Random.Range(0, 6);
+                patient.CurrentIllness = (TaskType)Random.Range(0, maxTaskIndex);
                 patient.IsInBed = true;
                 patient.CurrentBed = bedList[i].gameObject;
                 patient.GetComponent<Animator>().SetBool("isLaying", true);
@@ -100,7 +101,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 patient.Healthbar.transform.parent.rotation = Quaternion.Euler(0, 0, 0); // these 2 lines position the healthbar on the whiteboard when you move the patient
                 bedList[i].IsPatientInBed = true;
                 bedList[i].CurrentPatient = patient;
-                patient.CurrentIllness = (TaskType)Random.Range(0, 6);
+                patient.CurrentIllness = (TaskType)Random.Range(0, maxTaskIndex);
                 patient.IsInBed = true;
                 patient.CurrentBed = bedList[i].gameObject;
                 patient.GetComponent<Animator>().SetBool("isLaying", true);
