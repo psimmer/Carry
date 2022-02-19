@@ -521,11 +521,6 @@ public class TutorialManager : MonoBehaviour
             freeCamImage.gameObject.SetActive(true);
         }
     }
-
-
-
-
-
 }
 
 [System.Serializable]
