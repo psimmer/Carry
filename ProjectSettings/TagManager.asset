@@ -15,6 +15,7 @@ TagManager:
   - Ground
   - PatientDestroy
   - Computer
+  - Tutorial
   layers:
   - Default
   - TransparentFX

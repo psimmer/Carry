@@ -11,8 +11,8 @@ public class StressLvl : MonoBehaviour
 
     private void Awake()
     {
-  
-        fillAmountofStress = Random.Range(0,30);
+
+        fillAmountofStress = Random.Range(10, 40);
         fillofStress.fillAmount = fillAmountofStress / 100;
     }
 

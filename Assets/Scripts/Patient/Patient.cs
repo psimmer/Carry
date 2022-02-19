@@ -53,6 +53,8 @@ public class Patient : MonoBehaviour
     public GameObject CurrentPopUp { get { return currentPopUp; } set { currentPopUp = value; } }
     float popUpTimer;
     float timetillPopUp;
+    public float TimeTillPopUp { get { return timetillPopUp; } set { timetillPopUp = value; } }
+
     bool hasPopUp;
     public bool HasPopUp { get { return hasPopUp; } set { hasPopUp = value; } }
 

@@ -121,7 +121,6 @@ public class Player : MonoBehaviour, ISaveSystem
         if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
         {
             currentItem = null;
-            Debug.Log("Item thrown away");
         }
     }
 

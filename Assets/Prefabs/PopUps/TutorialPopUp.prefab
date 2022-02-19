@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialPopUp
       objectReference: {fileID: 0}
+    - target: {fileID: 1360661134648728818, guid: be7335628a72584469b1020da3d5028a, type: 3}
+      propertyPath: m_TagString
+      value: Tutorial
+      objectReference: {fileID: 0}
     - target: {fileID: 2985294049399845868, guid: be7335628a72584469b1020da3d5028a, type: 3}
       propertyPath: duration
       value: 40
