@@ -11,20 +11,36 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] GameObject itemSlot;
     [SerializeField] Timer gameTime;
     [SerializeField] Item bandage;
+    [SerializeField] GameObject laptop;
+    [SerializeField] GameObject stressLevel;
+
+    [Header("Doctor")]
+    [SerializeField] GameObject documentationBubbleCanvas;
     [SerializeField] GameObject doctor;
     [SerializeField] Transform doctorDocPos;
     [SerializeField] Transform doctorLevelStartPos;
-    [SerializeField] GameObject documentationBubbleCanvas;
     [SerializeField] TMP_Text doctorTextField;
-    [SerializeField] Transform cameraPositionOverview;
+
+    [Header("Patient")]
     [SerializeField] GameObject patientTutorialPrefab;
-    [SerializeField] Transform patientSpawnPoint;
     [SerializeField] Transform patientBedPos;
+    [SerializeField] Transform patientSpawnPoint;
+
+    [Header("PopUpStuff")]
+    [SerializeField] Transform popUpPos;
     [SerializeField] GameObject popUpPrefab;
     [SerializeField] GameObject releasePopUpPrefab;
-    [SerializeField] Transform popUpPos;
-    [SerializeField] GameObject laptop;
-    [SerializeField] GameObject stressLevel;
+    [SerializeField] Transform laptopPopUpPos;
+    [SerializeField] GameObject laptopPopUpPrefab;
+
+    [Header("Camera Stuff")]
+    [SerializeField] float interpolationValue;
+    [SerializeField] GameObject cameraFixedPosition;
+    [SerializeField] GameObject cameraMovePoint;
+    [SerializeField] GameObject fixCamImage;
+    [SerializeField] GameObject freeCamImage;
+    bool isCamerafixed;
+
     [SerializeField] List<Texts> tutorialTexts;
     GameObject currentUIitem;
     GameObject currentPatient;
@@ -48,6 +64,7 @@ public class TutorialManager : MonoBehaviour
     bool releaseBool = true;
     bool timerBool = false;
     bool isInputCorrect = false;
+    bool laptopPopUpSpawned = false;
     #endregion
 
 
@@ -62,6 +79,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
+        CameraMovement();
         if (currentPatient != null)
         {
             currentPatient.GetComponent<Patient>().TimeTillPopUp = 100;
@@ -91,7 +109,18 @@ public class TutorialManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        //doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+        if (player.IsAtPc && tutorialTexts[textDirectionIndex].NumberOfExecution != 16)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Camera.main.transform.position = cameraFixedPosition.transform.position;
+                Camera.main.transform.rotation = cameraFixedPosition.transform.rotation;
+                laptop.GetComponent<Computer>().ClipBoardCanvas.SetActive(false);
+                laptop.GetComponent<Computer>().Canvas.SetActive(false);
+                player.GetComponent<NewPlayerMovement>().enabled = true;
+                player.IsAtPc = false;
+            }
+        }
         tutorialTimer += Time.deltaTime;
         TutorialLoop();
     }
@@ -345,8 +374,17 @@ public class TutorialManager : MonoBehaviour
         //Lets go to computer
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 16)
         {
+            if (!laptopPopUpSpawned)
+            {
+                laptopPopUpSpawned = true;
+                currentPopUp = Instantiate(laptopPopUpPrefab, laptopPopUpPos);
+                Vector3 lookDir = Camera.main.transform.forward;
+                currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
+            }
+
             if (player.IsAtPc)
             {
+                Destroy(currentPopUp);
                 doctor.transform.position = doctorDocPos.position;
                 doctor.transform.rotation = doctorDocPos.rotation;
                 player.GetComponent<NewPlayerMovement>().enabled = false;
@@ -357,8 +395,8 @@ public class TutorialManager : MonoBehaviour
                     {
                         isInputCorrect = true;
                     }
-                    Camera.main.transform.position = cameraPositionOverview.position;
-                    Camera.main.transform.rotation = cameraPositionOverview.rotation;
+                    Camera.main.transform.position = cameraFixedPosition.transform.position;
+                    Camera.main.transform.rotation = cameraFixedPosition.transform.rotation;
                     doctor.transform.position = doctorLevelStartPos.position;
                     doctor.transform.rotation = doctorLevelStartPos.rotation;
                     player.GetComponent<NewPlayerMovement>().enabled = true;
@@ -459,6 +497,35 @@ public class TutorialManager : MonoBehaviour
             gameTime.TimeText.text = "0" + gameTime.TimeInHours.ToString() + ":" + (int)realTime;
         }
     }
+
+    private void CameraMovement()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            isCamerafixed = true;
+        }
+        if (isCamerafixed)
+        {
+            //FixCamera
+            float interpolation = interpolationValue * Time.deltaTime;
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, cameraFixedPosition.transform.position, interpolation);
+            fixCamImage.gameObject.SetActive(true);
+            freeCamImage.gameObject.SetActive(false);
+        }
+        if (Input.GetKey(KeyCode.E) && Camera.main.transform.position.y >= 6)
+        {
+            //Zoom Camera
+            isCamerafixed = false;
+            Camera.main.transform.position += Camera.main.transform.forward * 2 * Time.deltaTime;
+            fixCamImage.gameObject.SetActive(false);
+            freeCamImage.gameObject.SetActive(true);
+        }
+    }
+
+
+
+
+
 }
 
 [System.Serializable]
