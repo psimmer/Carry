@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bcd6d3ca6355c64c8a8564c17a0d7d9, type: 3}
+  m_Name: RelocateAPatient
+  m_EditorClassIdentifier: 
+  itemName: RelocateAPatient
+  restoreHealth: 5
+  prefab: {fileID: 3795708498365473136, guid: e618394e4b0a4f5438c81b1e3a8ffba1, type: 3}
+  UI_prefab: {fileID: 3795708498365473136, guid: e618394e4b0a4f5438c81b1e3a8ffba1, type: 3}
+  task: 4
+  healingTime: 1

@@ -85,8 +85,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   timeOutDamagePatient: 10
   timeOutDamagePlayer: 30
-  item: {fileID: 0}
-  popUpTaskType: 6
+  item: {fileID: 11400000, guid: 31802f32b3c52cb48bdc5884850404a2, type: 2}
+  popUpTaskType: 4
 --- !u!1 &1587126990566112467
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,14 +39,19 @@ public class NewPlayerMovement : MonoBehaviour
         Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
         movement = Vector3.ClampMagnitude(movement, 1) * playerSpeed * Time.deltaTime;
-       
+
         characterController.Move(movement);
 
-        if(movement.magnitude >= 0)
+        if (movement.magnitude > 0)
+        {
             animator.SetBool("isWalking", true);
-        
-        if(movement.magnitude <= 0)
+            SoundManager.instance.PlayAudioClip(ESoundeffects.FootSteps, GetComponent<AudioSource>());
+        }
+
+        if (movement.magnitude <= 0)
+        {
             animator.SetBool("isWalking", false);
+        }
 
         if (movement != Vector3.zero)
         {

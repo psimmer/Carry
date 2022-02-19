@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     #region Inventory Variables
     [SerializeField] private Inventory itemSlot;
     [SerializeField] private Transform itemslotPos;
+    [SerializeField] private Item relocateAPatient;
+    Item lastItem;
+    bool lastItemIsSaved;
     #endregion
 
     #region Features
@@ -39,7 +42,7 @@ public class GameManager : MonoBehaviour
         //player Stuff
         player.Interact();
         player.DropItem();
-
+        Debug.Log(player.currentItem);
         Treatment(player.currentPatient);
 
         //Features
@@ -50,6 +53,10 @@ public class GameManager : MonoBehaviour
 
         DrinkingCoffee();
         uiManager.transform.GetComponent<StressLvl>().FillOfStress.fillAmount = player.CurrentStressLvl / player.MaxStressLvl;
+        if (player.CurrentStressLvl > 75)
+        {
+            SoundManager.instance.PlayAudioClip(ESoundeffects.StressLevel, uiManager.GetComponent<AudioSource>());
+        }
         isGameOver();
 
         if (player.CurrentStressLvl <= 0)
@@ -63,8 +70,8 @@ public class GameManager : MonoBehaviour
             if (coffeeMachine.Drinking == false) // inflict damage to the player if the player activates the coffee
                 player.CurrentStressLvl += coffeeDamage;
 
-                coffeeMachine.Drinking = true;
-                coffeeMachine.RefillCup = true;
+            coffeeMachine.Drinking = true;
+            coffeeMachine.RefillCup = true;
         }
         player.IsDrinkingCoffee = false;
 
@@ -114,6 +121,15 @@ public class GameManager : MonoBehaviour
 
         if (player.IsInContact && patient.IsInBed) // the patient.isinbed fixed the issue with the null reference
         {
+            if (patient.CurrentIllness == TaskType.RelocateAPatient)
+            {
+                if (!lastItemIsSaved)
+                {
+                    lastItem = player.currentItem;
+                    player.currentItem = relocateAPatient;
+                    lastItemIsSaved = true;
+                }
+            }
             // release the patient to leave the hospital
             if (patient.CurrentIllness == TaskType.ReleasePatient && !patient.IsReleasing)
             {
@@ -234,7 +250,10 @@ public class GameManager : MonoBehaviour
                         playerAnimator.SetBool("isTreating", false);
                         Destroy(patient.CurrentParticles);
                         Damage(patient);
-                        ResetItem();
+                        if (patient.CurrentIllness != TaskType.RelocateAPatient)
+                        {
+                            ResetItem();
+                        }
                         player.IsInContact = false;
                         player.GetComponent<NewPlayerMovement>().enabled = true;
                         Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
@@ -249,12 +268,14 @@ public class GameManager : MonoBehaviour
 
     private void ResetItem()
     {
-        if (itemSlot.CurrentItem != null)
+        if (itemSlot.CurrentItem != null && player.currentItem != relocateAPatient)
         {
             Destroy(itemSlot.CurrentItem);
             player.currentItem = null;
             itemSlot.UI_Element = null;
         }
+        lastItemIsSaved = false;
+        player.currentItem = lastItem;
     }
 
 

@@ -12,8 +12,9 @@ public class UIManager : MonoBehaviour, ISaveSystem
     [SerializeField] TMP_Text patientsLost;
     [SerializeField] TMP_Text treatments;
 
-    [SerializeField] Slider stressLvlBar;
-    public Slider StressLevelBar => stressLvlBar;
+    [SerializeField] GameObject stressLvlBar;
+    public GameObject StressLevelBar => stressLvlBar;
+
     [SerializeField] GameObject pauseElements;
     [SerializeField] GameObject optionsElements;
     [SerializeField] GameObject pauseButton;
