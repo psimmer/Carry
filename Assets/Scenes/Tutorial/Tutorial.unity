@@ -1963,11 +1963,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 70181312}
-  itemSlot: {fileID: 1910900829}
   gameTime: {fileID: 1138620996}
-  bandage: {fileID: 1889993034}
   laptop: {fileID: 507699703}
   stressLevel: {fileID: 1495127243}
+  itemSlot: {fileID: 1910900829}
+  bandage: {fileID: 1889993034}
   documentationBubbleCanvas: {fileID: 2000617162}
   doctor: {fileID: 6193388610922612758}
   doctorDocPos: {fileID: 1486860232}
@@ -1996,7 +1996,7 @@ MonoBehaviour:
     text3: 
     numberOfExecution: 1
   - text: 
-    text2: Lets Begin with the Basics...
+    text2: Lets begin with the basics...
     text3: 
     numberOfExecution: 2
   - text: 
@@ -2004,7 +2004,7 @@ MonoBehaviour:
     text3: 
     numberOfExecution: 3
   - text: 
-    text2: 'To Interact: Space'
+    text2: 'To Interact: SPACE'
     text3: 
     numberOfExecution: 4
   - text: 
@@ -2020,7 +2020,7 @@ MonoBehaviour:
     text3: 
     numberOfExecution: 7
   - text: 
-    text2: Look!                    A Patient came in.
+    text2: Look!                    A patient came in.
     text3: 
     numberOfExecution: 8
   - text: 
@@ -2036,39 +2036,39 @@ MonoBehaviour:
     text3: 
     numberOfExecution: 11
   - text: 
-    text2: Grab the  item that the pop up shows you!
+    text2: Grab the item that is shown in the PopUp!
     text3: 
     numberOfExecution: 12
   - text: 
-    text2: Now interact with the patient and hold Space!
+    text2: Now interact with the patient and hold SPACE!
     text3: 
     numberOfExecution: 13
   - text: 
-    text2: Great you did it!
+    text2: Great, you did it!
     text3: 
     numberOfExecution: 14
   - text: 
-    text2: The Patient is fully healed you can release him!
+    text2: The patient has recovered! Now you can release him!
     text3: 
     numberOfExecution: 15
   - text: 
-    text2: Great! Lets go to the computer before its 18 pm!
+    text2: Great! Lets go to the computer before it's 18:00 o clock!
     text3: 
     numberOfExecution: 16
   - text: 
-    text2: Your input was correct your stress level got less!
+    text2: Your input was correct! The stresslevel decreased!
     text3: 
     numberOfExecution: 17
   - text: 
-    text2: Your input was not correct your stress level got higher!
+    text2: Your input was wrong! The stresslevel raised!!
     text3: 
     numberOfExecution: 18
   - text: 
-    text2: Little tip before you leave this place.
+    text2: 'One hint before you leave:'
     text3: 
     numberOfExecution: 19
   - text: 
-    text2: You can zoom with "E" and fix the cam with "Q"
+    text2: You can zoom in with "E" and fix the camera with "Q"
     text3: 
     numberOfExecution: 20
   - text: 
