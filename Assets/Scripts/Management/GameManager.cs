@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
         //player Methods
         player.Interact();
         player.DropItem();
-        Debug.Log(player.currentItem);
         Treatment(player.currentPatient);
 
         //Features
@@ -239,6 +238,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.IsDrinkingCoffee && !coffeeMachine.Drinking && !coffeeMachine.IsOnCooldown)
         {
+            Debug.Log("asd");
             if (coffeeMachine.Drinking == false) // raises stresslevel after activating the coffee
                 player.CurrentStressLvl += coffeeDamage;
 
