@@ -12,14 +12,19 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
     public Image CoffeeFill{get { return coffeeFill; }set { coffeeFill = value; }}
     [SerializeField] NewPlayerMovement playerMovement;
     [SerializeField] Image coffeeCup;
-    public Image CoffeeCup{get { return coffeeCup; }set { coffeeCup = value; }}
-    [SerializeField] private float timer; // how long the effect lasts
+    [Tooltip("How long the effect lasts")]
+    [SerializeField] private float timer; 
+    [Tooltip("Gained speed through coffee")]
+    [SerializeField] private int extraSpeed; 
+    [Tooltip("Cooldown in seconds after the coffee effect")]
+    [SerializeField] private float cooldownDuration;
+    public Image CoffeeCup { get { return coffeeCup; } set { coffeeCup = value; } }
     private float maxTimer;
-    [SerializeField] private int extraSpeed; // gained speed through coffee  
+
     private bool drinking = false;
     public bool Drinking{get { return drinking; }set { drinking = value; }}
     private bool refillCup = false;
-    [SerializeField] private float cooldownDuration; 
+
     private float cooldownTimer = 0; 
     private bool isOnCooldown = false; 
     public bool IsOnCooldown{get { return isOnCooldown; }set { isOnCooldown = value; } }
@@ -40,9 +45,14 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         if(!drinking && isOnCooldown)
             CoffeeCooldown(cooldownDuration);
     }
-
+    /// <summary>
+    /// During the coffee effect, the player is faster
+    /// </summary>
+    /// <param name="totalTime">How long the coffee effect lasts</param>
+    /// <param name="gainedSpeed">Amount of speed that the player will gain</param>
     private void CoffeeIsActive(float totalTime, float gainedSpeed)
     {
+        //player gains speed
         if (timer == totalTime)
         {
             Color tempColor = coffeeCup.color;
@@ -63,6 +73,7 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         timer -= Time.deltaTime;
         coffeeFill.fillAmount -= Time.deltaTime/totalTime;
 
+        //coffee effect is over, everything is set too normal
         if (timer <= 0)
         {
             coffeeFill.fillAmount = 0;
@@ -78,6 +89,10 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         }
     }
 
+    /// <summary>
+    /// disables the coffee maker duringt the cooldown
+    /// </summary>
+    /// <param name="coffeeColdown"></param>
     private void CoffeeCooldown(float coffeeColdown)
     {
         if (cooldownTimer < coffeeColdown)
@@ -100,7 +115,7 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         }
     }
 
-
+    #region Save/Load Methods
     public void SaveData()
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -144,6 +159,5 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
 
         }
     }
-
-   
+    #endregion
 }

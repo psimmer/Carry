@@ -28784,6 +28784,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5404059796577138036, guid: 639b46de5ce210d4aa6a001f3af4c2d7, type: 3}
     - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: maxTimeTillPopUp
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
+      propertyPath: minTimeTillPopUp
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: particlesDuration
       value: 3
       objectReference: {fileID: 0}
@@ -29380,6 +29388,14 @@ PrefabInstance:
       propertyPath: healingParticles
       value: 
       objectReference: {fileID: 5404059796577138036, guid: 639b46de5ce210d4aa6a001f3af4c2d7, type: 3}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: maxTimeTillPopUp
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: minTimeTillPopUp
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: particlesDuration
       value: 3
@@ -36355,6 +36371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minRandomTime: 5
   maxRandomTime: 10
+  maxTaskIndex: 3
   differentPatients:
   - {fileID: 6951617271039977802, guid: 251be277867c6934b8500fc8bce3dd65, type: 3}
   - {fileID: 6951617271039977802, guid: f66f546b2ad07834f86d3f2866509d10, type: 3}
@@ -36373,7 +36390,6 @@ MonoBehaviour:
   - {fileID: 2074558469}
   - {fileID: 657548985}
   - {fileID: 406820916}
-  maxTaskIndex: 3
 --- !u!4 &1879866311
 Transform:
   m_ObjectHideFlags: 0

@@ -7,24 +7,28 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour, ISaveSystem
 {
+    [Header("Menuing")]
     [SerializeField] Button firstButton;
-    [SerializeField] TMP_Text patientsHealed;
-    [SerializeField] TMP_Text patientsLost;
-    [SerializeField] TMP_Text treatments;
-
-    [SerializeField] GameObject stressLvlBar;
-    public GameObject StressLevelBar => stressLvlBar;
-
     [SerializeField] GameObject pauseElements;
     [SerializeField] GameObject optionsElements;
     [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject playButton;
+    [Header("Statistic")]
+    [SerializeField] TMP_Text patientsHealed;
+    [SerializeField] TMP_Text patientsLost;
+    [SerializeField] TMP_Text treatments;
+    [Header("UI")]
+    [SerializeField] GameObject stressLvlBar;
     [SerializeField] AudioSource LevelMusic;
+    public GameObject StressLevelBar => stressLvlBar;
+
+
     GameObject mainMenuElements;
 
 
     public void Awake()
     {
+        //Activating/Deactivating menu elements
         if (pauseElements != null)
         {
             pauseElements.SetActive(false);
@@ -58,25 +62,7 @@ public class UIManager : MonoBehaviour, ISaveSystem
     {
         GamePaused();
     }
-
-    #region Show Statistics after Complete Level/GameOver
-    public void ShowStatsCompleteShift()
-    {
-        SoundManager.instance.PlayAudioClip(ESoundeffects.Winning, GetComponent<AudioSource>());
-        patientsHealed.text = "Patients Healed: " + GlobalData.instance.ShiftPatientsHealed;
-        patientsLost.text = "Patients Lost: " + GlobalData.instance.ShiftPatientsLost;
-        treatments.text = "Treatments: " + GlobalData.instance.ShiftTreatments;
-    }
-
-    public void ShowStatsGameOver()
-    {
-        SoundManager.instance.PlayAudioClip(ESoundeffects.Losing, GetComponent<AudioSource>());
-        patientsHealed.text = "Patients Healed: " + GlobalData.instance.TotalPatientsHealed;
-        patientsLost.text = "Patients Lost: " + GlobalData.instance.TotalPatientsLost;
-        treatments.text = "Treatments: " + GlobalData.instance.TotalTreatments;
-    }
-    #endregion
-
+    
     #region Pausing the Game
     /// <summary>
     /// pauses the game and sets the Pause UI active
@@ -150,7 +136,7 @@ public class UIManager : MonoBehaviour, ISaveSystem
 
     }
     #endregion
-
+    
     #region Activate/Deactive Options
     //i think following two methods can be optimized. iam tired, i will look over it another time
     /// <summary>
@@ -203,6 +189,25 @@ public class UIManager : MonoBehaviour, ISaveSystem
 
     #endregion
 
+    #region Show statistic after a level
+    public void ShowStatsCompleteShift()
+    {
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Winning, GetComponent<AudioSource>());
+        patientsHealed.text = "Patients Healed: " + GlobalData.instance.ShiftPatientsHealed;
+        patientsLost.text = "Patients Lost: " + GlobalData.instance.ShiftPatientsLost;
+        treatments.text = "Treatments: " + GlobalData.instance.ShiftTreatments;
+    }
+
+    public void ShowStatsGameOver()
+    {
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Losing, GetComponent<AudioSource>());
+        patientsHealed.text = "Patients Healed: " + GlobalData.instance.TotalPatientsHealed;
+        patientsLost.text = "Patients Lost: " + GlobalData.instance.TotalPatientsLost;
+        treatments.text = "Treatments: " + GlobalData.instance.TotalTreatments;
+    }
+    #endregion
+
+    #region Save/Load methods
     public void SaveData()
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -233,4 +238,5 @@ public class UIManager : MonoBehaviour, ISaveSystem
 
         }
     }
+    #endregion
 }

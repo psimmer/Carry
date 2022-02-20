@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bed : MonoBehaviour
 {
-
+    [Header("Bed Information")]
     [SerializeField] Transform bedPos;
     public Transform BedPos => bedPos;
 
@@ -14,17 +14,19 @@ public class Bed : MonoBehaviour
     [SerializeField] private Transform popUpPosTransform;
 
     public Transform PopUpPosTransform => popUpPosTransform;
+    private bool setHealthBarAndPopUpSpawnPos = true;
+    public bool SetHealthBarAndPopUpSpawnPos { get { return setHealthBarAndPopUpSpawnPos; } set { setHealthBarAndPopUpSpawnPos = value; } }
 
+    [Header("Patient Information")]
     [SerializeField] private bool isPatientInBed;
     public bool IsPatientInBed { get { return isPatientInBed; } set { isPatientInBed = value; } }
 
     [SerializeField] private Patient currentPatient;
     public Patient CurrentPatient { get { return currentPatient; } set { currentPatient = value; } }
 
-    private bool setHealthBarAndPopUpSpawnPos = true;
-    public bool SetHealthBarAndPopUpSpawnPos { get { return setHealthBarAndPopUpSpawnPos; } set { setHealthBarAndPopUpSpawnPos = value; } }
     float timer;
     public float Timer { get { return timer; } set { timer = value; } }
+
     private void Start()
     {
         if(currentPatient == null)

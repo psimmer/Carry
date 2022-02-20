@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class PopUp : MonoBehaviour
 {
+    [Tooltip("How long the Popup will be active")]
     [SerializeField] float duration;
+    [SerializeField] int timeOutDamagePatient;
+    [SerializeField] float timeOutDamagePlayer;
     [SerializeField] Image radialBarImage;
     public Image RadialBarImage => radialBarImage;
 
     [SerializeField] Gradient gradient;
-    [SerializeField] int timeOutDamagePatient;
-    [SerializeField] float timeOutDamagePlayer;
     [SerializeField] ItemSO item;
     float remainingHealingTimer;
     bool startedHealing;
-    // [SerializeField] float healingSpeed; this variable we dont need
     public static event Action<float> e_OnPopUpTimeOut;
     public static event Action<Patient> e_RemovePatient;
 

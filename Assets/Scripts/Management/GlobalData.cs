@@ -6,8 +6,7 @@ public class GlobalData : MonoBehaviour, ISaveSystem
 {
     public static GlobalData instance;
 
-
-    //Overall statistics
+    #region Overall statistic
     private int totalTreatments;
     public int TotalTreatments { get { return totalTreatments; } set { totalTreatments = value; } }
 
@@ -16,27 +15,27 @@ public class GlobalData : MonoBehaviour, ISaveSystem
 
     private int totalPatientsLost;
     public int TotalPatientsLost { get { return totalPatientsLost; } set { totalPatientsLost = value; } }
-
-    //Shift statistics
+    #endregion
+    #region Shift statistics
     private int shiftTreatments;
     public int ShiftTreatments { get { return shiftTreatments; } set { shiftTreatments = value; } }
-    
+
     private int shiftPatientsHealed;
     public int ShiftPatientsHealed { get { return shiftPatientsHealed; } set { shiftPatientsHealed = value; } }
-    
+
     private int shiftPatientsLost;
     public int ShiftPatientsLost { get { return shiftPatientsLost; } set { shiftPatientsLost = value; } }
+    #endregion
 
-
+    #region variables needed from scene to scene
     private bool isSaveFileLoaded;
     public bool IsSaveFileLoaded { get { return isSaveFileLoaded; } set { isSaveFileLoaded = value; } }
 
-    //Stats for Level transition
     private int currentLevel = 1;
     public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
     private float currentStressLvl;
     public float CurrentStressLvl { get { return currentStressLvl; } set { currentStressLvl = value; } }
-
+    #endregion
 
     private void Awake()
     {
@@ -52,19 +51,7 @@ public class GlobalData : MonoBehaviour, ISaveSystem
         DontDestroyOnLoad(gameObject);  //take GlobalData to the next scene
     }
 
-    public void ResetTotalStatistics()
-    {
-        totalTreatments = 0;
-        totalPatientsLost = 0;
-        totalPatientsHealed = 0;
-    }
-
-    public void ResetShiftStatistics()
-    {
-        shiftPatientsHealed = 0;
-        shiftPatientsLost = 0;
-        shiftTreatments = 0;
-    }
+    #region Setting/Resetting statistics
 
     public void SetPatientDeadStatistics()
     {
@@ -85,7 +72,22 @@ public class GlobalData : MonoBehaviour, ISaveSystem
         shiftTreatments++;
         TotalTreatments++;
     }
+    public void ResetTotalStatistics()
+    {
+        totalTreatments = 0;
+        totalPatientsLost = 0;
+        totalPatientsHealed = 0;
+    }
 
+    public void ResetShiftStatistics()
+    {
+        shiftPatientsHealed = 0;
+        shiftPatientsLost = 0;
+        shiftTreatments = 0;
+    }
+    #endregion
+
+    #region Save/Load methods
     public void SaveData()
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -123,4 +125,5 @@ public class GlobalData : MonoBehaviour, ISaveSystem
 
         }
     }
+    #endregion
 }

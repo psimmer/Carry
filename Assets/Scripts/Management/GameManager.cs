@@ -3,15 +3,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Important managing references
+    [Header("Important managing references")]
     [SerializeField] Player player;
     [SerializeField] SceneMan sceneManager;
     [SerializeField] UIManager uiManager;
     [SerializeField] PatientSpawner patientSpawner;
     [SerializeField] private Animator playerAnimator;
-    [SerializeField] float documentationReward;
+    #endregion
 
     #region Multipliers
-    [Tooltip("Damage that the player takes when drinking coffee")]
+    [Header("Multipliers")]
+    [Tooltip("Amount of stress the player gains when drinking coffee")]
     [SerializeField] private float coffeeDamage;
     [Tooltip("This value multiplies the stress")]
     [Range(1, 4)]
@@ -19,10 +22,10 @@ public class GameManager : MonoBehaviour
     [Tooltip("This value reduce the stress")]
     [Range(0, 1)]
     [SerializeField] private float stressReductionMultiplier;
-    [SerializeField] private CoffeMachine coffeeMachine;
     #endregion
 
     #region Inventory Variables
+    [Header("Inventory")]
     [SerializeField] private Inventory itemSlot;
     [SerializeField] private Transform itemslotPos;
     [SerializeField] private Item relocateAPatient;
@@ -31,15 +34,18 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Features
+    [Header("Features")]
+    [SerializeField] private CoffeMachine coffeeMachine;
     [SerializeField] private Camera mainCam;
     [SerializeField] private Computer computer;
     [SerializeField] private DayCycle dayCycle;
     [SerializeField] private Timer dayTime;
+    [SerializeField] float documentationReward;
     #endregion
 
     void Update()
     {
-        //player Stuff
+        //player Methods
         player.Interact();
         player.DropItem();
         Debug.Log(player.currentItem);
@@ -53,6 +59,7 @@ public class GameManager : MonoBehaviour
 
         DrinkingCoffee();
         uiManager.transform.GetComponent<StressLvl>().FillOfStress.fillAmount = player.CurrentStressLvl / player.MaxStressLvl;
+        
         if (player.CurrentStressLvl > 75)
         {
             SoundManager.instance.PlayAudioClip(ESoundeffects.StressLevel, uiManager.GetComponent<AudioSource>());
@@ -62,60 +69,13 @@ public class GameManager : MonoBehaviour
         if (player.CurrentStressLvl <= 0)
             player.CurrentStressLvl = 0;
     }
-
-    private void DrinkingCoffee()
-    {
-        if (player.IsDrinkingCoffee && !coffeeMachine.Drinking && !coffeeMachine.IsOnCooldown)
-        {
-            if (coffeeMachine.Drinking == false) // inflict damage to the player if the player activates the coffee
-                player.CurrentStressLvl += coffeeDamage;
-
-            coffeeMachine.Drinking = true;
-            coffeeMachine.RefillCup = true;
-        }
-        player.IsDrinkingCoffee = false;
-
-    }
-
-    private void ComputerTaskSuccessCondition()
-    {
-        if (player.IsAtPc)
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                player.IsAtPc = false;
-                player.GetComponent<NewPlayerMovement>().enabled = true;
-                computer.Canvas.gameObject.SetActive(false);
-                computer.ClipBoardCanvas.gameObject.SetActive(false);
-                Camera.main.GetComponent<CamPosition>().lastPoint = Camera.main.GetComponent<CamPosition>().currentPoint;
-                Camera.main.GetComponent<CamPosition>().MovePoint.CameraOnPc = false;
-                Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().lastPoint.position;
-                Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraRotation;
-
-                if (dayTime.TimeInHours >= dayTime.EndTimeHours)
-                {
-                    if (computer.HintText.text == computer.InputField.text)
-                    {
-                        //Success
-                        player.GetComponent<Player>().CurrentStressLvl -= documentationReward;
-                        Debug.Log("Success DocumentationTask");
-                    }
-                    else
-                    {
-                        //Failed
-                        player.GetComponent<Player>().CurrentStressLvl += documentationReward;
-                        Debug.Log("Failed DocumentationTask");
-                    }
-                }
-
-            }
-        }
-    }
-
+    
+    #region Treating a Patient
     /// <summary>
-    /// Heals or damages the patient if it is the wrong item
+    /// Success: patient gets healed, stress level of the player will decrease. Fail: patient loses health, stresslevel
+    /// of the player rises
     /// </summary>
-    /// <param name="patient"></param>
+    /// <param name="patient">treated patient</param>
     public void Treatment(Patient patient)
     {
 
@@ -142,6 +102,7 @@ public class GameManager : MonoBehaviour
                 patientSpawner.PatientList.Remove(patient.gameObject);
                 patient.GetComponent<Animator>().SetBool("isWalking", true);
             }
+
             //damage to the patient, when you try to treat him without an item
             else if (player.currentItem == null && !(patient.CurrentIllness == TaskType.ReleasePatient))
             {
@@ -183,10 +144,9 @@ public class GameManager : MonoBehaviour
             }
 
         }
-
+        //assign the patient from the hallway to the bed
         else if (player.IsInContact && !patient.IsInBed)
         {
-            //assign the patient from the hallway to the bed
             if (patient.CurrentIllness == TaskType.AssignBed)
             {
                 patientSpawner.MoveToBed(patient);
@@ -195,30 +155,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Damage(Patient patient)
-    {
-        patient.HasPopUp = false;
-
-        if (player.currentItem == null)
-        {
-            patient.Treatment(-player.NoItemDamage);
-            player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
-        }
-        else
-        {
-            patient.Treatment(-player.currentItem.item.restoreHealth);
-            player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
-        }
-    }
-
-    private void isGameOver()
-    {
-        if (player.CurrentStressLvl >= player.MaxStressLvl)
-        {
-            sceneManager.GameOver();
-        }
-    }
-
+    /// <summary>
+    /// Co-Routine, which executes the treatment
+    /// </summary>
+    /// <param name="patient">treated patient</param>
+    /// <returns></returns>
     IEnumerator TreatmentProgress(Patient patient)
     {
         while (player.IsInContact)
@@ -244,6 +185,7 @@ public class GameManager : MonoBehaviour
                         Destroy(patient.GetComponentInChildren<PopUp>().gameObject);
                         StopCoroutine(TreatmentProgress(patient));
                     }
+
                     //Fail
                     else if (!Input.GetKey(KeyCode.Space))
                     {
@@ -265,7 +207,101 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// damage that is dealed, when the treatment went wrong
+    /// </summary>
+    /// <param name="patient">treated patient</param>
+    private void Damage(Patient patient)
+    {
+        patient.HasPopUp = false;
 
+        //damage, if you try to treat the patient without an item
+        if (player.currentItem == null)
+        {
+            patient.Treatment(-player.NoItemDamage);
+            player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
+        }
+
+        //damage, if you treat the patient with the wrong item
+        else
+        {
+            patient.Treatment(-player.currentItem.item.restoreHealth);
+            player.CurrentStressLvl += player.currentItem.item.restoreHealth * stressMultiplier;
+        }
+    }
+    #endregion
+
+    #region Coffee and Computer Feature
+    /// <summary>
+    /// Coffee Feature is activated: stresslevel and player speed are raised
+    /// </summary>
+    private void DrinkingCoffee()
+    {
+        if (player.IsDrinkingCoffee && !coffeeMachine.Drinking && !coffeeMachine.IsOnCooldown)
+        {
+            if (coffeeMachine.Drinking == false) // raises stresslevel after activating the coffee
+                player.CurrentStressLvl += coffeeDamage;
+
+            coffeeMachine.Drinking = true;
+            coffeeMachine.RefillCup = true;
+        }
+        player.IsDrinkingCoffee = false;
+
+    }
+
+    /// <summary>
+    /// Player has to fullfill the documentation task in the last hour
+    /// </summary>
+    private void ComputerTaskSuccessCondition()
+    {
+        if (player.IsAtPc)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                player.IsAtPc = false;
+                player.GetComponent<NewPlayerMovement>().enabled = true;
+                computer.Canvas.gameObject.SetActive(false);
+                computer.ClipBoardCanvas.gameObject.SetActive(false);
+                Camera.main.GetComponent<CamPosition>().lastPoint = Camera.main.GetComponent<CamPosition>().currentPoint;
+                Camera.main.GetComponent<CamPosition>().MovePoint.CameraOnPc = false;
+                Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().lastPoint.position;
+                Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraRotation;
+
+                if (dayTime.TimeInHours >= dayTime.EndTimeHours)
+                {
+                    if (computer.HintText.text == computer.InputField.text)
+                    {
+                        //Success
+                        player.GetComponent<Player>().CurrentStressLvl -= documentationReward;
+                        Debug.Log("Success DocumentationTask");
+                    }
+                    else
+                    {
+                        //Failed
+                        player.GetComponent<Player>().CurrentStressLvl += documentationReward;
+                        Debug.Log("Failed DocumentationTask");
+                    }
+                }
+
+            }
+        }
+    }
+    #endregion
+    
+    /// <summary>
+    /// When the max stresslevel is reached, the player loses the game
+    /// </summary>
+    private void isGameOver()
+    {
+        if (player.CurrentStressLvl >= player.MaxStressLvl)
+        {
+            sceneManager.GameOver();
+        }
+    }
+
+    /// <summary>
+    /// resets the item in the inventory after using or droppping
+    /// </summary>
     private void ResetItem()
     {
         if (itemSlot.CurrentItem != null && player.currentItem != relocateAPatient)

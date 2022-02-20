@@ -5,34 +5,44 @@ using UnityEngine;
 
 public class Patient : MonoBehaviour
 {
-
+    #region Patient variables
     [Header("Patient Values")]
     [SerializeField] private int currentHP;
     public int CurrentHP { get { return currentHP; } set { currentHP = value; } }
     private int patientMaxHP = 100;
-    //range for the random HP that the patient spawns with
+    [Tooltip("range for the random HP that the patient spawns with (minimum")]
     [SerializeField] private int minCurrentHp;
+    [Tooltip("range for the random HP that the patient spawns with (minimum")]
     [SerializeField] private int maxCurrentHp;
     //Patient Illnes
     [SerializeField] private TaskType currentIllness;
     public TaskType CurrentIllness { get { return currentIllness; } set { currentIllness = value; } }
-    //Is to check if the patient is in a bed or is the bed free
+
     [SerializeField] bool isInBed = false;
     public bool IsInBed { get { return isInBed; } set { isInBed = value; } }
     [SerializeField] private GameObject currentBed;
     public GameObject CurrentBed { get { return currentBed; } set { currentBed = value; } }
 
+    [Tooltip("When the patient is released, he walks out of the hospital. When he reaches this point, he will be destroyed")]
     [SerializeField] private Transform destroyPosition;
     private float destroyTimer = 0;
 
+    [Tooltip("When the patient is released, he walks out of the hospital. This is the start point")]
     private Transform leaveHospital;
     public Transform LeaveHospital => leaveHospital;
 
     private int differentPatiensIndex;
     public int DifferentPatientsIndex { get { return differentPatiensIndex; } set { differentPatiensIndex = value; } }
     private float losingHpTimer = 0;
-
+    #endregion
+    #region PopUp variables
     [Header("PopUp")]
+    [Tooltip("Range for the random time till a PopUp occurs (min)")]
+    [SerializeField] float minTimeTillPopUp;
+    [Tooltip("Range for the random time till a PopUp occurs (min)")]
+    [SerializeField] float maxTimeTillPopUp;
+    [Tooltip("Possible tasks that are available: Lvl 1 = 3; Lvl 2 = 5; Lvl 3 = 7; Lvl 4 = 7")]
+    [SerializeField] int maxTaskIndex;
     [SerializeField] private Transform popUpCanvas;
     public Transform PopUpCanvas { get { return popUpCanvas; } set { popUpCanvas = value; } }
 
@@ -43,21 +53,21 @@ public class Patient : MonoBehaviour
 
     [SerializeField] private bool hasTask;
     public bool HasTask { get { return hasTask; } set { hasTask = value; } }
-    [Tooltip("Lvl 1 = 3; Lvl 2 = 5; Lvl 3 = 7; Lvl 4 = 7")]
-    [SerializeField] int maxTaskIndex;
-
+  
     private bool isReleasing;
     public bool IsReleasing { get { return isReleasing; } set { isReleasing = value; } }
 
     GameObject currentPopUp;
     public GameObject CurrentPopUp { get { return currentPopUp; } set { currentPopUp = value; } }
     float popUpTimer;
+
     float timetillPopUp;
     public float TimeTillPopUp { get { return timetillPopUp; } set { timetillPopUp = value; } }
 
     bool hasPopUp;
     public bool HasPopUp { get { return hasPopUp; } set { hasPopUp = value; } }
-
+    #endregion region
+    #region Healthbar variables
     [Header("HealthBar")]
     [SerializeField] private Transform healthBarCanvas;
     public Transform HealthBarCanvas { get { return healthBarCanvas; } set { healthBarCanvas = value; } }
@@ -69,9 +79,9 @@ public class Patient : MonoBehaviour
     public GameObject Heartbeat { get { return heartbeat; } set { heartbeat = value; } }
 
     [SerializeField] bool isLayingSinceStart;
-    
-    
-    [Header("Particels")]
+    #endregion
+    #region Particles variables
+    [Header("Particles")]
     [SerializeField] private GameObject spawningParticles;
     public GameObject SpawningParticles => spawningParticles;
     [SerializeField] private GameObject healingParticles;
@@ -88,7 +98,7 @@ public class Patient : MonoBehaviour
     public float ParticlesDuration => particlesDuration;
     private GameObject currentParticles;
     public GameObject CurrentParticles { get { return currentParticles; } set { currentParticles = value; } }
-
+    #endregion
 
     private void Awake()
     {
@@ -103,7 +113,7 @@ public class Patient : MonoBehaviour
     {
         tag = "Patient";
         hasPopUp = false;
-        timetillPopUp = Random.Range(7, 30);       //this gets serialized;
+        timetillPopUp = Random.Range(minTimeTillPopUp, maxTimeTillPopUp);       
         healthbar = GetComponentInChildren<Healthbar>();
 
         HasTask = false;
@@ -139,12 +149,56 @@ public class Patient : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PatientDestroy"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    #region Spawning a PopUp
+    public void PopUpTimer(TaskType illness, Transform canvas)
+    {
+        if (popUpTimer >= timetillPopUp)
+        {
+            popUpTimer = 0;
+            StartCoroutine(PopUpSpawn(illness, canvas));
+        }
+    }
+
+    IEnumerator PopUpSpawn(TaskType illness, Transform canvas)
+    {
+        if (CurrentIllness != TaskType.AssignBed)
+        {
+            foreach (GameObject popUp in popUpList)
+            {
+                if (illness == popUp.GetComponent<PopUp>().TaskType)
+                {
+                    if (!hasPopUp)
+                    {
+                        hasPopUp = true;
+                        currentPopUp = Instantiate(popUp.gameObject, canvas);
+                        SoundManager.instance.PlayAudioClip(ESoundeffects.PopUp, GetComponent<AudioSource>());
+                    }
+                }
+            }
+        }
+        yield return new WaitForEndOfFrame();
+    }
+    #endregion
+
+    /// <summary>
+    /// patient gets healed or damaged after the treatment
+    /// </summary>
+    /// <param name="health">Damage/Healing points</param>
     public void Treatment(int health)
     {
         if (CurrentIllness != TaskType.AssignBed)
         {
 
             currentHP += health;
+
             //Damage
             if (health < 0)
             {
@@ -176,6 +230,7 @@ public class Patient : MonoBehaviour
                 GlobalData.instance.SetPatientDeadStatistics();
                 Destroy(this.gameObject, particlesDuration);
             }
+            //setting statistics
             if (currentHP > 0 && currentHP < patientMaxHP && health > 0)
                 GlobalData.instance.SetPatientTreatmentStatistics();
 
@@ -183,6 +238,9 @@ public class Patient : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// patient leaves the hospital
+    /// </summary>
     public void ReleasingPatient()
     {
         if (IsReleasing)
@@ -204,43 +262,10 @@ public class Patient : MonoBehaviour
         Destroy(newParticles, duration);
     }
 
-    public void PopUpTimer(TaskType illness, Transform canvas)
-    {
-        if (popUpTimer >= timetillPopUp)
-        {
-            popUpTimer = 0;
-            StartCoroutine(PopUpSpawn(illness, canvas));
-        }
-    }
 
-    IEnumerator PopUpSpawn(TaskType illness, Transform canvas)
-    {
-        if (CurrentIllness != TaskType.AssignBed)
-        {
-            foreach (GameObject popUp in popUpList)
-            {
-                if (illness == popUp.GetComponent<PopUp>().TaskType)
-                {
-                    if (!hasPopUp)
-                    {
-                        hasPopUp = true;
-                        currentPopUp = Instantiate(popUp.gameObject, canvas);
-                        SoundManager.instance.PlayAudioClip(ESoundeffects.PopUp, GetComponent<AudioSource>());
-                    }
-                }
-            }
-        }
-        yield return new WaitForEndOfFrame();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("PatientDestroy"))
-        {
-            Destroy(this.gameObject);
-        }
-    }
-
+    /// <summary>
+    /// Patients who wait for a bed get damaged over time
+    /// </summary>
     private void TakeDamageByTime()
     {
         if (losingHpTimer >= 5)

@@ -6,8 +6,13 @@ using UnityEngine;
 
 public class PatientSpawner : MonoBehaviour, ISaveSystem
 {
+    [Tooltip("Time window for spawning patients (minimum in seconds")]
     [SerializeField] int minRandomTime;
+    [Tooltip("Time window for spawning patients (maximum in seconds")]
     [SerializeField] int maxRandomTime;
+
+    [Tooltip("Possible tasks that are available: Lvl 1 = 3; Lvl 2 = 5; Lvl 3 = 7; Lvl 4 = 7")]
+    [SerializeField] int maxTaskIndex;
     [SerializeField] List<GameObject> differentPatients;
     [SerializeField] List<GameObject> patientList;
     public List<GameObject> PatientList { get { return patientList; } set { patientList = value; } }
@@ -15,9 +20,8 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
     [SerializeField] List<Transform> spawnPoints;
     [SerializeField] List<Bed> bedList;
     public List<Bed> BedList { get { return bedList; } set { bedList = value; } }
-    [Tooltip("Lvl 1 = 3; Lvl 2 = 5; Lvl 3 = 7; Lvl 4 = 7")]
-    [SerializeField] int maxTaskIndex;
-    //timer Stuff
+
+    //timer 
     float spawnTimer;
     float randomTime;
 
@@ -29,6 +33,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         randomTime = Random.Range(minRandomTime, maxRandomTime);
         if (GlobalData.instance.IsSaveFileLoaded)
         {
+            //deleting the patient list before loading the Save File
             Patient[] pArray = FindObjectsOfType<Patient>();
             for (int i = 0; i < pArray.Length; i++)
             {
@@ -48,6 +53,9 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         SpawnPatient();
     }
 
+    /// <summary>
+    /// As soon as a bed is free, a new patient will spawn after a random time
+    /// </summary>
     public void SpawnPatient()
     {
         if (patientList.Count < bedList.Count && spawnTimer >= randomTime)
@@ -70,6 +78,10 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         }
     }
 
+    /// <summary>
+    /// Moves the Patient from the Hallway to the bed and sets the important variables
+    /// </summary>
+    /// <param name="patient">The patient that the player interacts</param>
     public void MoveToBed(Patient patient)
     {
         for (int i = 0; i < bedList.Count; i++)
@@ -90,6 +102,11 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         }
     }
 
+    /// <summary>
+    /// Only used after loading the game. Moves the loaded patient to the correct Bed and sets all the important values
+    /// </summary>
+    /// <param name="patient">Patient that has to be moved</param>
+    /// <param name="bedname">Same Bed, which the patient was after saving the game</param>
     public void MoveToBed(Patient patient, string bedname)
     {
         for (int i = 0; i < bedList.Count; i++)
@@ -114,7 +131,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         patientList.Remove(patient.gameObject);
     }
 
-
+    #region Save/Load Methods
     public void SaveData()
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -139,6 +156,11 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         //}
 
         //serialize spawnpoints
+        //formatter.Serialize(stream, spawnPoints.Count);
+        //foreach (var spawnpoint in spawnPoints)
+        //{
+        //    formatter.Serialize(stream, spawnpoint.GetComponent<SpawnPoint>().IsFree);
+        //}
         stream.Close();
     }
 
@@ -186,9 +208,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
 
                 }
 
-                //if(p.IsInBed)
-                //    p.GetComponent<Animator>().SetBool("isLaying", true);
-
                 loadedPatientList.Add(go);
 
             }
@@ -203,8 +222,14 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
             //}
 
             //deserialize spawnpoints
+            //int spawnPointsCount = (int)formatter.Deserialize(stream);
+            //for (int i = 0; i < spawnPointsCount; i++)
+            //{
+            //    spawnPoints[i].GetComponent<SpawnPoint>().IsFree = (bool)formatter.Deserialize(stream);
+            //}
             stream.Close();
 
         }
     }
+    #endregion
 }

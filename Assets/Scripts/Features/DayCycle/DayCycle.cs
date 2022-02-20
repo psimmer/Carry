@@ -23,12 +23,16 @@ public class DayCycle : MonoBehaviour, ISaveSystem
         dayCycle = LerpTheSun;
     }
 
+    /// <summary>
+    /// Simulates Day/Night Cycle
+    /// </summary>
     public void LerpTheSun()
     {
         interpolation += Time.deltaTime * (interpolationValue / 1000); 
         transform.rotation = Quaternion.Lerp(startPos, endPos, interpolation);
     }
 
+    #region Save/Load Methods
     public void SaveData()
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -53,5 +57,6 @@ public class DayCycle : MonoBehaviour, ISaveSystem
 
         }
     }
+    #endregion
 }
 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -7,18 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, ISaveSystem
 {
-    [SerializeField] private Camera camera;
-    [SerializeField] private Vector3 boxSize = Vector3.one;
-    public Vector3 boxPos;
-    //Player values
+
+
+    #region Player variables
     [SerializeField] private float currentStressLvl;
     public float CurrentStressLvl { get { return currentStressLvl; } set { currentStressLvl = value; } }
     [SerializeField] private float maxStressLvl;
     public float MaxStressLvl { get { return maxStressLvl; } }
-    [SerializeField] private int noItemDamage;
-    [SerializeField] private Animator animator;
-    Coroutine reduceStressIfOutside;
-
     private bool isAtPC;
     public bool IsAtPc { get { return isAtPC; } set { isAtPC = value; } }
     public int NoItemDamage { get { return noItemDamage; } }
@@ -27,6 +21,13 @@ public class Player : MonoBehaviour, ISaveSystem
     public bool IsInContact { get; set; }
     public bool IsDrinkingCoffee { get; set; }
     public bool IsHoldingItem { get; set; }
+    #endregion
+    [SerializeField] private int noItemDamage;
+    [SerializeField] private Camera camera;
+    [SerializeField] private Vector3 boxSize = Vector3.one;
+    [SerializeField] private Animator animator;
+    public Vector3 boxPos;
+    Coroutine reduceStressIfOutside;
 
 
 
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour, ISaveSystem
 
     private void Start()
     {
+        //setting the correct stresslvl from scene to scene
         if (SceneManager.GetActiveScene().name == "Level 2" || SceneManager.GetActiveScene().name == "Level 3" ||
             SceneManager.GetActiveScene().name == "Level 4")
         {
@@ -47,11 +49,6 @@ public class Player : MonoBehaviour, ISaveSystem
         }
         if (GlobalData.instance.IsSaveFileLoaded)
             LoadData();
-    }
-
-    private void TimeOutDamage(float damage)
-    {
-        CurrentStressLvl += damage;
     }
 
     /// <summary>
@@ -113,9 +110,6 @@ public class Player : MonoBehaviour, ISaveSystem
         Camera.main.transform.rotation = obj.GetComponent<Computer>().DocumentationCamPos.rotation;
     }
 
-
-
-
     public void DropItem()
     {
         if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
@@ -124,7 +118,7 @@ public class Player : MonoBehaviour, ISaveSystem
         }
     }
 
-    #region Stuff for Cam
+    #region Camera
 
     private void OnTriggerExit(Collider other)
     {
@@ -156,7 +150,11 @@ public class Player : MonoBehaviour, ISaveSystem
     }
 
     #endregion
-
+    #region Setting stress level
+    /// <summary>
+    /// When the player is outside of the building, the stresslevel will be decreased
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ReduceStressLevel()
     {
         while (true)
@@ -171,6 +169,12 @@ public class Player : MonoBehaviour, ISaveSystem
         GlobalData.instance.CurrentStressLvl = currentStressLvl;
     }
 
+    private void TimeOutDamage(float damage)
+    {
+        CurrentStressLvl += damage;
+    }
+    #endregion
+    #region Save/Load methods
     public void SaveData()
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -217,6 +221,7 @@ public class Player : MonoBehaviour, ISaveSystem
             stream.Close();
         }
     }
+    #endregion
 }
 
 

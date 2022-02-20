@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NewPlayerMovement : MonoBehaviour
@@ -21,7 +19,6 @@ public class NewPlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         PlayerMovement();

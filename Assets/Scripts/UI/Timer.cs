@@ -16,8 +16,6 @@ public class Timer : MonoBehaviour , ISaveSystem
     [Tooltip("This is the hour when the Game ends + 59 minutes")]
     [SerializeField] private int endTimeHours;
     public int EndTimeHours => endTimeHours;
-
-    private string dayOrNight;
     private float realTime;
     public float RealTime { get { return realTime; } set { realTime = value; } }
     public static event Action e_OnLevelCompleteSaveStressLvl;
@@ -68,6 +66,7 @@ public class Timer : MonoBehaviour , ISaveSystem
         }
     }
 
+    #region Save/Load methods
     public void SaveData()
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -97,4 +96,5 @@ public class Timer : MonoBehaviour , ISaveSystem
 
         }
     }
+    #endregion
 }
