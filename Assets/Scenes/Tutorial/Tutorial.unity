@@ -1981,7 +1981,7 @@ MonoBehaviour:
   releasePopUpPrefab: {fileID: 1360661134648728818, guid: dc1046bfc70bd064a86b83fe1090864b, type: 3}
   laptopPopUpPos: {fileID: 1521051233}
   laptopPopUpPrefab: {fileID: 1360661134648728818, guid: 084eb550b1ad621479ac3fc1c02eae02, type: 3}
-  interpolationValue: 10
+  interpolationValue: 2
   cameraFixedPosition: {fileID: 992233016}
   cameraMovePoint: {fileID: 1651962554}
   fixCamImage: {fileID: 1774908158}
@@ -5519,6 +5519,10 @@ PrefabInstance:
       value: This is the end of the tutorial.
       objectReference: {fileID: 0}
     - target: {fileID: 6101278694837605226, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101278694837605226, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
@@ -5672,6 +5676,50 @@ RectTransform:
   m_AnchoredPosition: {x: -84.69995, y: -1.8000488}
   m_SizeDelta: {x: 300, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1131139488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131139490}
+  - component: {fileID: 1131139489}
+  m_Layer: 0
+  m_Name: ColliderWayOut
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1131139489
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131139488}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.01, y: 2.01, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1131139490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131139488}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.61, y: 1.09, z: -7.55}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1138620990
 GameObject:
   m_ObjectHideFlags: 0
@@ -8971,7 +9019,7 @@ RectTransform:
   m_GameObject: {fileID: 2000617162}
   m_LocalRotation: {x: -0, y: -0.90656185, z: -0, w: -0.42207295}
   m_LocalPosition: {x: 0, y: 0, z: -2.88}
-  m_LocalScale: {x: 0.008859, y: 0.0073461486, z: 0.01}
+  m_LocalScale: {x: 0.007050533, y: 0.0073461486, z: 0.01}
   m_Children:
   - {fileID: 1428920708}
   m_Father: {fileID: 0}

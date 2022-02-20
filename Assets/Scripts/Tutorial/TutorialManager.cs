@@ -8,11 +8,13 @@ using TMPro;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] Player player;
-    [SerializeField] GameObject itemSlot;
     [SerializeField] Timer gameTime;
-    [SerializeField] Item bandage;
     [SerializeField] GameObject laptop;
     [SerializeField] GameObject stressLevel;
+
+    [Header("ItemStuff")]
+    [SerializeField] GameObject itemSlot;
+    [SerializeField] Item bandage;
 
     [Header("Doctor")]
     [SerializeField] GameObject documentationBubbleCanvas;
@@ -42,6 +44,7 @@ public class TutorialManager : MonoBehaviour
     bool isCamerafixed;
 
     [SerializeField] List<Texts> tutorialTexts;
+
     GameObject currentUIitem;
     GameObject currentPatient;
     GameObject currentPopUp;
@@ -79,6 +82,18 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if(currentUIitem != null)
+            Destroy(currentUIitem);
+
+            Debug.Log(player.currentItem);
+        }
+
+        if(currentPatient != null)
+            if (currentPatient.GetComponent<Patient>().CurrentHP < 30)
+                currentPatient.GetComponent<Patient>().CurrentHP = 60;
+
         CameraMovement();
         if (currentPatient != null)
         {
@@ -213,6 +228,7 @@ public class TutorialManager : MonoBehaviour
             {
                 playerdroppedItem = true;
                 player.currentItem = null;
+                tutorialTimer = 0;
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
             }
         }
@@ -228,7 +244,7 @@ public class TutorialManager : MonoBehaviour
         //Patient came in
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 8)
         {
-            if (tutorialTimer >= 4)
+            if (tutorialTimer >= 5)
             {
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 tutorialTimer = 0;
@@ -245,16 +261,10 @@ public class TutorialManager : MonoBehaviour
             }
         }
         //Great
-        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 10 && !isPopUpSpawned)
+        else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 10)
         {
             if ((int)tutorialTimer >= 2)
             {
-                currentPopUp = Instantiate(popUpPrefab, currentPatient.GetComponent<Patient>().PopUpCanvas);
-                currentPatient.GetComponent<Patient>().PopUpCanvas.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
-                currentPopUp.transform.position = popUpPos.position;
-                Vector3 lookDir = Camera.main.transform.forward;
-                currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
-                isPopUpSpawned = true;
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 tutorialTimer = 0;
             }
@@ -262,7 +272,16 @@ public class TutorialManager : MonoBehaviour
         // Patient need your help
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 11)
         {
-            if ((int)tutorialTimer >= 3)
+            if (!isPopUpSpawned && tutorialTimer >= 1)
+            {
+                isPopUpSpawned = true;
+                currentPopUp = Instantiate(popUpPrefab, currentPatient.GetComponent<Patient>().PopUpCanvas);
+                currentPatient.GetComponent<Patient>().PopUpCanvas.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+                currentPopUp.transform.position = popUpPos.position;
+                Vector3 lookDir = Camera.main.transform.forward;
+                currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
+            }
+            if ((int)tutorialTimer >= 2)
             {
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 isPopUpSpawned = true;
@@ -274,8 +293,12 @@ public class TutorialManager : MonoBehaviour
         {
             if (player.currentItem != null)
             {
-                if (Input.GetKeyDown(KeyCode.Space) && player.currentItem.item.task == TaskType.Bandages)
+                if (player.currentItem.item.task == TaskType.Bandages)
                 {
+                    if (itemSlot.transform.childCount <= 0)
+                        currentUIitem = Instantiate(bandage.item.UI_prefab, itemSlot.transform);
+                    Debug.Log(player.currentItem);
+                    //currentUIitem = Instantiate(bandage.item.UI_prefab, itemSlot.transform);
                     doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                     player.IsInContact = false;
                 }
@@ -298,18 +321,20 @@ public class TutorialManager : MonoBehaviour
                 }
                 else if (!Input.GetKey(KeyCode.Space))
                 {
+                    Damage(currentPatient.GetComponent<Patient>());
+                    currentUIitem = itemSlot.transform.GetChild(0).gameObject;
+                    Destroy(currentUIitem);
+                    currentUIitem = null;
+                    //Destroy(player.currentItem);
+                    player.currentItem = null;
                     Destroy(currentPatient.GetComponent<Patient>().CurrentParticles);
-                    textDirectionIndex = 10;
+                    Destroy(currentPopUp);
+                    textDirectionIndex = 11;
                     player.IsInContact = false;
                     currentPopUp.GetComponent<PopUp>().IsHealing = false;
                     player.GetComponent<Animator>().SetBool("isTreating", false);
                     player.GetComponent<NewPlayerMovement>().enabled = true;
-                    Destroy(currentPopUp);
-                    Damage(currentPatient.GetComponent<Patient>());
                     isPopUpSpawned = false;
-                    player.currentItem = null;
-                    currentUIitem = itemSlot.transform.GetChild(0).gameObject;
-                    Destroy(currentUIitem);
                     tutorialTimer = 0;
                     doctorTextField.text = $"{tutorialTexts[textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 }
@@ -423,7 +448,7 @@ public class TutorialManager : MonoBehaviour
         }
         else if (textDirectionIndex == 18)
         {
-            if (tutorialTimer >= 4)
+            if (tutorialTimer >= 5)
             {
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 tutorialTimer = 0;
@@ -433,7 +458,7 @@ public class TutorialManager : MonoBehaviour
         //Litlle tip
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 19)
         {
-            if (tutorialTimer >= 4)
+            if (tutorialTimer >= 5)
             {
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 tutorialTimer = 0;
@@ -442,7 +467,7 @@ public class TutorialManager : MonoBehaviour
         //You can zoom
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 20)
         {
-            if (tutorialTimer >= 5)
+            if (tutorialTimer >= 6)
             {
                 doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 tutorialTimer = 0;
@@ -451,7 +476,7 @@ public class TutorialManager : MonoBehaviour
         //Good Luck
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 21)
         {
-            if (tutorialTimer >= 3)
+            if (tutorialTimer >= 4)
             {
                 SceneManager.LoadScene(0);
             }
