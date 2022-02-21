@@ -148,7 +148,8 @@ public class UIManager : MonoBehaviour, ISaveSystem
     {
 
         if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" ||
-            SceneManager.GetActiveScene().name == "Level 3" || SceneManager.GetActiveScene().name == "Level 4")
+            SceneManager.GetActiveScene().name == "Level 3" || SceneManager.GetActiveScene().name == "Level 4" ||
+            SceneManager.GetActiveScene().name == "Tutorial")
         {
             pauseElements.SetActive(false);
             optionsElements.SetActive(true);
@@ -173,7 +174,8 @@ public class UIManager : MonoBehaviour, ISaveSystem
     {
 
         if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" ||
-            SceneManager.GetActiveScene().name == "Level 3" || SceneManager.GetActiveScene().name == "Level 4")
+            SceneManager.GetActiveScene().name == "Level 3" || SceneManager.GetActiveScene().name == "Level 4" ||
+            SceneManager.GetActiveScene().name == "Tutorial")
         {
             pauseElements.SetActive(true);
             SoundManager.instance.PlayAudioClip(ESoundeffects.Button, pauseElements.GetComponent<AudioSource>());
