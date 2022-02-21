@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
         DrinkingCoffee();
         uiManager.transform.GetComponent<StressLvl>().FillOfStress.fillAmount = player.CurrentStressLvl / player.MaxStressLvl;
-        
+
         if (player.CurrentStressLvl > 75)
         {
             SoundManager.instance.PlayAudioClip(ESoundeffects.StressLevel, uiManager.GetComponent<AudioSource>());
@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         if (player.CurrentStressLvl <= 0)
             player.CurrentStressLvl = 0;
     }
-    
+
     #region Treating a Patient
     /// <summary>
     /// Success: patient gets healed, stress level of the player will decrease. Fail: patient loses health, stresslevel
@@ -267,27 +267,23 @@ public class GameManager : MonoBehaviour
                 Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().lastPoint.position;
                 Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraRotation;
 
-                if (dayTime.TimeInHours >= dayTime.EndTimeHours)
+                if (computer.HintText.text == computer.InputField.text)
                 {
-                    if (computer.HintText.text == computer.InputField.text)
-                    {
-                        //Success
-                        player.GetComponent<Player>().CurrentStressLvl -= documentationReward;
-                        Debug.Log("Success DocumentationTask");
-                    }
-                    else
-                    {
-                        //Failed
-                        player.GetComponent<Player>().CurrentStressLvl += documentationReward;
-                        Debug.Log("Failed DocumentationTask");
-                    }
+                    //Success
+                    player.GetComponent<Player>().CurrentStressLvl -= documentationReward;
+                    Debug.Log("Success DocumentationTask");
                 }
-
+                else
+                {
+                    //Failed
+                    player.GetComponent<Player>().CurrentStressLvl += documentationReward;
+                    Debug.Log("Failed DocumentationTask");
+                }
             }
         }
     }
     #endregion
-    
+
     /// <summary>
     /// When the max stresslevel is reached, the player loses the game
     /// </summary>

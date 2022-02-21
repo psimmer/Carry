@@ -21,6 +21,7 @@ public class Computer : MonoBehaviour
     [SerializeField] GameObject DocumentationPopUp;
     [SerializeField] Transform popUpPos;
     float timer;
+    public float Timer { get { return timer; } }
     bool oneTimeBool = true;
     GameObject currentPopUp;
     public GameObject CurrentPopUp { get { return currentPopUp; } set { currentPopUp = value; } }
@@ -34,7 +35,7 @@ public class Computer : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if ((int)timer == 10 && oneTimeBool)
+        if ((int)timer > 10 && oneTimeBool)    //timer is hardcoded, because in every level the task shall start after 5 minutes
         {
             oneTimeBool = false;
             SpawnPopUpDocumentation();

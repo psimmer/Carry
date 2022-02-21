@@ -37800,8 +37800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bd1151532ab6641bb9477d149c9582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minRandomTime: 5
-  maxRandomTime: 10
+  minRandomTime: 15
+  maxRandomTime: 30
   maxTaskIndex: 7
   differentPatients:
   - {fileID: 6951617271039977802, guid: 251be277867c6934b8500fc8bce3dd65, type: 3}

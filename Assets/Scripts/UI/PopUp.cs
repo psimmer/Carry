@@ -47,13 +47,22 @@ public class PopUp : MonoBehaviour
     {
         if (radialBarImage.fillAmount <= 0)
         {
-            GetComponentInParent<Patient>().Treatment(-timeOutDamagePatient);
-            e_OnPopUpTimeOut?.Invoke(timeOutDamagePlayer);
-            GetComponentInParent<Patient>().HasPopUp = false;
-            Destroy(this.gameObject);
-            if (GetComponentInParent<Patient>().CurrentHP <= 0)
+            if (GetComponentInParent<Patient>() != null)
             {
-                e_RemovePatient?.Invoke(GetComponentInParent<Patient>());
+                GetComponentInParent<Patient>().Treatment(-timeOutDamagePatient);
+                e_OnPopUpTimeOut?.Invoke(timeOutDamagePlayer);
+                GetComponentInParent<Patient>().HasPopUp = false;
+                Destroy(this.gameObject);
+                if (GetComponentInParent<Patient>().CurrentHP <= 0)
+                {
+                    e_RemovePatient?.Invoke(GetComponentInParent<Patient>());
+                }
+            }
+            else
+            {
+                Destroy(this.gameObject);
+                e_OnPopUpTimeOut?.Invoke(timeOutDamagePlayer);
+
             }
         }
         else if (radialBarImage.fillAmount >= 1)
