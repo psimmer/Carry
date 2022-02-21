@@ -13,13 +13,14 @@ public class UIManager : MonoBehaviour, ISaveSystem
     [SerializeField] GameObject optionsElements;
     [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject playButton;
-    [Header("Statistic")]
-    [SerializeField] TMP_Text patientsHealed;
-    [SerializeField] TMP_Text patientsLost;
-    [SerializeField] TMP_Text treatments;
+
     [Header("UI")]
     [SerializeField] GameObject stressLvlBar;
     [SerializeField] AudioSource LevelMusic;
+
+    TMP_Text patientsHealed;
+    TMP_Text patientsLost;
+    TMP_Text treatments;
     public GameObject StressLevelBar => stressLvlBar;
 
 
@@ -62,7 +63,7 @@ public class UIManager : MonoBehaviour, ISaveSystem
     {
         GamePaused();
     }
-    
+
     #region Pausing the Game
     /// <summary>
     /// pauses the game and sets the Pause UI active
@@ -136,7 +137,7 @@ public class UIManager : MonoBehaviour, ISaveSystem
 
     }
     #endregion
-    
+
     #region Activate/Deactive Options
     //i think following two methods can be optimized. iam tired, i will look over it another time
     /// <summary>
