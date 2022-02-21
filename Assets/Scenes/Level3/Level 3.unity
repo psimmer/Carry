@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: dabf42a762a1c344ca815b664d9632c9, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 320b49a1a94cc1a49ae37adfeb04006a, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -33658,6 +33658,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2655099232893110827, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 711209936}
+    - target: {fileID: 2655099232893110827, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveAndQuit
+      objectReference: {fileID: 0}
     - target: {fileID: 4064141623081786180, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
       propertyPath: m_Name
       value: UIManagerLevel
@@ -33674,6 +33682,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1404871689}
+    - target: {fileID: 4779543476744705630, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 711209936}
+    - target: {fileID: 4779543476744705630, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitToMainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 5828410875861348693, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -33757,6 +33773,14 @@ PrefabInstance:
     - target: {fileID: 5828410875861348693, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7762139939457370506, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 711209936}
+    - target: {fileID: 7762139939457370506, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb975a97caa321d46bec5436af3d906d, type: 3}

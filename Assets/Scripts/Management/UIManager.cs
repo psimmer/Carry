@@ -18,9 +18,10 @@ public class UIManager : MonoBehaviour, ISaveSystem
     [SerializeField] GameObject stressLvlBar;
     [SerializeField] AudioSource LevelMusic;
 
-    TMP_Text patientsHealed;
-    TMP_Text patientsLost;
-    TMP_Text treatments;
+    [Header("Statistic")]
+    [SerializeField] TMP_Text patientsHealed;
+    [SerializeField] TMP_Text patientsLost;
+    [SerializeField] TMP_Text treatments;
     public GameObject StressLevelBar => stressLvlBar;
 
 

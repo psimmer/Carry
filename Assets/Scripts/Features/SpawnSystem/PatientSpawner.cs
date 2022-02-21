@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PatientSpawner : MonoBehaviour, ISaveSystem
 {
+    #region Variables
     [Tooltip("Time window for spawning patients (minimum in seconds")]
     [SerializeField] int minRandomTime;
     [Tooltip("Time window for spawning patients (maximum in seconds")]
@@ -24,7 +25,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
     //timer 
     float spawnTimer;
     float randomTime;
-
+    #endregion
     private void Start()
     {
 
@@ -156,11 +157,11 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         //}
 
         //serialize spawnpoints
-        //formatter.Serialize(stream, spawnPoints.Count);
-        //foreach (var spawnpoint in spawnPoints)
-        //{
-        //    formatter.Serialize(stream, spawnpoint.GetComponent<SpawnPoint>().IsFree);
-        //}
+        formatter.Serialize(stream, spawnPoints.Count);
+        foreach (var spawnpoint in spawnPoints)
+        {
+            formatter.Serialize(stream, spawnpoint.GetComponent<SpawnPoint>().IsFree);
+        }
         stream.Close();
     }
 
@@ -222,11 +223,11 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
             //}
 
             //deserialize spawnpoints
-            //int spawnPointsCount = (int)formatter.Deserialize(stream);
-            //for (int i = 0; i < spawnPointsCount; i++)
-            //{
-            //    spawnPoints[i].GetComponent<SpawnPoint>().IsFree = (bool)formatter.Deserialize(stream);
-            //}
+            int spawnPointsCount = (int)formatter.Deserialize(stream);
+            for (int i = 0; i < spawnPointsCount; i++)
+            {
+                spawnPoints[i].GetComponent<SpawnPoint>().IsFree = (bool)formatter.Deserialize(stream);
+            }
             stream.Close();
 
         }
