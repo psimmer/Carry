@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float documentationReward;
     #endregion
 
+
     void Update()
     {
         //player Methods

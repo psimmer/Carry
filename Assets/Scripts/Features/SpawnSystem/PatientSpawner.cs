@@ -11,9 +11,23 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
     [SerializeField] int minRandomTime;
     [Tooltip("Time window for spawning patients (maximum in seconds")]
     [SerializeField] int maxRandomTime;
-
     [Tooltip("Possible tasks that are available: Lvl 1 = 3; Lvl 2 = 5; Lvl 3 = 7; Lvl 4 = 7")]
     [SerializeField] int maxTaskIndex;
+
+
+    [Header("Patient idle values")]
+    [Tooltip("Damage taken every 5 seconds when sitting in the waiting area")]
+    [SerializeField] int patientIdleDamage;
+    [Tooltip("Stress level raise after a sitting patient dies")]
+    [SerializeField] int idleDeathStressDmg;
+
+    [Header ("Random health range for patients")]
+
+    [Tooltip("range for the random HP that the patient spawns with (minimum")]
+    [SerializeField] private int minCurrentHp;
+    [Tooltip("range for the random HP that the patient spawns with (minimum")]
+    [SerializeField] private int maxCurrentHp;
+
     [SerializeField] List<GameObject> differentPatients;
     [SerializeField] List<GameObject> patientList;
     public List<GameObject> PatientList { get { return patientList; } set { patientList = value; } }
@@ -28,10 +42,11 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
     #endregion
     private void Start()
     {
-
+        Patient.e_deletePatientFromList += RemovePatientFromList;
         PopUp.e_RemovePatient += RemovePatientFromList;
         patientList.AddRange(GameObject.FindGameObjectsWithTag("Patient"));
         randomTime = Random.Range(minRandomTime, maxRandomTime);
+
         if (GlobalData.instance.IsSaveFileLoaded)
         {
             //deleting the patient list before loading the Save File
@@ -75,6 +90,9 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 randomTime = Random.Range(minRandomTime, maxRandomTime);
                 GameObject newParticles = Instantiate(newPatient.GetComponent<Patient>().SpawningParticles, randomSpawn.position + Vector3.up, Quaternion.identity);
                 Destroy(newParticles, newPatient.GetComponent<Patient>().ParticlesDuration);
+                newPatient.GetComponent<Patient>().CurrentHP = Random.Range(minCurrentHp, maxCurrentHp);
+                newPatient.GetComponent<Patient>().PatientIdleDamage = patientIdleDamage;
+                newPatient.GetComponent<Patient>().IdleDeathStressDmg = idleDeathStressDmg;
             }
         }
     }

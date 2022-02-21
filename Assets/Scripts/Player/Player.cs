@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -28,14 +29,14 @@ public class Player : MonoBehaviour, ISaveSystem
     [SerializeField] private Animator animator;
     public Vector3 boxPos;
     Coroutine reduceStressIfOutside;
-
-
+    
 
     private void Awake()
     {
         IsHoldingItem = false;
         PopUp.e_OnPopUpTimeOut += TimeOutDamage;
         Timer.e_OnLevelCompleteSaveStressLvl += SaveStressLevel;
+        Patient.e_onPatientIdleDeath += TimeOutDamage;
 
     }
 
@@ -175,6 +176,7 @@ public class Player : MonoBehaviour, ISaveSystem
     private void TimeOutDamage(float damage)
     {
         CurrentStressLvl += damage;
+        Debug.Log("working");
     }
     #endregion
     #region Save/Load methods

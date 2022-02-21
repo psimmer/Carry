@@ -36354,6 +36354,10 @@ MonoBehaviour:
   minRandomTime: 5
   maxRandomTime: 10
   maxTaskIndex: 3
+  patientIdleDamage: 10
+  idleDeathStressDmg: 50
+  minCurrentHp: 50
+  maxCurrentHp: 80
   differentPatients:
   - {fileID: 6951617271039977802, guid: 251be277867c6934b8500fc8bce3dd65, type: 3}
   - {fileID: 6951617271039977802, guid: f66f546b2ad07834f86d3f2866509d10, type: 3}
@@ -41795,7 +41799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: maxStressLvl
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: noItemDamage

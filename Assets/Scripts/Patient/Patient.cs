@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,10 +11,6 @@ public class Patient : MonoBehaviour
     [SerializeField] private int currentHP;
     public int CurrentHP { get { return currentHP; } set { currentHP = value; } }
     private int patientMaxHP = 100;
-    [Tooltip("range for the random HP that the patient spawns with (minimum")]
-    [SerializeField] private int minCurrentHp;
-    [Tooltip("range for the random HP that the patient spawns with (minimum")]
-    [SerializeField] private int maxCurrentHp;
     //Patient Illnes
     [SerializeField] private TaskType currentIllness;
     public TaskType CurrentIllness { get { return currentIllness; } set { currentIllness = value; } }
@@ -45,6 +42,16 @@ public class Patient : MonoBehaviour
     [SerializeField] int maxTaskIndex;
     [SerializeField] private Transform popUpCanvas;
     public Transform PopUpCanvas { get { return popUpCanvas; } set { popUpCanvas = value; } }
+
+    [Tooltip("The damage that the patient takes when not assigned to a bed, every 5 seconds")]
+    [SerializeField] int patientIdleDamage;
+    [Tooltip("The damage that the patient takes when not assigned to a bed, every 5 seconds")]
+    [SerializeField] int idleDeathStressDmg;
+
+    [Tooltip("The patient died in the waiting area, this is for running the dead function just once")]
+    bool patientDiedInSeat;
+    public int PatientIdleDamage { get { return patientIdleDamage; } set { patientIdleDamage = value; } }
+    public int IdleDeathStressDmg { get { return idleDeathStressDmg; } set { idleDeathStressDmg = value; } }
 
     [SerializeField] private List<GameObject> popUpList;
 
@@ -98,6 +105,10 @@ public class Patient : MonoBehaviour
     public float ParticlesDuration => particlesDuration;
     private GameObject currentParticles;
     public GameObject CurrentParticles { get { return currentParticles; } set { currentParticles = value; } }
+    public static event Action<float> e_onPatientIdleDeath;
+    public static event Action<Patient> e_deletePatientFromList;
+
+
     #endregion
 
     private void Awake()
@@ -113,7 +124,7 @@ public class Patient : MonoBehaviour
     {
         tag = "Patient";
         hasPopUp = false;
-        timetillPopUp = Random.Range(minTimeTillPopUp, maxTimeTillPopUp);       
+        timetillPopUp = UnityEngine.Random.Range(minTimeTillPopUp, maxTimeTillPopUp);
         healthbar = GetComponentInChildren<Healthbar>();
 
         HasTask = false;
@@ -121,9 +132,8 @@ public class Patient : MonoBehaviour
 
         if (isInBed)
         {
-            CurrentIllness = (TaskType)Random.Range(0, maxTaskIndex);
+            CurrentIllness = (TaskType)UnityEngine.Random.Range(0, maxTaskIndex);
         }
-
     }
 
     private void Update()
@@ -203,14 +213,14 @@ public class Patient : MonoBehaviour
             if (health < 0)
             {
                 SoundManager.instance.PlayAudioClip(ESoundeffects.Damage, GetComponent<AudioSource>());
-                CurrentIllness = (TaskType)Random.Range(0, maxTaskIndex);
+                CurrentIllness = (TaskType)UnityEngine.Random.Range(0, maxTaskIndex);
                 SpawnParticles(damageParticles, particlesDuration);
             }
             //Heal
             else if (health > 0)
             {
                 SoundManager.instance.PlayAudioClip(ESoundeffects.Heal, GetComponent<AudioSource>());
-                CurrentIllness = (TaskType)Random.Range(0, maxTaskIndex);
+                CurrentIllness = (TaskType)UnityEngine.Random.Range(0, maxTaskIndex);
                 SpawnParticles(healParticles, particlesDuration);
             }
 
@@ -271,9 +281,21 @@ public class Patient : MonoBehaviour
         if (losingHpTimer >= 5)
         {
             losingHpTimer = 0;
-            currentHP--;
+            currentHP -= patientIdleDamage;
             SpawnParticles(sittingDamageParticles, particlesDuration);
         }
+
+        if(currentHP <= 0 && !patientDiedInSeat)
+        {
+            patientDiedInSeat = true;
+            e_onPatientIdleDeath?.Invoke(idleDeathStressDmg);
+            SpawnParticles(DeathParticles, particlesDuration);
+            e_deletePatientFromList?.Invoke(this);
+            SoundManager.instance.PlayAudioClip(ESoundeffects.Death, GetComponent<AudioSource>());
+            GlobalData.instance.SetPatientDeadStatistics();
+            Destroy(this.gameObject, particlesDuration);
+        }
+
 
         losingHpTimer += Time.deltaTime;
     }

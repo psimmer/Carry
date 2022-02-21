@@ -980,8 +980,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHP: 50
-  minCurrentHp: 0
-  maxCurrentHp: 0
+  minCurrentHp: 5
+  maxCurrentHp: 6
   currentIllness: 10
   isInBed: 0
   currentBed: {fileID: 0}

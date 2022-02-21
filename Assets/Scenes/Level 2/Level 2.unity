@@ -9886,6 +9886,14 @@ PrefabInstance:
       value: PatientSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 6963112497473834418, guid: ec9e215449313404ab4dd6210be96a25, type: 3}
+      propertyPath: maxCurrentHp
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963112497473834418, guid: ec9e215449313404ab4dd6210be96a25, type: 3}
+      propertyPath: minCurrentHp
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963112497473834418, guid: ec9e215449313404ab4dd6210be96a25, type: 3}
       propertyPath: bedList.Array.data[0]
       value: 
       objectReference: {fileID: 2021253386}

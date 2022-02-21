@@ -38001,6 +38001,8 @@ MonoBehaviour:
   minRandomTime: 15
   maxRandomTime: 30
   maxTaskIndex: 7
+  minCurrentHp: 5
+  maxCurrentHp: 6
   differentPatients:
   - {fileID: 6951617271039977802, guid: 251be277867c6934b8500fc8bce3dd65, type: 3}
   - {fileID: 6951617271039977802, guid: f66f546b2ad07834f86d3f2866509d10, type: 3}
