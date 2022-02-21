@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
 
         if (player.IsInContact && patient.IsInBed) // the patient.isinbed fixed the issue with the null reference
         {
-            if (patient.CurrentIllness == TaskType.RelocateAPatient)
+            if (patient.CurrentIllness == TaskType.RelocateAPatient && patient.CurrentPopUp != null)
             {
                 if (!lastItemIsSaved)
                 {
@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
                 {
                     ParticleLoops[i].loop = false;
                 }
+
                 patient.GetComponentInChildren<PopUp>().IsHealing = true;
                 player.GetComponent<NewPlayerMovement>().enabled = false;
                 StartCoroutine(TreatmentProgress(patient));

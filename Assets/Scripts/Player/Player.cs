@@ -93,7 +93,7 @@ public class Player : MonoBehaviour, ISaveSystem
 
     private void InteractWithLaptop(Computer obj)
     {
-        if (obj.Timer < 300)
+        if (obj.Timer < 10)
             return;
         
         animator.SetBool("isWalking", false);
