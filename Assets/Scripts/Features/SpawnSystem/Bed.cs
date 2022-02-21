@@ -37,7 +37,10 @@ public class Bed : MonoBehaviour
         {
             isPatientInBed = true;
         }
-        lights.SetActive(false);
+
+        if(lights)
+            lights.SetActive(false);
+
         Vector3 lookDir = Camera.main.transform.forward;
         popUpPosTransform.LookAt(popUpPosTransform.position + lookDir);
     }

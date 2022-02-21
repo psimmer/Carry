@@ -1128,8 +1128,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
+      propertyPath: bedPos
+      value: 
+      objectReference: {fileID: 1966082423}
+    - target: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5024520174531221999, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5886,14 +5890,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstButton: {fileID: 1817591431}
-  patientsHealed: {fileID: 0}
-  patientsLost: {fileID: 0}
-  treatments: {fileID: 0}
-  stressLvlBar: {fileID: 0}
   pauseElements: {fileID: 954933050}
   optionsElements: {fileID: 393375644}
   pauseButton: {fileID: 1187399547}
   playButton: {fileID: 808389471}
+  patientsHealed: {fileID: 0}
+  patientsLost: {fileID: 0}
+  treatments: {fileID: 0}
+  stressLvlBar: {fileID: 0}
   LevelMusic: {fileID: 2130437431}
 --- !u!114 &1138620995
 MonoBehaviour:

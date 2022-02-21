@@ -147,6 +147,9 @@ public class TutorialManager : MonoBehaviour
             player.currentPatient.transform.position = patientBedPos.position;
             player.currentPatient.transform.rotation = patientBedPos.rotation;
             player.currentPatient.GetComponent<Animator>().SetBool("isLaying", true);
+            player.currentPatient.Healthbar.transform.parent.rotation = Quaternion.Euler(0, 0, 0); // this line positions the healthbar on the whiteboard when you move the patient
+            patientBedPos.parent.GetComponent<Bed>().CurrentPatient = player.currentPatient;
+            patientBedPos.parent.GetComponent<Bed>().IsPatientInBed = true;
             player.currentPatient.IsInBed = true;
         }
     }
