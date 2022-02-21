@@ -36355,7 +36355,7 @@ MonoBehaviour:
   maxRandomTime: 10
   maxTaskIndex: 3
   patientIdleDamage: 10
-  idleDeathStressDmg: 50
+  idleDeathStressDmg: 30
   minCurrentHp: 50
   maxCurrentHp: 80
   differentPatients:

@@ -9894,6 +9894,14 @@ PrefabInstance:
       value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 6963112497473834418, guid: ec9e215449313404ab4dd6210be96a25, type: 3}
+      propertyPath: patientIdleDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963112497473834418, guid: ec9e215449313404ab4dd6210be96a25, type: 3}
+      propertyPath: idleDeathStressDmg
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963112497473834418, guid: ec9e215449313404ab4dd6210be96a25, type: 3}
       propertyPath: bedList.Array.data[0]
       value: 
       objectReference: {fileID: 2021253386}
