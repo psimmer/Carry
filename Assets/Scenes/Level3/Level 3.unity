@@ -16272,6 +16272,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5024520174531221999, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
   m_PrefabInstance: {fileID: 40681003}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &771699186 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4107777169054225612, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
+  m_PrefabInstance: {fileID: 1635251049}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &774982097 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4187650052692172, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
@@ -22679,7 +22684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4187650052692172, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.7503
+      value: 12.93
       objectReference: {fileID: 0}
     - target: {fileID: 4187650052692172, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_LocalPosition.y
@@ -33027,7 +33032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7711277700711003573, guid: 3f6077384a917af46aeaf0915d49ece9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.226499
+      value: 11.47
       objectReference: {fileID: 0}
     - target: {fileID: 7711277700711003573, guid: 3f6077384a917af46aeaf0915d49ece9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -33897,6 +33902,10 @@ PrefabInstance:
       propertyPath: LevelMusic
       value: 
       objectReference: {fileID: 107388860}
+    - target: {fileID: 4107777169680041946, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
+      propertyPath: stressLvlBar
+      value: 
+      objectReference: {fileID: 771699186}
     - target: {fileID: 4107777169680041947, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
       propertyPath: player
       value: 
@@ -42982,7 +42991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7537062293735653307, guid: b03f1532db74568408b8adb2ce444eac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.473923
+      value: 15.92
       objectReference: {fileID: 0}
     - target: {fileID: 7537062293735653307, guid: b03f1532db74568408b8adb2ce444eac, type: 3}
       propertyPath: m_LocalPosition.y
