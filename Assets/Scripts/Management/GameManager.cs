@@ -321,12 +321,12 @@ public class GameManager : MonoBehaviour
     #region Level 4 only stuff
     IEnumerator DecreaseStressReductionMultiplier()
     {
-            stressReductionMultiplier -= 1 / 360;
-            Debug.Log("asd");
+        while(true)
+        {
+            stressReductionMultiplier -= 1f / 360f;
             yield return new WaitForSeconds(1);
+        }
     }
-
-
 
     #endregion
 }
