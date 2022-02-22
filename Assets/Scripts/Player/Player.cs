@@ -27,6 +27,7 @@ public class Player : MonoBehaviour, ISaveSystem
     [SerializeField] private Camera camera;
     [SerializeField] private Vector3 boxSize = Vector3.one;
     [SerializeField] private Animator animator;
+    [SerializeField] Timer gameTime;
     public Vector3 boxPos;
     Coroutine reduceStressIfOutside;
     
@@ -94,7 +95,7 @@ public class Player : MonoBehaviour, ISaveSystem
 
     private void InteractWithLaptop(Computer obj)
     {
-        if (obj.Timer < 300)
+        if (16 > gameTime.TimeInHours)
             return;
         
         animator.SetBool("isWalking", false);

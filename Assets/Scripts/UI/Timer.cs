@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour , ISaveSystem
 {
     [SerializeField] private TextMeshProUGUI timeText;
     public TextMeshProUGUI TimeText { get { return timeText; } set { timeText = value; } }
+
     [SerializeField] private int startTimeHours;
     public int TimeInHours { get { return startTimeHours; } set { startTimeHours = value; } }
 
@@ -64,6 +65,11 @@ public class Timer : MonoBehaviour , ISaveSystem
             realTime = 0;
             timeText.text = "0" + startTimeHours.ToString() + ":" + (int)realTime;
         }
+    }
+
+    public int GetTimeInHours()
+    {
+        return TimeInHours;
     }
 
     #region Save/Load methods
