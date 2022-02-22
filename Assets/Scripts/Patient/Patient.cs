@@ -40,6 +40,7 @@ public class Patient : MonoBehaviour
     [SerializeField] float maxTimeTillPopUp;
     [Tooltip("Possible tasks that are available: Lvl 1 = 3; Lvl 2 = 5; Lvl 3 = 7; Lvl 4 = 7")]
     [SerializeField] int maxTaskIndex;
+    public int MaxTaskIndex { get { return maxTaskIndex; } set { maxTaskIndex = value; } }
     [SerializeField] private Transform popUpCanvas;
     public Transform PopUpCanvas { get { return popUpCanvas; } set { popUpCanvas = value; } }
 

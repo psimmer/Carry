@@ -84,6 +84,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 int differentPatientsIndex = Random.Range(0, differentPatients.Count);
                 GameObject newPatient = Instantiate(differentPatients[differentPatientsIndex], randomSpawn);
                 patientList.Add(newPatient);
+                newPatient.GetComponent<Patient>().MaxTaskIndex = maxTaskIndex;
                 newPatient.GetComponent<Patient>().DifferentPatientsIndex = differentPatientsIndex;
                 newPatient.GetComponent<Patient>().CurrentIllness = TaskType.AssignBed;
                 randomSpawn.GetComponent<SpawnPoint>().IsFree = false;
@@ -167,7 +168,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
         }
 
         //serialize bedlist
-        //formatter.Serialize(stream, bedList.Count);
         //foreach (var b in bedList)
         //{
         //    BedData data = new BedData(b);
@@ -210,6 +210,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 p.IsInBed = data.isInBed;
                 p.HasPopUp = data.hasPopUp;
                 p.IsReleasing = data.isReleasing;
+                p.MaxTaskIndex = data.maxTaskIndex;
                 foreach (Bed b in bedList)
                 {
                     if (b.name == data.currentBed)
@@ -233,11 +234,13 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
             patientList = loadedPatientList;
 
             //deserialize Bedlist
-            //int bedcount = (int)formatter.Deserialize(stream);
             //List<Bed> loadedBedList = new List<Bed>();
-            //for (int i = 0; i < bedcount; i++)
+            //for (int i = 0; i < bedList.Count; i++)
             //{
             //    BedData data = (BedData)formatter.Deserialize(stream);
+            //    bedList[i].IsPatientInBed = data.isPatientInBed;
+            //    bedList[i].SetHealthBarAndPopUpSpawnPos = data.setHealthBarAndPopUpSpawnPos;
+            //    bedList[i].Timer = data.timer;
             //}
 
             //deserialize spawnpoints

@@ -3227,7 +3227,7 @@ PrefabInstance:
     - target: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: lights
       value: 
-      objectReference: {fileID: 1910183185}
+      objectReference: {fileID: 941854623}
     - target: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: currentPatient
       value: 

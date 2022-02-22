@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     public void Treatment(Patient patient)
     {
 
-        if (player.IsInContact && patient.IsInBed) // the patient.isinbed fixed the issue with the null reference
+        if (player.IsInContact && patient != null && patient.IsInBed) // the patient.isinbed fixed the issue with the null reference
         {
             if (patient.CurrentIllness == TaskType.RelocateAPatient && patient.CurrentPopUp != null)
             {
@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
 
         }
         //assign the patient from the hallway to the bed
-        else if (player.IsInContact && !patient.IsInBed)
+        else if (player.IsInContact && patient != null && !patient.IsInBed)
         {
             if (patient.CurrentIllness == TaskType.AssignBed)
             {

@@ -48,7 +48,6 @@ public class Bed : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-
         if (currentPatient == null)
         {
             isPatientInBed = false;

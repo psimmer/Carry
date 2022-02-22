@@ -13,6 +13,7 @@ public class PatientData
     public bool hasPopUp;
     public bool isReleasing;
     public string currentBed;
+    public int maxTaskIndex;
 
     public PatientData(Patient patient)
     {
@@ -33,5 +34,6 @@ public class PatientData
         isReleasing = patient.IsReleasing;
         if(patient.CurrentBed != null)
             currentBed = patient.CurrentBed.name;
+        maxTaskIndex = patient.MaxTaskIndex;
     }
 }
