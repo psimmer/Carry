@@ -3247,8 +3247,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 18.682976, y: 4.169246, z: 15.930084}
-  m_Center: {x: 4.4440117, y: 1.1617429, z: 0.01277566}
+  m_Size: {x: 19.80729, y: 4.169246, z: 17.186565}
+  m_Center: {x: 3.8818548, y: 1.1617429, z: 0.6410179}
 --- !u!1 &631819721
 GameObject:
   m_ObjectHideFlags: 0
@@ -7416,6 +7416,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1676983871888136956, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
+      propertyPath: playerSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4959383937220050687, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: m_Name
       value: Player
@@ -7442,7 +7446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: currentStressLvl
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5735498805784552517, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: m_RootOrder
@@ -9959,7 +9963,7 @@ PrefabInstance:
       objectReference: {fileID: 1723813837}
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: coffeeDamage
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: sceneManager
@@ -9985,6 +9989,14 @@ PrefabInstance:
       propertyPath: stressMultiplier
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
+      propertyPath: documentationReward
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
+      propertyPath: stressReductionMultiplier
+      value: 0.65
+      objectReference: {fileID: 0}
     - target: {fileID: 5061466822453182138, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -10004,15 +10016,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6963112497473834418, guid: ec9e215449313404ab4dd6210be96a25, type: 3}
       propertyPath: maxCurrentHp
-      value: 90
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6963112497473834418, guid: ec9e215449313404ab4dd6210be96a25, type: 3}
       propertyPath: minCurrentHp
-      value: 80
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6963112497473834418, guid: ec9e215449313404ab4dd6210be96a25, type: 3}
       propertyPath: patientIdleDamage
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6963112497473834418, guid: ec9e215449313404ab4dd6210be96a25, type: 3}
       propertyPath: idleDeathStressDmg

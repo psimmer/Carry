@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,7 +44,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] float documentationReward;
     #endregion
 
-
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "Level 4")
+            StartCoroutine(DecreaseStressReductionMultiplier());
+    }
     void Update()
     {
         //player Methods
@@ -283,6 +288,7 @@ public class GameManager : MonoBehaviour
                     player.GetComponent<Player>().CurrentStressLvl += documentationReward;
                     Debug.Log("Failed DocumentationTask");
                 }
+
             }
         }
     }
@@ -314,5 +320,15 @@ public class GameManager : MonoBehaviour
         player.currentItem = lastItem;
     }
 
+    #region Level 4 only stuff
+    IEnumerator DecreaseStressReductionMultiplier()
+    {
+        while(true)
+        {
+            stressReductionMultiplier -= 1f / 360f;
+            yield return new WaitForSeconds(1);
+        }
+    }
 
+    #endregion
 }
