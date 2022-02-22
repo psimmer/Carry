@@ -281,6 +281,7 @@ public class GameManager : MonoBehaviour
                     player.GetComponent<Player>().CurrentStressLvl += documentationReward;
                     Debug.Log("Failed DocumentationTask");
                 }
+
             }
         }
     }
