@@ -3883,7 +3883,6 @@ GameObject:
   m_Component:
   - component: {fileID: 527759233}
   - component: {fileID: 527759232}
-  - component: {fileID: 527759231}
   - component: {fileID: 527759230}
   - component: {fileID: 527759229}
   - component: {fileID: 527759228}
@@ -3964,14 +3963,6 @@ MonoBehaviour:
   lastPoint: {fileID: 1143981406}
   camImageUnfixed: {fileID: 752594762}
   camImageFixed: {fileID: 752594761}
---- !u!81 &527759231
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527759227}
-  m_Enabled: 1
 --- !u!20 &527759232
 Camera:
   m_ObjectHideFlags: 0
@@ -10541,15 +10532,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9177376708461510941, guid: a4f9e73e7fc5e7a418b32f2c60c0abde, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.2
+      value: -5.24
       objectReference: {fileID: 0}
     - target: {fileID: 9177376708461510941, guid: a4f9e73e7fc5e7a418b32f2c60c0abde, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1
+      value: 1.165
       objectReference: {fileID: 0}
     - target: {fileID: 9177376708461510941, guid: a4f9e73e7fc5e7a418b32f2c60c0abde, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.71
+      value: -1.716
       objectReference: {fileID: 0}
     - target: {fileID: 9177376708461510941, guid: a4f9e73e7fc5e7a418b32f2c60c0abde, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10677,7 +10668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4239241825834946, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.955
+      value: -5.811
       objectReference: {fileID: 0}
     - target: {fileID: 4239241825834946, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10715,6 +10706,22 @@ PrefabInstance:
       propertyPath: gameTime
       value: 
       objectReference: {fileID: 752594757}
+    - target: {fileID: 6101278694837605226, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101278694837605226, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101278694837605226, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101278694837605226, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
 --- !u!114 &1416646560 stripped
