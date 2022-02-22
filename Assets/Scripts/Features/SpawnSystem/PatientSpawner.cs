@@ -7,6 +7,7 @@ using UnityEngine;
 public class PatientSpawner : MonoBehaviour, ISaveSystem
 {
     #region Variables
+    [Header("Patient Spawning time")]
     [Tooltip("Time window for spawning patients (minimum in seconds")]
     [SerializeField] int minRandomTime;
     [Tooltip("Time window for spawning patients (maximum in seconds")]
