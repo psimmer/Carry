@@ -36354,7 +36354,7 @@ MonoBehaviour:
   minRandomTime: 5
   maxRandomTime: 10
   maxTaskIndex: 3
-  patientIdleDamage: 10
+  patientIdleDamage: 8
   idleDeathStressDmg: 30
   minCurrentHp: 50
   maxCurrentHp: 80
@@ -41410,7 +41410,7 @@ PrefabInstance:
       objectReference: {fileID: 1127159734}
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: coffeeDamage
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: sceneManager
@@ -41438,7 +41438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: stressReductionMultiplier
-      value: 0.795
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5061466822453182138, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: m_Name

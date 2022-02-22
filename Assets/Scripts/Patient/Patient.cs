@@ -297,7 +297,6 @@ public class Patient : MonoBehaviour
             Destroy(this.gameObject, particlesDuration);
         }
 
-
         losingHpTimer += Time.deltaTime;
     }
 }

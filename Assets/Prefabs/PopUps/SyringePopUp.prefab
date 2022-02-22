@@ -271,7 +271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd8aab96f4322e439209a5ac3a210a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 35
+  duration: 25
+  timeOutDamagePatient: 20
+  timeOutDamagePlayer: 30
   radialBarImage: {fileID: 947608233017506615}
   gradient:
     serializedVersion: 2
@@ -302,8 +304,6 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  timeOutDamagePatient: 22
-  timeOutDamagePlayer: 15
   item: {fileID: 11400000, guid: 170307f2f3e29b54f9af1b04b72484ab, type: 2}
   popUpTaskType: 2
 --- !u!1001 &6104552859543324850
