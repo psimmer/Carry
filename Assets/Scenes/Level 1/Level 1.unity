@@ -41442,7 +41442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: stressReductionMultiplier
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5061466822453182138, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: m_Name
@@ -41516,6 +41516,10 @@ PrefabInstance:
     - target: {fileID: 1512409628767100279, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 173.53508
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676983871888136956, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
+      propertyPath: playerSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1965056011918014494, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: outlineWidth
@@ -41820,6 +41824,10 @@ PrefabInstance:
     - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: stressMultiplier
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
+      propertyPath: savedStresslevelReduction
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: stressReductionMultiplier

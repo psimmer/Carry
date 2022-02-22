@@ -11,6 +11,9 @@ public class Player : MonoBehaviour, ISaveSystem
 
     #region Player variables
     [SerializeField] private float currentStressLvl;
+    [Tooltip("This value multiplies the stress level that is carried on to the next level")]
+    [Range(0,1)]
+    [SerializeField] private float savedStresslevelReduction;
     public float CurrentStressLvl { get { return currentStressLvl; } set { currentStressLvl = value; } }
     [SerializeField] private float maxStressLvl;
     public float MaxStressLvl { get { return maxStressLvl; } }
@@ -171,7 +174,7 @@ public class Player : MonoBehaviour, ISaveSystem
 
     private void SaveStressLevel()
     {
-        GlobalData.instance.CurrentStressLvl = currentStressLvl;
+        GlobalData.instance.CurrentStressLvl = currentStressLvl * savedStresslevelReduction;
     }
 
     private void TimeOutDamage(float damage)

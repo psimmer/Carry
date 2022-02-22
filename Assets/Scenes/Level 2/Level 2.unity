@@ -7416,6 +7416,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1676983871888136956, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
+      propertyPath: playerSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4959383937220050687, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: m_Name
       value: Player
@@ -7442,7 +7446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: currentStressLvl
-      value: 35
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5735498805784552517, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: m_RootOrder
@@ -9991,7 +9995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: stressReductionMultiplier
-      value: 0.35
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 5061466822453182138, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: m_Name
