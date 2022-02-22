@@ -10711,6 +10711,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 5930743008484771852, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: gameTime
+      value: 
+      objectReference: {fileID: 752594757}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
 --- !u!114 &1416646560 stripped
@@ -10999,6 +11003,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1469624504}
+    - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
+      propertyPath: gameTime
+      value: 
+      objectReference: {fileID: 752594757}
     - target: {fileID: 5193262505905465339, guid: 35a083cc8aa857a4e8a39c043405feec, type: 3}
       propertyPath: maxStressLvl
       value: 100
