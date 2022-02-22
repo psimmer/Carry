@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,7 +44,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] float documentationReward;
     #endregion
 
-
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "Level 4")
+            StartCoroutine(DecreaseStressReductionMultiplier());
+    }
     void Update()
     {
         //player Methods
@@ -313,5 +318,15 @@ public class GameManager : MonoBehaviour
         player.currentItem = lastItem;
     }
 
+    #region Level 4 only stuff
+    IEnumerator DecreaseStressReductionMultiplier()
+    {
+            stressReductionMultiplier -= 1 / 360;
+            Debug.Log("asd");
+            yield return new WaitForSeconds(1);
+    }
 
+
+
+    #endregion
 }
