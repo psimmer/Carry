@@ -177,7 +177,6 @@ public class Player : MonoBehaviour, ISaveSystem
     private void TimeOutDamage(float damage)
     {
         CurrentStressLvl += damage;
-        Debug.Log("working");
     }
     #endregion
     #region Save/Load methods

@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd8aab96f4322e439209a5ac3a210a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 25
+  duration: 18
   timeOutDamagePatient: 20
   timeOutDamagePlayer: 30
   radialBarImage: {fileID: 947608233017506615}
