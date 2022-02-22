@@ -11,5 +11,7 @@ public enum ESoundeffects
     PopUp,
     StressLevel,
     Winning,
-    Button
+    Button,
+    ComputerSuccess,
+    ComputerFail
 }

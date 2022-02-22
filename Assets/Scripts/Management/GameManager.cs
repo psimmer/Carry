@@ -272,12 +272,14 @@ public class GameManager : MonoBehaviour
                 if (computer.HintText.text == computer.InputField.text)
                 {
                     //Success
+                    SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerSuccess, computer.gameObject.GetComponent<AudioSource>());
                     player.GetComponent<Player>().CurrentStressLvl -= documentationReward;
                     Debug.Log("Success DocumentationTask");
                 }
                 else
                 {
                     //Failed
+                    SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerFail, computer.gameObject.GetComponent<AudioSource>());
                     player.GetComponent<Player>().CurrentStressLvl += documentationReward;
                     Debug.Log("Failed DocumentationTask");
                 }

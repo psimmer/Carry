@@ -128,3 +128,17 @@ MonoBehaviour:
     soundTimer: 0
     soundVolume: 1
     isStackable: 1
+  - name: ComputerSuccess
+    typeOfSound: 12
+    clipSound: {fileID: 8300000, guid: ce585de63958a164192c6fdeb659019b, type: 3}
+    offset: 0
+    soundTimer: 0
+    soundVolume: 0.1
+    isStackable: 0
+  - name: ComputerFail
+    typeOfSound: 13
+    clipSound: {fileID: 8300000, guid: 071b38dc44d8e2841b84802bbb7cd616, type: 3}
+    offset: 0
+    soundTimer: 0
+    soundVolume: 0.1
+    isStackable: 0
