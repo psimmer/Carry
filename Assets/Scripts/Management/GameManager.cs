@@ -51,6 +51,25 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 4)
+                return;
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + -1);
+            Destroy(GameObject.Find("DontDestroyOnLoad"));
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 7)
+                return;
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Destroy(GameObject.Find("DontDestroyOnLoad"));
+        }
+
+
         //player Methods
         player.Interact();
         player.DropItem();
