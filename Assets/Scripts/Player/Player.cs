@@ -194,6 +194,7 @@ public class Player : MonoBehaviour, ISaveSystem
         formatter.Serialize(stream, IsDrinkingCoffee);
         formatter.Serialize(stream, IsHoldingItem);
         formatter.Serialize(stream, isAtPC);
+        formatter.Serialize(stream, isOutside);
 
         stream.Close();
     }
@@ -220,6 +221,7 @@ public class Player : MonoBehaviour, ISaveSystem
             IsDrinkingCoffee = (bool)formatter.Deserialize(stream);
             IsHoldingItem = (bool)formatter.Deserialize(stream);
             isAtPC = (bool)formatter.Deserialize(stream);
+            isOutside = (bool)formatter.Deserialize(stream);
 
             stream.Close();
         }
