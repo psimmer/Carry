@@ -12,7 +12,7 @@ public class Bed : MonoBehaviour
     [SerializeField] GameObject lights;
 
     [SerializeField] private Transform popUpPosTransform;
-
+    [SerializeField] private bool isHorizontalBed;
     public Transform PopUpPosTransform => popUpPosTransform;
     private bool setHealthBarAndPopUpSpawnPos = true;
     public bool SetHealthBarAndPopUpSpawnPos { get { return setHealthBarAndPopUpSpawnPos; } set { setHealthBarAndPopUpSpawnPos = value; } }
@@ -57,32 +57,38 @@ public class Bed : MonoBehaviour
         }
 
         // position healthbars in the whiteboard if there is a patient in bed
-        if (currentPatient != null && setHealthBarAndPopUpSpawnPos) 
+        if (currentPatient != null && setHealthBarAndPopUpSpawnPos)
         {
+            if (isHorizontalBed)
+                currentPatient.HealthBarCanvas.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
+
             currentPatient.Healthbar.transform.position = new Vector3(
                 WhiteboardPos.position.x,
-                WhiteboardPos.position.y + whiteboardPos.localScale.y/4,
+                WhiteboardPos.position.y + whiteboardPos.localScale.y / 4,
                 WhiteboardPos.position.z - WhiteboardPos.localScale.z
                 );
-          
+
             currentPatient.Heartbeat.transform.position = new Vector3(
                 WhiteboardPos.position.x,
                 whiteboardPos.position.y - whiteboardPos.localScale.y / 5,
                 whiteboardPos.position.z - whiteboardPos.localScale.z
                 );
 
+            if (isHorizontalBed)
+                currentPatient.HealthBarCanvas.localPosition += new Vector3(0, 0, 0.026f);
+
+
             Vector3 popUpPos = popUpPosTransform.position;
             Vector3 popUpRotation = PopUpPosTransform.eulerAngles;
 
             CurrentPatient.Canvas.transform.position = popUpPos;
-            CurrentPatient.Canvas.transform.eulerAngles= popUpRotation;
+            CurrentPatient.Canvas.transform.eulerAngles = popUpRotation;
+
 
             currentPatient.Heartbeat.SetActive(true);
             setHealthBarAndPopUpSpawnPos = false;
-            if(lights)
+            if (lights)
                 lights.SetActive(true);
-
-           
         }
 
         if (timer >= 1 && currentPatient != null)
