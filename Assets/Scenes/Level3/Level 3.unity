@@ -29889,7 +29889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: currentHP
-      value: 99
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: d319b1c6ff12dcf4cb4668f43543bb1d, type: 3}
       propertyPath: maxTaskIndex
@@ -30408,7 +30408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: currentHP
-      value: 99
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: maxTaskIndex
@@ -33863,7 +33863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4107777168366850494, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
       propertyPath: startTimeHours
-      value: 15
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4107777169680041946, guid: fb975a97caa321d46bec5436af3d906d, type: 3}
       propertyPath: LevelMusic

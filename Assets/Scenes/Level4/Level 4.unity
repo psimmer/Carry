@@ -969,6 +969,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: currentHP
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: maxTaskIndex
       value: 7
       objectReference: {fileID: 0}
@@ -1124,6 +1128,10 @@ PrefabInstance:
     - target: {fileID: 5869952013167535559, guid: 16906c09dd68e0f47bb211de8b9fde38, type: 3}
       propertyPath: isInBed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: 16906c09dd68e0f47bb211de8b9fde38, type: 3}
+      propertyPath: currentHP
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: 16906c09dd68e0f47bb211de8b9fde38, type: 3}
       propertyPath: currentBed
@@ -4029,6 +4037,10 @@ PrefabInstance:
     - target: {fileID: 5869952013167535559, guid: d9ce796e9db58d345a59fb8f0bd73e0c, type: 3}
       propertyPath: isInBed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869952013167535559, guid: d9ce796e9db58d345a59fb8f0bd73e0c, type: 3}
+      propertyPath: currentHP
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: d9ce796e9db58d345a59fb8f0bd73e0c, type: 3}
       propertyPath: currentBed

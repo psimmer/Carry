@@ -854,7 +854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstButton: {fileID: 556665320}
   pauseElements: {fileID: 0}
-  optionsElements: {fileID: 0}
+  optionsElements: {fileID: 1040821359}
   pauseButton: {fileID: 0}
   playButton: {fileID: 0}
   stressLvlBar: {fileID: 0}
