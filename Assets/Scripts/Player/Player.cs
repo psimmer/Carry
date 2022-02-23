@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -12,7 +11,7 @@ public class Player : MonoBehaviour, ISaveSystem
     #region Player variables
     [SerializeField] private float currentStressLvl;
     [Tooltip("This value multiplies the stress level that is carried on to the next level")]
-    [Range(0,1)]
+    [Range(0, 1)]
     [SerializeField] private float savedStresslevelReduction;
     public float CurrentStressLvl { get { return currentStressLvl; } set { currentStressLvl = value; } }
     [SerializeField] private float maxStressLvl;
@@ -32,8 +31,7 @@ public class Player : MonoBehaviour, ISaveSystem
     [SerializeField] private Animator animator;
     [SerializeField] Timer gameTime;
     public Vector3 boxPos;
-    Coroutine reduceStressIfOutside;
-    
+    bool isOutside;
 
     private void Awake()
     {
@@ -100,7 +98,7 @@ public class Player : MonoBehaviour, ISaveSystem
     {
         if (16 > gameTime.TimeInHours)
             return;
-        
+
         animator.SetBool("isWalking", false);
         Camera.main.GetComponent<CamPosition>().MovePoint.CameraOnPc = true;
         IsAtPc = true;
@@ -130,20 +128,17 @@ public class Player : MonoBehaviour, ISaveSystem
 
     private void OnTriggerExit(Collider other)
     {
-
         if (other.CompareTag("Inside"))
         {
-            reduceStressIfOutside = StartCoroutine(ReduceStressLevel());
+            isOutside = true;
+            StartCoroutine(ReduceStressLevel());
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Inside"))
-        {
-            if (reduceStressIfOutside != null)
-                StopCoroutine(reduceStressIfOutside);
-        }
+            isOutside = false;
 
         if (other.GetComponent<CamColliders>() != null)
         {
@@ -165,7 +160,7 @@ public class Player : MonoBehaviour, ISaveSystem
     /// <returns></returns>
     IEnumerator ReduceStressLevel()
     {
-        while (true)
+        while (isOutside)
         {
             yield return new WaitForSeconds(3);
             CurrentStressLvl--;

@@ -2044,7 +2044,7 @@ MonoBehaviour:
     text3: 
     numberOfExecution: 12
   - text: 
-    text2: Now interact with the patient and hold SPACE!
+    text2: Now interact with the patient and HOLD SPACE!
     text3: 
     numberOfExecution: 13
   - text: 

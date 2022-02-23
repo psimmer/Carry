@@ -277,12 +277,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (!isPopUpSpawned && tutorialTimer >= 1)
             {
-                isPopUpSpawned = true;
-                currentPopUp = Instantiate(popUpPrefab, currentPatient.GetComponent<Patient>().PopUpCanvas);
-                currentPatient.GetComponent<Patient>().PopUpCanvas.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
-                currentPopUp.transform.position = popUpPos.position;
-                Vector3 lookDir = Camera.main.transform.forward;
-                currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
+                SpawnPopUp();
             }
             if ((int)tutorialTimer >= 2)
             {
@@ -305,6 +300,10 @@ public class TutorialManager : MonoBehaviour
                     doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                     player.IsInContact = false;
                 }
+            }
+            if(currentPopUp == null)
+            {
+                SpawnPopUp();
             }
         }
         //Interact with the patient to heal him and hold space
@@ -548,6 +547,16 @@ public class TutorialManager : MonoBehaviour
             fixCamImage.gameObject.SetActive(false);
             freeCamImage.gameObject.SetActive(true);
         }
+    }
+
+    void SpawnPopUp()
+    {
+        isPopUpSpawned = true;
+        currentPopUp = Instantiate(popUpPrefab, currentPatient.GetComponent<Patient>().PopUpCanvas);
+        currentPatient.GetComponent<Patient>().PopUpCanvas.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+        currentPopUp.transform.position = popUpPos.position;
+        Vector3 lookDir = Camera.main.transform.forward;
+        currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
     }
 }
 
