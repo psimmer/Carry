@@ -7821,6 +7821,10 @@ PrefabInstance:
       propertyPath: isHorizontalBed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
+      propertyPath: isVerticalWhiteboard
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5024520174531221999, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -8047,6 +8051,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: isHorizontalBed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
+      propertyPath: isVerticalWhiteboard
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5024520174531221999, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
@@ -13408,6 +13416,10 @@ PrefabInstance:
       objectReference: {fileID: 423244022}
     - target: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: isHorizontalBed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
+      propertyPath: isVerticalWhiteboard
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5024520174531221999, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}

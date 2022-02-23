@@ -12,7 +12,9 @@ public class Bed : MonoBehaviour
     [SerializeField] GameObject lights;
 
     [SerializeField] private Transform popUpPosTransform;
-    [SerializeField] private bool isHorizontalBed;
+
+    [Tooltip("If the healthbar isn't positioned properly due to the whiteboard being positioned vertically in the scene, select this, else ignore it")]
+    [SerializeField] private bool isVerticalWhiteboard;
     public Transform PopUpPosTransform => popUpPosTransform;
     private bool setHealthBarAndPopUpSpawnPos = true;
     public bool SetHealthBarAndPopUpSpawnPos { get { return setHealthBarAndPopUpSpawnPos; } set { setHealthBarAndPopUpSpawnPos = value; } }
@@ -59,7 +61,7 @@ public class Bed : MonoBehaviour
         // position healthbars in the whiteboard if there is a patient in bed
         if (currentPatient != null && setHealthBarAndPopUpSpawnPos)
         {
-            if (isHorizontalBed)
+            if (isVerticalWhiteboard)
                 currentPatient.HealthBarCanvas.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
             currentPatient.Healthbar.transform.position = new Vector3(
@@ -74,7 +76,7 @@ public class Bed : MonoBehaviour
                 whiteboardPos.position.z - whiteboardPos.localScale.z
                 );
 
-            if (isHorizontalBed)
+            if (isVerticalWhiteboard)
                 currentPatient.HealthBarCanvas.localPosition += new Vector3(0, 0, 0.026f);
 
 
