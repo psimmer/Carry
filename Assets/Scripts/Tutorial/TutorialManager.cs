@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -277,8 +276,7 @@ public class TutorialManager : MonoBehaviour
                 {
                     if (itemSlot.transform.childCount <= 0)
                         currentUIitem = Instantiate(bandage.item.UI_prefab, itemSlot.transform);
-                    Debug.Log(player.currentItem);
-                    //currentUIitem = Instantiate(bandage.item.UI_prefab, itemSlot.transform);
+
                     NextDirectionIndex();
                     player.IsInContact = false;
                 }

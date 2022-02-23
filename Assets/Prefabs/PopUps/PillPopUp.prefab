@@ -53,8 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 10
-  timeOutDamagePatient: 10
-  timeOutDamagePlayer: 10
+  timeOutDamagePatient: 5
+  timeOutDamagePlayer: 5
   radialBarImage: {fileID: 3643749057878431123}
   gradient:
     serializedVersion: 2

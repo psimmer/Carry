@@ -51,23 +51,8 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            if (SceneManager.GetActiveScene().buildIndex == 4)
-                return;
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + -1);
-            Destroy(GameObject.Find("DontDestroyOnLoad"));
-        }
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            if (SceneManager.GetActiveScene().buildIndex == 7)
-                return;
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            Destroy(GameObject.Find("DontDestroyOnLoad"));
-        }
+        //for testing in the build
+        SkipLevel();
 
 
         //player Methods
@@ -92,6 +77,29 @@ public class GameManager : MonoBehaviour
 
         if (player.CurrentStressLvl <= 0)
             player.CurrentStressLvl = 0;
+    }
+
+    /// <summary>
+    /// with 'F2' you can skip to the next level and 'F1' go back one level. for testing in the build
+    /// </summary>
+    private void SkipLevel()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 4)
+                return;
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + -1);
+            Destroy(GameObject.Find("DontDestroyOnLoad"));
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 7)
+                return;
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Destroy(GameObject.Find("DontDestroyOnLoad"));
+        }
     }
 
     #region Treating a Patient
@@ -272,7 +280,6 @@ public class GameManager : MonoBehaviour
     {
         if (player.IsDrinkingCoffee && !coffeeMachine.Drinking && !coffeeMachine.IsOnCooldown)
         {
-            Debug.Log("asd");
             if (coffeeMachine.Drinking == false) // raises stresslevel after activating the coffee
                 player.CurrentStressLvl += coffeeDamage;
 
@@ -306,14 +313,12 @@ public class GameManager : MonoBehaviour
                     //Success
                     SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerSuccess, computer.gameObject.GetComponent<AudioSource>());
                     player.GetComponent<Player>().CurrentStressLvl -= documentationReward;
-                    Debug.Log("Success DocumentationTask");
                 }
                 else
                 {
                     //Failed
                     SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerFail, computer.gameObject.GetComponent<AudioSource>());
                     player.GetComponent<Player>().CurrentStressLvl += documentationReward;
-                    Debug.Log("Failed DocumentationTask");
                 }
 
             }
