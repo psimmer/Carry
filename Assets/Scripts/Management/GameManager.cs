@@ -98,6 +98,11 @@ public class GameManager : MonoBehaviour
             // release the patient to leave the hospital
             if (patient.CurrentIllness == TaskType.ReleasePatient && !patient.IsReleasing)
             {
+                if (patient.CurrentPopUp == null)
+                {
+                    Damage(patient);
+                    return;
+                }
                 patient.transform.position = patient.LeaveHospital.transform.position;
                 patient.transform.rotation = patient.LeaveHospital.transform.rotation;
                 patient.PopUpCanvas.gameObject.SetActive(false);
