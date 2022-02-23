@@ -109,6 +109,7 @@ public class TutorialManager : MonoBehaviour
         TutorialLoop();
     }
 
+    //JustToJumpToTheNextTutorialState
     void DeveloperTestFunction()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -286,56 +287,7 @@ public class TutorialManager : MonoBehaviour
         //Interact with the patient to heal him and hold space
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 13)
         {
-            if (currentPopUp == null)
-            {
-                SpawnPopUp();
-            }
-            if (player.IsInContact)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    if (Input.GetKey(KeyCode.Space))
-                    {
-                        currentPopUp.GetComponent<PopUp>().IsHealing = true;
-                        player.GetComponent<Animator>().SetBool("isTreating", true);
-                        currentPatient.GetComponent<Patient>().CurrentParticles = Instantiate(currentPatient.GetComponent<Patient>().HealingParticles, currentPatient.GetComponent<Patient>().transform);
-                        ParticleSystem[] ParticleLoops = currentPatient.GetComponent<Patient>().GetComponentsInChildren<ParticleSystem>();
-                    }
-                }
-                else if (!Input.GetKey(KeyCode.Space))
-                {
-                    Damage(currentPatient.GetComponent<Patient>());
-                    currentUIitem = itemSlot.transform.GetChild(0).gameObject;
-                    Destroy(currentUIitem);
-                    currentUIitem = null;
-                    //Destroy(player.currentItem);
-                    player.currentItem = null;
-                    Destroy(currentPatient.GetComponent<Patient>().CurrentParticles);
-                    Destroy(currentPopUp);
-                    textDirectionIndex = 11;
-                    player.IsInContact = false;
-                    currentPopUp.GetComponent<PopUp>().IsHealing = false;
-                    player.GetComponent<Animator>().SetBool("isTreating", false);
-                    player.GetComponent<NewPlayerMovement>().enabled = true;
-                    isPopUpSpawned = false;
-                    tutorialTimer = 0;
-                    doctorTextField.text = $"{tutorialTexts[textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
-                }
-
-            }
-            if (currentPopUp != null)
-            {
-                if (currentPopUp.GetComponent<PopUp>().RadialBarImage.fillAmount >= 1)
-                {
-                    Destroy(currentPopUp);
-                    Destroy(currentPatient.GetComponent<Patient>().CurrentParticles);
-                    currentPopUp = null;
-                    player.GetComponent<Animator>().SetBool("isTreating", false);
-                    NextDirectionIndex();
-                    currentPatient.GetComponent<Patient>().CurrentHP = 100;
-                    tutorialTimer = 0;
-                }
-            }
+            InterActWithPatient();
         }
         //great you did it
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 14)
@@ -350,90 +302,12 @@ public class TutorialManager : MonoBehaviour
         //release patient
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 15)
         {
-            if (currentPatient != null)
-            {
-                currentPatient.GetComponent<Patient>().CurrentHP = 100;
-                if (currentPatient.GetComponent<Patient>().CurrentHP >= 100 && !isPopUpSpawned)
-                {
-                    SpawnReleasePopUp();
-                }
-                if (Input.GetKeyDown(KeyCode.Space) && player.IsInContact && releaseBool)
-                {
-                    Destroy(currentPopUp);
-                    currentPopUp = null;
-                    player.IsInContact = false;
-                    currentPatient.GetComponent<Patient>().HealthBarCanvas.gameObject.SetActive(false);
-                    currentPatient.GetComponent<Patient>().PopUpCanvas.gameObject.SetActive(false);
-                    currentPatient.GetComponent<Animator>().SetBool("isWalking", true);
-                    currentPatient.transform.position = currentPatient.GetComponent<Patient>().LeaveHospital.position;
-                    currentPatient.GetComponent<Patient>().IsReleasing = true;
-                    currentPatient = null;
-                    releaseBool = false;
-                    gameTime.TimeInHours = 17;
-                    gameTime.RealTime = 0;
-                    timerBool = true;
-                    NextDirectionIndex();
-                }
-                if (currentPopUp == null)
-                {
-                    isPopUpSpawned = false;
-                }
-            }
-
+            ReleasePatient();
         }
         //Lets go to computer
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 16)
         {
-            if (!laptopPopUpSpawned)
-            {
-                laptopPopUpSpawned = true;
-                currentPopUp = Instantiate(laptopPopUpPrefab, laptopPopUpPos);
-                Vector3 lookDir = Camera.main.transform.forward;
-                currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
-            }
-            if (currentPopUp == null)
-            {
-                laptopPopUpSpawned = false;
-            }
-            if (player.IsAtPc)
-            {
-                Destroy(currentPopUp);
-                doctor.transform.position = doctorDocPos.position;
-                doctor.transform.rotation = doctorDocPos.rotation;
-                player.GetComponent<NewPlayerMovement>().enabled = false;
-                documentationBubbleCanvas.gameObject.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.Return))
-                {
-                    if (laptop.GetComponent<Computer>().ClipBoardCanvas.GetComponentInChildren<TMP_Text>().text == laptop.GetComponent<Computer>().Canvas.GetComponentInChildren<TMP_InputField>().text)
-                    {
-                        isInputCorrect = true;
-                    }
-                    Camera.main.transform.position = cameraFixedPosition.transform.position;
-                    Camera.main.transform.rotation = cameraFixedPosition.transform.rotation;
-                    doctor.transform.position = doctorLevelStartPos.position;
-                    doctor.transform.rotation = doctorLevelStartPos.rotation;
-                    player.GetComponent<NewPlayerMovement>().enabled = true;
-                    documentationBubbleCanvas.gameObject.SetActive(false);
-                    laptop.GetComponent<Computer>().ClipBoardCanvas.SetActive(false);
-                    laptop.GetComponent<Computer>().Canvas.SetActive(false);
-                    tutorialTimer = 0;
-                    if (isInputCorrect)
-                    {
-                        tutorialTimer = 0;
-                        NextDirectionIndex();
-                        stressLevel.GetComponent<Image>().fillAmount -= 0.2f;
-                        textDirectionIndex = 18;
-                    }
-                    else
-                    {
-                        stressLevel.GetComponent<Image>().fillAmount += 0.3f;
-                        textDirectionIndex = 17;
-                        tutorialTimer = 0;
-                        NextDirectionIndex();
-
-                    }
-                }
-            }
+            ComputerTask();
         }
         else if (textDirectionIndex == 18)
         {
@@ -576,7 +450,6 @@ public class TutorialManager : MonoBehaviour
             RealTime();
         }
     }
-
     void SpawnPatient()
     {
         if (textDirectionIndex == 7 && !isSpawned)
@@ -602,6 +475,146 @@ public class TutorialManager : MonoBehaviour
             }
         }
     }
+    void InterActWithPatient()
+    {
+        if (currentPopUp == null)
+        {
+            SpawnPopUp();
+        }
+        if (player.IsInContact)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    currentPopUp.GetComponent<PopUp>().IsHealing = true;
+                    player.GetComponent<Animator>().SetBool("isTreating", true);
+                    currentPatient.GetComponent<Patient>().CurrentParticles = Instantiate(currentPatient.GetComponent<Patient>().HealingParticles, currentPatient.GetComponent<Patient>().transform);
+                    ParticleSystem[] ParticleLoops = currentPatient.GetComponent<Patient>().GetComponentsInChildren<ParticleSystem>();
+                }
+            }
+            else if (!Input.GetKey(KeyCode.Space))
+            {
+                Damage(currentPatient.GetComponent<Patient>());
+                currentUIitem = itemSlot.transform.GetChild(0).gameObject;
+                Destroy(currentUIitem);
+                currentUIitem = null;
+                //Destroy(player.currentItem);
+                player.currentItem = null;
+                Destroy(currentPatient.GetComponent<Patient>().CurrentParticles);
+                Destroy(currentPopUp);
+                textDirectionIndex = 11;
+                player.IsInContact = false;
+                currentPopUp.GetComponent<PopUp>().IsHealing = false;
+                player.GetComponent<Animator>().SetBool("isTreating", false);
+                player.GetComponent<NewPlayerMovement>().enabled = true;
+                isPopUpSpawned = false;
+                tutorialTimer = 0;
+                doctorTextField.text = $"{tutorialTexts[textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+            }
+
+        }
+        if (currentPopUp != null)
+        {
+            if (currentPopUp.GetComponent<PopUp>().RadialBarImage.fillAmount >= 1)
+            {
+                Destroy(currentPopUp);
+                Destroy(currentPatient.GetComponent<Patient>().CurrentParticles);
+                currentPopUp = null;
+                player.GetComponent<Animator>().SetBool("isTreating", false);
+                NextDirectionIndex();
+                currentPatient.GetComponent<Patient>().CurrentHP = 100;
+                tutorialTimer = 0;
+            }
+        }
+    }
+    void ReleasePatient()
+    {
+        if (currentPatient != null)
+        {
+            currentPatient.GetComponent<Patient>().CurrentHP = 100;
+            if (currentPatient.GetComponent<Patient>().CurrentHP >= 100 && !isPopUpSpawned)
+            {
+                SpawnReleasePopUp();
+            }
+            if (Input.GetKeyDown(KeyCode.Space) && player.IsInContact && releaseBool)
+            {
+                Destroy(currentPopUp);
+                currentPopUp = null;
+                player.IsInContact = false;
+                currentPatient.GetComponent<Patient>().HealthBarCanvas.gameObject.SetActive(false);
+                currentPatient.GetComponent<Patient>().PopUpCanvas.gameObject.SetActive(false);
+                currentPatient.GetComponent<Animator>().SetBool("isWalking", true);
+                currentPatient.transform.position = currentPatient.GetComponent<Patient>().LeaveHospital.position;
+                currentPatient.GetComponent<Patient>().IsReleasing = true;
+                currentPatient = null;
+                releaseBool = false;
+                gameTime.TimeInHours = 17;
+                gameTime.RealTime = 0;
+                timerBool = true;
+                NextDirectionIndex();
+            }
+            if (currentPopUp == null)
+            {
+                isPopUpSpawned = false;
+            }
+        }
+    }
+    void ComputerTask()
+    {
+        if (!laptopPopUpSpawned)
+        {
+            laptopPopUpSpawned = true;
+            currentPopUp = Instantiate(laptopPopUpPrefab, laptopPopUpPos);
+            Vector3 lookDir = Camera.main.transform.forward;
+            currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
+        }
+        if (currentPopUp == null)
+        {
+            laptopPopUpSpawned = false;
+        }
+        if (player.IsAtPc)
+        {
+            Destroy(currentPopUp);
+            doctor.transform.position = doctorDocPos.position;
+            doctor.transform.rotation = doctorDocPos.rotation;
+            player.GetComponent<NewPlayerMovement>().enabled = false;
+            documentationBubbleCanvas.gameObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                if (laptop.GetComponent<Computer>().ClipBoardCanvas.GetComponentInChildren<TMP_Text>().text == laptop.GetComponent<Computer>().Canvas.GetComponentInChildren<TMP_InputField>().text)
+                {
+                    isInputCorrect = true;
+                }
+                Camera.main.transform.position = cameraFixedPosition.transform.position;
+                Camera.main.transform.rotation = cameraFixedPosition.transform.rotation;
+                doctor.transform.position = doctorLevelStartPos.position;
+                doctor.transform.rotation = doctorLevelStartPos.rotation;
+                player.GetComponent<NewPlayerMovement>().enabled = true;
+                documentationBubbleCanvas.gameObject.SetActive(false);
+                laptop.GetComponent<Computer>().ClipBoardCanvas.SetActive(false);
+                laptop.GetComponent<Computer>().Canvas.SetActive(false);
+                tutorialTimer = 0;
+                if (isInputCorrect)
+                {
+                    tutorialTimer = 0;
+                    stressLevel.GetComponent<Image>().fillAmount -= 0.2f;
+                    textDirectionIndex = 18;
+                    SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerSuccess, laptop.gameObject.GetComponent<AudioSource>());
+                    NextDirectionIndex();
+                }
+                else
+                {
+                    stressLevel.GetComponent<Image>().fillAmount += 0.3f;
+                    textDirectionIndex = 17;
+                    tutorialTimer = 0;
+                    SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerFail, laptop.gameObject.GetComponent<AudioSource>());
+                    NextDirectionIndex();
+                }
+            }
+        }
+    }
+
     void NextDirectionIndex()
     {
         doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
