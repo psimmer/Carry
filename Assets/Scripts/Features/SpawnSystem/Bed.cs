@@ -76,8 +76,7 @@ public class Bed : MonoBehaviour
                 whiteboardPos.position.z - whiteboardPos.localScale.z
                 );
 
-            if (isVerticalWhiteboard)
-                currentPatient.HealthBarCanvas.localPosition += new Vector3(0, 0, 0.07f);
+            currentPatient.HealthBarCanvas.localPosition += new Vector3(0, 0, 0.085f);
 
 
             Vector3 popUpPos = popUpPosTransform.position;
