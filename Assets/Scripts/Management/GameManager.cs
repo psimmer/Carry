@@ -141,6 +141,9 @@ public class GameManager : MonoBehaviour
             //Success, right treatment
             else if (Input.GetKeyDown(KeyCode.Space) && patient.CurrentIllness == player.currentItem.item.task)
             {
+                if (patient.CurrentPopUp == null) // possible fix for animation bug 
+                    return;
+
                 playerAnimator.SetBool("isTreating", true);
                 patient.CurrentParticles = Instantiate(patient.HealingParticles, patient.transform);
                 ParticleSystem[] ParticleLoops = patient.GetComponentsInChildren<ParticleSystem>();
