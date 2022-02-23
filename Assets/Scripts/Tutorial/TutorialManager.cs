@@ -82,62 +82,39 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if(currentUIitem != null)
-            Destroy(currentUIitem);
+        DropItem();
 
-            Debug.Log(player.currentItem);
-        }
-
-        if(currentPatient != null)
-            if (currentPatient.GetComponent<Patient>().CurrentHP < 30)
-                currentPatient.GetComponent<Patient>().CurrentHP = 60;
+        DontLetThePatientDie();
 
         CameraMovement();
-        if (currentPatient != null)
-        {
-            currentPatient.GetComponent<Patient>().TimeTillPopUp = 1000000;
-        }
+
+        DontSpawnPatientsPopUp();
+
+        //DeveloperTestFunction();
+
+        MovePatientInBed();
+
+        player.Interact();
+
+        RealOrDoubleTimeCondition();
+
+        SpawnPatient();
+
+        ResetTime();
+
+        CameraPositionReset();
+
+        tutorialTimer += Time.deltaTime;
+        
+        TutorialLoop();
+    }
+
+    void DeveloperTestFunction()
+    {
         if (Input.GetKeyDown(KeyCode.P))
         {
             doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
         }
-        MovePatientInBed();
-        player.Interact();
-        if (!timerBool)
-        {
-            gameTime.DoubledRealTime();
-        }
-        else
-        {
-            RealTime();
-        }
-        if (textDirectionIndex == 7 && !isSpawned)
-        {
-            isSpawned = true;
-            currentPatient = Instantiate(patientTutorialPrefab);
-            currentPatient.transform.position = patientSpawnPoint.position;
-            currentPatient.transform.eulerAngles = new Vector3(0, 90, 0);
-        }
-        if (gameTime.TimeInHours == 18)
-        {
-            gameTime.TimeInHours = 17;
-        }
-        if (player.IsAtPc && tutorialTexts[textDirectionIndex].NumberOfExecution != 16)
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                Camera.main.transform.position = cameraFixedPosition.transform.position;
-                Camera.main.transform.rotation = cameraFixedPosition.transform.rotation;
-                laptop.GetComponent<Computer>().ClipBoardCanvas.SetActive(false);
-                laptop.GetComponent<Computer>().Canvas.SetActive(false);
-                player.GetComponent<NewPlayerMovement>().enabled = true;
-                player.IsAtPc = false;
-            }
-        }
-        tutorialTimer += Time.deltaTime;
-        TutorialLoop();
     }
 
     private void MovePatientInBed()
@@ -189,7 +166,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (textDirectionIndex <= 2)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 tutorialTimer = 0;
             }
         }
@@ -199,8 +176,8 @@ public class TutorialManager : MonoBehaviour
             CheckListMovement();
             if (IsWPressed && IsAPressed && IsSPressed && IsDPressed)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
-                IsDPressed = false;
+                NextDirectionIndex();
+                 IsDPressed = false;
                 IsWPressed = false;
             }
         }
@@ -210,7 +187,7 @@ public class TutorialManager : MonoBehaviour
             CheckForInteractionInput();
             if (IsSpacePressed)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 IsSpacePressed = false;
             }
         }
@@ -219,7 +196,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (player.currentItem != null && !playerGrabItem)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 playerGrabItem = true;
                 tutorialTimer = 0;
             }
@@ -232,7 +209,7 @@ public class TutorialManager : MonoBehaviour
                 playerdroppedItem = true;
                 player.currentItem = null;
                 tutorialTimer = 0;
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
             }
         }
         //Great
@@ -240,7 +217,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (tutorialTimer >= 3)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 tutorialTimer = 0;
             }
         }
@@ -249,7 +226,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (tutorialTimer >= 5)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 tutorialTimer = 0;
             }
         }
@@ -258,7 +235,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (currentPatient.GetComponent<Patient>().IsInBed && !isLayingInBed)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 isLayingInBed = true;
                 tutorialTimer = 0;
             }
@@ -268,7 +245,7 @@ public class TutorialManager : MonoBehaviour
         {
             if ((int)tutorialTimer >= 2)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 tutorialTimer = 0;
             }
         }
@@ -281,7 +258,7 @@ public class TutorialManager : MonoBehaviour
             }
             if ((int)tutorialTimer >= 2)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 isPopUpSpawned = true;
                 tutorialTimer = 0;
             }
@@ -289,7 +266,7 @@ public class TutorialManager : MonoBehaviour
         //grab the correct item
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 12)
         {
-            if(currentPopUp == null)
+            if (currentPopUp == null)
             {
                 SpawnPopUp();
             }
@@ -301,7 +278,7 @@ public class TutorialManager : MonoBehaviour
                         currentUIitem = Instantiate(bandage.item.UI_prefab, itemSlot.transform);
                     Debug.Log(player.currentItem);
                     //currentUIitem = Instantiate(bandage.item.UI_prefab, itemSlot.transform);
-                    doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                    NextDirectionIndex();
                     player.IsInContact = false;
                 }
             }
@@ -344,7 +321,7 @@ public class TutorialManager : MonoBehaviour
                     tutorialTimer = 0;
                     doctorTextField.text = $"{tutorialTexts[textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 }
-                
+
             }
             if (currentPopUp != null)
             {
@@ -354,7 +331,7 @@ public class TutorialManager : MonoBehaviour
                     Destroy(currentPatient.GetComponent<Patient>().CurrentParticles);
                     currentPopUp = null;
                     player.GetComponent<Animator>().SetBool("isTreating", false);
-                    doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                    NextDirectionIndex();
                     currentPatient.GetComponent<Patient>().CurrentHP = 100;
                     tutorialTimer = 0;
                 }
@@ -365,7 +342,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (tutorialTimer >= 3)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 isPopUpSpawned = false;
                 tutorialTimer = 0;
             }
@@ -395,9 +372,9 @@ public class TutorialManager : MonoBehaviour
                     gameTime.TimeInHours = 17;
                     gameTime.RealTime = 0;
                     timerBool = true;
-                    doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                    NextDirectionIndex();
                 }
-                if(currentPopUp == null)
+                if (currentPopUp == null)
                 {
                     isPopUpSpawned = false;
                 }
@@ -414,7 +391,7 @@ public class TutorialManager : MonoBehaviour
                 Vector3 lookDir = Camera.main.transform.forward;
                 currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
             }
-            if(currentPopUp == null)
+            if (currentPopUp == null)
             {
                 laptopPopUpSpawned = false;
             }
@@ -443,7 +420,7 @@ public class TutorialManager : MonoBehaviour
                     if (isInputCorrect)
                     {
                         tutorialTimer = 0;
-                        doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                        NextDirectionIndex();
                         stressLevel.GetComponent<Image>().fillAmount -= 0.2f;
                         textDirectionIndex = 18;
                     }
@@ -452,7 +429,8 @@ public class TutorialManager : MonoBehaviour
                         stressLevel.GetComponent<Image>().fillAmount += 0.3f;
                         textDirectionIndex = 17;
                         tutorialTimer = 0;
-                        doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                        NextDirectionIndex();
+
                     }
                 }
             }
@@ -461,7 +439,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (tutorialTimer >= 5)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 tutorialTimer = 0;
             }
 
@@ -471,7 +449,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (tutorialTimer >= 5)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 tutorialTimer = 0;
             }
         }
@@ -480,7 +458,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (tutorialTimer >= 6)
             {
-                doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+                NextDirectionIndex();
                 tutorialTimer = 0;
             }
         }
@@ -557,7 +535,77 @@ public class TutorialManager : MonoBehaviour
             freeCamImage.gameObject.SetActive(true);
         }
     }
+    void ResetTime()
+    {
+        if (gameTime.TimeInHours == 18)
+        {
+            gameTime.TimeInHours = 17;
+        }
+    }
+    void DropItem()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (currentUIitem != null)
+                Destroy(currentUIitem);
+        }
+    }
 
+    void DontLetThePatientDie()
+    {
+        if (currentPatient != null)
+            if (currentPatient.GetComponent<Patient>().CurrentHP < 30)
+                currentPatient.GetComponent<Patient>().CurrentHP = 60;
+    }
+
+    void DontSpawnPatientsPopUp()
+    {
+        if (currentPatient != null)
+        {
+            currentPatient.GetComponent<Patient>().TimeTillPopUp = 1000000;
+        }
+    }
+    void RealOrDoubleTimeCondition()
+    {
+        if (!timerBool)
+        {
+            gameTime.DoubledRealTime();
+        }
+        else
+        {
+            RealTime();
+        }
+    }
+
+    void SpawnPatient()
+    {
+        if (textDirectionIndex == 7 && !isSpawned)
+        {
+            isSpawned = true;
+            currentPatient = Instantiate(patientTutorialPrefab);
+            currentPatient.transform.position = patientSpawnPoint.position;
+            currentPatient.transform.eulerAngles = new Vector3(0, 90, 0);
+        }
+    }
+    void CameraPositionReset()
+    {
+        if (player.IsAtPc && tutorialTexts[textDirectionIndex].NumberOfExecution != 16)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Camera.main.transform.position = cameraFixedPosition.transform.position;
+                Camera.main.transform.rotation = cameraFixedPosition.transform.rotation;
+                laptop.GetComponent<Computer>().ClipBoardCanvas.SetActive(false);
+                laptop.GetComponent<Computer>().Canvas.SetActive(false);
+                player.GetComponent<NewPlayerMovement>().enabled = true;
+                player.IsAtPc = false;
+            }
+        }
+    }
+    void NextDirectionIndex()
+    {
+        doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
+    }
     void SpawnPopUp()
     {
         isPopUpSpawned = true;
