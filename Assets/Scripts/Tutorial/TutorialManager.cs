@@ -97,7 +97,7 @@ public class TutorialManager : MonoBehaviour
         CameraMovement();
         if (currentPatient != null)
         {
-            currentPatient.GetComponent<Patient>().TimeTillPopUp = 100;
+            currentPatient.GetComponent<Patient>().TimeTillPopUp = 1000000;
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -122,7 +122,7 @@ public class TutorialManager : MonoBehaviour
         }
         if (gameTime.TimeInHours == 18)
         {
-            SceneManager.LoadScene(0);
+            gameTime.TimeInHours = 17;
         }
         if (player.IsAtPc && tutorialTexts[textDirectionIndex].NumberOfExecution != 16)
         {
@@ -289,6 +289,10 @@ public class TutorialManager : MonoBehaviour
         //grab the correct item
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 12)
         {
+            if(currentPopUp == null)
+            {
+                SpawnPopUp();
+            }
             if (player.currentItem != null)
             {
                 if (player.currentItem.item.task == TaskType.Bandages)
@@ -301,14 +305,14 @@ public class TutorialManager : MonoBehaviour
                     player.IsInContact = false;
                 }
             }
-            if(currentPopUp == null)
-            {
-                SpawnPopUp();
-            }
         }
         //Interact with the patient to heal him and hold space
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 13)
         {
+            if (currentPopUp == null)
+            {
+                SpawnPopUp();
+            }
             if (player.IsInContact)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -340,6 +344,7 @@ public class TutorialManager : MonoBehaviour
                     tutorialTimer = 0;
                     doctorTextField.text = $"{tutorialTexts[textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 }
+                
             }
             if (currentPopUp != null)
             {
@@ -370,14 +375,10 @@ public class TutorialManager : MonoBehaviour
         {
             if (currentPatient != null)
             {
+                currentPatient.GetComponent<Patient>().CurrentHP = 100;
                 if (currentPatient.GetComponent<Patient>().CurrentHP >= 100 && !isPopUpSpawned)
                 {
-                    isPopUpSpawned = true;
-                    currentPopUp = Instantiate(releasePopUpPrefab, currentPatient.GetComponent<Patient>().PopUpCanvas);
-                    currentPopUp.transform.position = popUpPos.position;
-                    Vector3 lookDir = Camera.main.transform.forward;
-                    currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
-                    player.IsInContact = false;
+                    SpawnReleasePopUp();
                 }
                 if (Input.GetKeyDown(KeyCode.Space) && player.IsInContact && releaseBool)
                 {
@@ -396,7 +397,12 @@ public class TutorialManager : MonoBehaviour
                     timerBool = true;
                     doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
                 }
+                if(currentPopUp == null)
+                {
+                    isPopUpSpawned = false;
+                }
             }
+
         }
         //Lets go to computer
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 16)
@@ -408,7 +414,10 @@ public class TutorialManager : MonoBehaviour
                 Vector3 lookDir = Camera.main.transform.forward;
                 currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
             }
-
+            if(currentPopUp == null)
+            {
+                laptopPopUpSpawned = false;
+            }
             if (player.IsAtPc)
             {
                 Destroy(currentPopUp);
@@ -557,6 +566,15 @@ public class TutorialManager : MonoBehaviour
         currentPopUp.transform.position = popUpPos.position;
         Vector3 lookDir = Camera.main.transform.forward;
         currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
+    }
+    void SpawnReleasePopUp()
+    {
+        isPopUpSpawned = true;
+        currentPopUp = Instantiate(releasePopUpPrefab, currentPatient.GetComponent<Patient>().PopUpCanvas);
+        currentPopUp.transform.position = popUpPos.position;
+        Vector3 lookDir = Camera.main.transform.forward;
+        currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
+        player.IsInContact = false;
     }
 }
 
