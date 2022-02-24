@@ -86,7 +86,7 @@ public class Player : MonoBehaviour, ISaveSystem
                 }
                 if (obj.GetComponent<Computer>())
                 {
-                    //e_OnDocumentationStart?.Invoke(false);
+                    e_OnDocumentationStart?.Invoke(false);
                     InteractWithLaptop(obj.GetComponent<Computer>());
                 }
                 if (obj.CompareTag("CoffeeMachine"))

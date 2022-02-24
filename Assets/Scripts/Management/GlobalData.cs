@@ -31,7 +31,7 @@ public class GlobalData : MonoBehaviour, ISaveSystem
     private bool isSaveFileLoaded;
     public bool IsSaveFileLoaded { get { return isSaveFileLoaded; } set { isSaveFileLoaded = value; } }
 
-    private int currentLevel = 1;
+    [SerializeField] private int currentLevel = 1;
     public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
     private float currentStressLvl;
     public float CurrentStressLvl { get { return currentStressLvl; } set { currentStressLvl = value; } }

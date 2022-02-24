@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Timer dayTime;
     [SerializeField] float documentationReward;
     [SerializeField] GameObject items;
+    [SerializeField] List<Outline> outlineList;
     #endregion
 
     private void Start()
@@ -105,6 +107,11 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F3))
         {
             player.CurrentStressLvl = 0f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            dayTime.TimeInHours++;
         }
     }
 
@@ -321,14 +328,14 @@ public class GameManager : MonoBehaviour
                     //Success
                     SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerSuccess, computer.gameObject.GetComponent<AudioSource>());
                     player.GetComponent<Player>().CurrentStressLvl -= documentationReward;
-                    //SetItemOutlines(true);
+                    SetItemOutlines(true);
                 }
                 else
                 {
                     //Failed
                     SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerFail, computer.gameObject.GetComponent<AudioSource>());
                     player.GetComponent<Player>().CurrentStressLvl += documentationReward;
-                    //SetItemOutlines(true);
+                    SetItemOutlines(true);
 
                 }
 
@@ -339,12 +346,11 @@ public class GameManager : MonoBehaviour
 
     private void SetItemOutlines(bool enableOutline)
     {
-        Outline[] outlineArray = new Outline[10];
-        outlineArray = items.GetComponentsInChildren<Outline>();
-        for (int i = 0; i < outlineArray.Length; i++)
+
+        for (int i = 0; i < outlineList.Count; i++)
         {
-            if (outlineArray[i] != null)
-                outlineArray[i].gameObject.GetComponent<Outline>().enabled = enableOutline;
+            if (outlineList[i] != null)
+                outlineList[i].gameObject.GetComponent<Outline>().enabled = enableOutline;
         }
     }
     /// <summary>
