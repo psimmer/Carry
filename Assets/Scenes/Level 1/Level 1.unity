@@ -19630,6 +19630,7 @@ MonoBehaviour:
   lastPoint: {fileID: 721536810}
   camImageUnfixed: {fileID: 1664348864}
   camImageFixed: {fileID: 901295142}
+  cameraOverviewPoint: {fileID: 721536810}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
