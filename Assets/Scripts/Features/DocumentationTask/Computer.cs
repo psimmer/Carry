@@ -27,6 +27,8 @@ public class Computer : MonoBehaviour, ISaveSystem
     bool oneTimeBool = true;
     GameObject currentPopUp;
     public GameObject CurrentPopUp { get { return currentPopUp; } set { currentPopUp = value; } }
+    bool canDoComputerThing = true;
+    public bool CanDoComputerThing => canDoComputerThing;
     private void Awake()
     {
         canvas.gameObject.SetActive(false);
@@ -55,6 +57,7 @@ public class Computer : MonoBehaviour, ISaveSystem
         Camera.main.transform.position = documentationCamPos.position;
         canvas.gameObject.SetActive(true);
         ClipBoardCanvas.gameObject.SetActive(true);
+        canDoComputerThing = false;
     }
     public void SpawnPopUpDocumentation()
     {
