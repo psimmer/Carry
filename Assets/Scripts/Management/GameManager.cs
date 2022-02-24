@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //for testing in the build
-        SkipLevel();
+        Godmode();
 
 
         //player Methods
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// with 'F2' you can skip to the next level and 'F1' go back one level. for testing in the build
     /// </summary>
-    private void SkipLevel()
+    private void Godmode()
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
@@ -101,6 +101,10 @@ public class GameManager : MonoBehaviour
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             Destroy(GameObject.Find("DontDestroyOnLoad"));
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            player.CurrentStressLvl = 0f;
         }
     }
 
