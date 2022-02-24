@@ -133,6 +133,8 @@ public class UIManager : MonoBehaviour, ISaveSystem
     {
         SoundManager.instance.PlayAudioClip(ESoundeffects.Button, stressLvlBar.gameObject.GetComponent<AudioSource>());
         pauseElements.SetActive(false);
+        playButton.gameObject.SetActive(false);
+        pauseButton.gameObject.SetActive(true);
         Time.timeScale = 1f;
         LevelMusic.Play();
 
