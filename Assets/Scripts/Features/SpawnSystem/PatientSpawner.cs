@@ -29,6 +29,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
     [Tooltip("range for the random HP that the patient spawns with (minimum")]
     [SerializeField] private int maxCurrentHp;
 
+    [SerializeField] Transform cameraOverViewPoint;
     [SerializeField] List<GameObject> differentPatients;
     [SerializeField] List<GameObject> patientList;
     public List<GameObject> PatientList { get { return patientList; } set { patientList = value; } }
@@ -40,6 +41,10 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
     //timer 
     float spawnTimer;
     float randomTime;
+    private void Awake()
+    {
+        cameraOverViewPoint = GameObject.Find("CameraStartPosition").transform;
+    }
     #endregion
     private void Start()
     {
@@ -85,6 +90,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 int differentPatientsIndex = Random.Range(0, differentPatients.Count);
                 GameObject newPatient = Instantiate(differentPatients[differentPatientsIndex], randomSpawn);
                 patientList.Add(newPatient);
+                newPatient.GetComponent<Patient>().HealthBarCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
                 newPatient.GetComponent<Patient>().MaxTaskIndex = maxTaskIndex;
                 newPatient.GetComponent<Patient>().DifferentPatientsIndex = differentPatientsIndex;
                 newPatient.GetComponent<Patient>().CurrentIllness = TaskType.AssignBed;
@@ -95,6 +101,7 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 newPatient.GetComponent<Patient>().CurrentHP = Random.Range(minCurrentHp, maxCurrentHp);
                 newPatient.GetComponent<Patient>().PatientIdleDamage = patientIdleDamage;
                 newPatient.GetComponent<Patient>().IdleDeathStressDmg = idleDeathStressDmg;
+
             }
         }
     }

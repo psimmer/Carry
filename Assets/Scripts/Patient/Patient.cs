@@ -108,18 +108,22 @@ public class Patient : MonoBehaviour
     public GameObject CurrentParticles { get { return currentParticles; } set { currentParticles = value; } }
     public static event Action<float> e_onPatientIdleDeath;
     public static event Action<Patient> e_deletePatientFromList;
+    [SerializeField] Transform cameraOverViewPoint;
+    public Transform CameraOverviewPoint => cameraOverViewPoint;
 
 
     #endregion
 
     private void Awake()
     {
+        cameraOverViewPoint = GameObject.Find("CameraStartPosition").transform;
         if (isLayingSinceStart)
         {
             GetComponent<Animator>().SetBool("isLaying", true);
         }
         leaveHospital = GameObject.Find("LeaveHospitalPoint").transform;
         destroyPosition = GameObject.Find("DestoyPos").transform;
+
     }
     void Start()
     {

@@ -11,11 +11,13 @@ public class Healthbar : MonoBehaviour
     [SerializeField] Image heartbeatImage;
     [SerializeField] float heartbeatLerpSpeed;
     float heartBeatTValue = 0;
+    Transform cameraOverViewPoint;
 
     private void Start()
     {
+        cameraOverViewPoint = GameObject.Find("CameraStartPosition").transform;
+
         healthbar = GetComponent<Slider>();
-        Vector3 lookDir;
 
 
         if (GetComponentInParent<Patient>() != null && GetComponentInParent<Patient>().IsInBed)
@@ -24,8 +26,7 @@ public class Healthbar : MonoBehaviour
         }
         else
         {
-            lookDir = Camera.main.transform.forward;
-            transform.parent.LookAt(transform.parent.position + lookDir);
+            transform.parent.LookAt(transform.parent.position + cameraOverViewPoint.position);
         }
 
     }
