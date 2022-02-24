@@ -1391,6 +1391,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8696312524144752453, guid: 21bbebeb6bd906f41a22af3f36db6ef2, type: 3}
+      propertyPath: currentLevel
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21bbebeb6bd906f41a22af3f36db6ef2, type: 3}
 --- !u!4 &292498775 stripped
@@ -1624,6 +1628,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5024520174531221999, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
   m_PrefabInstance: {fileID: 60450627}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &343859986 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8532349878868869186, guid: 026bbb898b925f54b9fc6523b72e5933, type: 3}
+  m_PrefabInstance: {fileID: 320806976}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &347704033
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4321,6 +4336,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eba6de21bad6835458bcccf1009cc31a, type: 3}
+--- !u!114 &855762756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7659538458434368925, guid: 84b909233f8e89840a0080f161f49f01, type: 3}
+  m_PrefabInstance: {fileID: 476687559}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &866663344
 GameObject:
   m_ObjectHideFlags: 0
@@ -5904,6 +5930,17 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1227451071 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8365233802539867040, guid: a4f9e73e7fc5e7a418b32f2c60c0abde, type: 3}
+  m_PrefabInstance: {fileID: 2003400363}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1232591587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6338,6 +6375,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63239e3a98a9c70448416bb136794339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1418041483 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6425479042761529898, guid: ca776a8d2e8b5954ea38004ec37ffa19, type: 3}
+  m_PrefabInstance: {fileID: 1253920830}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1418162023 stripped
@@ -8796,6 +8844,17 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1977532874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2528061458409624889, guid: 3147ec5b3ec82c544a57d3a790e5eb1d, type: 3}
+  m_PrefabInstance: {fileID: 846046480}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1981095056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9917,6 +9976,30 @@ PrefabInstance:
       propertyPath: documentationReward
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
+      propertyPath: outlineList.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
+      propertyPath: outlineList.Array.data[0]
+      value: 
+      objectReference: {fileID: 855762756}
+    - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
+      propertyPath: outlineList.Array.data[1]
+      value: 
+      objectReference: {fileID: 1418041483}
+    - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
+      propertyPath: outlineList.Array.data[2]
+      value: 
+      objectReference: {fileID: 1977532874}
+    - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
+      propertyPath: outlineList.Array.data[3]
+      value: 
+      objectReference: {fileID: 343859986}
+    - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
+      propertyPath: outlineList.Array.data[4]
+      value: 
+      objectReference: {fileID: 1227451071}
     - target: {fileID: 5061466822453182137, guid: b2f0e2394c483e34d83868c911786afb, type: 3}
       propertyPath: stressReductionMultiplier
       value: 0.45
