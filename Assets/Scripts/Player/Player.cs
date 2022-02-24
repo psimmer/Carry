@@ -100,7 +100,7 @@ public class Player : MonoBehaviour, ISaveSystem
 
     private void InteractWithLaptop(Computer obj)
     {
-        if (16 > gameTime.TimeInHours)
+        if (16 > gameTime.TimeInHours || obj.CanDoComputerThing == false)
             return;
 
         animator.SetBool("isWalking", false);
