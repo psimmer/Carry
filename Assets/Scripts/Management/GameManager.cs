@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
     public void Treatment(Patient patient)
     {
 
-        if (player.IsInContact && patient != null && patient.IsInBed) // the patient.isinbed fixed the issue with the null reference
+        if (player.IsInContact && patient != null && patient.IsInBed && !patient.IsReleasing) // the patient.isinbed fixed the issue with the null reference
         {
             if (patient.CurrentIllness == TaskType.RelocateAPatient && patient.CurrentPopUp != null)
             {

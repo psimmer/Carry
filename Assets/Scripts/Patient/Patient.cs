@@ -280,7 +280,7 @@ public class Patient : MonoBehaviour
     /// </summary>
     private void TakeDamageByTime()
     {
-        if (losingHpTimer >= 5)
+        if (losingHpTimer >= 5 && !isReleasing)
         {
             losingHpTimer = 0;
             currentHP -= patientIdleDamage;
