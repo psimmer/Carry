@@ -20,6 +20,7 @@ public class Timer : MonoBehaviour , ISaveSystem
     private float realTime;
     public float RealTime { get { return realTime; } set { realTime = value; } }
     public static event Action e_OnLevelCompleteSaveStressLvl;
+    //public static event Action e_OnLoadingDuringDocumentationPopup;
 
     private void Start()
     {

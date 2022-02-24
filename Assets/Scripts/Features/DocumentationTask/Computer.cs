@@ -1,7 +1,9 @@
 using UnityEngine;
 using TMPro;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
-public class Computer : MonoBehaviour
+public class Computer : MonoBehaviour, ISaveSystem
 {
     [SerializeField] private GameObject clipBoardCanvas;
     public GameObject ClipBoardCanvas { get { return clipBoardCanvas; } set { clipBoardCanvas = value; } }
@@ -21,8 +23,7 @@ public class Computer : MonoBehaviour
     [SerializeField] GameObject DocumentationPopUp;
     [SerializeField] Transform popUpPos;
     [SerializeField] Timer gameTime;
-    //float timer;
-    //public float Timer { get { return timer; } }
+
     bool oneTimeBool = true;
     GameObject currentPopUp;
     public GameObject CurrentPopUp { get { return currentPopUp; } set { currentPopUp = value; } }
@@ -30,7 +31,12 @@ public class Computer : MonoBehaviour
     {
         canvas.gameObject.SetActive(false);
         ClipBoardCanvas.gameObject.SetActive(false);
+    }
 
+    private void Start()
+    {
+        if (GlobalData.instance.IsSaveFileLoaded)
+            LoadData();
     }
 
     private void Update()
@@ -59,4 +65,30 @@ public class Computer : MonoBehaviour
 
     }
 
+
+    public void SaveData()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        string path = Application.persistentDataPath + "/SaveDataComputer.carry";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, oneTimeBool);
+
+        stream.Close();
+    }
+
+    public void LoadData()
+    {
+        string path = Application.persistentDataPath + "/SaveDataComputer.carry";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            oneTimeBool = (bool)formatter.Deserialize(stream);
+            stream.Close();
+
+        }
+    }
 }
