@@ -306,6 +306,7 @@ public class TutorialManager : MonoBehaviour
         else if (tutorialTexts[textDirectionIndex].NumberOfExecution == 16)
         {
             ComputerTask();
+            tutorialTimer = 0;
         }
         else if (textDirectionIndex == 18)
         {

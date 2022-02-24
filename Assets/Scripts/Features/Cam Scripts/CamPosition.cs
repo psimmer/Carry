@@ -12,6 +12,9 @@ public class CamPosition : MonoBehaviour
     [SerializeField] public Transform lastPoint;
     [SerializeField] private GameObject camImageUnfixed;
     [SerializeField] private GameObject camImageFixed;
+    [SerializeField] Transform cameraOverviewPoint;
+    public Transform CameraOverview => cameraOverviewPoint;
+
     Quaternion cameraRotation;
     public Quaternion CameraRotation => cameraRotation;
     private float interpolation;
