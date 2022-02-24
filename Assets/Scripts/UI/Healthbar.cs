@@ -27,6 +27,8 @@ public class Healthbar : MonoBehaviour
         else
         {
             transform.parent.LookAt(transform.parent.position + cameraOverViewPoint.position);
+            transform.parent.localRotation = Quaternion.Euler(transform.parent.eulerAngles.x, 0, 180);
+            transform.parent.localPosition += new Vector3(0, -1.05f, 0);
         }
 
     }
