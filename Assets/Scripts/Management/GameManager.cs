@@ -337,14 +337,14 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    private void SetItemOutlines(bool active)
+    private void SetItemOutlines(bool enableOutline)
     {
         Outline[] outlineArray = new Outline[10];
         outlineArray = items.GetComponentsInChildren<Outline>();
         for (int i = 0; i < outlineArray.Length; i++)
         {
             if (outlineArray[i] != null)
-                outlineArray[i].gameObject.GetComponent<Outline>().enabled = active;
+                outlineArray[i].gameObject.GetComponent<Outline>().enabled = enableOutline;
         }
     }
     /// <summary>
