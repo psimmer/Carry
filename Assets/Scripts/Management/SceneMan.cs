@@ -44,7 +44,7 @@ public class SceneMan : MonoBehaviour
             StartGame();
             return;
         }
-
+        Time.timeScale = 1f;
         SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.IsSaveFileLoaded = true;
         GlobalData.instance.LoadData();
