@@ -42,12 +42,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DayCycle dayCycle;
     [SerializeField] private Timer dayTime;
     [SerializeField] float documentationReward;
+    [SerializeField] GameObject items;
     #endregion
 
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == "Level 4")
             StartCoroutine(DecreaseStressReductionMultiplier());
+        Player.e_OnDocumentationStart += SetItemOutlines;
     }
     void Update()
     {
@@ -313,12 +315,15 @@ public class GameManager : MonoBehaviour
                     //Success
                     SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerSuccess, computer.gameObject.GetComponent<AudioSource>());
                     player.GetComponent<Player>().CurrentStressLvl -= documentationReward;
+                    //SetItemOutlines(true);
                 }
                 else
                 {
                     //Failed
                     SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerFail, computer.gameObject.GetComponent<AudioSource>());
                     player.GetComponent<Player>().CurrentStressLvl += documentationReward;
+                    //SetItemOutlines(true);
+
                 }
 
             }
@@ -326,6 +331,16 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    private void SetItemOutlines(bool active)
+    {
+        Outline[] outlineArray = new Outline[10];
+        outlineArray = items.GetComponentsInChildren<Outline>();
+        for (int i = 0; i < outlineArray.Length; i++)
+        {
+            if (outlineArray[i] != null)
+                outlineArray[i].gameObject.GetComponent<Outline>().enabled = active;
+        }
+    }
     /// <summary>
     /// When the max stresslevel is reached, the player loses the game
     /// </summary>

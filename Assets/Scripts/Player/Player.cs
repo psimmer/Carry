@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -30,6 +31,8 @@ public class Player : MonoBehaviour, ISaveSystem
     [SerializeField] private Vector3 boxSize = Vector3.one;
     [SerializeField] private Animator animator;
     [SerializeField] Timer gameTime;
+    public static event Action<bool> e_OnDocumentationStart;
+
     public Vector3 boxPos;
     bool isOutside;
 
@@ -83,6 +86,7 @@ public class Player : MonoBehaviour, ISaveSystem
                 }
                 if (obj.GetComponent<Computer>())
                 {
+                    //e_OnDocumentationStart?.Invoke(false);
                     InteractWithLaptop(obj.GetComponent<Computer>());
                 }
                 if (obj.CompareTag("CoffeeMachine"))

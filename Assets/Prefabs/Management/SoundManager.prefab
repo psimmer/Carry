@@ -91,7 +91,7 @@ MonoBehaviour:
     clipSound: {fileID: 8300000, guid: ce49ee316f57da54580bea5e6d833e8d, type: 3}
     offset: 0
     soundTimer: 0
-    soundVolume: 0.01
+    soundVolume: 0.3
     isStackable: 0
   - name: NewPatientArrived
     typeOfSound: 7
@@ -126,7 +126,7 @@ MonoBehaviour:
     clipSound: {fileID: 8300000, guid: 6128f977deb75fa49802a7bf2fd2f86f, type: 3}
     offset: 0
     soundTimer: 0
-    soundVolume: 1
+    soundVolume: 0.3
     isStackable: 1
   - name: ComputerSuccess
     typeOfSound: 12

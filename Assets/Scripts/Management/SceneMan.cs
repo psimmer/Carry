@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,7 +28,7 @@ public class SceneMan : MonoBehaviour
     public void SaveAndQuit()
     {
         //searches all scripts after the interface and executes the method (so everything gets saved)
-        foreach(var saveMethod in FindObjectsOfType<MonoBehaviour>().OfType<ISaveSystem>())
+        foreach (var saveMethod in FindObjectsOfType<MonoBehaviour>().OfType<ISaveSystem>())
         {
             saveMethod.SaveData();
         }
@@ -37,7 +38,13 @@ public class SceneMan : MonoBehaviour
 
     public void LoadSaveFile()
     {
-        Time.timeScale = 1f;
+        string path = Application.persistentDataPath + "/SaveDataTimer.carry";
+        if (!File.Exists(path))
+        {
+            StartGame();
+            return;
+        }
+
         SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.IsSaveFileLoaded = true;
         GlobalData.instance.LoadData();
@@ -89,5 +96,5 @@ public class SceneMan : MonoBehaviour
         Application.Quit();
     }
 
- 
+
 }
