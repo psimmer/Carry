@@ -58,6 +58,7 @@ public class Computer : MonoBehaviour, ISaveSystem
         canvas.gameObject.SetActive(true);
         ClipBoardCanvas.gameObject.SetActive(true);
         canDoComputerThing = false;
+        inputField.Select();
     }
     public void SpawnPopUpDocumentation()
     {

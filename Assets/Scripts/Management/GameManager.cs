@@ -323,7 +323,14 @@ public class GameManager : MonoBehaviour
                 Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().CameraOverview.position;
                 Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraOverview.rotation;
 
-                if (computer.HintText.text == computer.InputField.text)
+
+                // Alejandro's suggestion: we accept values that are not capitalized or without the dot at the end, the lines marked with "//flexible" are responsible for this
+                
+                //Debug.Log(computer.InputField.text.ToLower()); //flexible check
+                //Debug.Log(computer.HintText.text.ToLower());  //flexible check
+
+                //if (computer.HintText.text == computer.InputField.text) old condition (not flexible)
+                if (computer.HintText.text.ToLower().Contains(computer.InputField.text.ToLower())) //flexible
                 {
                     //Success
                     SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerSuccess, computer.gameObject.GetComponent<AudioSource>());
