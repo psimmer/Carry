@@ -81,6 +81,8 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
+        CheckThatPlayerDontDie();
+
         DropItem();
 
         DontLetThePatientDie();
@@ -89,7 +91,7 @@ public class TutorialManager : MonoBehaviour
 
         DontSpawnPatientsPopUp();
 
-        //DeveloperTestFunction();
+        DeveloperTestFunction();
 
         MovePatientInBed();
 
@@ -104,7 +106,7 @@ public class TutorialManager : MonoBehaviour
         CameraPositionReset();
 
         tutorialTimer += Time.deltaTime;
-        
+
         TutorialLoop();
     }
 
@@ -177,7 +179,7 @@ public class TutorialManager : MonoBehaviour
             if (IsWPressed && IsAPressed && IsSPressed && IsDPressed)
             {
                 NextDirectionIndex();
-                 IsDPressed = false;
+                IsDPressed = false;
                 IsWPressed = false;
             }
         }
@@ -415,12 +417,24 @@ public class TutorialManager : MonoBehaviour
             gameTime.TimeInHours = 17;
         }
     }
+    void DestroyItem()
+    {
+        if (itemSlot.transform.childCount > 0)
+        {
+            for (int i = 0; i < itemSlot.transform.childCount; i++)
+            {
+                GameObject tempObj = itemSlot.transform.GetChild(i).gameObject;
+                Destroy(tempObj);
+            }
+        }
+    }
     void DropItem()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (currentUIitem != null)
-                Destroy(currentUIitem);
+            //if (currentUIitem != null)
+            //    Destroy(currentUIitem);
+            DestroyItem();
         }
     }
 
@@ -482,6 +496,7 @@ public class TutorialManager : MonoBehaviour
         }
         if (player.IsInContact)
         {
+            DestroyItem();
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (Input.GetKey(KeyCode.Space))
@@ -495,9 +510,10 @@ public class TutorialManager : MonoBehaviour
             else if (!Input.GetKey(KeyCode.Space))
             {
                 Damage(currentPatient.GetComponent<Patient>());
-                currentUIitem = itemSlot.transform.GetChild(0).gameObject;
-                Destroy(currentUIitem);
-                currentUIitem = null;
+                stressLevel.GetComponent<Image>().fillAmount += 0.1f;
+                //currentUIitem = itemSlot.transform.GetChild(0).gameObject;
+                //Destroy(currentUIitem);
+                //currentUIitem = null;
                 //Destroy(player.currentItem);
                 player.currentItem = null;
                 Destroy(currentPatient.GetComponent<Patient>().CurrentParticles);
@@ -522,6 +538,7 @@ public class TutorialManager : MonoBehaviour
                 currentPopUp = null;
                 player.GetComponent<Animator>().SetBool("isTreating", false);
                 NextDirectionIndex();
+                stressLevel.GetComponent<Image>().fillAmount -= 0.1f;
                 currentPatient.GetComponent<Patient>().CurrentHP = 100;
                 tutorialTimer = 0;
             }
@@ -604,7 +621,11 @@ public class TutorialManager : MonoBehaviour
                 }
                 else
                 {
-                    stressLevel.GetComponent<Image>().fillAmount += 0.3f;
+                    if (stressLevel.GetComponent<Image>().fillAmount <= 0.75f)
+                    {
+                        stressLevel.GetComponent<Image>().fillAmount += 0.2f;
+
+                    }
                     textDirectionIndex = 17;
                     tutorialTimer = 0;
                     SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerFail, laptop.gameObject.GetComponent<AudioSource>());
@@ -635,6 +656,13 @@ public class TutorialManager : MonoBehaviour
         Vector3 lookDir = Camera.main.transform.forward;
         currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
         player.IsInContact = false;
+    }
+
+
+    void CheckThatPlayerDontDie()
+    {
+        if (stressLevel.GetComponent<Image>().fillAmount > 0.7f)
+            stressLevel.GetComponent<Image>().fillAmount = 0.5f;
     }
 }
 
