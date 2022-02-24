@@ -239,6 +239,7 @@ public class Patient : MonoBehaviour
                 SpawnParticles(DeathParticles, particlesDuration);
                 SoundManager.instance.PlayAudioClip(ESoundeffects.Death, GetComponent<AudioSource>());
                 GlobalData.instance.SetPatientDeadStatistics();
+                e_deletePatientFromList?.Invoke(this);
                 Destroy(this.gameObject, particlesDuration);
             }
             //setting statistics

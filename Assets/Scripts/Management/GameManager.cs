@@ -152,7 +152,6 @@ public class GameManager : MonoBehaviour
                 Damage(patient);
                 if (patient.CurrentHP <= 0)
                 {
-                    patientSpawner.PatientList.Remove(patient.gameObject);
                     Destroy(patient.gameObject, patient.ParticlesDuration);
                 }
                 player.IsInContact = false;
@@ -268,6 +267,8 @@ public class GameManager : MonoBehaviour
             patient.Treatment(-player.NoItemDamage);
             player.CurrentStressLvl += player.NoItemDamage * stressMultiplier;
         }
+        
+
 
         //damage, if you treat the patient with the wrong item
         else
