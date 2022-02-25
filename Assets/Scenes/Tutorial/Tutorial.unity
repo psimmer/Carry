@@ -5927,7 +5927,7 @@ GameObject:
   m_Component:
   - component: {fileID: 992233017}
   m_Layer: 0
-  m_Name: FixedCamPosition
+  m_Name: CameraStartPosition
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -8942,6 +8942,7 @@ MonoBehaviour:
   lastPoint: {fileID: 0}
   camImageUnfixed: {fileID: 0}
   camImageFixed: {fileID: 0}
+  cameraOverviewPoint: {fileID: 0}
 --- !u!114 &1889993034 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7659538458434368924, guid: 84b909233f8e89840a0080f161f49f01, type: 3}
