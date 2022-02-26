@@ -178,11 +178,8 @@ public class GameManager : MonoBehaviour
 
 
             //Success, right treatment
-            else if (Input.GetKeyDown(KeyCode.Space) && patient.CurrentIllness == player.currentItem.item.task)
+            else if (Input.GetKeyDown(KeyCode.Space) && patient.CurrentIllness == player.currentItem.item.task && patient.CurrentPopUp != null)
             {
-                if (patient.CurrentPopUp == null) // possible fix for animation bug 
-                    return;
-
                 playerAnimator.SetBool("isTreating", true);
                 patient.CurrentParticles = Instantiate(patient.HealingParticles, patient.transform);
                 ParticleSystem[] ParticleLoops = patient.GetComponentsInChildren<ParticleSystem>();
@@ -196,6 +193,14 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(TreatmentProgress(patient));
             }
 
+            else if(Input.GetKeyDown(KeyCode.Space) && patient.CurrentIllness == player.currentItem.item.task && patient.CurrentPopUp == null)
+            {
+                Damage(patient);
+                ResetItem();
+                if (patient.CurrentPopUp != null)
+                    Destroy(patient.CurrentPopUp);
+                player.IsInContact = false;
+            }
         }
         //assign the patient from the hallway to the bed
         else if (player.IsInContact && patient != null && !patient.IsInBed)
@@ -221,7 +226,6 @@ public class GameManager : MonoBehaviour
             {
                 if (player.currentItem != null)
                 {
-
                     //Success
                     if (patient.GetComponentInChildren<PopUp>().RadialBarImage.fillAmount >= 1)
                     {
@@ -330,7 +334,7 @@ public class GameManager : MonoBehaviour
                 //Debug.Log(computer.HintText.text.ToLower());  //flexible check
 
                 //if (computer.HintText.text == computer.InputField.text) old condition (not flexible)
-                if (computer.HintText.text.ToLower().Contains(computer.InputField.text.ToLower())) //flexible
+                if (computer.HintText.text.ToLower().Contains(computer.InputField.text.ToLower()) && computer.InputField.text.Length >= computer.HintText.text.Length - 1) //flexible
                 {
                     //Success
                     SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerSuccess, computer.gameObject.GetComponent<AudioSource>());
@@ -353,6 +357,9 @@ public class GameManager : MonoBehaviour
 
     private void SetItemOutlines(bool enableOutline)
     {
+        if (computer.OneTimeBool)
+            return;
+
 
         for (int i = 0; i < outlineList.Count; i++)
         {
