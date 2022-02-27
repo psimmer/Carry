@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] UIManager uiManager;
     [SerializeField] PatientSpawner patientSpawner;
     [SerializeField] private Animator playerAnimator;
+    [Tooltip("This is needed in level 4 only!")]
+    [SerializeField] AudioSource level4Music;
     #endregion
 
     #region Multipliers
@@ -399,6 +401,30 @@ public class GameManager : MonoBehaviour
         while(true)
         {
             stressReductionMultiplier -= 1f / 360f;
+            if(dayTime.TimeInHours == 6)
+                level4Music.pitch = 0.94f;
+            if (dayTime.TimeInHours == 7)
+                level4Music.pitch = 0.95f;
+            if (dayTime.TimeInHours == 8)
+                level4Music.pitch = 0.96f;
+            if (dayTime.TimeInHours == 9)
+                level4Music.pitch = 0.97f;
+            if (dayTime.TimeInHours == 10)
+                level4Music.pitch = 0.98f;
+            if (dayTime.TimeInHours == 11)
+                level4Music.pitch = 0.99f;
+            if (dayTime.TimeInHours == 12)
+                level4Music.pitch = 1f;
+            if (dayTime.TimeInHours == 13)
+                level4Music.pitch = 1.01f;
+            if (dayTime.TimeInHours == 14)
+                level4Music.pitch = 1.02f;
+            if (dayTime.TimeInHours == 15)
+                level4Music.pitch = 1.03f;
+            if (dayTime.TimeInHours == 16)
+                level4Music.pitch = 1.04f;
+            if (dayTime.TimeInHours == 17)
+                level4Music.pitch = 1.05f;
             yield return new WaitForSeconds(1);
         }
     }
