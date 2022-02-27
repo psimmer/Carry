@@ -1036,12 +1036,12 @@ MonoBehaviour:
     is different as well!
   - Pills require you to be quick, but they won't punish you too hard if you fail
     to bring them in time.
-  - Do you really think you can beat level 4? \n Think again
+  - Do you really think you can beat level 4? Think again
   - Every time a patient loses health, a kitten dies :'(
   - A variety of cheese, the famous Saveload cheese, was created by Carry
   - There are "itemless tasks", which you can complete without having any item in
     your inventory
-  - Just a few mistakes can make you lose control of the game. \nStay focused!
+  - Just a few mistakes can make you lose control of the game. Stay focused!
   - Carry costed a grand total of 27.35 eurs, and tons of coffee
   UIText: {fileID: 350297554}
 --- !u!114 &350297554
