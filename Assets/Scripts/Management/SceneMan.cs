@@ -17,6 +17,7 @@ public class SceneMan : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("HELLLOO");
         Time.timeScale = 1f;
         SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.ResetTotalStatistics();
