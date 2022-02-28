@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] UIManager uiManager;
     [SerializeField] PatientSpawner patientSpawner;
     [SerializeField] private Animator playerAnimator;
+    [Tooltip("This is needed in level 4 only!")]
+    [SerializeField] AudioSource level4Music;
     #endregion
 
     #region Multipliers
@@ -178,11 +180,8 @@ public class GameManager : MonoBehaviour
 
 
             //Success, right treatment
-            else if (Input.GetKeyDown(KeyCode.Space) && patient.CurrentIllness == player.currentItem.item.task)
+            else if (Input.GetKeyDown(KeyCode.Space) && patient.CurrentIllness == player.currentItem.item.task && patient.CurrentPopUp != null)
             {
-                if (patient.CurrentPopUp == null) // possible fix for animation bug 
-                    return;
-
                 playerAnimator.SetBool("isTreating", true);
                 patient.CurrentParticles = Instantiate(patient.HealingParticles, patient.transform);
                 ParticleSystem[] ParticleLoops = patient.GetComponentsInChildren<ParticleSystem>();
@@ -196,6 +195,14 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(TreatmentProgress(patient));
             }
 
+            else if(Input.GetKeyDown(KeyCode.Space) && patient.CurrentIllness == player.currentItem.item.task && patient.CurrentPopUp == null)
+            {
+                Damage(patient);
+                ResetItem();
+                if (patient.CurrentPopUp != null)
+                    Destroy(patient.CurrentPopUp);
+                player.IsInContact = false;
+            }
         }
         //assign the patient from the hallway to the bed
         else if (player.IsInContact && patient != null && !patient.IsInBed)
@@ -221,7 +228,6 @@ public class GameManager : MonoBehaviour
             {
                 if (player.currentItem != null)
                 {
-
                     //Success
                     if (patient.GetComponentInChildren<PopUp>().RadialBarImage.fillAmount >= 1)
                     {
@@ -330,7 +336,7 @@ public class GameManager : MonoBehaviour
                 //Debug.Log(computer.HintText.text.ToLower());  //flexible check
 
                 //if (computer.HintText.text == computer.InputField.text) old condition (not flexible)
-                if (computer.HintText.text.ToLower().Contains(computer.InputField.text.ToLower())) //flexible
+                if (computer.HintText.text.ToLower().Contains(computer.InputField.text.ToLower()) && computer.InputField.text.Length >= computer.HintText.text.Length - 1) //flexible
                 {
                     //Success
                     SoundManager.instance.PlayAudioClip(ESoundeffects.ComputerSuccess, computer.gameObject.GetComponent<AudioSource>());
@@ -353,6 +359,9 @@ public class GameManager : MonoBehaviour
 
     private void SetItemOutlines(bool enableOutline)
     {
+        if (computer.OneTimeBool)
+            return;
+
 
         for (int i = 0; i < outlineList.Count; i++)
         {
@@ -392,6 +401,30 @@ public class GameManager : MonoBehaviour
         while(true)
         {
             stressReductionMultiplier -= 1f / 360f;
+            if(dayTime.TimeInHours == 6)
+                level4Music.pitch = 0.94f;
+            if (dayTime.TimeInHours == 7)
+                level4Music.pitch = 0.95f;
+            if (dayTime.TimeInHours == 8)
+                level4Music.pitch = 0.96f;
+            if (dayTime.TimeInHours == 9)
+                level4Music.pitch = 0.97f;
+            if (dayTime.TimeInHours == 10)
+                level4Music.pitch = 0.98f;
+            if (dayTime.TimeInHours == 11)
+                level4Music.pitch = 0.99f;
+            if (dayTime.TimeInHours == 12)
+                level4Music.pitch = 1f;
+            if (dayTime.TimeInHours == 13)
+                level4Music.pitch = 1.01f;
+            if (dayTime.TimeInHours == 14)
+                level4Music.pitch = 1.02f;
+            if (dayTime.TimeInHours == 15)
+                level4Music.pitch = 1.03f;
+            if (dayTime.TimeInHours == 16)
+                level4Music.pitch = 1.04f;
+            if (dayTime.TimeInHours == 17)
+                level4Music.pitch = 1.05f;
             yield return new WaitForSeconds(1);
         }
     }

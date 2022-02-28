@@ -864,6 +864,10 @@ PrefabInstance:
       propertyPath: currentPatient
       value: 
       objectReference: {fileID: 1518185704}
+    - target: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
+      propertyPath: isPatientInBed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5024520174531221999, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -32973,6 +32977,10 @@ PrefabInstance:
       propertyPath: currentPatient
       value: 
       objectReference: {fileID: 1042092640}
+    - target: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
+      propertyPath: isPatientInBed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5024520174531221999, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -38461,6 +38469,7 @@ MonoBehaviour:
   idleDeathStressDmg: 30
   minCurrentHp: 30
   maxCurrentHp: 50
+  cameraOverViewPoint: {fileID: 0}
   differentPatients:
   - {fileID: 6951617271039977802, guid: 251be277867c6934b8500fc8bce3dd65, type: 3}
   - {fileID: 6951617271039977802, guid: f66f546b2ad07834f86d3f2866509d10, type: 3}

@@ -25,6 +25,11 @@ public class Computer : MonoBehaviour, ISaveSystem
     [SerializeField] Timer gameTime;
 
     bool oneTimeBool = true;
+    public bool OneTimeBool
+    {
+        get { return oneTimeBool; }
+    }
+
     GameObject currentPopUp;
     public GameObject CurrentPopUp { get { return currentPopUp; } set { currentPopUp = value; } }
     bool canDoComputerThing = true;
