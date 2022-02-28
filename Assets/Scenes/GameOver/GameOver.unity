@@ -1775,7 +1775,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 96588207}
         m_TargetAssemblyTypeName: SceneMan, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: TryAgain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

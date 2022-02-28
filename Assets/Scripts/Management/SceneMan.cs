@@ -60,6 +60,14 @@ public class SceneMan : MonoBehaviour
         SceneManager.LoadScene("Level " + GlobalData.instance.CurrentLevel);
     }
 
+    public void TryAgain()
+    {
+        SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
+        GlobalData.instance.ResetShiftStatistics();
+        GlobalData.instance.IsSaveFileLoaded = false;
+        SceneManager.LoadScene("Level " + GlobalData.instance.CurrentLevel);
+    }
+
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f;
