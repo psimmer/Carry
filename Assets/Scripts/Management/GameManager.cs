@@ -94,17 +94,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void UnwinableMode()
-    {
-        patientSpawner.MinRandomTime = 5;
-        patientSpawner.MaxRandomTime = 10;
-        for (int i = 0; i < patientSpawner.PatientList.Count; i++)
-        {
-            patientSpawner.PatientList[i].GetComponent<Patient>().MinTimeTillPopUp = 5;
-            patientSpawner.PatientList[i].GetComponent<Patient>().MaxTimeTillPopUp = 10;
 
-        }
-    }
 
     /// <summary>
     /// with 'F2' you can skip to the next level and 'F1' go back one level. for testing in the build
@@ -447,6 +437,21 @@ public class GameManager : MonoBehaviour
             if (dayTime.TimeInHours == 17)
                 level4Music.pitch = 1.05f;
             yield return new WaitForSeconds(1);
+        }
+    }
+
+    /// <summary>
+    /// in Level at 15 o clock, the PopUp's and Patient's increase dramatically. Player wont be able to win
+    /// </summary>
+    private void UnwinableMode()
+    {
+        patientSpawner.MinRandomTime = 5;
+        patientSpawner.MaxRandomTime = 10;
+        for (int i = 0; i < patientSpawner.PatientList.Count; i++)
+        {
+            patientSpawner.PatientList[i].GetComponent<Patient>().MinTimeTillPopUp = 5;
+            patientSpawner.PatientList[i].GetComponent<Patient>().MaxTimeTillPopUp = 10;
+
         }
     }
 
