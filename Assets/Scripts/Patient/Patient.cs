@@ -36,8 +36,10 @@ public class Patient : MonoBehaviour
     [Header("PopUp")]
     [Tooltip("Range for the random time till a PopUp occurs (min)")]
     [SerializeField] float minTimeTillPopUp;
+    public float MinTimeTillPopUp { get { return minTimeTillPopUp; } set { minTimeTillPopUp = value; } }
     [Tooltip("Range for the random time till a PopUp occurs (min)")]
     [SerializeField] float maxTimeTillPopUp;
+    public float MaxTimeTillPopUp { get { return maxTimeTillPopUp; } set { maxTimeTillPopUp = value; } }
     [Tooltip("Possible tasks that are available: Lvl 1 = 3; Lvl 2 = 5; Lvl 3 = 7; Lvl 4 = 7")]
     [SerializeField] int maxTaskIndex;
     public int MaxTaskIndex { get { return maxTaskIndex; } set { maxTaskIndex = value; } }

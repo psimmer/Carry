@@ -10,8 +10,10 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
     [Header("Patient Spawning time")]
     [Tooltip("Time window for spawning patients (minimum in seconds")]
     [SerializeField] int minRandomTime;
+    public int MinRandomTime { get { return minRandomTime; } set { minRandomTime = value; } }
     [Tooltip("Time window for spawning patients (maximum in seconds")]
     [SerializeField] int maxRandomTime;
+    public int MaxRandomTime { get { return MaxRandomTime; } set { maxRandomTime = value; } }
     [Tooltip("Possible tasks that are available: Lvl 1 = 3; Lvl 2 = 5; Lvl 3 = 7; Lvl 4 = 7")]
     [SerializeField] int maxTaskIndex;
 

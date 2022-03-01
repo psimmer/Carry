@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float documentationReward;
     [SerializeField] GameObject items;
     [SerializeField] List<Outline> outlineList;
+    private bool isUnwinable;
     #endregion
 
     private void Start()
@@ -83,6 +84,26 @@ public class GameManager : MonoBehaviour
 
         if (player.CurrentStressLvl <= 0)
             player.CurrentStressLvl = 0;
+
+        //spawntime of patients and popup is increased, so the player isnt able to win
+        if (SceneManager.GetActiveScene().name == "Level 4" && dayTime.TimeInHours >= 15 && !isUnwinable)
+        {
+            isUnwinable = true;
+            UnwinableMode();
+        }
+
+    }
+
+    private void UnwinableMode()
+    {
+        patientSpawner.MinRandomTime = 5;
+        patientSpawner.MaxRandomTime = 10;
+        for (int i = 0; i < patientSpawner.PatientList.Count; i++)
+        {
+            patientSpawner.PatientList[i].GetComponent<Patient>().MinTimeTillPopUp = 5;
+            patientSpawner.PatientList[i].GetComponent<Patient>().MaxTimeTillPopUp = 10;
+
+        }
     }
 
     /// <summary>
