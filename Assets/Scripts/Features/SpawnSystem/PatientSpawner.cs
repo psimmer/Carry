@@ -177,13 +177,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
             formatter.Serialize(stream, data);
         }
 
-        //serialize bedlist
-        //foreach (var b in bedList)
-        //{
-        //    BedData data = new BedData(b);
-        //    formatter.Serialize(stream, data);
-        //}
-
         //serialize spawnpoints
         formatter.Serialize(stream, spawnPoints.Count);
         foreach (var spawnpoint in spawnPoints)
@@ -209,8 +202,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
                 PatientData data = (PatientData)formatter.Deserialize(stream);
                 GameObject go = Instantiate(differentPatients[data.differentPatientsIndex]);
                 Patient p = go.GetComponent<Patient>();
-
-                
 
                 p.DifferentPatientsIndex = data.differentPatientsIndex;
                 p.CurrentHP = data.currentHP;
@@ -242,16 +233,6 @@ public class PatientSpawner : MonoBehaviour, ISaveSystem
 
             }
             patientList = loadedPatientList;
-
-            //deserialize Bedlist
-            //List<Bed> loadedBedList = new List<Bed>();
-            //for (int i = 0; i < bedList.Count; i++)
-            //{
-            //    BedData data = (BedData)formatter.Deserialize(stream);
-            //    bedList[i].IsPatientInBed = data.isPatientInBed;
-            //    bedList[i].SetHealthBarAndPopUpSpawnPos = data.setHealthBarAndPopUpSpawnPos;
-            //    bedList[i].Timer = data.timer;
-            //}
 
             //deserialize spawnpoints
             int spawnPointsCount = (int)formatter.Deserialize(stream);
