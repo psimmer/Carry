@@ -95,9 +95,15 @@ public class Player : MonoBehaviour, ISaveSystem
     /// </summary>
     public void Interact()
     {
+        Collider[] objects = Physics.OverlapBox(transform.position + boxPos, boxSize);
+        foreach (var obj in objects)
+        {
+            if (obj.GetComponent<Patient>())
+                if(obj.GetComponent<Outline>().OutlineWidth <= 2f)
+                    obj.GetComponent<Outline>().OutlineWidth += 0.08f;
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Collider[] objects = Physics.OverlapBox(transform.position + boxPos, boxSize);
             foreach (var obj in objects)
             {
                 if (obj.CompareTag("Item"))

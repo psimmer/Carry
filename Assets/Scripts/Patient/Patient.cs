@@ -11,6 +11,8 @@ public class Patient : MonoBehaviour
     [SerializeField] private int currentHP;
     public int CurrentHP { get { return currentHP; } set { currentHP = value; } }
     private int patientMaxHP = 100;
+    private bool showOutline = false;
+    public bool ShowOutline { get { return showOutline; } set { showOutline = value; }}
     //Patient Illnes
     [SerializeField] private TaskType currentIllness;
     public TaskType CurrentIllness { get { return currentIllness; } set { currentIllness = value; } }
@@ -149,8 +151,12 @@ public class Patient : MonoBehaviour
             popUpTimer += Time.deltaTime;
 
         PopUpTimer(CurrentIllness, popUpCanvas);
-
         ReleasingPatient();
+
+        if(GetComponent<Outline>().OutlineWidth >= 0)
+        {
+            GetComponent<Outline>().OutlineWidth -= 0.025f;
+        }
 
         if (!isInBed)
         {

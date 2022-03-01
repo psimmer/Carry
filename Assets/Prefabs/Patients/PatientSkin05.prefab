@@ -910,6 +910,7 @@ GameObject:
   - component: {fileID: 1505932217537917477}
   - component: {fileID: 5869952013167535559}
   - component: {fileID: -8317119234605928277}
+  - component: {fileID: 3890426972488247370}
   m_Layer: 0
   m_Name: PatientSkin05
   m_TagString: Patient
@@ -980,8 +981,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHP: 50
-  minCurrentHp: 5
-  maxCurrentHp: 6
   currentIllness: 10
   isInBed: 0
   currentBed: {fileID: 0}
@@ -990,6 +989,8 @@ MonoBehaviour:
   maxTimeTillPopUp: 30
   maxTaskIndex: 0
   popUpCanvas: {fileID: 1900494021847150352}
+  patientIdleDamage: 0
+  idleDeathStressDmg: 0
   popUpList:
   - {fileID: 1360661134648728818, guid: be7335628a72584469b1020da3d5028a, type: 3}
   - {fileID: 1360661134648728818, guid: 05455ea590b10624d87a7721fea9a516, type: 3}
@@ -1013,6 +1014,7 @@ MonoBehaviour:
   sittingDamageParticles: {fileID: 5404059796577138036, guid: b52488c8c23e22f4db1ba3cb3b104ca6, type: 3}
   deathParticles: {fileID: 5404059796577138036, guid: b22c17f8913f6cf4b80a93073f5903e1, type: 3}
   particlesDuration: 3
+  cameraOverViewPoint: {fileID: 0}
 --- !u!82 &-8317119234605928277
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1109,6 +1111,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3890426972488247370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951617271039977802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0, g: 0.8396226, b: 0.12803017, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &7019693956521753176
 GameObject:
   m_ObjectHideFlags: 0
