@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: 54d9b27ece15ae34dbc1968dc93b8129
   - enabled: 1
     path: Assets/Scenes/LevelComplete/LevelComplete.unity
-    guid: c8aacce9b89775e4ea058ae1ad217916
+    guid: 7fc5e66f121d1c648bef0246a7401391
   - enabled: 1
     path: Assets/Scenes/Tutorial/Tutorial.unity
     guid: fb8ff01b0fd848848ac6d987b1fe35c8
