@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DayCycle dayCycle;
     [SerializeField] private Timer dayTime;
     [SerializeField] float documentationReward;
-    [SerializeField] GameObject items;
     [SerializeField] List<Outline> outlineList;
     private bool isUnwinable;
     #endregion

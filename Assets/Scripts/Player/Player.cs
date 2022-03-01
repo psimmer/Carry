@@ -32,8 +32,10 @@ public class Player : MonoBehaviour, ISaveSystem
     [SerializeField] private Animator animator;
     [SerializeField] Timer gameTime;
     private float destroyTimer = 0;
+    [SerializeField] private Transform startPosition;
     [SerializeField] private Transform destroyPosition;
     public static event Action<bool> e_OnDocumentationStart;
+    private bool isLevelComplete;
 
     public Vector3 boxPos;
     bool isOutside;
@@ -44,7 +46,10 @@ public class Player : MonoBehaviour, ISaveSystem
         PopUp.e_OnPopUpTimeOut += TimeOutDamage;
         Timer.e_OnLevelCompleteSaveStressLvl += SaveStressLevel;
         Patient.e_onPatientIdleDeath += TimeOutDamage;
-        
+        if (SceneManager.GetActiveScene().name == "LevelComplete")
+            isLevelComplete = true;
+        else
+            isLevelComplete = false;
     }
 
 
@@ -63,7 +68,7 @@ public class Player : MonoBehaviour, ISaveSystem
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "LevelComplete")
+        if (isLevelComplete)
             PlayerLeavesHospital();
     }
 
@@ -77,7 +82,7 @@ public class Player : MonoBehaviour, ISaveSystem
 
         this.GetComponent<Animator>().SetBool("isWalking", true);
         destroyTimer += Time.deltaTime;
-        transform.position = Vector3.Lerp(transform.position, destroyPosition.position, interpolation);
+        transform.position = Vector3.Lerp(startPosition.position, destroyPosition.position, interpolation);
         if (destroyTimer >= 6) // the value is the time which will take the patient to be destroyed after being released
         {
             Destroy(gameObject);
