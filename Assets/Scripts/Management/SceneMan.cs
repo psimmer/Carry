@@ -79,6 +79,11 @@ public class SceneMan : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void QuitToMainMenuFromCredits()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void StartTutorial()
     {
         Time.timeScale = 1f;
@@ -89,6 +94,11 @@ public class SceneMan : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene("GameOver");
+    }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
     }
 
     public void ExitGame()
