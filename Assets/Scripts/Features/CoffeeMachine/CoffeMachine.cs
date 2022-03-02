@@ -45,6 +45,7 @@ public class CoffeMachine : MonoBehaviour, ISaveSystem
         if(!drinking && isOnCooldown)
             CoffeeCooldown(cooldownDuration);
     }
+
     /// <summary>
     /// During the coffee effect, the player is faster
     /// </summary>

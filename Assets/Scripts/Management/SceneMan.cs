@@ -17,7 +17,6 @@ public class SceneMan : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("HELLLOO");
         Time.timeScale = 1f;
         SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.ResetTotalStatistics();
@@ -73,8 +72,8 @@ public class SceneMan : MonoBehaviour
     {
         Time.timeScale = 1f;
         SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.StressLevelBar.gameObject.GetComponent<AudioSource>());
-        GlobalData.instance.ResetShiftStatistics();     //just for safety
-        GlobalData.instance.ResetTotalStatistics();     //just for safety
+        GlobalData.instance.ResetShiftStatistics();     
+        GlobalData.instance.ResetTotalStatistics();     
         GlobalData.instance.IsSaveFileLoaded = false;
         SceneManager.LoadScene("MainMenu");
     }

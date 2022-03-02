@@ -88,42 +88,11 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Level 4" && dayTime.TimeInHours >= 15 && !isUnwinable)
         {
             isUnwinable = true;
-            UnwinableMode();
+            UnwinnableMode();
         }
 
     }
 
-    /// <summary>
-    /// with 'F2' you can skip to the next level and 'F1' go back one level. for testing in the build
-    /// </summary>
-    private void Godmode()
-    {
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            if (SceneManager.GetActiveScene().buildIndex == 4)
-                return;
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + -1);
-            Destroy(GameObject.Find("DontDestroyOnLoad"));
-        }
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            if (SceneManager.GetActiveScene().buildIndex == 7)
-                return;
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            Destroy(GameObject.Find("DontDestroyOnLoad"));
-        }
-        if (Input.GetKeyDown(KeyCode.F3))
-        {
-            player.CurrentStressLvl = 0f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.F4))
-        {
-            dayTime.TimeInHours++;
-        }
-    }
 
     #region Treating a Patient
     /// <summary>
@@ -337,13 +306,6 @@ public class GameManager : MonoBehaviour
                 Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().CameraOverview.position;
                 Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraOverview.rotation;
 
-
-                // Alejandro's suggestion: we accept values that are not capitalized or without the dot at the end, the lines marked with "//flexible" are responsible for this
-                
-                //Debug.Log(computer.InputField.text.ToLower()); //flexible check
-                //Debug.Log(computer.HintText.text.ToLower());  //flexible check
-
-                //if (computer.HintText.text == computer.InputField.text) old condition (not flexible)
                 if (computer.HintText.text.ToLower().Contains(computer.InputField.text.ToLower()) && computer.InputField.text.Length >= computer.HintText.text.Length - 1) //flexible
                 {
                     //Success
@@ -365,6 +327,11 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region Ordinary GameManager stuff
+    /// <summary>
+    /// When the player completes the documentation task, the outlines of the items are deactivated
+    /// </summary>
+    /// <param name="enableOutline"></param>
     private void SetItemOutlines(bool enableOutline)
     {
         if (computer.OneTimeBool)
@@ -403,6 +370,40 @@ public class GameManager : MonoBehaviour
         player.currentItem = lastItem;
     }
 
+
+    /// <summary>
+    /// with 'F2' you can skip to the next level and 'F1' go back one level. for testing in the build
+    /// </summary>
+    private void Godmode()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 4)
+                return;
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + -1);
+            Destroy(GameObject.Find("DontDestroyOnLoad"));
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 7)
+                return;
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Destroy(GameObject.Find("DontDestroyOnLoad"));
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            player.CurrentStressLvl = 0f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            dayTime.TimeInHours++;
+        }
+    }
+    #endregion
+
     #region Level 4 only stuff
     IEnumerator DecreaseStressReductionMultiplier()
     {
@@ -438,9 +439,9 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// in Level at 15 o clock, the PopUp's and Patient's increase dramatically. Player wont be able to win
+    /// in Level 4 at 15 o clock, the PopUp's and Patient's increase dramatically. Player wont be able to win
     /// </summary>
-    private void UnwinableMode()
+    private void UnwinnableMode()
     {
         patientSpawner.MinRandomTime = 5;
         patientSpawner.MaxRandomTime = 10;

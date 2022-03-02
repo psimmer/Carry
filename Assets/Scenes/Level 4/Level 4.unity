@@ -1013,6 +1013,10 @@ PrefabInstance:
       value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
+      propertyPath: currentBed
+      value: 
+      objectReference: {fileID: 724405081}
+    - target: {fileID: 5869952013167535559, guid: 167ffd10fd4a9b0428ab8dae4ead078b, type: 3}
       propertyPath: maxTaskIndex
       value: 7
       objectReference: {fileID: 0}
@@ -5121,6 +5125,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &724405081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1693428794228340, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
+  m_PrefabInstance: {fileID: 62137190}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &726025459
 GameObject:
   m_ObjectHideFlags: 0
@@ -13538,7 +13547,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4883672179317743335, guid: 6c0095e891ffc4f4b9bca37d30ba8415, type: 3}
   m_PrefabInstance: {fileID: 62137190}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 724405081}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8116966c82c7f244bc62cdd8ac6d0b6, type: 3}

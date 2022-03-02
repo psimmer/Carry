@@ -78,8 +78,7 @@ public class Player : MonoBehaviour, ISaveSystem
     private void PlayerLeavesHospital()
     {
 
-        float interpolation = 0.2f * Time.deltaTime;
-        Debug.Log(destroyPosition.position);
+        float interpolation = 0.3f * Time.deltaTime;
         this.GetComponent<Animator>().SetBool("isWalking", true);
         destroyTimer += Time.deltaTime;
         transform.position = Vector3.Lerp(transform.position, destroyPosition.position, interpolation);
@@ -228,10 +227,6 @@ public class Player : MonoBehaviour, ISaveSystem
         string path = Application.persistentDataPath + "/SaveDataPlayer.carry";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        //Serialize player data
-        formatter.Serialize(stream, transform.position.x);
-        formatter.Serialize(stream, transform.position.y);
-        formatter.Serialize(stream, transform.position.z);
         formatter.Serialize(stream, currentStressLvl);
         formatter.Serialize(stream, IsInContact);
         formatter.Serialize(stream, IsDrinkingCoffee);
@@ -250,15 +245,6 @@ public class Player : MonoBehaviour, ISaveSystem
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            //Set Player position
-            float[] position = new float[3];
-            position[0] = (float)formatter.Deserialize(stream);
-            position[1] = (float)formatter.Deserialize(stream);
-            position[2] = (float)formatter.Deserialize(stream);
-            Vector3 vector = new Vector3(position[0], position[1], position[2]);
-            transform.position = vector;
-
-            //setting the rest of the player data
             currentStressLvl = (float)formatter.Deserialize(stream);
             IsInContact = (bool)formatter.Deserialize(stream);
             IsDrinkingCoffee = (bool)formatter.Deserialize(stream);
