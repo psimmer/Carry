@@ -68,6 +68,7 @@ public class Computer : MonoBehaviour, ISaveSystem
 
     public void BeginDocumentation()
     {
+        Camera.main.transform.GetComponent<CamPosition>().enabled = false;
         Camera.main.transform.position = documentationCamPos.position;
         canvas.gameObject.SetActive(true);
         ClipBoardCanvas.gameObject.SetActive(true);

@@ -303,6 +303,7 @@ public class GameManager : MonoBehaviour
                 Camera.main.GetComponent<CamPosition>().MovePoint.IsCameraFixed = true;
                 Camera.main.GetComponent<CamPosition>().lastPoint = Camera.main.GetComponent<CamPosition>().CameraOverview;
                 Camera.main.GetComponent<CamPosition>().MovePoint.CameraOnPc = false;
+                Camera.main.GetComponent<CamPosition>().enabled = true;
                 Camera.main.transform.position = Camera.main.GetComponent<CamPosition>().CameraOverview.position;
                 Camera.main.transform.rotation = Camera.main.GetComponent<CamPosition>().CameraOverview.rotation;
 
