@@ -22,6 +22,11 @@ public class UIManager : MonoBehaviour, ISaveSystem
     [SerializeField] TMP_Text patientsHealed;
     [SerializeField] TMP_Text patientsLost;
     [SerializeField] TMP_Text treatments;
+
+    [Tooltip("timer for activating UI after losing or winning a level")]
+    float sceneTransitionTimer = 0f;
+    public float SceneTransitionTimer { get { return sceneTransitionTimer; } }
+
     public GameObject StressLevelBar => stressLvlBar;
 
 
@@ -62,6 +67,8 @@ public class UIManager : MonoBehaviour, ISaveSystem
     }
     private void Update()
     {
+        if(SceneManager.GetActiveScene().name == "GameOver" || SceneManager.GetActiveScene().name == "LevelComplete")
+            sceneTransitionTimer += Time.deltaTime;
         GamePaused();
     }
 
