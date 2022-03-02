@@ -87,11 +87,11 @@ public class TutorialManager : MonoBehaviour
 
         DontLetThePatientDie();
 
-        CameraMovement();
+        CameraZoom();
 
         DontSpawnPatientsPopUp();
 
-        DeveloperTestFunction();
+        //DeveloperTestFunction();
 
         MovePatientInBed();
 
@@ -110,7 +110,7 @@ public class TutorialManager : MonoBehaviour
         TutorialLoop();
     }
 
-    //JustToJumpToTheNextTutorialState
+    //JustToJumpToTheNextTutorialState #DeveloperFunction
     void DeveloperTestFunction()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -126,13 +126,12 @@ public class TutorialManager : MonoBehaviour
             player.currentPatient.transform.position = patientBedPos.position;
             player.currentPatient.transform.rotation = patientBedPos.rotation;
             player.currentPatient.GetComponent<Animator>().SetBool("isLaying", true);
-            player.currentPatient.Healthbar.transform.parent.rotation = Quaternion.Euler(0, 0, 0); // this line positions the healthbar on the whiteboard when you move the patient
+            player.currentPatient.Healthbar.transform.parent.rotation = Quaternion.Euler(0, 0, 0); 
             patientBedPos.parent.GetComponent<Bed>().CurrentPatient = player.currentPatient;
             patientBedPos.parent.GetComponent<Bed>().IsPatientInBed = true;
             player.currentPatient.IsInBed = true;
         }
     }
-
     private void CheckListMovement()
     {
         if (Input.GetKeyDown(KeyCode.W))
@@ -161,7 +160,9 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// This is the whole tutorialtext
+    /// </summary>
     private void TutorialLoop()
     {
         if ((int)tutorialTimer == 5)
@@ -346,7 +347,10 @@ public class TutorialManager : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// Damages the patient
+    /// </summary>
+    /// <param name="patient"></param>
     private void Damage(Patient patient)
     {
         patient.HasPopUp = false;
@@ -387,7 +391,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    private void CameraMovement()
+    private void CameraZoom()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -432,19 +436,19 @@ public class TutorialManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            //if (currentUIitem != null)
-            //    Destroy(currentUIitem);
             DestroyItem();
         }
     }
-
+    /// <summary>
+    /// If the patients health is smaller than 30 he gets healed to 60
+    /// </summary>
     void DontLetThePatientDie()
     {
         if (currentPatient != null)
             if (currentPatient.GetComponent<Patient>().CurrentHP < 30)
                 currentPatient.GetComponent<Patient>().CurrentHP = 60;
     }
-
+    //Just to dont get the patient implemented popUp
     void DontSpawnPatientsPopUp()
     {
         if (currentPatient != null)
@@ -473,6 +477,9 @@ public class TutorialManager : MonoBehaviour
             currentPatient.transform.eulerAngles = new Vector3(0, 90, 0);
         }
     }
+    /// <summary>
+    /// This resets the Camera Position after DocumentationTask
+    /// </summary>
     void CameraPositionReset()
     {
         if (player.IsAtPc && tutorialTexts[textDirectionIndex].NumberOfExecution != 16)
@@ -511,10 +518,6 @@ public class TutorialManager : MonoBehaviour
             {
                 Damage(currentPatient.GetComponent<Patient>());
                 stressLevel.GetComponent<Image>().fillAmount += 0.1f;
-                //currentUIitem = itemSlot.transform.GetChild(0).gameObject;
-                //Destroy(currentUIitem);
-                //currentUIitem = null;
-                //Destroy(player.currentItem);
                 player.currentItem = null;
                 Destroy(currentPatient.GetComponent<Patient>().CurrentParticles);
                 Destroy(currentPopUp);
@@ -576,6 +579,9 @@ public class TutorialManager : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// The Whole ComputerTask
+    /// </summary>
     void ComputerTask()
     {
         if (!laptopPopUpSpawned)
@@ -634,7 +640,9 @@ public class TutorialManager : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// Shows the next text of the tutorialDoctor
+    /// </summary>
     void NextDirectionIndex()
     {
         doctorTextField.text = $"{tutorialTexts[++textDirectionIndex].Text} \n {tutorialTexts[textDirectionIndex].Text2} \n {tutorialTexts[textDirectionIndex].Text3}";
@@ -657,7 +665,6 @@ public class TutorialManager : MonoBehaviour
         currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
         player.IsInContact = false;
     }
-
 
     void CheckThatPlayerDontDie()
     {

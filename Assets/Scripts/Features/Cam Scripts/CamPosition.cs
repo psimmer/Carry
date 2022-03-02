@@ -2,29 +2,36 @@ using UnityEngine;
 
 public class CamPosition : MonoBehaviour
 {
+    #region CamValues
+    [Header("CameraSpeed")]
+    [SerializeField] float cameraSpeedOut;
+    [SerializeField] float cameraSpeedIn;
+    [Header("CameraImg")]
+    [SerializeField] private GameObject camImageUnfixed;
+    [SerializeField] private GameObject camImageFixed;
+    [Header("OtherValues")]
     [SerializeField] private Transform camPoints;
     [SerializeField] MovePoints movePoints;
     public MovePoints MovePoint { get { return movePoints; } set { movePoints = value; } }
-    [SerializeField] float cameraSpeedOut;
-    [SerializeField] float cameraSpeedIn;
-
     [SerializeField] public Transform currentPoint;
     [SerializeField] public Transform lastPoint;
-    [SerializeField] private GameObject camImageUnfixed;
-    [SerializeField] private GameObject camImageFixed;
     [SerializeField] Transform cameraOverviewPoint;
     public Transform CameraOverview => cameraOverviewPoint;
-
     Quaternion cameraRotation;
     public Quaternion CameraRotation => cameraRotation;
     private float interpolation;
-
+    #endregion
     private void Awake()
     {
         cameraRotation = this.gameObject.transform.rotation;
     }
 
     private void Update()
+    {
+        FreeOrFixedCamera();
+    }
+
+    void FreeOrFixedCamera()
     {
         if (!movePoints.IsCameraFixed)
         {
@@ -51,8 +58,6 @@ public class CamPosition : MonoBehaviour
             transform.position -= new Vector3(0, movePoints.CamHeight, -movePoints.CameraDirection) * Time.deltaTime;
         }
     }
-
-
 
 
 

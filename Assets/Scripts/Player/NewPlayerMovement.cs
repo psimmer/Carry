@@ -39,17 +39,17 @@ public class NewPlayerMovement : MonoBehaviour
 
         characterController.Move(movement);
 
+        //Animator and Sound
         if (movement.magnitude > 0)
         {
             animator.SetBool("isWalking", true);
             SoundManager.instance.PlayAudioClip(ESoundeffects.FootSteps, GetComponent<AudioSource>());
         }
-
         if (movement.magnitude <= 0)
         {
             animator.SetBool("isWalking", false);
         }
-
+        //Direction
         if (movement != Vector3.zero)
         {
             gameObject.transform.forward = movement;

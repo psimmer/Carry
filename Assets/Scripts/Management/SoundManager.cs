@@ -7,8 +7,6 @@ public class SoundManager : MonoBehaviour
 
     public static SoundManager instance;
 
-    float timer;
-
     private void Awake()
     {
         if(instance == null)
@@ -22,6 +20,11 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);   
     }
 
+    /// <summary>
+    /// PlaysTheAudioClip
+    /// </summary>
+    /// <param name="soundType">The Enum Type of the Sound</param>
+    /// <param name="audioSource">On this AudioSource the clip gets played</param>
     public void PlayAudioClip(ESoundeffects soundType, AudioSource audioSource)
     {
         for (int i = 0; i < soundeffects.Count; i++)
@@ -34,7 +37,12 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// Checks if the Sound can get played
+    /// </summary>
+    /// <param name="sound">The SoundFile from the list soundeffects</param>
+    /// <param name="offset">The time till the sound plays again</param>
+    /// <returns></returns>
     bool IsSoundPlayable(SoundFile sound, float offset)
     {
         if(sound.SoundTimer - offset <= Time.time)
@@ -51,13 +59,19 @@ public class SoundManager : MonoBehaviour
             return false;
         }
     } 
-
+    /// <summary>
+    /// Adding the time while the sound plays
+    /// </summary>
+    /// <param name="sound"></param>
     void SetTimer(SoundFile sound)
     {
         sound.SoundTimer = Time.time + sound.ClipSound.length;
     }
 }
 
+/// <summary>
+/// EveryThing what a SoundFile have
+/// </summary>
 [System.Serializable]
 public class SoundFile
 {

@@ -154,7 +154,6 @@ public class Player : MonoBehaviour, ISaveSystem
             Camera.main.GetComponent<CamPosition>().MovePoint.IsCameraFixed = false;
         }
         GetComponent<NewPlayerMovement>().enabled = false;
-        Camera.main.GetComponent<CamPosition>().lastPoint = obj.GetComponent<Computer>().DocumentationCamPos;
         Camera.main.transform.rotation = obj.GetComponent<Computer>().DocumentationCamPos.rotation;
     }
 

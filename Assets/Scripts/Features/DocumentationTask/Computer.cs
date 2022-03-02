@@ -5,23 +5,31 @@ using System.IO;
 
 public class Computer : MonoBehaviour, ISaveSystem
 {
-    [SerializeField] private GameObject clipBoardCanvas;
-    public GameObject ClipBoardCanvas { get { return clipBoardCanvas; } set { clipBoardCanvas = value; } }
-
+    #region Values
+    [Header("Laptop")]
     [SerializeField] private GameObject canvas;
     public GameObject Canvas { get { return canvas; } set { canvas = value; } }
-
-    [SerializeField] private TMP_Text hintText;
-    public TMP_Text HintText { get { return hintText; } set { hintText = value; } }
 
     [SerializeField] private TMP_InputField inputField;
     public TMP_InputField InputField { get { return inputField; } set { inputField = value; } }
 
-    [SerializeField] Transform documentationCamPos;
-    public Transform DocumentationCamPos { get { return documentationCamPos; } set { documentationCamPos = value; } }
+    [Header("Clipboard")]
+    [SerializeField] private GameObject clipBoardCanvas;
+    public GameObject ClipBoardCanvas { get { return clipBoardCanvas; } set { clipBoardCanvas = value; } }
+
+    [SerializeField] private TMP_Text hintText;
+    public TMP_Text HintText { get { return hintText; } set { hintText = value; } }
+
+    [Header("PopUp")]
+
     [SerializeField] Transform popUpCanvas;
     [SerializeField] GameObject DocumentationPopUp;
     [SerializeField] Transform popUpPos;
+
+    [Header("CameraPos")]
+    [SerializeField] Transform documentationCamPos;
+    public Transform DocumentationCamPos { get { return documentationCamPos; } set { documentationCamPos = value; } }
+    [Header("Timer")]
     [SerializeField] Timer gameTime;
 
     bool oneTimeBool = true;
@@ -34,6 +42,8 @@ public class Computer : MonoBehaviour, ISaveSystem
     public GameObject CurrentPopUp { get { return currentPopUp; } set { currentPopUp = value; } }
     bool canDoComputerThing = true;
     public bool CanDoComputerThing => canDoComputerThing;
+    #endregion
+
     private void Awake()
     {
         canvas.gameObject.SetActive(false);
@@ -48,8 +58,7 @@ public class Computer : MonoBehaviour, ISaveSystem
 
     private void Update()
     {
-        //timer += Time.deltaTime;
-        if (gameTime.TimeInHours >= 16 && oneTimeBool)    //timer is hardcoded, because in every level the task shall start after 5 minutes
+        if (gameTime.TimeInHours >= 16 && oneTimeBool)
         {
             oneTimeBool = false;
             SpawnPopUpDocumentation();
@@ -73,7 +82,6 @@ public class Computer : MonoBehaviour, ISaveSystem
         currentPopUp.transform.LookAt(currentPopUp.transform.position + lookDir);
 
     }
-
 
     public void SaveData()
     {

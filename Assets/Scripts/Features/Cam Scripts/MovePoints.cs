@@ -26,12 +26,10 @@ public class MovePoints : MonoBehaviour
 
     private void Update()
     {
-        MoveCamera();
-
-
+        CameraZoom();
     }
 
-    public void MoveCamera()
+    public void CameraZoom()
     {
 
         if (Input.GetKey(KeyCode.Q) && !CameraOnPc)
