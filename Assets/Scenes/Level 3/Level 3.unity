@@ -37213,7 +37213,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3565615849516372378, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: m_text
-      value: Shift of 12 hours finished.
+      value: All other nurses have caught COVID, I am the only one still able to
+        work
       objectReference: {fileID: 0}
     - target: {fileID: 3828206668431659987, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: m_Camera

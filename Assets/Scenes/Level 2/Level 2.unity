@@ -2243,6 +2243,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 3565615849516372378, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
+      propertyPath: m_text
+      value: I have never seen the hospital so crowded.
+      objectReference: {fileID: 0}
     - target: {fileID: 5930743008484771852, guid: f0c2d9c0796a76d428d02150209c6d26, type: 3}
       propertyPath: gameTime
       value: 
