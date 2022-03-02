@@ -79,10 +79,10 @@ public class Player : MonoBehaviour, ISaveSystem
     {
 
         float interpolation = 0.2f * Time.deltaTime;
-
+        Debug.Log(destroyPosition.position);
         this.GetComponent<Animator>().SetBool("isWalking", true);
         destroyTimer += Time.deltaTime;
-        transform.position = Vector3.Lerp(startPosition.position, destroyPosition.position, interpolation);
+        transform.position = Vector3.Lerp(transform.position, destroyPosition.position, interpolation);
         if (destroyTimer >= 6) // the value is the time which will take the patient to be destroyed after being released
         {
             Destroy(gameObject);

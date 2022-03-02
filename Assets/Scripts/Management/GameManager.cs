@@ -93,8 +93,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-
-
     /// <summary>
     /// with 'F2' you can skip to the next level and 'F1' go back one level. for testing in the build
     /// </summary>
