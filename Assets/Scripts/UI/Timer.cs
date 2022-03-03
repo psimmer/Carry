@@ -68,10 +68,6 @@ public class Timer : MonoBehaviour , ISaveSystem
         }
     }
 
-    public int GetTimeInHours()
-    {
-        return TimeInHours;
-    }
 
     #region Save/Load methods
     public void SaveData()

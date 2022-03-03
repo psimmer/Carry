@@ -17,6 +17,9 @@ public class Inventory : MonoBehaviour
         InstantiateItem();
     }
 
+    /// <summary>
+    /// Instantiate the UI Prefab of the item you grabed
+    /// </summary>
     public void InstantiateItem()
     {
         if (player.currentItem != null && player.IsHoldingItem)
@@ -31,7 +34,7 @@ public class Inventory : MonoBehaviour
                 Ui_element = player.currentItem.item.UI_prefab;
             }
         }
-
+        //Throw the item away
         if (Input.GetKeyDown(KeyCode.F) && currentItem != null)
         {
             Destroy(currentItem);

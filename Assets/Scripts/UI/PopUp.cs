@@ -43,6 +43,9 @@ public class PopUp : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// if the Radial bar of a popUp is zero or is full happens this.
+    /// </summary>
     private void PopUpCondition()
     {
         if (radialBarImage.fillAmount <= 0)
@@ -89,7 +92,9 @@ public class PopUp : MonoBehaviour
         radialBarImage.fillAmount = timePassed / duration;
         radialBarImage.color = gradient.Evaluate(radialBarImage.fillAmount);
     }
-
+    /// <summary>
+    /// Let the radialBar go down
+    /// </summary>
     private void PopUpAnimation()
     {
         if (radialBarImage.fillAmount >= 0.25)
