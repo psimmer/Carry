@@ -38,8 +38,7 @@ public class SceneMan : MonoBehaviour
 
     public void LoadSaveFile()
     {
-        if (uiManager.SceneTransitionTimer < 2f)
-            return;
+
         string path = Application.persistentDataPath + "/SaveDataTimer.carry";
         if (!File.Exists(path))
         {
@@ -69,6 +68,7 @@ public class SceneMan : MonoBehaviour
     {
         if (uiManager.SceneTransitionTimer < 2f)
             return;
+
         SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.ResetShiftStatistics();
         GlobalData.instance.IsSaveFileLoaded = false;
@@ -77,8 +77,6 @@ public class SceneMan : MonoBehaviour
 
     public void QuitToMainMenu()
     {
-        if (uiManager.SceneTransitionTimer < 2f)
-            return;
         Time.timeScale = 1f;
         SoundManager.instance.PlayAudioClip(ESoundeffects.Button, uiManager.StressLevelBar.gameObject.GetComponent<AudioSource>());
         GlobalData.instance.ResetShiftStatistics();     
